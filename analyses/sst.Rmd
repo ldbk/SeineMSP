@@ -1,0 +1,591 @@
+---
+title: "Statistique et analyses de données"
+subtitle: "Température de surface, série temporelle et classification"
+author: "Laurent Dubroca - laurent.dubroca@ifremer.fr"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document
+
+---
+
+\begin{center}\emph{Version de travail 0.3}\end{center}
+
+
+# Contexte
+
+Couvrant 71 % de la surface de la Terre, les mers et les océans sont les
+régulateurs principaux du climat mondial. Par les échanges radiatifs, mécaniques
+et gazeux avec l'atmosphère, le milieu marin absorbe, stocke et transporte la
+chaleur du rayonnement électromagnétique solaire. Le réchauffement récent de
+l'atmosphère causé par l'émission des gaz à effet de serre due aux activités
+humaine impacte donc les océans en premier lieu, et on constate un réchauffement
+général de ce milieu aux conséquences secondaires dramatiques : fonte des
+calottes glaciaires, élévation du niveau global des océans, modification
+profonde du fonctionnement des écosystèmes associés.
+
+Dans ce contexte il s'agit d'évaluer l'évolution de la température de surface de la mer (en anglais:
+sea surface temperature ou SST) dans la baie de Seine des années 80 à
+aujourd'hui et d'évaluer les tendances de son évolution dans le temps et dans
+l'espace.
+
+
+## La température de surface de la mer
+ 
+La température de surface de la mer (sea surface temperature - SST) est la
+température dans une couche plus ou moins importante prés de la surface de la
+mer. Elle peut être mesurée par différentes méthodes : in situ à l'aide de
+capteurs mesurant la température ou à distance par des satellites
+météorologiques.
+
+## Données
+
+Il s'agit d'utiliser ici les mesures satellitales de la température sur la baie
+de Seine. Le portail Marine Copernicus donne accès à de nombreuses séries de mesures.
+Parmi l'ensemble des produits disponibles, nous souhaitons travailler sur une
+série de mesure :
+
+- couvrant la baie de Seine,
+- longue (couvrant au moins une trentaine d'années),
+- à la plus haute résolution spatiale possible.
+
+Le format de réception de la donnée devra être compatible avec R, le logiciel
+qui sera utilisé pour lire, nettoyer, résumer et représenter la température.
+
+## Séries temporelles
+
+Pour quantifier l'évolution d'une série de mesure dans le temps, nous ferons
+l'usage de séries temporelles. Une série temporelle est un enregistrement des
+valeurs d'une paramètre pris dans le temps. Afin de quantifier objectivement la
+tendance à la baisse ou à la hausse des valeurs dans le temps, on utilisera un
+test statistique sur le coefficient de corrélation non paramètrique entre le
+temps et les valeurs.
+
+## Classification
+
+Afin d'identifier les zones de la baie de Seine similaires dans l'évolution de
+la température dans le temps, une classification des séries temporelles de
+chaque pixel sera opérée. Il s'agira ensuite de déterminer si les évolutions de
+la température dans chacun des groupes de pixels similaires sont similaires ou non.
+
+# Organisation de la séance
+
+Nous allons former des groupes de travail de 3 personnes. Chacun de ces trois
+groupes devra mener à bien l'étude de l'évolution spatio-temporelle de la
+température de surface dans la baie de Seine\footnote{On peut envisager un choix
+de zone différent pour les plus ambitieux.}.
+
+Au début de la séance, au sein de chacun des groupes, chacun aura un rôle spécifique. 
+Ces rôles sont les suivants :
+
+- le spécialiste des données : cet opérateur aura la charge de récupérer
+  l'information, de l'importer dans R, et de la préparer en vue des analyses,
+- le spécialiste du traitement du signal : cet opérateur aura la charge d'analyser les tendances
+  de l'évolution des températures de surface et de les représenter,
+- le spécialiste big data : cet opérateur devra mettre une oeuvre une
+  classification statistiques des séries des températures de surface de la baie
+  de seine et d'identifier les zones présentant des évolutions similaire.
+
+En plus de son rôle, chaque spécialiste aura pour tâche de transmettre ses
+connaissances aux deux autres spécialistes de son groupe. Vous devez donc avoir
+acquis les compétences des trois spécialités à l'issue de la séance.
+
+Après les 15 minutes nécessaires à la prise de connaissance complète de ce document, vous définirez collégiallement le rôle de chacun. 
+Ensuite Les spécialistes de chaque groupe se réuniront 15 minutes entre eux afin de
+confronter leurs compréhensions de leurs tâches, d'évaluer les stratégies les
+plus efficaces de les mener à bien et de discuter comment transmettre
+leurs compétences aux autres membres du groupe. Ensuite les groupes initiaux se
+reformeront pour résoudre les questions posées par cette étude.
+
+**L'objectif de cette séance est que chacun des groupes mène à bien l'étude et que
+vous soyez en capacité de jouer les trois rôles proposés à l'issue de la séance. 
+\footnote{Vous êtes en présence d'un apprentissage coopératif avec décloisonnement en équipes
+d'experts, cf The jigsaw strategy (2002) Elliot Aronson.}**
+
+
+# Rappels et consignes de moindre importance
+
+R est un logiciel dédié à l'anlyse de données. RStutio est un environnement de
+travail intégré qui permet de faciliter le travail sous R.
+
+- `getwd()` et `setwd()` permette de renseigner ou de positionner R dans un répertoire de travail
+  donné.
+- `NA` signifie donnée manquante.
+- `print()` affiche le contenu d'un objet ou un résumé de ce dernier.
+- `head()` affiche les 10 premières valeurs d'un objet.
+- `tail()` affiche les 10 dernières valeurs d'un objet.
+- pour installer une librairie (package) : `install.package("nomdupackage")`.
+- le travail est à mener en utilisant un script.
+- Pensez à enregistrer votre script.
+- chacun mène son travail sur son ordinateur.
+- Pensez à enregistrer votre script.
+ 
+\newpage
+
+# Spécialité
+
+## Spécialisation "données"
+
+Vous avez pour rôle de fournir l'information sur la témpérature de la baie de
+Seine à votre groupe en utilisant le portail Marine Copernicus.
+La zone d'étude est la suivante :
+
+```{r zoneetude, include=T,cache=T,echo=T,eval=T,fig.height=3}
+#librairies : à installer si non disponibles
+library(mapdata) 
+library(maps)
+#un plot vide
+plot(1,xlim=c(-1.5,0.8),ylim=c(49.2,49.7),type="n",xlab="Longitude",ylab="Latitude",asp=1)
+#le trait de côte
+map("worldHires",xlim=c(-1.5,0.8),ylim=c(49.2,49.7),col="light grey",fill=T,add=T)
+```
+
+Utiliser le portail Marine Copernicus pour trouver l'information répondant aux
+critères suivants :
+
+- série de mesure couvrant la baie de Seine,
+- longue (couvrant au moins une trentaine d'années),
+- à la plus haute résolution spatiale possible.
+
+Télécharger le fichier correspondant et le stocker sur le disque dur de
+l'ordinateur. Il devrait s'agir d'un fichier NetCDF (nom du fichier se terminant
+par .nc). Le fichier se lit à l'aide de la commande `stack` du package du même
+nom. Attention au positionnement de R au démarrage de votre session de travail
+(utiliser `getwd()` pour savoir où R est positionné et `setwd()` pour changer ce
+positionnement).
+
+```{r data, include=T,cache=T,echo=T,eval=T,fig.height=4,fig.width=6}
+#librairies : à installer si non disponibles
+library(raster)
+#lit le fichier netcdf dans R
+sst<-stack("./data/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581888292747.nc")
+
+pipo <- writeRaster(sst,"sst.grd",format="raster")
+#aa<-stack("sst.grd")
+
+#affiche un résumé sur l'object chargé dans R
+print(sst)
+#represente les premières cartes de SST
+plot(sst)
+```
+
+L'objet R contenant les cartes de température se nomme `RasterStack`. Ses
+dimensions indiquent :
+
+```{r dimdata, include=T,cache=T,echo=T,eval=T}
+dim(sst) #dim() donne la dimention d'un objet
+```
+
+qu'il contient 13232 cartes de 13 pixels en lignes, 56 en colonnes. Ce sont des
+cartes journalières qu'il va s'agir de moyenner afin d'obtenir les cartes
+annuelles. Cette manipulation est complexe car l'identité temporelle des cartes
+contenus dans le nom de chacune d'elles (`X31622400`) est exprimée en seconde
+depuis le 01/01/1981 (si si : rechercher cette information dans la documentation
+sur les mesures). De plus la température est exprimée en degré Kelvin. Ô joie.
+
+Pour construire les cartes annuelles de température, la fonction `stackApply`
+est d'une grande aide. Elle prend différents arguments dont l'identité des
+groupes de cartes à moyenner. Nous allons construire le vecteur contenant les
+années auxquelles les cartes appartiennent à partir du nom des cartes.
+
+
+```{r day2year, include=T,cache=T,echo=T,eval=T}
+# nom des cartes représentant la date en secondes depuis le 01/01/1981
+# names(sst) renvoit le nom de chacun des cartes : il s'agit d'une chaîne de caractères 
+nomsst<-names(sst) 
+head(nomsst) #les 10 premiers nom uniquement
+# on transforme ces noms en nombre 
+# on enleve le X
+nomsst<-sub("X","",nomsst) # sub remplace "X" par "", donc rien
+# on corrige des écritures de nombres
+# sub remplace "e.0" par "e0", parce que cette écriture pose des problèmes à R
+nomsst<-sub("e.0","e0",nomsst) 
+# conversion en nombre, enfin, avec as.numeric
+secsst<-as.numeric(nomsst)
+# on crée le jour de référence
+day0<-strptime("1981-01-01 00:00:00",format="%Y-%m-%d %H:%M:%S")
+# on additionne ce jour avec les secondes pour obtenir une date
+datesst<-day0+secsst
+# on vérifie que tout va bien
+head(datesst) #head() affiche les 10 premières valeurs d'un object
+tail(datesst) #tail() affiche les 10 dernières valeurs d'un object
+# on extrait l'annee pour chaque date
+# substr(datesst,1,4) prend les 4 premières caractères de chacun des éléments de datesst
+yearsst<-substr(datesst,1,4) 
+# on vérifie que tout va bien
+head(yearsst) #head() affiche les 10 premières valeurs d'un object
+tail(yearsst) #tail() affiche les 10 dernières valeurs d'un object
+# table() compte les éléments d'un vecteur et affiche leurs occurences
+table(yearsst) 
+# ouf...
+```
+
+Ensuite on demande une moyenne (`mean`) des valeurs des cartes de l'object
+(`sst`) pour chacune des années (objet `yearsst`) à l'aide de `stackApply`:
+
+```{r sst2year, include=T,cache=T,echo=T,eval=T}
+sstyear<-stackApply(sst,yearsst,"mean")
+pipo <- writeRaster(sstyear,"sst.grd",format="raster")
+aa<-stack("sst.grd")
+writeRaster(sstyear,file="pipo")
+#on verifie
+dim(sstyear)
+#plot(sstyear)
+#on verifie avec une jolie cartographie si on veut
+#librairies : à installer si non disponibles
+library(rasterVis)
+levelplot(sstyear)
+```
+
+Pour transformer la température des degrés Kelvin en degrés Celsius :
+
+```{r K2C, include=T,cache=T,echo=T,eval=T}
+#Kelvin to Celsius
+sstyear<-sstyear-275.15
+#on vérifie
+levelplot(sstyear)
+```
+
+Voici les commandes utiles pour résumer l'information de ces cartes :
+
+- la fonction `cellStats` permet d'appliquer des opérateurs statistiques
+  (moyenne...) sur chaque carte et renvoit une valeur par carte.
+- la fonction `zonal` fait la même chose que `cellStats` avec un argument
+  supplémentaire pour appliquer des opérateurs statistiques
+  (moyenne...) sur des zones de chaque carte et renvoit les valeurs par zone.
+- la fonction `as.data.frame` transforme l'objet `RasterStack` en `data.frame`, c'est à dire un tableau.
+
+Exemple avec `cellStats` :
+
+```{r s2ts, include=T,cache=T,echo=T,eval=T,fig.height=3}
+# cellStats calcule la moyenne pour chaque carte
+meanyear<-cellStats(sstyear,"mean")
+# cellStats calcule l'écart type pour chaque carte
+sdyear<-cellStats(sstyear,"sd")
+# on affiche la moyenne et l'écart type
+plot(meanyear,type="l")
+points(meanyear+sdyear,pch="+")
+points(meanyear-sdyear,pch="+")
+```
+
+Exemple avec `zonal` :
+
+```{r s2tszonal, include=T,cache=T,echo=T,eval=T,fig.height=4}
+# on definit une zone d'interet :
+# les coordonnées géographiques de chacun des pixels sont extraits
+xy<-coordinates(sstyear)
+head(xy) # head() affiche les 10 premières éléments d'un objet
+# zone est une carte simple copiant la structure de la première carte de sstyear
+zone<-sstyear[[1]]
+#si la longitude est supérieure à 49.5 on définit la zone 1
+zone[xy[,2]>49.5]<-1
+#si la longitude est inférieure ou égale à 49.5 on définit la zone 2
+zone[xy[,2]<=49.5]<-2
+#si la température n'est pas définit alors NA
+zone[is.na(sstyear[[1]])]<-NA
+#on affiche les zones
+plot(zone,main="Zones arbitraires")
+#on calcule la moyenne dans chacune des deux zones
+zonesstyear<-zonal(sstyear,zone,"mean")
+head(zonesstyear)
+#on affiche les deux séries de moyennes
+plot(1982:2018,zonesstyear[1,2:38],type="l",col="blue")
+lines(1982:2018,zonesstyear[2,2:38],col="green")
+# on ajoute une légende
+legend("topleft",legend=c("Zone 1","Zone 2"),fill=c("blue","green"))
+```
+
+Exemple avec `as.data.frame` :
+
+```{r s2dataframe, include=T,cache=T,echo=T,eval=T}
+#année en colonne, pixel en ligne
+tabsstyear<-as.data.frame(sstyear)
+# pour afficher :
+#head(tabsstyear) 
+#pour transposer le tableau, donc
+#pixel en colonne, annee en ligne
+tabsstyear<-t(tabsstyear)
+```
+
+\newpage
+
+## Spécialisation "série temporelle"
+
+Pour quantifier l'évolution d'une série de mesure dans le temps, nous ferons
+l'usage de séries temporelles. Une série temporelle est un enregistrement des
+valeurs d'une paramètre pris dans le temps. Afin de quantifier objectivement la
+tendance à la baisse ou à la hausse des valeurs dans le temps, on utilisera un
+test statistique sur le coefficient de corrélation non paramètrique entre le
+temps et les valeurs.
+
+Un exemple : une série de 7 mesures annuelles de températures hasardeuses prises
+entre 1997 et 2003:
+
+```{r ts1, include=T,cache=T,echo=T,eval=T,fig.height=3}
+x<-c(12,13,12,11,15,16,17)
+temps<-1997:2003 #xxx:yyy renvoit les entiers compris entre xxx et yyy
+# on affiche
+print(x)
+print(temps)
+# on représente graphiqueemnt
+plot(temps,x) 
+
+```
+
+`x` semble augmenter avec le temps. Pour quantifier objectivement ce fait, nous
+allons calculer le coefficient de corrélation de Spearman entre le temps et `x`,
+et vérifier si celui-ci diffère statistiquement de 0.
+
+```{r ts2, include=T,cache=T,echo=T,eval=T}
+reztest<-cor.test(temps,x,type="Spearman")
+reztest
+```
+
+La valeur de ce coefficent est `r reztest$estimate`, et l'hypothèse nulle (le
+coefficient est nul) peut être rejetée au risque de `r reztest$p.value`.
+
+Rechercher comment ce coefficient est calculé et en quoi il diffère du
+coefficient de corrélation de Pearson (le coefficient plus classiquement utilisé
+pour analyser les corrélation).
+
+Tester les commandes avec d'autres séries de données (décroissante, stable, avec
+plus de données) afin d'acquérir un sens sur l'interprétation des résultats du
+test. 
+
+A partir d'un objet `RasterStack` (il s'agit d'un objet qui contient une
+succession de carte dans le temps), la fonction `cellStats` permet d'appliquer des opérateurs statistiques
+  (moyenne...) sur chaque carte et renvoit une valeur par carte, donc une série
+  temporelle.
+Exemple avec `cellStats` sur un objet `RasterStack` nommé `sstyear` :
+
+```{r s2ts2, include=T,cache=T,echo=T,eval=T,fig.height=3}
+# cellStats calcule la moyenne pour chaque carte
+meanyear<-cellStats(sstyear,"mean")
+print(meanyear) # affiche l'objet
+#on voit que les mesures sont calculés de 1982 à 2018
+temps<-1982:2018 #xxx:yyy renvoit les entiers compris entre xxx et yyy
+# on affiche
+print(temps)
+# on représente graphiqueme:nt
+plot(temps,meanyear) 
+# on calcule et teste la tendance éventuelle
+cor.test(temps,meanyear)
+```
+
+\newpage
+
+## Spécialisation "big data"
+
+Afin d'identifier les zones de la baie de Seine similaires dans l'évolution de
+la température dans le temps, une classification des séries temporelles de
+chaque pixel va être opérée. 
+
+Soit 4 séries de mesure de température prises dans 6 endroits différents pendant
+4 années de 1990 à 1993 :
+
+```{r big1, include=T,cache=T,echo=T,eval=T,fig.height=3}
+x1<-c(12,11,15,17,19,NA)
+x2<-c(13,14,15,19,15,NA)
+x3<-c(12,23,11,14,16,NA) 
+x4<-c(14,19,11,15,19,NA)
+#Ces 7 séries sont transformées en `Raster` puis `RasterStack` (un objet
+# contenant une succession de carte dans le temps
+r1<-raster(matrix(x1,2,3))
+r2<-raster(matrix(x2,2,3))
+r3<-raster(matrix(x3,2,3))
+r4<-raster(matrix(x4,2,3))
+serie<-stack(r1,r2,r3,r4)
+names(serie)<-1990:1993
+plot(serie)
+```
+
+Pour identifier les pixels où les évolutions des mesures sont similaires, nous allons
+mettre en place une classification hiérarchque des séries.
+
+On crée un tableau avec ces mesures avec les pixels en ligne :
+
+```{r big3, include=T,cache=T,echo=T,eval=T}
+tabserie<-as.data.frame(serie)
+print(tabserie) # affiche l'objet
+#cela revient à faire une tableau avec les séries d'origine
+tab<-data.frame(x1,x2,x3,x4)
+print(tab) # affiche l'objet
+```
+
+Pour établir une classification il faut d'abord éliminer les pixels où les
+mesures sont manquantes, et conserver cette information afin de pouvoir
+représenter ensuite les groupes issus de la classification sur une carte :
+
+
+```{r big4, include=T,cache=T,echo=T,eval=T}
+#pixel où il y a des mesures
+pixelok<-which(!is.na(apply(tabserie,1,mean)))
+print(pixelok)
+#on ne garde que les lignes sans NA
+tabserie<-tabserie[pixelok,]
+```
+
+Pour classifier il faut pouvoir mesurer une distance entre les series.
+On utilise ici la distance Euclidiennet :
+
+```{r big5, include=T,cache=T,echo=T,eval=T}
+#calcule la distance entre les séries
+distancetabserie<-dist(tabserie)
+print(distancetabserie)
+```
+
+Sur cette matrice de distance on regroupe les séries en fonction de leurs
+proximités entre elles en utilisant une classification hiérarchique (fonction
+`hclust`), et en identifiant les groupes avec les fonctions `cutree` et
+`rect.hclut`:
+
+```{r big6, include=T,cache=T,echo=T,eval=T,fig.height=3}
+rezclassif<-hclust(distancetabserie)
+#on affiche l'arbre de classification
+plot(rezclassif) 
+#on choisit de prendre 3 groupes
+rect.hclust(rezclassif,3)
+#on identifie les groupes de pixels
+groupepixel<-cutree(rezclassif,3)
+print(groupepixel)
+```
+
+On tranforme les résultats de la classification en carte :
+
+```{r big7, include=T,cache=T,echo=T,eval=T,fig.height=3}
+#zone reprend la structure d'une seule carte
+zone<-serie[[1]]
+#zone prend NA partout
+values(zone)<-NA
+#pour les pixels classés on affecte le numéro de groupe
+zone[pixelok]<-groupepixel
+# on affiche
+plot(zone)
+```
+
+```{r corrigé, include=F,cache=T,echo=F,eval=F}
+sstyear
+tabsstyear<-as.data.frame(tabsstyear)
+pixelok<-which(!is.na(apply(tabsstyear,1,mean)))
+print(pixelok)
+#on ne garde que les lignes sans NA
+tabsstyear<-tabsstyear[pixelok,]
+distancetabsstyear<-dist(tabsstyear)
+print(distancetabsstyear)
+rezclassif<-hclust(distancetabsstyear)
+#on affiche l'arbre de classification
+plot(rezclassif) 
+#on choisit de prendre 3 groupes
+rect.hclust(rezclassif,5)
+#on identifie les groupes de pixels
+groupepixel<-cutree(rezclassif,5)
+print(groupepixel)
+
+#zone reprend la structure d'une seule carte
+zone<-sstyear[[1]]
+#zone prend NA partout
+values(zone)<-NA
+#pour les pixels classés on affecte le numéro de groupe
+zone[pixelok]<-groupepixel
+# on affiche
+plot(zone)
+
+
+tssst<-cellStats(sst2,"mean")
+plot(tssst,type="l")
+tssst2<-ts(as.numeric(tssst),start=c(2000,1),frequency=12)
+plot(tssst2)
+plot(decompose(tssst2))
+dec1<-decompose(tssst2)
+stl(tssst2,s.window=12))
+dec2<-(stl(tssst2,s.window=12))
+
+plot(dec1$trend)
+trend.test(dec1$trend)
+cor.test(time(dec1$trend),dec1$trend,method="spearman")
+
+
+st3df<-t(as.data.frame(sst3))
+idok<-which(!is.na(apply(sst3df,2,mean)))
+idko<-which(is.na(apply(sst3df,2,mean)))
+
+
+
+
+library(ade4)
+library(FactoMineR)
+rez<-PCA(sst3df[,idok])
+
+
+
+#extraction
+rez<-hclust(dist(t(sst3df[,idok])))
+rezcut<-cutree(rez,4)
+rect.hclust(rez,4)
+
+
+dim1<-sst3[[1]]
+dim1[idko]<-NA
+dim1[idok]<-rezcut
+plot(dim1)
+zonets<-zonal(sst3,dim1,"mean")
+
+plot(2000:2018,zonets[1,2:20],type="l")
+plot(2000:2018,zonets[4,2:20],type="l")
+
+
+
+
+
+title: "Evolution de l'environnement"
+bathy<-raster("bathy2.tif")
+
+plot(bathy)
+class(bathy)
+bathy
+extent(bathy)
+bathy[bathy<0]<-NA
+plot(bathy)
+
+#valeur sous un point
+xy <- data.frame(x=0,y=49.4)
+points(xy,pch="+")
+extract(bathy, xy)
+
+#générer une grille
+x<-seq(-0.4,0.4,0.1)
+y<-seq(49.2,49.7,0.1)
+xy<-expand.grid(x,y)
+points(xy,pch="+")
+extract(bathy, xy)
+
+#bathybinaire<-bathy
+#bathybinaire[!is.na(bathybinaire)]<-1
+#plot(bathybinaire)
+#poly<-rasterToPolygons(bathybinaire,dissolve=T)
+#saveRDS(poly,file="poly.rds")
+
+#manual
+plot(bathy)
+xy<-locator(type="p")
+xy<-data.frame(x=xy$x,y=xy$y)
+points(xy,pch="+")
+extract(bathy, xy)
+
+
+#random sampling 
+a1<-sampleRandom(bathy,size=10,sp=TRUE)
+points(a1)
+
+#sampleRegular
+a2<-sampleRegular(bathy,size=10,sp=TRUE)
+plot(bathy)
+plot(a2,add=T)
+
+#sampleRegular
+a3<-sampleStratified(bathy,size=10,sp=TRUE)
+plot(bathy)
+plot(a3,add=T)
+
+```
+
+
