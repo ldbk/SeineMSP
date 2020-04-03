@@ -157,7 +157,7 @@ positionnement).
 #librairies : à installer si non disponibles
 library(raster)
 #lit le fichier netcdf dans R
-sst<-stack("./data/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581888292747.nc")
+sst<-stack("../data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581888292747.nc")
 
 pipo <- writeRaster(sst,"sst.grd",format="raster")
 #aa<-stack("sst.grd")
