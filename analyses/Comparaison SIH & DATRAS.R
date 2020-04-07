@@ -159,7 +159,7 @@ J2<- J2 %>%
 # DATRAS especes
 J2esp<- J2 %>% dplyr::select(ScientificName_WoRMS)
 J2esp<- unique(J2esp)
-write.csv(J2esp, file="C:/Users/jrivet/Documents/Stage M2/Data/CGFS/Tab especes.csv")
+write.csv(J2esp, file="C:/Users/jrivet/Documents/Stage M2/Data/CGFS/Tabespeces.csv")
 
 
 # DATRAS calcul densites
