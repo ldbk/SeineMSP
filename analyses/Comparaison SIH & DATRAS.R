@@ -108,9 +108,9 @@ ggplot(J3SIH)+
 
 
 # DATRAS
-HH<- read.csv(file="C:/Users/jrivet/Documents/Stage M2/Donn?es/CGFS/Datras HH original.csv", sep=",")
-HL<- read.csv(file="C:/Users/jrivet/Documents/Stage M2/Donn?es/CGFS/Datras HL original.csv", sep=",")
-Wing<- read.csv(file= "C:/Users/jrivet/Documents/Stage M2/Donn?es/CGFS/OuvertureCgfs2015_2019 original.csv", sep=";")
+HH<- read.csv(file="Datras HH original.csv", sep=",")
+HL<- read.csv(file="Datras HL original.csv", sep=",")
+Wing<- read.csv(file= "OuvertureCgfs2015_2019 original.csv", sep=";")
 
 
 # DATRAS nettoyage tableaux
@@ -156,7 +156,13 @@ J2<- J2 %>%
   filter(-1.5<=HaulLong & HaulLong <= 0.5 & 49<=HaulLat & HaulLat<=49.8)
 
 
-# DATRAS calcul densit?s
+# DATRAS especes
+J2esp<- J2 %>% dplyr::select(ScientificName_WoRMS)
+J2esp<- unique(J2esp)
+write.csv(J2esp, file="C:/Users/jrivet/Documents/Stage M2/Data/CGFS/Tab especes.csv")
+
+
+# DATRAS calcul densites
 J2$CatCatchWgt<- J2$CatCatchWgt/1000 # Converti g en kg
 J2$Distance<- J2$Distance/1000 # Converti m en km 
 J2$WingSpread<- J2$WingSpread/1000 # Converti m en km
