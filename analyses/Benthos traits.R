@@ -3,7 +3,8 @@ library(dplyr)
 
 benthos<- read.csv("Traits benthos (BIOTIC).csv", sep=";")
 
-benthos<- benthos %>% select(SpeciesName, LifeSpan, Maturity, DepthRange, envpos, biozone, Habit, feedingmethod, Sociability, ReprodLocation, Migratory)
+benthos<- benthos %>% dplyr::select(SpeciesName, LifeSpan, BiogeographicRange, Maturity, DepthRange, envpos, biozone, Habit, feedingmethod, Sociability, FertilizationType, ReprodFreq, Migratory)
+names(benthos)[4]<- "MaturityAge"
 
 {
   benthos==""
@@ -34,6 +35,12 @@ benthos<- benthos %>% select(SpeciesName, LifeSpan, Maturity, DepthRange, envpos
   which(benthos=="Not researched", arr.ind = T)
   benthos[which(benthos=="Not researched", arr.ind = T)]
   benthos[which(benthos=="Not researched", arr.ind = T)]<- NA
+}
+{
+  benthos=="Insufficient information (13)"
+  which(benthos=="Insufficient information (13)", arr.ind = T)
+  benthos[which(benthos=="Insufficient information (13)", arr.ind = T)]
+  benthos[which(benthos=="Insufficient information (13)", arr.ind = T)]<- NA
 }
 {
   benthos=="No text entered"
