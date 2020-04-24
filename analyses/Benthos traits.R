@@ -84,26 +84,6 @@ names(benthos)[4]<- "MaturityAge"
   summary<- data.frame(nbid=nbid,nbNA=nbNA)
 }
 
-essai<- benthos %>%
-  select(SpeciesName, LifeSpan, MaturityAge, Habit, ReprodFreq) 
-
-  # Imputation
-essai<- benthos %>% 
-  mutate_all(as.factor) %>% 
-  data.frame()
-
-row.names(essai)<- essai[,1] 
-essai<- essai[,-1]
-nb<- estim_ncpMCA(essai) # Error : The algorithm fails to converge. Choose a number of components (ncp) less or equal than 2 or a number of iterations (maxiter) less or equal than 999
-
-rez<- imputeMCA(essai, ncp=4)
-rez<- MCA(essai, tab.disj=rez$tab.disj.comp)
-HCPC(rez)
-
-
-
-
-# essai
 benthos<- benthos %>%
   mutate_all(as.factor)%>%
   data.frame()
@@ -111,7 +91,6 @@ benthos<- benthos %>%
 row.names(benthos)<- benthos[,1] 
 essai<- benthos[,-1]
 nb<- estim_ncpMCA(benthos)
-
 
 rez<- imputeMCA(benthos, ncp=4)
 rez<- MCA(benthos, tab.disj=rez$tab.disj.comp)
