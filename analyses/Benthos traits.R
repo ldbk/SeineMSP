@@ -103,3 +103,21 @@ HCPC(rez)
 
 
 
+# essai
+benthos<- benthos %>%
+  mutate_all(as.factor)%>%
+  data.frame()
+
+row.names(benthos)<- benthos[,1] 
+essai<- benthos[,-1]
+nb<- estim_ncpMCA(benthos)
+
+
+rez<- imputeMCA(benthos, ncp=4)
+rez<- MCA(benthos, tab.disj=rez$tab.disj.comp)
+HCPC(rez)
+
+
+
+
+
