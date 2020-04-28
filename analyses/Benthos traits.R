@@ -1,9 +1,9 @@
-setwd("C:/Users/jrivet/Documents/Stage M2/Data/CGFS")
+setwd("C:/Users/jrivet/Documents/Stage M2/SeineMSP/data")
 library(dplyr)
 library(FactoMineR)
 library(missMDA)
 
-benthos<- read.csv("Traits benthos (BIOTIC).csv", sep=";")
+benthos<- read.csv("Traits benthos (BIOTIC).csv", sep=',')
 
 benthos<- benthos %>% dplyr::select(SpeciesName, LifeSpan, BiogeographicRange, Maturity, DepthRange, envpos, biozone, Habit, feedingmethod, Sociability, FertilizationType, ReprodFreq, Migratory)
 names(benthos)[4]<- "MaturityAge"
@@ -58,43 +58,12 @@ names(benthos)[4]<- "MaturityAge"
   benthos[which(benthos=="See additional information", arr.ind = T)]<- NA
 }
 
-{
-  benthos$MaturityAge=="<1 year"
-  which(benthos$MaturityAge=="<1 year", arr.ind = T)
-  benthos$MaturityAge[which(benthos$MaturityAge=="<1 year", arr.ind = T)]
-  benthos$MaturityAge[which(benthos$MaturityAge=="<1 year", arr.ind = T)]<- "< 1 year"
-}
+
+benthos<- benthos[,-5]
 
 
 
 
-
-
-# ACM
-
-{
-  nbid<- benthos %>%
-    summarise_all(n_distinct) %>%
-    t()
-  nbNA<- function(a){a[a==""]<-NA;sum(is.na(a))}
-  nbNA<- benthos %>%
-    summarise_all(nbNA) %>%
-    t()
-  
-  summary<- data.frame(nbid=nbid,nbNA=nbNA)
-}
-
-benthos<- benthos %>%
-  mutate_all(as.factor)%>%
-  data.frame()
-
-row.names(benthos)<- benthos[,1] 
-essai<- benthos[,-1]
-nb<- estim_ncpMCA(benthos)
-
-rez<- imputeMCA(benthos, ncp=4)
-rez<- MCA(benthos, tab.disj=rez$tab.disj.comp)
-HCPC(rez)
 
 
 

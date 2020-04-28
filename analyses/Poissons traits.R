@@ -1,10 +1,10 @@
 remotes::install_github("ropensci/rfishbase")
-setwd("C:/Users/jrivet/Documents/Stage M2/Data/CGFS")
+setwd("C:/Users/jrivet/Documents/Stage M2/SeineMSP/data")
 library("rfishbase")
 library(dplyr)
 library(stats)
 
-esp<- read.csv(file="C:/Users/jrivet/Documents/Stage M2/Data/CGFS/TabespecesDATRAS.csv")
+esp<- read.csv(file="TabespecesDATRAS.csv")
 names(esp)[2]<- "SpeciesName"
 
 Doc <- docs()
