@@ -61,7 +61,7 @@ paraxes<- essai$desc.axes
 
 # description par les individus
 
-parind<- essai$desc.ind
+parind<- essai$desc.ind$para
 
 
 

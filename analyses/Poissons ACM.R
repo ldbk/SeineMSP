@@ -6,7 +6,7 @@ library(missMDA)
 fishtrait<-read.csv("FishTraits - traits.csv", stringsAsFactors=F)
 
 # Nettoyage tableau
-fishtrait<- fishtrait %>% select(-c(SpawningGround, Spawningarea, MaturityLocality, Distrib))
+fishtrait<- fishtrait %>% select(-Distrib)
 
 # TRAITEMENT TRAITS QUANTITATIFS (en utilisant les quantiles)
 
@@ -44,16 +44,65 @@ fishtrait$DepthDeep<- catquant(fishtrait$DepthDeep, quantile(fishtrait$DepthDeep
 
 
 
-pipo<- fishtrait %>% 
+fishtrait<- fishtrait %>% 
   mutate_all(as.factor) %>% 
   data.frame()
 
-row.names(pipo)<- pipo[,1] 
-pipo<- pipo[,-1]
+row.names(fishtrait)<- fishtrait[,1] 
+fishtrait<- fishtrait[,-1]
 
-nb<- estim_ncpMCA(pipo) 
-rez<- imputeMCA(pipo, ncp=4) 
-rez<- MCA(pipo, tab.disj=rez$tab.disj.comp) 
-HCPC(rez) 
+nb<- estim_ncpMCA(fishtrait) 
+rez<- imputeMCA(fishtrait, ncp=4) 
+rez<- MCA(fishtrait, tab.disj=rez$tab.disj.comp) 
+clustering<- HCPC(rez) 
+
+
+
+# Description par Variables et/ou modalités
+
+testchi2<- as.data.frame(clustering$desc.var$test.chi2) 
+clustering$desc.var$category
+
+# description par les composantes principales
+
+paraxes<- clustering$desc.axes
+
+# description par les individus
+
+parind<- clustering$desc.ind
+
+
+
+# Caracterisation des clusters
+
+Tab<- clustering$data.clust 
+Tab<- Tab %>% mutate(Species= row.names(Tab))
+Tab <- Tab[, c(12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)]
+
+{
+  Cluster1<- Tab %>% filter(clust == 1)
+  Cluster2<- Tab %>% filter(clust == 2)
+  Cluster3<- Tab %>% filter(clust == 3)
+  Cluster4<- Tab %>% filter(clust == 4)
+  Cluster5<- Tab %>% filter(clust == 5)
+  Cluster6<- Tab %>% filter(clust == 6)
+}
+
+
+summaryc1<- as.data.frame(summary(Cluster1))
+summaryc2<- as.data.frame(summary(Cluster2))
+summaryc3<- as.data.frame(summary(Cluster3))
+summaryc4<- as.data.frame(summary(Cluster4))
+summaryc5<- as.data.frame(summary(Cluster5))
+summaryc6<- as.data.frame(summary(Cluster6))
+
+
+
+
+
+
+
+
+
 
 
