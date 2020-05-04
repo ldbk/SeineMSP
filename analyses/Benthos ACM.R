@@ -45,29 +45,13 @@ benthos<- benthos[,-1]
 nb<- estim_ncpMCA(benthos)
 
 rez<- imputeMCA(benthos)
-rez<- MCA(benthos, tab.disj=rez$tab.disj.comp)
-essai<- HCPC(rez)
-Investigate(essai)
+rez1<- MCA(benthos, tab.disj=rez$tab.disj)
+clustering<- HCPC(rez1)
 
 
-# Description par Variables et/ou modalités
+# Description des cluster par Variables et/ou modalités
 
-testchi2<- as.data.frame(essai$desc.var$test.chi2) 
-essai$desc.var$category
-
-# description par les composantes principales
-
-paraxes<- essai$desc.axes
-
-# description par les individus
-
-parind<- essai$desc.ind$para
-
-
-
-# ESSAI caracterisation des clusters
-
-Tab<- essai$data.clust 
+Tab<- clustering$data.clust 
 Tab<- Tab %>% mutate(Species= row.names(Tab))
 Tab <- Tab[, c(11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)]
 
@@ -76,8 +60,12 @@ Cluster1<- Tab %>% filter(clust == 1)
 Cluster2<- Tab %>% filter(clust == 2)
 Cluster3<- Tab %>% filter(clust == 3)
 Cluster4<- Tab %>% filter(clust == 4)
+Cluster5<- Tab %>% filter(clust == 5)
+Cluster6<- Tab %>% filter(clust == 6)
+Cluster7<- Tab %>% filter(clust == 7)
 }
 
+clustering$desc.var$category
 
 summaryc1<- as.data.frame(summary(Cluster1))
 summaryc2<- as.data.frame(summary(Cluster2))
