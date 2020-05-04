@@ -3,7 +3,7 @@ library(dplyr)
 library(FactoMineR)
 library(missMDA)
 
-fishtrait<-read.csv("FishTraits - traits.csv", stringsAsFactors=F)
+fishtrait<- read.csv("FishTraits - traits.csv", stringsAsFactors=F)
 
 # Nettoyage tableau
 fishtrait<- fishtrait %>% select(-Distrib)
@@ -16,8 +16,6 @@ catquant<- function(a, value){ # a<- unique(fishtrait$LifeSpan) et value<- c(0, 
   a1<- interval[findInterval(a, value, all.inside=T)]
   return(a1)
 }
-
-table(fishtrait$MaturityAge, catquant(fishtrait$MaturityAge, quantile(fishtrait$MaturityAge, na.rm=T)))
 
 fishtrait$LifeSpan<- catquant(fishtrait$LifeSpan, quantile(fishtrait$LifeSpan, na.rm=T)) 
 fishtrait$FoodTroph<- catquant(fishtrait$FoodTroph, quantile(fishtrait$FoodTroph, na.rm=T))
@@ -52,28 +50,13 @@ row.names(fishtrait)<- fishtrait[,1]
 fishtrait<- fishtrait[,-1]
 
 nb<- estim_ncpMCA(fishtrait) 
-rez<- imputeMCA(fishtrait, ncp=4) 
-rez<- MCA(fishtrait, tab.disj=rez$tab.disj.comp) 
-clustering<- HCPC(rez) 
+rez<- imputeMCA(fishtrait, ncp=4)
+rez$tab.disj # verif fonctionnement imputation
+rez1<- MCA(fishtrait, tab.disj=rez$tab.disj) 
+clustering<- HCPC(rez1) 
 
 
-
-# Description par Variables et/ou modalités
-
-testchi2<- as.data.frame(clustering$desc.var$test.chi2) 
-clustering$desc.var$category
-
-# description par les composantes principales
-
-paraxes<- clustering$desc.axes
-
-# description par les individus
-
-parind<- clustering$desc.ind
-
-
-
-# Caracterisation des clusters
+# Description des cluster par Variables et/ou modalités
 
 Tab<- clustering$data.clust 
 Tab<- Tab %>% mutate(Species= row.names(Tab))
@@ -87,6 +70,8 @@ Tab <- Tab[, c(12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)]
   Cluster5<- Tab %>% filter(clust == 5)
   Cluster6<- Tab %>% filter(clust == 6)
 }
+
+clustering$desc.var$category
 
 
 summaryc1<- as.data.frame(summary(Cluster1))
