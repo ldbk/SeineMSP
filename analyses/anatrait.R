@@ -54,11 +54,14 @@ fishtrait$MaturityAge<-catquant(fishtrait$MaturityAge,quantile(fishtrait$Maturit
 diagmiss(fishtrait)
 
 #selection of some traits where information is consitent (let's say...)
-fishtrait<-fishtrait%>%select(Species,LifeSpan,DemersPelag,FoodTroph,Migratory,SpawningFreq,FoodTroph,MaturityAge,IUCN.status)
+fishtrait<-fishtrait%>%select(Species,LifeSpan,DemersPelag,FoodTroph,Migratory,FoodTroph,MaturityAge,IUCN.status)
 
 pipo<-fishtrait[,-1]
 row.names(pipo)<-fishtrait[,1]
-rez<-MCA(pipo,ncp=6)
+rez<-MCA(pipo,ncp=800)
+rez2<-HCPC(rez)
+matfin<-rez2$data.clust%>%mutate(spp=row.names(rez2$data.clust))%>%arrange(clust)
+View(matfin)
 
 matdist<-rez$coord
 
