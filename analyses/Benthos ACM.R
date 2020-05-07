@@ -53,8 +53,11 @@ Cluster7<- Tab %>% filter(clust == 7)
 }
 
 clustering$desc.var$category
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 355daf5e7fee41680f407f34f1531758570f67dc
 
 
 
