@@ -6,14 +6,14 @@ library(googlesheets4)
 
 #library(mice)
 #read the orginal trait data
-fishtraitlocal<-read_sheet("https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0",sheet=1,na="NA")
-fishtraitlocal<-as.data.frame(lapply(fishtraitlocal,unlist))
+fishtraitlocal<-read.csv(file="../data/TabespecesDATRAS.csv", sep=",")
+
 #link trait matrix
 #https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0
 fishtraitBeuhkhof<-readxl::read_excel("../data/fishtrait/TraitCollectionFishNAtlanticNEPacificContShelf.xlsx")
 fishtrait1<-fishtraitBeuhkhof%>%mutate(Species=paste(genus,species))%>%
 	filter(Species%in%fishtraitlocal$Species)%>%
-	filter(LME==22)
+	filter(LME %in% c(22,23,24))
 length(unique(fishtrait1$Species))
 #11 species missing for LME 22 (North Sea)
 #try to get info from other LME : 24 for Celtic seas
