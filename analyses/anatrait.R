@@ -112,6 +112,26 @@ stop()
 #characteristics relevant to the user. In C. H. Skiadas (ed.) Proceedings of
 #ASMDA 2017, 501-520, https://arxiv.org/abs/1703.09282
 # using clusterbenchmark from fpc
+#a quick test on multiple methods
+library(fpc)
+set.seed(666) #the number of the beaaasttt
+  options(digits=3)
+    face <- rFace(10,dMoNo=2,dNoEy=0,p=2)
+clustermethod=c("kmeansCBI","hclustCBI","hclustCBI")
+clustermethodpars <- list()
+clustermethodpars[[2]] <- clustermethodpars[[3]] <- list()
+clustermethodpars[[2]]$method <- "ward.D2"
+clustermethodpars[[3]]$method <- "single"
+methodname <- c("kmeans","ward","single")
+cbs <-  clusterbenchstats(face,G=2:10,clustermethod=clustermethod,scaling=FALSE,
+				        methodname=methodname,distmethod=rep(FALSE,3),
+					    clustermethodpars=clustermethodpars,nnruns=2,kmruns=2,fnruns=2,avenruns=2)
+	    plot(cbs$stat,cbs$sim)
+	    plot(cbs$stat,cbs$sim,statistic="dindex")
+	      plot(cbs$stat,cbs$sim,statistic="avewithin")
+	      print(cbs$sstat,aggregate=TRUE,weights=c(1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0))
+
+
 
 rez2<-HCPC(rez)
 matfin<-rez2$data.clust%>%mutate(clust2=cutree(arbre,k=3),spp=row.names(rez2$data.clust))%>%arrange(clust2)
