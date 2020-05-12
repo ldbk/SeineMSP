@@ -4,16 +4,17 @@ library(factoextra)
 library(missMDA)
 library(googlesheets4)
 
-#library(mice)
+library(mice)
 #read the orginal trait data
-fishtraitlocal<-read_sheet("https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0",sheet=1,na="NA")
-fishtraitlocal<-as.data.frame(lapply(fishtraitlocal,unlist))
+fishtraitlocal<-read.csv(file="../data/TabespecesDATRAS.csv", sep=",")
+names(fishtraitlocal)[2]<- "Species"
+
 #link trait matrix
 #https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0
 fishtraitBeuhkhof<-readxl::read_excel("../data/fishtrait/TraitCollectionFishNAtlanticNEPacificContShelf.xlsx")
 fishtrait1<-fishtraitBeuhkhof%>%mutate(Species=paste(genus,species))%>%
 	filter(Species%in%fishtraitlocal$Species)%>%
-	filter(LME==22)
+  filter(LME==22)
 length(unique(fishtrait1$Species))
 #11 species missing for LME 22 (North Sea)
 #try to get info from other LME : 24 for Celtic seas
@@ -37,7 +38,9 @@ fishtraitnew<-fishtrait3%>%select(Species,habitat,feeding.mode,tl,
 				  age.maturity,#fecundity,
 				  growth.coefficient,length.max,age.max)
 #add IUCN status
-fishtraitnew<-left_join(fishtraitnew,fishtraitlocal%>%select(Species,IUCN.status))
+IUCN<- read_sheet("https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0",sheet=1,na="NA")
+names(IUCN)[12]<- "IUCN.status"
+fishtraitnew<-left_join(fishtraitnew, IUCN%>%select(Species,IUCN.status))
 #explo data
 diagmiss<-function(fishtrait){
 	nbid<-fishtrait%>%summarise_all(n_distinct)%>%t()

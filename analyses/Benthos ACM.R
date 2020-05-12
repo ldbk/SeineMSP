@@ -29,9 +29,9 @@ benthos<- benthos %>%
 
 row.names(benthos)<- benthos[,1] 
 benthos<- benthos[,-1]
-nb<- estim_ncpMCA(benthos)
+#nb<- estim_ncpMCA(benthos)
 
-rez<- imputeMCA(benthos)
+rez<- imputeMCA(benthos, ncp =2)
 rez1<- MCA(benthos, tab.disj=rez$tab.disj)
 clustering<- HCPC(rez1)
 
