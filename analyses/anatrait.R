@@ -92,7 +92,7 @@ plotellipses(rez,axes=c(1,2))
 plotellipses(rez,axes=c(1,3))
 
 #classif
-arbre<-cluster::agnes(rez$ind$coord,method="flexible")
+arbre<-cluster::agnes(rez$ind$coord,method="flexible",par.method=1)
 plot(arbre,which=2,hang=-1)
 rect.hclust(arbre,k=4)
 groupe<-cutree(arbre,k=4)
@@ -119,19 +119,24 @@ stop()
 library(fpc)
 set.seed(666) #the number of the beaaasttt
   options(digits=3)
-    face <- rFace(10,dMoNo=2,dNoEy=0,p=2)
 clustermethod=c("kmeansCBI","hclustCBI","hclustCBI")
 clustermethodpars <- list()
 clustermethodpars[[2]] <- clustermethodpars[[3]] <- list()
 clustermethodpars[[2]]$method <- "ward.D2"
 clustermethodpars[[3]]$method <- "single"
 methodname <- c("kmeans","ward","single")
-cbs <-  clusterbenchstats(face,G=2:10,clustermethod=clustermethod,scaling=FALSE,
-				        methodname=methodname,distmethod=rep(FALSE,3),
-					    clustermethodpars=clustermethodpars,nnruns=2,kmruns=2,fnruns=2,avenruns=2)
-	    plot(cbs$stat,cbs$sim)
+cbs <-  clusterbenchstats(rez$ind$coord,G=2:10,
+			  clustermethod=clustermethod,scaling=FALSE,
+			  methodname=methodname,distmethod=rep(FALSE,4),
+			clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
+			fnruns=100,avenruns=100,multicore=TRUE)
+
+	    plot(cbs$stat,cbs$sim,statistic="sindex")
 	    plot(cbs$stat,cbs$sim,statistic="dindex")
 	      plot(cbs$stat,cbs$sim,statistic="avewithin")
+	      plot(cbs$stat,cbs$sim,statistic="entropy")
+	      plot(cbs$stat,cbs$sim,statistic="pamc")
+	      plot(cbs$stat,cbs$sim,statistic="maxdiameter")
 	      print(cbs$sstat,aggregate=TRUE,weights=c(1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0))
 
 
