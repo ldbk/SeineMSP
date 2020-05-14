@@ -28,7 +28,7 @@ benthos$LifeSpan<- sub("21-50 years", "[21;50[",benthos$LifeSpan)
 
 
 
-# ACM - ancienne methode
+# ACM
 
 {
   nbid<- benthos %>%
@@ -77,21 +77,5 @@ clustering$desc.var$category
 
 
 
-# Nouvelles methodes Laurent
 
-pipob<- data.frame(benthos[,-1])
-row.names(pipob)<- benthos$Species
-rezb<- MCA(pipob, ncp=999, method="Burt") 
-
-
-
-# Classification
-arbreb<- cluster::agnes(rezb$ind$coord, method="flexible", par.method=1) 
-plot(arbreb, which=2, hang=-1)
-rect.hclust(arbreb, k=4)
-groupeb<- cutree(arbreb, k=4)
-
-benthos<- benthos %>% mutate(Cluster= groupeb)
-
-save(benthos, file= "C:/Users/jrivet/Documents/Stage M2/Data/CGFS/BenthosClusters.RData")
 
