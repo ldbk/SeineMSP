@@ -4,6 +4,7 @@ library(ggplot2)
 library(viridis)
 library(gridExtra)
 library(cowplot)
+library(raster)
 
 # Ouvrir PoissonsClusters.RData, BenthosClusters.RData et J2Datras.RData das l'environnement
 
@@ -27,121 +28,94 @@ BenthoPoi<- unique(BenthoPoi)
 
 # Jointure Datras-traits
 Tot<- J2 %>% left_join(BenthoPoi, by= ("Species"))
-
-sanstrait<- Tot %>% filter(is.na(Cluster))
-
 save(Tot, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Jointure Datras-Traits.Rdata")
 
+sanstrait<- Tot %>% filter(is.na(Cluster)) %>% dplyr::select(Species)
+sanstrait<- unique(sanstrait)
+write.csv(sanstrait, file="C:/Users/jrivet/Documents/Stage M2/Data/CGFS/sanstrait.csv")
+sanstrait2<- read.csv("C:/Users/jrivet/Documents/Stage M2/Data/CGFS/sanstrait_Worms.csv", sep=";")
 
-# Essai 1e méthode
+
+{
+  nbid<- sanstrait2 %>%
+    summarise_all(n_distinct) %>%
+    t()
+  nbNA<- function(a){a[a==""]<-NA;sum(is.na(a))}
+  nbNA<- sanstrait2 %>%
+    summarise_all(nbNA) %>%
+    t()
+  data.frame(nbid=nbid,nbNA=nbNA)
+  
+  summary<- data.frame(nbid=nbid,nbNA=nbNA)
+}
+
+
+
+# Essai 1e methode
 Dens<- Tot %>% dplyr::select(Year, moyLong, moyLat, Cluster, DensityWgt, DensityNb) %>% 
   group_by(Cluster, Year, moyLat, moyLong) %>% 
   summarize(TotNb= mean(DensityNb), TotWgt= mean(DensityWgt)) %>% 
   ungroup()
 
-# Essai 2e méthode
+# Essai 2e methode
 Dens2<- Tot %>% dplyr::select(Year, moyLong, moyLat, Cluster, Poids, Nombre, Superficie) %>% 
   group_by(Cluster, Year, moyLat, moyLong) %>% 
   summarize(Nb= mean(Nombre), Wgt= mean(Poids), Sup= mean(Superficie), TotNb=Nb/Sup, TotWgt= Wgt/Sup ) %>% 
   ungroup()
 
-
+{
+  Cluster1<- Dens2 %>% filter(Cluster==1)
+  Cluster2<- Dens2 %>% filter(Cluster==2)
+  Cluster3<- Dens2 %>% filter(Cluster==3)
+  Cluster4<- Dens2 %>% filter(Cluster==4)
+  Cluster5<- Dens2 %>% filter(Cluster==5)
+  Cluster6<- Dens2 %>% filter(Cluster==6)
+  Cluster7<- Dens2 %>% filter(Cluster==7)
+  Cluster8<- Dens2 %>% filter(Cluster==8)
+  }
 
 
 # Test carto
 
-Jointtest<- Joint %>% dplyr::select(Year, moyLong, moyLat, Cluster)
-
 rx<- range(Dens2$moyLong, na.rm=T)
 ry<- range(Dens2$moyLat, na.rm=T)
 
-
-{
-Cluster1<- Dens2 %>% filter(Cluster==1)
-Cluster2<- Dens2 %>% filter(Cluster==2)
-Cluster3<- Dens2 %>% filter(Cluster==3)
-Cluster4<- Dens2 %>% filter(Cluster==4)
-Cluster5<- Dens2 %>% filter(Cluster==5)
-Cluster6<- Dens2 %>% filter(Cluster==6)
-Cluster7<- Dens2 %>% filter(Cluster==7)
-Cluster8<- Dens2 %>% filter(Cluster==8)
-}
-
-
-C1<-ggplot(Cluster1)+
-  geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
-  borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
-  coord_sf(xlim=rx, ylim=ry)+
-  ggtitle("C1")+
-  scale_color_viridis()+
-  theme_minimal()+
-  xlab("Longitude")+
-  ylab("Latitude")
-C2<-ggplot(Cluster2)+
+ggplot(Dens2)+
   geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
   borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
   coord_sf(xlim=rx, ylim=ry)+
   scale_color_viridis()+
-  ggtitle("C2")+
-  theme_minimal()+
-  xlab("Longitude")+
-  ylab("Latitude")
-C3<-ggplot(Cluster3)+
-  geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
-  borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
-  coord_sf(xlim=rx, ylim=ry)+
-  scale_color_viridis()+
-  ggtitle("C3")+
-  theme_minimal()+
-  xlab("Longitude")+
-  ylab("Latitude")
-C4<-ggplot(Cluster4)+
-  geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
-  borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
-  coord_sf(xlim=rx, ylim=ry)+
-  scale_color_viridis()+
-  ggtitle("C4")+
-  theme_minimal()+
-  xlab("Longitude")+
-  ylab("Latitude")
-C5<-ggplot(Cluster5)+
-  geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
-  borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
-  coord_sf(xlim=rx, ylim=ry)+
-  scale_color_viridis()+
-  ggtitle("C5")+
-  theme_minimal()+
-  xlab("Longitude")+
-  ylab("Latitude")
-C6<-ggplot(Cluster6)+
-  geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
-  borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
-  coord_sf(xlim=rx, ylim=ry)+
-  scale_color_viridis()+
-  ggtitle("C6")+
-  theme_minimal()+
-  xlab("Longitude")+
-  ylab("Latitude")
-C7<-ggplot(Cluster7)+
-  geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
-  borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
-  coord_sf(xlim=rx, ylim=ry)+
-  scale_color_viridis()+
-  theme_minimal()+
-  ggtitle("C7")+
-  xlab("Longitude")+
-  ylab("Latitude")
-C8<-ggplot(Cluster8)+
-  geom_point(aes(x= moyLong, y= moyLat, size=TotNb))+
-  borders("world", xlim=rx, ylim=ry, fill="grey", colour=NA, alpha=1)+
-  coord_sf(xlim=rx, ylim=ry)+
-  scale_color_viridis()+
-  ggtitle("C8")+
+  facet_wrap(.~ Cluster)
   theme_minimal()+
   xlab("Longitude")+
   ylab("Latitude")
 
 
-plot_grid(C1, C2, C3, C4, C5, C6, C7, C8, ncol = 3, nrow = 3)
+
+
+# Essai raster
+ 
+essairaster<- raster(nrow=13, ncol=53, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
+
+
+
+res(essairaster)<- 0.04
+
+projection(essairaster)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+values(essairaster)<-  Cluster1[,8]
+
+r1<- rasterize(Cluster1[,3:4], essairaster, fields=Cluster1$TotNb, fun=sum)
+
+
+#rasterization
+#definition d'une image : definition range geographic anb number of pixel by nrow, ncol
+# nrow and ncol can be changed here to match satellite data
+r<-raster(xmn=-2,xmx=3,ymn=49,ymx=51.5,nrow=50,ncol=25)
+#rasterize : sum of the column z
+xyztmp<-xyz
+r1<-rasterize(xyz[,1:2],r,fields=xyz$z,fun=sum)
+#a simple plot
+plot(r1)
 
 
