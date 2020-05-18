@@ -95,27 +95,18 @@ ggplot(Dens2)+
 
 # Essai raster
  
-essairaster<- raster(nrow=13, ncol=53, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
+essairaster<- raster(nrow=11, ncol=66, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
 
 
-
-res(essairaster)<- 0.04
+#res(essairaster)<- 0.04
 
 projection(essairaster)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-values(essairaster)<-  Cluster1[,8]
+values<- setValues(essairaster, Cluster1$TotNb)
 
-r1<- rasterize(Cluster1[,3:4], essairaster, fields=Cluster1$TotNb, fun=sum)
+r1<- rasterize(Cluster1[,4:3], essairaster, fields=values, fun=sum)
 
 
-#rasterization
-#definition d'une image : definition range geographic anb number of pixel by nrow, ncol
-# nrow and ncol can be changed here to match satellite data
-r<-raster(xmn=-2,xmx=3,ymn=49,ymx=51.5,nrow=50,ncol=25)
-#rasterize : sum of the column z
-xyztmp<-xyz
-r1<-rasterize(xyz[,1:2],r,fields=xyz$z,fun=sum)
-#a simple plot
-plot(r1)
+
 
 
