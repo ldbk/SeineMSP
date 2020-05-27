@@ -1,0 +1,191 @@
+ScientificName;;AphiaID;Match type;Taxon status;ScientificName;AphiaID_accepted;ScientificName_accepted;Kingdom;Phylum;Class;Order;Family;Genus;Subgenus;Species;Subspecies;isMarine;isBrackish;isFresh;isTerrestrial
+Merlangius merlangus;;126438;exact;accepted;Merlangius merlangus;126438;Merlangius merlangus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Merlangius;;merlangus;;1;0;0;0
+Gadus morhua;;126436;exact;accepted;Gadus morhua;126436;Gadus morhua;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Gadus;;morhua;;1;1;0;0
+Trachurus trachurus;;126822;exact;accepted;Trachurus trachurus;126822;Trachurus trachurus;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Trachurus;;trachurus;;1;0;0;0
+Sprattus sprattus;;126425;exact;accepted;Sprattus sprattus;126425;Sprattus sprattus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Sprattus;;sprattus;;1;1;0;0
+Pleuronectes platessa;;127143;exact;accepted;Pleuronectes platessa;127143;Pleuronectes platessa;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Pleuronectes;;platessa;;1;1;0;0
+Limanda limanda;;127139;exact;accepted;Limanda limanda;127139;Limanda limanda;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Limanda;;limanda;;1;0;0;0
+Solea solea;;127160;exact;accepted;Solea solea;127160;Solea solea;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Solea;;solea;;1;1;0;0
+Clupea harengus;;126417;exact;accepted;Clupea harengus;126417;Clupea harengus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Clupea;;harengus;;1;1;0;0
+Callionymus lyra;;126792;exact;accepted;Callionymus lyra;126792;Callionymus lyra;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;lyra;;1;0;0;0
+Trisopterus minutus;;126446;exact;accepted;Trisopterus minutus;126446;Trisopterus minutus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;minutus;;1;0;0;0
+Scomber scombrus;;127023;exact;accepted;Scomber scombrus;127023;Scomber scombrus;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Scomber;;scombrus;;1;1;0;0
+Trisopterus luscus;;126445;exact;accepted;Trisopterus luscus;126445;Trisopterus luscus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;luscus;;1;1;0;0
+Zeus faber;;127427;exact;accepted;Zeus faber;127427;Zeus faber;Animalia;Chordata;Actinopterygii;Zeiformes;Zeidae;Zeus;;faber;;1;1;0;0
+Pollachius pollachius;;126440;exact;accepted;Pollachius pollachius;126440;Pollachius pollachius;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Pollachius;;pollachius;;1;0;0;0
+Scyliorhinus canicula;;105814;exact;accepted;Scyliorhinus canicula;105814;Scyliorhinus canicula;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;canicula;;1;0;0;0
+Raja clavata;;105883;exact;accepted;Raja clavata;105883;Raja clavata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;clavata;;1;0;0;0
+Chelidonichthys lucerna;;127262;exact;accepted;Chelidonichthys lucerna;127262;Chelidonichthys lucerna;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;lucerna;;1;0;0;0
+Trigloporus lastoviza;;154462;exact;unaccepted;Trigloporus lastoviza;127261;Chelidonichthys lastoviza;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigloporus;;lastoviza;;1;0;0;0
+Taurulus bubalis;;127204;exact;accepted;Taurulus bubalis;127204;Taurulus bubalis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Taurulus;;bubalis;;1;1;0;0
+Spondyliosoma cantharus;;127066;exact;accepted;Spondyliosoma cantharus;127066;Spondyliosoma cantharus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Spondyliosoma;;cantharus;;1;0;0;0
+Sardina pilchardus;;126421;exact;accepted;Sardina pilchardus;126421;Sardina pilchardus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Sardina;;pilchardus;;1;1;1;0
+Scophthalmus rhombus;;127150;exact;accepted;Scophthalmus rhombus;127150;Scophthalmus rhombus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;rhombus;;1;0;0;0
+Trigla lyra;;127266;exact;accepted;Trigla lyra;127266;Trigla lyra;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigla;;lyra;;1;0;0;0
+Chelidonichthys cuculus;;127259;exact;accepted;Chelidonichthys cuculus;127259;Chelidonichthys cuculus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;cuculus;;1;0;0;
+Agonus cataphractus;;127190;exact;accepted;Agonus cataphractus;127190;Agonus cataphractus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Agonidae;Agonus;;cataphractus;;1;0;0;0
+Mullus surmuletus;;126986;exact;accepted;Mullus surmuletus;126986;Mullus surmuletus;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;Mullus;;surmuletus;;1;0;0;0
+Raja montagui;;105887;exact;accepted;Raja montagui;105887;Raja montagui;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;montagui;;1;0;0;0
+Scyliorhinus stellaris;;105815;exact;accepted;Scyliorhinus stellaris;105815;Scyliorhinus stellaris;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;stellaris;;1;0;0;0
+Engraulis encrasicolus;;126426;exact;accepted;Engraulis encrasicolus;126426;Engraulis encrasicolus;Animalia;Chordata;Actinopterygii;Clupeiformes;Engraulidae;Engraulis;;encrasicolus;;1;1;0;0
+Buglossidium luteum;;127153;exact;accepted;Buglossidium luteum;127153;Buglossidium luteum;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Buglossidium;;luteum;;1;0;0;0
+Raja undulata;;105891;exact;accepted;Raja undulata;105891;Raja undulata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;undulata;;1;0;0;0
+Dicentrarchus labrax;;126975;exact;accepted;Dicentrarchus labrax;126975;Dicentrarchus labrax;Animalia;Chordata;Actinopterygii;Perciformes;Moronidae;Dicentrarchus;;labrax;;1;1;1;0
+Lophius piscatorius;;126555;exact;accepted;Lophius piscatorius;126555;Lophius piscatorius;Animalia;Chordata;Actinopterygii;Lophiiformes;Lophiidae;Lophius;;piscatorius;;1;0;0;0
+Raja brachyura;;;ambiguous;;;;;;;;;;;;;;;;;
+Raja microocellata;;105885;exact;accepted;Raja microocellata;105885;Raja microocellata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;microocellata;;1;0;0;0
+Belone belone;;126375;exact;accepted;Belone belone;126375;Belone belone;Animalia;Chordata;Actinopterygii;Beloniformes;Belonidae;Belone;;belone;;1;1;0;0
+Mustelus asterias;;105821;exact;accepted;Mustelus asterias;105821;Mustelus asterias;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;asterias;;1;0;0;0
+Mustelus mustelus;;105822;exact;accepted;Mustelus mustelus;105822;Mustelus mustelus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;mustelus;;1;0;0;0
+Psetta maxima;;154473;exact;unaccepted;Psetta maxima;127149;Scophthalmus maximus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Psetta;;maxima;;1;1;0;0
+Platichthys flesus;;127141;exact;accepted;Platichthys flesus;127141;Platichthys flesus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Platichthys;;flesus;;1;1;1;0
+Eutrigla gurnardus;;150637;exact;accepted;Eutrigla gurnardus;150637;Eutrigla gurnardus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Eutrigla;;gurnardus;;1;1;0;0
+Alosa alosa;;126413;exact;accepted;Alosa alosa;126413;Alosa alosa;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;alosa;;1;1;1;0
+Leucoraja naevus;;105876;exact;accepted;Leucoraja naevus;105876;Leucoraja naevus;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;naevus;;1;0;0;0
+Liza aurata;;126978;exact;unaccepted;Liza aurata;1044127;Chelon auratus;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Liza;;aurata;;1;1;1;0
+Galeorhinus galeus;;105820;exact;accepted;Galeorhinus galeus;105820;Galeorhinus galeus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Galeorhinus;;galeus;;1;0;0;0
+Echiichthys vipera;;150630;exact;accepted;Echiichthys vipera;150630;Echiichthys vipera;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Echiichthys;;vipera;;1;0;0;0
+Anguilla anguilla;;126281;exact;accepted;Anguilla anguilla;126281;Anguilla anguilla;Animalia;Chordata;Actinopterygii;Anguilliformes;Anguillidae;Anguilla;;anguilla;;1;1;1;0
+Balistes capriscus;;154721;exact;accepted;Balistes capriscus;154721;Balistes capriscus;Animalia;Chordata;Actinopterygii;Tetraodontiformes;Balistidae;Balistes;;capriscus;;1;0;0;0
+Micromesistius poutassou;;126439;exact;accepted;Micromesistius poutassou;126439;Micromesistius poutassou;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Micromesistius;;poutassou;;1;0;0;0
+Microstomus kitt;;127140;exact;accepted;Microstomus kitt;127140;Microstomus kitt;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Microstomus;;kitt;;1;0;0;0
+Dasyatis pastinaca;;105851;exact;accepted;Dasyatis pastinaca;105851;Dasyatis pastinaca;Animalia;Chordata;Elasmobranchii;Myliobatiformes;Dasyatidae;Dasyatis;;pastinaca;;1;1;0;0
+Trachinus draco;;127082;exact;accepted;Trachinus draco;127082;Trachinus draco;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Trachinus;;draco;;1;0;0;0
+Pegusa lascaris;;127156;exact;accepted;Pegusa lascaris;127156;Pegusa lascaris;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Pegusa;;lascaris;;1;1;0;0
+Conger conger;;126285;exact;accepted;Conger conger;126285;Conger conger;Animalia;Chordata;Actinopterygii;Anguilliformes;Congridae;Conger;;conger;;1;0;0;0
+Microchirus variegatus;;274304;exact;accepted;Microchirus variegatus;274304;Microchirus variegatus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Microchirus;;variegatus;;1;0;0;0
+Alosa fallax;;126415;exact;accepted;Alosa fallax;126415;Alosa fallax;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;fallax;;1;1;1;0
+Ciliata mustela;;126448;exact;accepted;Ciliata mustela;126448;Ciliata mustela;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Ciliata;;mustela;;1;0;0;0
+Labrus bergylta;;126965;exact;accepted;Labrus bergylta;126965;Labrus bergylta;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Labrus;;bergylta;;1;0;0;0
+Liza ramada;;126980;exact;unaccepted;Liza ramada;1042830;Chelon ramada;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Liza;;ramada;;1;1;1;0
+Pagellus erythrinus;;127060;exact;accepted;Pagellus erythrinus;127060;Pagellus erythrinus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;erythrinus;;1;0;0;0
+Sparus aurata;;151523;exact;accepted;Sparus aurata;151523;Sparus aurata;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Sparus;;aurata;;1;1;0;0
+Zeugopterus punctatus;;127151;exact;accepted;Zeugopterus punctatus;127151;Zeugopterus punctatus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Zeugopterus;;punctatus;;1;0;0;0
+Osmerus eperlanus;;126736;exact;accepted;Osmerus eperlanus;126736;Osmerus eperlanus;Animalia;Chordata;Actinopterygii;Osmeriformes;Osmeridae;Osmerus;;eperlanus;;1;1;1;0
+Leucoraja circularis;;105873;exact;accepted;Leucoraja circularis;105873;Leucoraja circularis;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;circularis;;1;0;0;0
+Arnoglossus laterna;;127126;exact;accepted;Arnoglossus laterna;127126;Arnoglossus laterna;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;laterna;;1;0;0;0
+Salmo trutta;;127187;exact;accepted;Salmo trutta;127187;Salmo trutta;Animalia;Chordata;Actinopterygii;Salmoniformes;Salmonidae;Salmo;;trutta;;1;1;1;0
+Chelon labrosus;;126977;exact;accepted;Chelon labrosus;126977;Chelon labrosus;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Chelon;;labrosus;;1;1;1;0
+Blennius ocellaris;;126761;exact;accepted;Blennius ocellaris;126761;Blennius ocellaris;Animalia;Chordata;Actinopterygii;Perciformes;Blenniidae;Blennius;;ocellaris;;1;0;0;0
+Pagellus bogaraveo;;127059;exact;accepted;Pagellus bogaraveo;127059;Pagellus bogaraveo;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;bogaraveo;;1;0;0;0
+Hyperoplus lanceolatus;;126756;exact;accepted;Hyperoplus lanceolatus;126756;Hyperoplus lanceolatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;lanceolatus;;1;1;0;0
+Ammodytes tobianus;;126752;exact;accepted;Ammodytes tobianus;126752;Ammodytes tobianus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Ammodytes;;tobianus;;1;1;0;0
+Hippocampus hippocampus;;127380;exact;accepted;Hippocampus hippocampus;127380;Hippocampus hippocampus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Hippocampus;;hippocampus;;1;0;0;0
+Liparis liparis;;127219;exact;alternate representation;Liparis liparis;293624;Liparis liparis liparis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Liparis;;liparis;;1;0;0;0
+Atherina presbyter;;272030;exact;accepted;Atherina presbyter;272030;Atherina presbyter;Animalia;Chordata;Actinopterygii;Atheriniformes;Atherinidae;Atherina;;presbyter;;1;1;0;0
+Gobius niger;;;ambiguous;;;;;;;;;;;;;;;;;
+Hyperoplus immaculatus;;126755;exact;accepted;Hyperoplus immaculatus;126755;Hyperoplus immaculatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;immaculatus;;1;0;0;0
+Lepadogaster lepadogaster;;126518;exact;accepted;Lepadogaster lepadogaster;126518;Lepadogaster lepadogaster;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Lepadogaster;;lepadogaster;;1;0;0;0
+Myoxocephalus scorpius;;127203;exact;accepted;Myoxocephalus scorpius;127203;Myoxocephalus scorpius;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Myoxocephalus;;scorpius;;1;1;0;0
+Syngnathus acus;;127387;exact;accepted;Syngnathus acus;127387;Syngnathus acus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;acus;;1;1;0;0
+Ctenolabrus rupestris;;126964;exact;accepted;Ctenolabrus rupestris;126964;Ctenolabrus rupestris;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Ctenolabrus;;rupestris;;1;0;0;0
+Lepadogaster;;125781;exact;accepted;Lepadogaster;125781;Lepadogaster;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Lepadogaster;;;;1;0;0;0
+Loligo;;138139;exact;accepted;Loligo;138139;Loligo;Animalia;Mollusca;Cephalopoda;Myopsida;Loliginidae;Loligo;;;;1;;0;0
+Cancer pagurus;;107276;exact;accepted;Cancer pagurus;107276;Cancer pagurus;Animalia;Arthropoda;Malacostraca;Decapoda;Cancridae;Cancer;;pagurus;;1;;;
+Loligo vulgaris;;140271;exact;accepted;Loligo vulgaris;140271;Loligo vulgaris;Animalia;Mollusca;Cephalopoda;Myopsida;Loliginidae;Loligo;;vulgaris;;1;;0;0
+Macropodia;;205077;exact;accepted;Macropodia;205077;Macropodia;Animalia;Arthropoda;Malacostraca;Decapoda;Inachidae;Macropodia;;;;1;;;
+Liocarcinus depurator;;107387;exact;accepted;Liocarcinus depurator;107387;Liocarcinus depurator;Animalia;Arthropoda;Malacostraca;Decapoda;Polybiidae;Liocarcinus;;depurator;;1;;;
+Ophiura ophiura;;124929;exact;accepted;Ophiura ophiura;124929;Ophiura ophiura;Animalia;Echinodermata;Ophiuroidea;Ophiurida;Ophiuridae;Ophiura;;ophiura;;1;0;0;0
+Callionymus;;125930;exact;accepted;Callionymus;125930;Callionymus;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;;;1;1;1;0
+Gobiidae;;125537;exact;accepted;Gobiidae;125537;Gobiidae;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;;;;;1;1;;
+Necora puber;;107398;exact;accepted;Necora puber;107398;Necora puber;Animalia;Arthropoda;Malacostraca;Decapoda;Polybiidae;Necora;;puber;;1;;;
+Sepia officinalis;;141444;exact;accepted;Sepia officinalis;141444;Sepia officinalis;Animalia;Mollusca;Cephalopoda;Sepiida;Sepiidae;Sepia;;officinalis;;1;;0;0
+Liocarcinus vernalis;;107394;exact;accepted;Liocarcinus vernalis;107394;Liocarcinus vernalis;Animalia;Arthropoda;Malacostraca;Decapoda;Polybiidae;Liocarcinus;;vernalis;;1;;;
+Echinocardium cordatum;;124392;exact;accepted;Echinocardium cordatum;124392;Echinocardium cordatum;Animalia;Echinodermata;Echinoidea;Spatangoida;Loveniidae;Echinocardium;;cordatum;;1;0;0;0
+Crangon crangon;;107552;exact;accepted;Crangon crangon;107552;Crangon crangon;Animalia;Arthropoda;Malacostraca;Decapoda;Crangonidae;Crangon;;crangon;;1;;0;0
+Aequipecten opercularis;;140687;exact;accepted;Aequipecten opercularis;140687;Aequipecten opercularis;Animalia;Mollusca;Bivalvia;Pectinida;Pectinidae;Aequipecten;;opercularis;;1;;;
+Mytilus edulis;;140480;exact;accepted;Mytilus edulis;140480;Mytilus edulis;Animalia;Mollusca;Bivalvia;Mytilida;Mytilidae;Mytilus;;edulis;;1;;;
+Inachus dorsettensis;;107327;exact;accepted;Inachus dorsettensis;107327;Inachus dorsettensis;Animalia;Arthropoda;Malacostraca;Decapoda;Inachidae;Inachus;;dorsettensis;;1;;;
+Sepiola;;138483;exact;accepted;Sepiola;138483;Sepiola;Animalia;Mollusca;Cephalopoda;Sepiida;Sepiolidae;Sepiola;;;;1;;0;0
+Suberites;;132072;exact;accepted;Suberites;132072;Suberites;Animalia;Porifera;Demospongiae;Suberitida;Suberitidae;Suberites;;;;1;0;0;0
+Pagurus cuanensis;;;ambiguous;;;;;;;;;;;;;;;;;
+Ophiothrix fragilis;;125131;exact;accepted;Ophiothrix fragilis;125131;Ophiothrix fragilis;Animalia;Echinodermata;Ophiuroidea;Amphilepidida;Ophiotrichidae;Ophiothrix;;fragilis;;1;0;0;0
+Maja brachydactyla;;107347;exact;accepted;Maja brachydactyla;107347;Maja brachydactyla;Animalia;Arthropoda;Malacostraca;Decapoda;Majidae;Maja;;brachydactyla;;1;;;
+Pecten maximus;;140712;exact;accepted;Pecten maximus;140712;Pecten maximus;Animalia;Mollusca;Bivalvia;Pectinida;Pectinidae;Pecten;;maximus;;1;;;
+Anseropoda placenta;;123985;exact;accepted;Anseropoda placenta;123985;Anseropoda placenta;Animalia;Echinodermata;Asteroidea;Valvatida;Asterinidae;Anseropoda;;placenta;;1;0;0;0
+Symphodus bailloni;;273566;exact;accepted;Symphodus bailloni;273566;Symphodus bailloni;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;bailloni;;1;0;0;0
+Pisidia longicornis;;107188;exact;accepted;Pisidia longicornis;107188;Pisidia longicornis;Animalia;Arthropoda;Malacostraca;Decapoda;Porcellanidae;Pisidia;;longicornis;;1;;;
+Pilumnus hirtellus;;107418;exact;accepted;Pilumnus hirtellus;107418;Pilumnus hirtellus;Animalia;Arthropoda;Malacostraca;Decapoda;Pilumnidae;Pilumnus;;hirtellus;;1;;;
+Ascidia;;103483;exact;accepted;Ascidia;103483;Ascidia;Animalia;Chordata;Ascidiacea;Phlebobranchia;Ascidiidae;Ascidia;;;;1;;;0
+Macropodia tenuirostris;;107346;exact;accepted;Macropodia tenuirostris;107346;Macropodia tenuirostris;Animalia;Arthropoda;Malacostraca;Decapoda;Inachidae;Macropodia;;tenuirostris;;1;;;
+Mimachlamys varia;;236719;exact;accepted;Mimachlamys varia;236719;Mimachlamys varia;Animalia;Mollusca;Bivalvia;Pectinida;Pectinidae;Mimachlamys;;varia;;1;;0;0
+Buccinum undatum;;138878;exact;accepted;Buccinum undatum;138878;Buccinum undatum;Animalia;Mollusca;Gastropoda;Neogastropoda;Buccinidae;Buccinum;;undatum;;1;;;
+Palaemon serratus;;107616;exact;accepted;Palaemon serratus;107616;Palaemon serratus;Animalia;Arthropoda;Malacostraca;Decapoda;Palaemonidae;Palaemon;;serratus;;1;;0;0
+Scophthalmus maximus;;127149;exact;accepted;Scophthalmus maximus;127149;Scophthalmus maximus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;maximus;;1;1;0;0
+Symphodus roissali;;273573;exact;accepted;Symphodus roissali;273573;Symphodus roissali;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;roissali;;1;1;0;0
+Loligo forbesi;;416668;exact;unaccepted;Loligo forbesi;140270;Loligo forbesii;Animalia;Mollusca;Cephalopoda;Myopsida;Loliginidae;Loligo;;forbesi;;1;;0;0
+Ascidiacea;;1839;exact;accepted;Ascidiacea;1839;Ascidiacea;Animalia;Chordata;Ascidiacea;;;;;;;1;;;
+Macropodia rostrata;;107345;exact;accepted;Macropodia rostrata;107345;Macropodia rostrata;Animalia;Arthropoda;Malacostraca;Decapoda;Inachidae;Macropodia;;rostrata;;1;;;
+Calliostoma granulatum;;141753;exact;accepted;Calliostoma granulatum;141753;Calliostoma granulatum;Animalia;Mollusca;Gastropoda;Trochida;Calliostomatidae;Calliostoma;;granulatum;;1;;;
+Tethya aurantium;;134311;exact;accepted;Tethya aurantium;134311;Tethya aurantium;Animalia;Porifera;Demospongiae;Tethyida;Tethyidae;Tethya;;aurantium;;1;0;0;0
+Calliostoma zizyphinum;;141767;exact;accepted;Calliostoma zizyphinum;141767;Calliostoma zizyphinum;Animalia;Mollusca;Gastropoda;Trochida;Calliostomatidae;Calliostoma;;zizyphinum;;1;0;0;0
+Pagurus prideaux;;107239;exact;accepted;Pagurus prideaux;107239;Pagurus prideaux;Animalia;Arthropoda;Malacostraca;Decapoda;Paguridae;Pagurus;;prideaux;;1;;;
+Aphrodita aculeata;;129840;exact;accepted;Aphrodita aculeata;129840;Aphrodita aculeata;Animalia;Annelida;Polychaeta;Phyllodocida;Aphroditidae;Aphrodita;;aculeata;;1;0;0;0
+Homarus gammarus;;107253;exact;accepted;Homarus gammarus;107253;Homarus gammarus;Animalia;Arthropoda;Malacostraca;Decapoda;Nephropidae;Homarus;;gammarus;;1;;;
+Polychaeta;;883;exact;accepted;Polychaeta;883;Polychaeta;Animalia;Annelida;Polychaeta;;;;;;;1;1;1;1
+Galathea;;;ambiguous;;;;;;;;;;;;;;;;;
+Abra alba;;141433;exact;accepted;Abra alba;141433;Abra alba;Animalia;Mollusca;Bivalvia;Cardiida;Semelidae;Abra;;alba;;1;;;
+Rissoides desmaresti;;136135;exact;accepted;Rissoides desmaresti;136135;Rissoides desmaresti;Animalia;Arthropoda;Malacostraca;Stomatopoda;Squillidae;Rissoides;;desmaresti;;1;0;0;0
+Styela clava;;103929;exact;accepted;Styela clava;103929;Styela clava;Animalia;Chordata;Ascidiacea;Stolidobranchia;Styelidae;Styela;;clava;;1;;0;0
+Adamsia carciniopados;;100931;exact;unaccepted;Adamsia carciniopados;445590;Adamsia palliata;Animalia;Cnidaria;Anthozoa;Actiniaria;Hormathiidae;Adamsia;;carciniopados;;1;;;
+Doris pseudoargus;;181228;exact;accepted;Doris pseudoargus;181228;Doris pseudoargus;Animalia;Mollusca;Gastropoda;Nudibranchia;Dorididae;Doris;;pseudoargus;;1;;;
+Liocarcinus pusillus;;107393;exact;accepted;Liocarcinus pusillus;107393;Liocarcinus pusillus;Animalia;Arthropoda;Malacostraca;Decapoda;Polybiidae;Liocarcinus;;pusillus;;1;;;
+Tritonia hombergii;;416648;exact;accepted;Tritonia hombergii;416648;Tritonia hombergii;Animalia;Mollusca;Gastropoda;Nudibranchia;Tritoniidae;Tritonia;;hombergii;;1;;;
+Microchirus;;126129;exact;accepted;Microchirus;126129;Microchirus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Microchirus;;;;1;0;0;0
+Diodora graeca;;139951;exact;accepted;Diodora graeca;139951;Diodora graeca;Animalia;Mollusca;Gastropoda;Lepetellida;Fissurellidae;Diodora;;graeca;;1;0;0;0
+Molgulidae;;103448;exact;accepted;Molgulidae;103448;Molgulidae;Animalia;Chordata;Ascidiacea;Stolidobranchia;Molgulidae;;;;;1;;;
+Mytilus galloprovincialis;;140481;exact;accepted;Mytilus galloprovincialis;140481;Mytilus galloprovincialis;Animalia;Mollusca;Bivalvia;Mytilida;Mytilidae;Mytilus;;galloprovincialis;;1;0;0;0
+Pisa armata;;107353;exact;accepted;Pisa armata;107353;Pisa armata;Animalia;Arthropoda;Malacostraca;Decapoda;Epialtidae;Pisa;;armata;;1;;;
+Dromia personata;;107258;exact;accepted;Dromia personata;107258;Dromia personata;Animalia;Arthropoda;Malacostraca;Decapoda;Dromiidae;Dromia;;personata;;1;;;
+Ocenebra erinaceus;;140405;exact;accepted;Ocenebra erinaceus;140405;Ocenebra erinaceus;Animalia;Mollusca;Gastropoda;Neogastropoda;Muricidae;Ocenebra;;erinaceus;;1;;;
+Antedon;;123349;exact;accepted;Antedon;123349;Antedon;Animalia;Echinodermata;Crinoidea;Comatulida;Antedonidae;Antedon;;;;1;0;0;0
+Botryllus;;103529;exact;accepted;Botryllus;103529;Botryllus;Animalia;Chordata;Ascidiacea;Stolidobranchia;Styelidae;Botryllus;;;;1;;;0
+Eurynome aspera;;107318;exact;accepted;Eurynome aspera;107318;Eurynome aspera;Animalia;Arthropoda;Malacostraca;Decapoda;Majidae;Eurynome;;aspera;;1;;;
+Cirripedia;;1082;exact;accepted;Cirripedia;1082;Cirripedia;Animalia;Arthropoda;Hexanauplia;;;;;;;1;;1;
+Bivalvia;;105;exact;accepted;Bivalvia;105;Bivalvia;Animalia;Mollusca;Bivalvia;;;;;;;1;1;1;0
+Metridium senile;;100982;exact;accepted;Metridium senile;100982;Metridium senile;Animalia;Cnidaria;Anthozoa;Actiniaria;Metridiidae;Metridium;;senile;;1;;;
+Sarda sarda;;127021;exact;accepted;Sarda sarda;127021;Sarda sarda;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Sarda;;sarda;;1;1;0;0
+Chrysaora hysoscella;;135304;exact;accepted;Chrysaora hysoscella;135304;Chrysaora hysoscella;Animalia;Cnidaria;Scyphozoa;Semaeostomeae;Pelagiidae;Chrysaora;;hysoscella;;1;0;0;0
+Rhizostoma;;135257;exact;accepted;Rhizostoma;135257;Rhizostoma;Animalia;Cnidaria;Scyphozoa;Rhizostomeae;Rhizostomatidae;Rhizostoma;;;;1;0;0;0
+Alopias vulpinus;;105836;exact;accepted;Alopias vulpinus;105836;Alopias vulpinus;Animalia;Chordata;Elasmobranchii;Lamniformes;Alopiidae;Alopias;;vulpinus;;1;0;0;0
+Gymnammodytes semisquamatus;;126754;exact;accepted;Gymnammodytes semisquamatus;126754;Gymnammodytes semisquamatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Gymnammodytes;;semisquamatus;;1;0;0;0
+Gobius gasteveni;;126890;exact;accepted;Gobius gasteveni;126890;Gobius gasteveni;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;gasteveni;;1;1;0;0
+Diplecogaster bimaculata;;126513;exact;alternate representation;Diplecogaster bimaculata;236458;Diplecogaster bimaculata bimaculata;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Diplecogaster;;bimaculata;;1;0;0;0
+Pomatoschistus;;125999;exact;accepted;Pomatoschistus;125999;Pomatoschistus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;;;1;1;1;0
+Microchirus (Microchirus) variegatus;;127472;exact;alternate representation;Microchirus (Microchirus) variegatus;274304;Microchirus variegatus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Microchirus;Microchirus;variegatus;;1;0;0;0
+Eledone cirrhosa;;140600;exact;accepted;Eledone cirrhosa;140600;Eledone cirrhosa;Animalia;Mollusca;Cephalopoda;Octopoda;Eledonidae;Eledone;;cirrhosa;;1;;0;0
+Gobius paganellus;;126893;exact;accepted;Gobius paganellus;126893;Gobius paganellus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;paganellus;;1;1;1;0
+Pomatoschistus minutus;;126928;exact;accepted;Pomatoschistus minutus;126928;Pomatoschistus minutus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;minutus;;1;1;0;0
+Symphodus (Crenilabrus) bailloni;;127454;exact;alternate representation;Symphodus (Crenilabrus) bailloni;273566;Symphodus bailloni;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;Crenilabrus;bailloni;;1;;;
+Psammechinus miliaris;;124319;exact;accepted;Psammechinus miliaris;124319;Psammechinus miliaris;Animalia;Echinodermata;Echinoidea;Camarodonta;Parechinidae;Psammechinus;;miliaris;;1;0;0;0
+Crepidula fornicata;;138963;exact;accepted;Crepidula fornicata;138963;Crepidula fornicata;Animalia;Mollusca;Gastropoda;Littorinimorpha;Calyptraeidae;Crepidula;;fornicata;;1;;;
+Nudibranchia;;1762;exact;accepted;Nudibranchia;1762;Nudibranchia;Animalia;Mollusca;Gastropoda;Nudibranchia;;;;;;1;;;
+Alloteuthis;;138138;exact;accepted;Alloteuthis;138138;Alloteuthis;Animalia;Mollusca;Cephalopoda;Myopsida;Loliginidae;Alloteuthis;;;;1;;0;0
+Liocarcinus holsatus;;107388;exact;accepted;Liocarcinus holsatus;107388;Liocarcinus holsatus;Animalia;Arthropoda;Malacostraca;Decapoda;Polybiidae;Liocarcinus;;holsatus;;1;;;
+Asterias rubens;;123776;exact;accepted;Asterias rubens;123776;Asterias rubens;Animalia;Echinodermata;Asteroidea;Forcipulatida;Asteriidae;Asterias;;rubens;;1;1;0;0
+Crossaster papposus;;124154;exact;accepted;Crossaster papposus;124154;Crossaster papposus;Animalia;Echinodermata;Asteroidea;Valvatida;Solasteridae;Crossaster;;papposus;;1;0;0;0
+Pagurus bernhardus;;107232;exact;accepted;Pagurus bernhardus;107232;Pagurus bernhardus;Animalia;Arthropoda;Malacostraca;Decapoda;Paguridae;Pagurus;;bernhardus;;1;;;
+Tethya citrina;;134312;exact;accepted;Tethya citrina;134312;Tethya citrina;Animalia;Porifera;Demospongiae;Tethyida;Tethyidae;Tethya;;citrina;;1;0;0;0
+Inachus;;106905;exact;accepted;Inachus;106905;Inachus;Animalia;Arthropoda;Malacostraca;Decapoda;Inachidae;Inachus;;;;1;;;
+Alcyonium digitatum;;125333;exact;accepted;Alcyonium digitatum;125333;Alcyonium digitatum;Animalia;Cnidaria;Anthozoa;Alcyonacea;Alcyoniidae;Alcyonium;;digitatum;;1;;0;0
+Alcyonidium diaphanum;;111597;exact;accepted;Alcyonidium diaphanum;111597;Alcyonidium diaphanum;Animalia;Bryozoa;Gymnolaemata;Ctenostomatida;Alcyonidiidae;Alcyonidium;;diaphanum;;1;0;0;0
+Adamsia palliata;;445590;exact;accepted;Adamsia palliata;445590;Adamsia palliata;Animalia;Cnidaria;Anthozoa;Actiniaria;Hormathiidae;Adamsia;;palliata;;1;;;
+Inachus phalangium;;107333;exact;accepted;Inachus phalangium;107333;Inachus phalangium;Animalia;Arthropoda;Malacostraca;Decapoda;Inachidae;Inachus;;phalangium;;1;;;
+Porifera;;558;exact;accepted;Porifera;558;Porifera;Animalia;Porifera;;;;;;;;1;1;1;0
+Epizoanthus;;100790;exact;accepted;Epizoanthus;100790;Epizoanthus;Animalia;Cnidaria;Anthozoa;Zoantharia;Epizoanthidae;Epizoanthus;;;;1;0;0;0
+Atelecyclus undecimdentatus;;107274;exact;accepted;Atelecyclus undecimdentatus;107274;Atelecyclus undecimdentatus;Animalia;Arthropoda;Malacostraca;Decapoda;Atelecyclidae;Atelecyclus;;undecimdentatus;;1;;;
+Urticina felina;;100834;exact;accepted;Urticina felina;100834;Urticina felina;Animalia;Cnidaria;Anthozoa;Actiniaria;Actiniidae;Urticina;;felina;;1;;;
+Pyuridae;;103449;exact;accepted;Pyuridae;103449;Pyuridae;Animalia;Chordata;Ascidiacea;Stolidobranchia;Pyuridae;;;;;1;;;
+Alcyonidium gelatinosum;;111600;exact;accepted;Alcyonidium gelatinosum;111600;Alcyonidium gelatinosum;Animalia;Bryozoa;Gymnolaemata;Ctenostomatida;Alcyonidiidae;Alcyonidium;;gelatinosum;;1;0;0;0
+Ophiura albida;;124913;exact;accepted;Ophiura albida;124913;Ophiura albida;Animalia;Echinodermata;Ophiuroidea;Ophiurida;Ophiuridae;Ophiura;;albida;;1;1;0;0
+Epizoanthus incrustatus;;150642;exact;unaccepted;Epizoanthus incrustatus;101037;Epizoanthus papillosus;Animalia;Cnidaria;Anthozoa;Zoantharia;Epizoanthidae;Epizoanthus;;incrustatus;;1;0;0;0
+Suberites ficus;;134285;exact;accepted;Suberites ficus;134285;Suberites ficus;Animalia;Porifera;Demospongiae;Suberitida;Suberitidae;Suberites;;ficus;;1;0;0;0
+Flustra foliacea;;111367;exact;accepted;Flustra foliacea;111367;Flustra foliacea;Animalia;Bryozoa;Gymnolaemata;Cheilostomatida;Flustridae;Flustra;;foliacea;;1;0;0;0
+Upogebia deltaura;;107739;exact;accepted;Upogebia deltaura;107739;Upogebia deltaura;Animalia;Arthropoda;Malacostraca;Decapoda;Upogebiidae;Upogebia;;deltaura;;1;;;
+Liocarcinus;;106925;exact;accepted;Liocarcinus;106925;Liocarcinus;Animalia;Arthropoda;Malacostraca;Decapoda;Polybiidae;Liocarcinus;;;;1;;;
+Hyas coarctatus;;107323;exact;accepted;Hyas coarctatus;107323;Hyas coarctatus;Animalia;Arthropoda;Malacostraca;Decapoda;Oregoniidae;Hyas;;coarctatus;;1;;;
+Mustelus;;105732;exact;accepted;Mustelus;105732;Mustelus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;;;1;1;0;0
+Ciliata septentrionalis;;126449;exact;accepted;Ciliata septentrionalis;126449;Ciliata septentrionalis;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Ciliata;;septentrionalis;;1;1;0;0
+Carcinus maenas;;107381;exact;accepted;Carcinus maenas;107381;Carcinus maenas;Animalia;Arthropoda;Malacostraca;Decapoda;Carcinidae;Carcinus;;maenas;;1;;;
+Ostrea edulis;;140658;exact;accepted;Ostrea edulis;140658;Ostrea edulis;Animalia;Mollusca;Bivalvia;Ostreida;Ostreidae;Ostrea;;edulis;;1;;;
+Hippocampus;;126224;exact;accepted;Hippocampus;126224;Hippocampus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Hippocampus;;;;1;1;0;0
