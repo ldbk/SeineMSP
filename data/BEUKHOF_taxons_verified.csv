@@ -1,365 +1,365 @@
-ScientificName;;AphiaID;Match type;Taxon status;ScientificName;AphiaID_accepted;ScientificName_accepted;Kingdom;Phylum;Class;Order;Family;Genus;Subgenus;Species;Subspecies;isMarine;isBrackish;isFresh;isTerrestrial
-Agonus cataphractus;;127190;exact;accepted;Agonus cataphractus;127190;Agonus cataphractus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Agonidae;Agonus;;cataphractus;;1;0;0;0
-Leptagonus decagonus;;127191;exact;accepted;Leptagonus decagonus;127191;Leptagonus decagonus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Agonidae;Leptagonus;;decagonus;;1;0;0;0
-Agonidae;;125588;exact;accepted;Agonidae;125588;Agonidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Agonidae;;;;;1;;;
-Alepocephalus bairdii;;126682;exact;accepted;Alepocephalus bairdii;126682;Alepocephalus bairdii;Animalia;Chordata;Actinopterygii;Osmeriformes;Alepocephalidae;Alepocephalus;;bairdii;;1;0;0;0
-Xenodermichthys copei;;126714;exact;accepted;Xenodermichthys copei;126714;Xenodermichthys copei;Animalia;Chordata;Actinopterygii;Osmeriformes;Alepocephalidae;Xenodermichthys;;copei;;1;0;0;0
-Ammodytes marinus;;126751;exact;accepted;Ammodytes marinus;126751;Ammodytes marinus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Ammodytes;;marinus;;1;1;0;0
-Ammodytes tobianus;;126752;exact;accepted;Ammodytes tobianus;126752;Ammodytes tobianus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Ammodytes;;tobianus;;1;1;0;0
-Ammodytes;;125909;exact;accepted;Ammodytes;125909;Ammodytes;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Ammodytes;;;;1;1;0;0
-Gymnammodytes semisquamatus;;126754;exact;accepted;Gymnammodytes semisquamatus;126754;Gymnammodytes semisquamatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Gymnammodytes;;semisquamatus;;1;0;0;0
-Hyperoplus immaculatus;;126755;exact;accepted;Hyperoplus immaculatus;126755;Hyperoplus immaculatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;immaculatus;;1;0;0;0
-Hyperoplus lanceolatus;;126756;exact;accepted;Hyperoplus lanceolatus;126756;Hyperoplus lanceolatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;lanceolatus;;1;1;0;0
-Hyperoplus;;125911;exact;accepted;Hyperoplus;125911;Hyperoplus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;;;1;1;0;0
-Ammodytidae;;125516;exact;accepted;Ammodytidae;125516;Ammodytidae;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;;;;;1;;;
-Anarhichas denticulatus;;126757;exact;accepted;Anarhichas denticulatus;126757;Anarhichas denticulatus;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;Anarhichas;;denticulatus;;1;0;0;0
-Anarhichas lupus;;126758;exact;accepted;Anarhichas lupus;126758;Anarhichas lupus;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;Anarhichas;;lupus;;1;0;0;0
-Anarhichas minor;;126759;exact;accepted;Anarhichas minor;126759;Anarhichas minor;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;Anarhichas;;minor;;1;0;0;0
-Anarhichadidae;;125517;exact;accepted;Anarhichadidae;125517;Anarhichadidae;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;;;;;1;;;
-Anguilla anguilla;;126281;exact;accepted;Anguilla anguilla;126281;Anguilla anguilla;Animalia;Chordata;Actinopterygii;Anguilliformes;Anguillidae;Anguilla;;anguilla;;1;1;1;0
-Anguilla;;125620;exact;accepted;Anguilla;125620;Anguilla;Animalia;Chordata;Actinopterygii;Anguilliformes;Anguillidae;Anguilla;;;;1;1;1;0
-Argentina silus;;126715;exact;accepted;Argentina silus;126715;Argentina silus;Animalia;Chordata;Actinopterygii;Argentiniformes;Argentinidae;Argentina;;silus;;1;0;0;0
-Argentina sphyraena;;126716;exact;accepted;Argentina sphyraena;126716;Argentina sphyraena;Animalia;Chordata;Actinopterygii;Argentiniformes;Argentinidae;Argentina;;sphyraena;;1;0;0;0
-Argentinidae;;125508;exact;accepted;Argentinidae;125508;Argentinidae;Animalia;Chordata;Actinopterygii;Argentiniformes;Argentinidae;;;;;1;;;
-Bathyraja brachyurops;;271509;exact;accepted;Bathyraja brachyurops;271509;Bathyraja brachyurops;Animalia;Chordata;Elasmobranchii;Rajiformes;Arhynchobatidae;Bathyraja;;brachyurops;;1;0;0;0
-Bathyraja spinicauda;;105868;exact;accepted;Bathyraja spinicauda;105868;Bathyraja spinicauda;Animalia;Chordata;Elasmobranchii;Rajiformes;Arhynchobatidae;Bathyraja;;spinicauda;;1;0;0;0
-Atherina presbyter;;272030;exact;accepted;Atherina presbyter;272030;Atherina presbyter;Animalia;Chordata;Actinopterygii;Atheriniformes;Atherinidae;Atherina;;presbyter;;1;1;0;0
-Balistes capriscus;;154721;exact;accepted;Balistes capriscus;154721;Balistes capriscus;Animalia;Chordata;Actinopterygii;Tetraodontiformes;Balistidae;Balistes;;capriscus;;1;0;0;0
-Balistes;;126228;exact;accepted;Balistes;126228;Balistes;Animalia;Chordata;Actinopterygii;Tetraodontiformes;Balistidae;Balistes;;;;1;0;0;0
-Belone belone;;126375;exact;accepted;Belone belone;126375;Belone belone;Animalia;Chordata;Actinopterygii;Beloniformes;Belonidae;Belone;;belone;;1;1;0;0
-Beryx decadactylus;;126394;exact;accepted;Beryx decadactylus;126394;Beryx decadactylus;Animalia;Chordata;Actinopterygii;Beryciformes;Berycidae;Beryx;;decadactylus;;1;0;0;0
-Beryx splendens;;126395;exact;accepted;Beryx splendens;126395;Beryx splendens;Animalia;Chordata;Actinopterygii;Beryciformes;Berycidae;Beryx;;splendens;;1;0;0;0
-Blennius ocellaris;;126761;exact;accepted;Blennius ocellaris;126761;Blennius ocellaris;Animalia;Chordata;Actinopterygii;Perciformes;Blenniidae;Blennius;;ocellaris;;1;0;0;0
-Parablennius gattorugine;;126770;exact;accepted;Parablennius gattorugine;126770;Parablennius gattorugine;Animalia;Chordata;Actinopterygii;Perciformes;Blenniidae;Parablennius;;gattorugine;;1;0;0;0
-Blenniidae;;125519;exact;accepted;Blenniidae;125519;Blenniidae;Animalia;Chordata;Actinopterygii;Perciformes;Blenniidae;;;;;1;1;1;
-Arnoglossus imperialis;;127124;exact;accepted;Arnoglossus imperialis;127124;Arnoglossus imperialis;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;imperialis;;1;0;0;0
-Arnoglossus laterna;;127126;exact;accepted;Arnoglossus laterna;127126;Arnoglossus laterna;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;laterna;;1;0;0;0
-Arnoglossus thori;;127128;exact;accepted;Arnoglossus thori;127128;Arnoglossus thori;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;thori;;1;0;0;0
-Arnoglossus;;126109;exact;accepted;Arnoglossus;126109;Arnoglossus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;;;1;1;0;0
-Brama brama;;126783;exact;accepted;Brama brama;126783;Brama brama;Animalia;Chordata;Actinopterygii;Perciformes;Bramidae;Brama;;brama;;1;0;0;0
-Pterycombus brama;;126785;exact;accepted;Pterycombus brama;126785;Pterycombus brama;Animalia;Chordata;Actinopterygii;Perciformes;Bramidae;Pterycombus;;brama;;1;0;0;0
-Callionymus lyra;;126792;exact;accepted;Callionymus lyra;126792;Callionymus lyra;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;lyra;;1;0;0;0
-Callionymus maculatus;;126793;exact;accepted;Callionymus maculatus;126793;Callionymus maculatus;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;maculatus;;1;0;0;0
-Callionymus reticulatus;;126795;exact;accepted;Callionymus reticulatus;126795;Callionymus reticulatus;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;reticulatus;;1;1;0;0
-Callionymus;;125930;exact;accepted;Callionymus;125930;Callionymus;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;;;1;1;1;0
-Callionymidae;;125522;exact;accepted;Callionymidae;125522;Callionymidae;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;;;;;1;;;
-Capros aper;;127419;exact;accepted;Capros aper;127419;Capros aper;Animalia;Chordata;Actinopterygii;Perciformes;Caproidae;Capros;;aper;;1;0;0;0
-Naucrates ductor;;126811;exact;accepted;Naucrates ductor;126811;Naucrates ductor;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Naucrates;;ductor;;1;0;0;0
-Trachurus mediterraneus;;126820;exact;accepted;Trachurus mediterraneus;126820;Trachurus mediterraneus;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Trachurus;;mediterraneus;;1;1;0;0
-Trachurus picturatus;;126821;exact;accepted;Trachurus picturatus;126821;Trachurus picturatus;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Trachurus;;picturatus;;1;0;0;0
-Trachurus trachurus;;126822;exact;accepted;Trachurus trachurus;126822;Trachurus trachurus;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Trachurus;;trachurus;;1;0;0;0
-Echiodon drummondii;;126663;exact;accepted;Echiodon drummondii;126663;Echiodon drummondii;Animalia;Chordata;Actinopterygii;Ophidiiformes;Carapidae;Echiodon;;drummondii;;1;0;0;0
-Macroramphosus scolopax;;127378;exact;accepted;Macroramphosus scolopax;127378;Macroramphosus scolopax;Animalia;Chordata;Actinopterygii;Syngnathiformes;Centriscidae;Macroramphosus;;scolopax;;1;0;0;0
-Macrorhamphosus scolopax;;217972;exact;unaccepted;Macrorhamphosus scolopax;127378;Macroramphosus scolopax;Animalia;Chordata;Actinopterygii;Syngnathiformes;Centriscidae;Macrorhamphosus;;scolopax;;1;0;0;
-Centrolophus niger;;126831;exact;accepted;Centrolophus niger;126831;Centrolophus niger;Animalia;Chordata;Actinopterygii;Perciformes;Centrolophidae;Centrolophus;;niger;;1;0;0;0
-Schedophilus medusophagus;;126833;exact;accepted;Schedophilus medusophagus;126833;Schedophilus medusophagus;Animalia;Chordata;Actinopterygii;Perciformes;Centrolophidae;Schedophilus;;medusophagus;;1;0;0;0
-Centrophorus granulosus;;105899;exact;accepted;Centrophorus granulosus;105899;Centrophorus granulosus;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Centrophorus;;granulosus;;1;0;0;0
-Centrophorus squamosus;;105901;exact;accepted;Centrophorus squamosus;105901;Centrophorus squamosus;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Centrophorus;;squamosus;;1;0;0;0
-Deania calcea;;105903;exact;accepted;Deania calcea;105903;Deania calcea;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Deania;;calcea;;1;0;0;0
-Deania profundorum;;105905;exact;accepted;Deania profundorum;105905;Deania profundorum;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Deania;;profundorum;;1;0;0;0
-Cepola macrophthalma;;126835;exact;accepted;Cepola macrophthalma;126835;Cepola macrophthalma;Animalia;Chordata;Actinopterygii;Perciformes;Cepolidae;Cepola;;macrophthalma;;1;0;0;0
-Chimaera monstrosa;;105824;exact;accepted;Chimaera monstrosa;105824;Chimaera monstrosa;Animalia;Chordata;Holocephali;Chimaeriformes;Chimaeridae;Chimaera;;monstrosa;;1;0;0;0
-Chimaera opalescens;;712407;exact;accepted;Chimaera opalescens;712407;Chimaera opalescens;Animalia;Chordata;Holocephali;Chimaeriformes;Chimaeridae;Chimaera;;opalescens;;1;0;0;
-Hydrolagus mirabilis;;105826;exact;accepted;Hydrolagus mirabilis;105826;Hydrolagus mirabilis;Animalia;Chordata;Holocephali;Chimaeriformes;Chimaeridae;Hydrolagus;;mirabilis;;1;0;0;0
-Chlorophthalmus agassizi;;126336;exact;accepted;Chlorophthalmus agassizi;126336;Chlorophthalmus agassizi;Animalia;Chordata;Actinopterygii;Aulopiformes;Chlorophthalmidae;Chlorophthalmus;;agassizi;;1;1;0;0
-Alosa agone;;416357;exact;accepted;Alosa agone;416357;Alosa agone;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;agone;;0;0;1;0
-Alosa alosa;;126413;exact;accepted;Alosa alosa;126413;Alosa alosa;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;alosa;;1;1;1;0
-Alosa fallax;;126415;exact;accepted;Alosa fallax;126415;Alosa fallax;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;fallax;;1;1;1;0
-Alosa;;125715;exact;accepted;Alosa;125715;Alosa;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;;;1;1;1;0
-Clupea harengus;;126417;exact;accepted;Clupea harengus;126417;Clupea harengus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Clupea;;harengus;;1;1;0;0
-Sardina pilchardus;;126421;exact;accepted;Sardina pilchardus;126421;Sardina pilchardus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Sardina;;pilchardus;;1;1;1;0
-Spratelloides lewisi;;272278;exact;accepted;Spratelloides lewisi;272278;Spratelloides lewisi;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Spratelloides;;lewisi;;1;0;0;0
-Sprattus sprattus;;126425;exact;accepted;Sprattus sprattus;126425;Sprattus sprattus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Sprattus;;sprattus;;1;1;0;0
-Clupeidae;;125464;exact;accepted;Clupeidae;125464;Clupeidae;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;;;;;1;;;
-Conger conger;;126285;exact;accepted;Conger conger;126285;Conger conger;Animalia;Chordata;Actinopterygii;Anguilliformes;Congridae;Conger;;conger;;1;0;0;0
-Artediellus atlanticus;;127193;exact;accepted;Artediellus atlanticus;127193;Artediellus atlanticus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Artediellus;;atlanticus;;1;0;0;0
-Icelus bicornis;;127199;exact;accepted;Icelus bicornis;127199;Icelus bicornis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Icelus;;bicornis;;1;0;0;0
-Micrenophrys lilljeborgii;;127201;exact;accepted;Micrenophrys lilljeborgii;127201;Micrenophrys lilljeborgii;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Micrenophrys;;lilljeborgii;;1;1;0;0
-Myoxocephalus quadricornis;;254529;exact;accepted;Myoxocephalus quadricornis;254529;Myoxocephalus quadricornis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Myoxocephalus;;quadricornis;;1;1;1;
-Myoxocephalus scorpioides;;127202;exact;accepted;Myoxocephalus scorpioides;127202;Myoxocephalus scorpioides;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Myoxocephalus;;scorpioides;;1;1;0;0
-Myoxocephalus scorpius;;127203;exact;accepted;Myoxocephalus scorpius;127203;Myoxocephalus scorpius;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Myoxocephalus;;scorpius;;1;1;0;0
-Taurulus bubalis;;127204;exact;accepted;Taurulus bubalis;127204;Taurulus bubalis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Taurulus;;bubalis;;1;1;0;0
-Triglops murrayi;;127205;exact;accepted;Triglops murrayi;127205;Triglops murrayi;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Triglops;;murrayi;;1;0;0;0
-Triglops pingelii;;127207;exact;accepted;Triglops pingelii;127207;Triglops pingelii;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Triglops;;pingelii;;1;0;0;0
-Triglops;;126154;exact;accepted;Triglops;126154;Triglops;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Triglops;;;;1;0;0;0
-Cottidae;;125589;exact;accepted;Cottidae;125589;Cottidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;;;;;1;;;
-Cyclopterus lumpus;;127214;exact;accepted;Cyclopterus lumpus;127214;Cyclopterus lumpus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cyclopteridae;Cyclopterus;;lumpus;;1;0;0;0
-Dalatias licha;;105910;exact;accepted;Dalatias licha;105910;Dalatias licha;Animalia;Chordata;Elasmobranchii;Squaliformes;Dalatiidae;Dalatias;;licha;;1;0;0;0
-Dasyatis pastinaca;;105851;exact;accepted;Dasyatis pastinaca;105851;Dasyatis pastinaca;Animalia;Chordata;Elasmobranchii;Myliobatiformes;Dasyatidae;Dasyatis;;pastinaca;;1;1;0;0
-Engraulis encrasicolus;;126426;exact;accepted;Engraulis encrasicolus;126426;Engraulis encrasicolus;Animalia;Chordata;Actinopterygii;Clupeiformes;Engraulidae;Engraulis;;encrasicolus;;1;1;0;0
-Epigonus telescopus;;126858;exact;accepted;Epigonus telescopus;126858;Epigonus telescopus;Animalia;Chordata;Actinopterygii;Perciformes;Epigonidae;Epigonus;;telescopus;;1;0;0;0
-Etmopterus spinax;;105913;exact;accepted;Etmopterus spinax;105913;Etmopterus spinax;Animalia;Chordata;Elasmobranchii;Squaliformes;Etmopteridae;Etmopterus;;spinax;;1;0;0;0
-Gadiculus argenteus;;126435;exact;accepted;Gadiculus argenteus;126435;Gadiculus argenteus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Gadiculus;;argenteus;;1;0;0;0
-Gadiculus thori;;300719;exact;accepted;Gadiculus thori;300719;Gadiculus thori;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Gadiculus;;thori;;1;0;0;
-Gadus morhua;;126436;exact;accepted;Gadus morhua;126436;Gadus morhua;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Gadus;;morhua;;1;1;0;0
-Melanogrammus aeglefinus;;126437;exact;accepted;Melanogrammus aeglefinus;126437;Melanogrammus aeglefinus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Melanogrammus;;aeglefinus;;1;0;0;0
-Merlangius merlangus;;126438;exact;accepted;Merlangius merlangus;126438;Merlangius merlangus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Merlangius;;merlangus;;1;0;0;0
-Micromesistius poutassou;;126439;exact;accepted;Micromesistius poutassou;126439;Micromesistius poutassou;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Micromesistius;;poutassou;;1;0;0;0
-Pollachius pollachius;;126440;exact;accepted;Pollachius pollachius;126440;Pollachius pollachius;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Pollachius;;pollachius;;1;0;0;0
-Pollachius virens;;126441;exact;accepted;Pollachius virens;126441;Pollachius virens;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Pollachius;;virens;;1;0;0;0
-Raniceps raninus;;126442;exact;accepted;Raniceps raninus;126442;Raniceps raninus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Raniceps;;raninus;;1;1;0;0
-Trisopterus esmarkii;;126444;exact;accepted;Trisopterus esmarkii;126444;Trisopterus esmarkii;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;esmarkii;;1;0;0;0
-Trisopterus luscus;;126445;exact;accepted;Trisopterus luscus;126445;Trisopterus luscus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;luscus;;1;1;0;0
-Trisopterus minutus;;126446;exact;accepted;Trisopterus minutus;126446;Trisopterus minutus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;minutus;;1;0;0;0
-Gadidae;;125469;exact;accepted;Gadidae;125469;Gadidae;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;;;;;1;;;
-Gasterosteus aculeatus;;126505;exact;accepted;Gasterosteus aculeatus;126505;Gasterosteus aculeatus;Animalia;Chordata;Actinopterygii;Gasterosteiformes;Gasterosteidae;Gasterosteus;;aculeatus;;1;1;1;0
-Gasterosteus aculeatus williamsoni;;293602;exact;accepted;Gasterosteus aculeatus williamsoni;293602;Gasterosteus aculeatus williamsoni;Animalia;Chordata;Actinopterygii;Gasterosteiformes;Gasterosteidae;Gasterosteus;;aculeatus;williamsoni;1;1;1;0
-Spinachia spinachia;;126508;exact;accepted;Spinachia spinachia;126508;Spinachia spinachia;Animalia;Chordata;Actinopterygii;Gasterosteiformes;Gasterosteidae;Spinachia;;spinachia;;1;1;0;0
-Apletodon dentatus;;126510;exact;accepted;Apletodon dentatus;126510;Apletodon dentatus;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Apletodon;;dentatus;;1;0;0;0
-Diplecogaster bimaculata;;126513;exact;alternate representation;Diplecogaster bimaculata;236458;Diplecogaster bimaculata bimaculata;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Diplecogaster;;bimaculata;;1;0;0;0
-Diplecogaster bimaculata bimaculata;;236458;exact;accepted;Diplecogaster bimaculata bimaculata;236458;Diplecogaster bimaculata bimaculata;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Diplecogaster;;bimaculata;bimaculata;1;0;0;
-Lepadogaster lepadogaster;;126518;exact;accepted;Lepadogaster lepadogaster;126518;Lepadogaster lepadogaster;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Lepadogaster;;lepadogaster;;1;0;0;0
-Lepadogaster;;125781;exact;accepted;Lepadogaster;125781;Lepadogaster;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Lepadogaster;;;;1;0;0;0
-Aphia minuta;;126868;exact;accepted;Aphia minuta;126868;Aphia minuta;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Aphia;;minuta;;1;1;0;0
-Awaous commersoni;;277418;exact;accepted;Awaous commersoni;277418;Awaous commersoni;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Awaous;;commersoni;;0;1;1;0
-Buenia jeffreysii;;126872;exact;accepted;Buenia jeffreysii;126872;Buenia jeffreysii;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Buenia;;jeffreysii;;1;0;0;0
-Crystallogobius linearis;;126878;exact;accepted;Crystallogobius linearis;126878;Crystallogobius linearis;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Crystallogobius;;linearis;;1;0;0;0
-Gobius gasteveni;;126890;exact;accepted;Gobius gasteveni;126890;Gobius gasteveni;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;gasteveni;;1;1;0;0
-Gobius niger;;;ambiguous;;;;;;;;;;;;;;;;;
-Gobius paganellus;;126893;exact;accepted;Gobius paganellus;126893;Gobius paganellus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;paganellus;;1;1;1;0
-Gobius;;125988;exact;accepted;Gobius;125988;Gobius;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;;;1;1;1;0
-Lesueurigobius friesii;;126904;exact;accepted;Lesueurigobius friesii;126904;Lesueurigobius friesii;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Lesueurigobius;;friesii;;1;0;0;0
-Lesueurigobius suerii;;126907;exact;accepted;Lesueurigobius suerii;126907;Lesueurigobius suerii;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Lesueurigobius;;suerii;;1;0;0;0
-Lesueurigobius;;125992;exact;accepted;Lesueurigobius;125992;Lesueurigobius;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Lesueurigobius;;;;1;0;0;0
-Pomatoschistus lozanoi;;126925;exact;accepted;Pomatoschistus lozanoi;126925;Pomatoschistus lozanoi;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;lozanoi;;1;1;0;0
-Pomatoschistus microps;;126927;exact;accepted;Pomatoschistus microps;126927;Pomatoschistus microps;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;microps;;1;1;1;0
-Pomatoschistus minutus;;126928;exact;accepted;Pomatoschistus minutus;126928;Pomatoschistus minutus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;minutus;;1;1;0;0
-Pomatoschistus norvegicus;;126929;exact;accepted;Pomatoschistus norvegicus;126929;Pomatoschistus norvegicus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;norvegicus;;1;0;0;0
-Pomatoschistus pictus;;126930;exact;accepted;Pomatoschistus pictus;126930;Pomatoschistus pictus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;pictus;;1;0;0;0
-Pomatoschistus;;125999;exact;accepted;Pomatoschistus;125999;Pomatoschistus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;;;1;1;1;0
-Gobiidae;;125537;exact;accepted;Gobiidae;125537;Gobiidae;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;;;;;1;1;;
-Heptranchias perlo;;105832;exact;accepted;Heptranchias perlo;105832;Heptranchias perlo;Animalia;Chordata;Elasmobranchii;Hexanchiformes;Hexanchidae;Heptranchias;;perlo;;1;0;0;0
-Hexanchus griseus;;105833;exact;accepted;Hexanchus griseus;105833;Hexanchus griseus;Animalia;Chordata;Elasmobranchii;Hexanchiformes;Hexanchidae;Hexanchus;;griseus;;1;0;0;0
-Acantholabrus palloni;;126957;exact;accepted;Acantholabrus palloni;126957;Acantholabrus palloni;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Acantholabrus;;palloni;;1;0;0;0
-Centrolabrus exoletus;;126961;exact;accepted;Centrolabrus exoletus;126961;Centrolabrus exoletus;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Centrolabrus;;exoletus;;1;0;0;0
-Ctenolabrus rupestris;;126964;exact;accepted;Ctenolabrus rupestris;126964;Ctenolabrus rupestris;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Ctenolabrus;;rupestris;;1;0;0;0
-Labrus bergylta;;126965;exact;accepted;Labrus bergylta;126965;Labrus bergylta;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Labrus;;bergylta;;1;0;0;0
-Labrus mixtus;;151501;exact;accepted;Labrus mixtus;151501;Labrus mixtus;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Labrus;;mixtus;;1;0;0;0
-Symphodus bailloni;;273566;exact;accepted;Symphodus bailloni;273566;Symphodus bailloni;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;bailloni;;1;0;0;0
-Symphodus melops;;273571;exact;accepted;Symphodus melops;273571;Symphodus melops;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;melops;;1;0;0;0
-Symphodus roissali;;273573;exact;accepted;Symphodus roissali;273573;Symphodus roissali;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;roissali;;1;1;0;0
-Labridae;;125541;exact;accepted;Labridae;125541;Labridae;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;;;;;1;;;
-Lamna nasus;;105841;exact;accepted;Lamna nasus;105841;Lamna nasus;Animalia;Chordata;Elasmobranchii;Lamniformes;Lamnidae;Lamna;;nasus;;1;0;0;0
-Careproctus reinhardti;;127212;exact;accepted;Careproctus reinhardti;127212;Careproctus reinhardti;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Careproctus;;reinhardti;;1;0;0;0
-Liparis fabricii;;127218;exact;accepted;Liparis fabricii;127218;Liparis fabricii;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Liparis;;fabricii;;1;0;0;0
-Liparis liparis liparis;;293624;exact;accepted;Liparis liparis liparis;293624;Liparis liparis liparis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Liparis;;liparis;liparis;1;0;0;0
-Liparis montagui;;127220;exact;accepted;Liparis montagui;127220;Liparis montagui;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Liparis;;montagui;;1;0;0;0
-Liparidae;;234519;exact;accepted;Liparidae;234519;Liparidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;;;;;1;0;0;0
-Lophius budegassa;;126554;exact;accepted;Lophius budegassa;126554;Lophius budegassa;Animalia;Chordata;Actinopterygii;Lophiiformes;Lophiidae;Lophius;;budegassa;;1;0;0;0
-Lophius piscatorius;;126555;exact;accepted;Lophius piscatorius;126555;Lophius piscatorius;Animalia;Chordata;Actinopterygii;Lophiiformes;Lophiidae;Lophius;;piscatorius;;1;0;0;0
-Brosme brosme;;126447;exact;accepted;Brosme brosme;126447;Brosme brosme;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Brosme;;brosme;;1;0;0;0
-Ciliata mustela;;126448;exact;accepted;Ciliata mustela;126448;Ciliata mustela;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Ciliata;;mustela;;1;0;0;0
-Ciliata septentrionalis;;126449;exact;accepted;Ciliata septentrionalis;126449;Ciliata septentrionalis;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Ciliata;;septentrionalis;;1;1;0;0
-Enchelyopus cimbrius;;126450;exact;accepted;Enchelyopus cimbrius;126450;Enchelyopus cimbrius;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Enchelyopus;;cimbrius;;1;0;0;0
-Gaidropsarus argentatus;;126451;exact;accepted;Gaidropsarus argentatus;126451;Gaidropsarus argentatus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;argentatus;;1;0;0;0
-Gaidropsarus biscayensis;;126452;exact;accepted;Gaidropsarus biscayensis;126452;Gaidropsarus biscayensis;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;biscayensis;;1;0;0;0
-Gaidropsarus macrophthalmus;;126456;exact;accepted;Gaidropsarus macrophthalmus;126456;Gaidropsarus macrophthalmus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;macrophthalmus;;1;0;0;0
-Gaidropsarus mediterraneus;;126457;exact;accepted;Gaidropsarus mediterraneus;126457;Gaidropsarus mediterraneus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;mediterraneus;;1;0;0;0
-Gaidropsarus vulgaris;;126458;exact;accepted;Gaidropsarus vulgaris;126458;Gaidropsarus vulgaris;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;vulgaris;;1;0;0;0
-Gaidropsarus;;125743;exact;accepted;Gaidropsarus;125743;Gaidropsarus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;;;1;1;0;0
-Molva dypterygia;;126459;exact;accepted;Molva dypterygia;126459;Molva dypterygia;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Molva;;dypterygia;;1;0;0;0
-Molva macrophthalma;;126460;exact;accepted;Molva macrophthalma;126460;Molva macrophthalma;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Molva;;macrophthalma;;1;0;0;0
-Molva molva;;126461;exact;accepted;Molva molva;126461;Molva molva;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Molva;;molva;;1;0;0;0
-Coelorinchus caelorhincus;;398381;exact;accepted;Coelorinchus caelorhincus;398381;Coelorinchus caelorhincus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Coelorinchus;;caelorhincus;;1;0;0;0
-Coelorinchus labiatus;;280299;exact;accepted;Coelorinchus labiatus;280299;Coelorinchus labiatus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Coelorinchus;;labiatus;;1;0;0;0
-Coryphaenoides rupestris;;158960;exact;accepted;Coryphaenoides rupestris;158960;Coryphaenoides rupestris;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Coryphaenoides;;rupestris;;1;0;0;0
-Hymenocephalus italicus;;158961;exact;accepted;Hymenocephalus italicus;158961;Hymenocephalus italicus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Hymenocephalus;;italicus;;1;0;0;0
-Macrourus berglax;;126472;exact;accepted;Macrourus berglax;126472;Macrourus berglax;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Macrourus;;berglax;;1;0;0;0
-Malacocephalus laevis;;272392;exact;accepted;Malacocephalus laevis;272392;Malacocephalus laevis;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Malacocephalus;;laevis;;1;0;0;0
-Nezumia aequalis;;126473;exact;accepted;Nezumia aequalis;126473;Nezumia aequalis;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Nezumia;;aequalis;;1;0;0;0
-Trachyrincus murrayi;;126481;exact;accepted;Trachyrincus murrayi;126481;Trachyrincus murrayi;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Trachyrincus;;murrayi;;1;0;0;0
-Trachyrincus scabrus;;126482;exact;accepted;Trachyrincus scabrus;126482;Trachyrincus scabrus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Trachyrincus;;scabrus;;1;0;0;0
-Merluccius merluccius;;126484;exact;accepted;Merluccius merluccius;126484;Merluccius merluccius;Animalia;Chordata;Actinopterygii;Gadiformes;Merlucciidae;Merluccius;;merluccius;;1;0;0;0
-Mola mola;;127405;exact;accepted;Mola mola;127405;Mola mola;Animalia;Chordata;Actinopterygii;Tetraodontiformes;Molidae;Mola;;mola;;1;0;0;0
-Halargyreus johnsonii;;126489;exact;accepted;Halargyreus johnsonii;126489;Halargyreus johnsonii;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Halargyreus;;johnsonii;;1;0;0;0
-Lepidion eques;;126493;exact;accepted;Lepidion eques;126493;Lepidion eques;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Lepidion;;eques;;1;0;0;0
-Mora moro;;126497;exact;accepted;Mora moro;126497;Mora moro;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Mora;;moro;;1;0;0;0
-Physiculus dalwigki;;126498;exact;accepted;Physiculus dalwigki;126498;Physiculus dalwigki;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Physiculus;;dalwigki;;1;0;0;0
-Dicentrarchus labrax;;126975;exact;accepted;Dicentrarchus labrax;126975;Dicentrarchus labrax;Animalia;Chordata;Actinopterygii;Perciformes;Moronidae;Dicentrarchus;;labrax;;1;1;1;0
-Dicentrarchus punctatus;;126976;exact;accepted;Dicentrarchus punctatus;126976;Dicentrarchus punctatus;Animalia;Chordata;Actinopterygii;Perciformes;Moronidae;Dicentrarchus;;punctatus;;1;1;0;0
-Chelon auratus;;1044127;exact;accepted;Chelon auratus;1044127;Chelon auratus;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Chelon;;auratus;;1;1;1;
-Chelon labrosus;;126977;exact;accepted;Chelon labrosus;126977;Chelon labrosus;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Chelon;;labrosus;;1;1;1;0
-Chelon ramada;;1042830;exact;accepted;Chelon ramada;1042830;Chelon ramada;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Chelon;;ramada;;1;1;1;0
-Mullus barbatus barbatus;;293632;exact;accepted;Mullus barbatus barbatus;293632;Mullus barbatus barbatus;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;Mullus;;barbatus;barbatus;1;0;0;0
-Mullus surmuletus;;126986;exact;accepted;Mullus surmuletus;126986;Mullus surmuletus;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;Mullus;;surmuletus;;1;0;0;0
-Mullus;;126034;exact;accepted;Mullus;126034;Mullus;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;Mullus;;;;1;0;0;0
-Mullidae;;125547;exact;accepted;Mullidae;125547;Mullidae;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;;;;;1;;;
-Benthosema glaciale;;126580;exact;accepted;Benthosema glaciale;126580;Benthosema glaciale;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Benthosema;;glaciale;;1;0;0;0
-Ceratoscopelus maderensis;;126585;exact;accepted;Ceratoscopelus maderensis;126585;Ceratoscopelus maderensis;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Ceratoscopelus;;maderensis;;1;0;0;0
-Lampanyctus crocodilus;;126612;exact;accepted;Lampanyctus crocodilus;126612;Lampanyctus crocodilus;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Lampanyctus;;crocodilus;;1;0;0;0
-Lampanyctus;;125825;exact;accepted;Lampanyctus;125825;Lampanyctus;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Lampanyctus;;;;1;0;0;0
-Myctophum punctatum;;126627;exact;accepted;Myctophum punctatum;126627;Myctophum punctatum;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Myctophum;;punctatum;;1;0;0;0
-Myctophum;;125829;exact;accepted;Myctophum;125829;Myctophum;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Myctophum;;;;1;1;0;0
-Notoscopelus elongatus kroyeri;;584805;exact;unaccepted;Notoscopelus elongatus kroyeri;272728;Notoscopelus kroyeri;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Notoscopelus;;elongatus;kroyeri;;;;
-Notoscopelus kroyeri;;272728;exact;accepted;Notoscopelus kroyeri;272728;Notoscopelus kroyeri;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Notoscopelus;;kroyeri;;1;0;0;0
-Myctophidae;;125498;exact;accepted;Myctophidae;125498;Myctophidae;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;;;;;1;;;
-Myliobatis aquila;;105860;exact;accepted;Myliobatis aquila;105860;Myliobatis aquila;Animalia;Chordata;Elasmobranchii;Myliobatiformes;Myliobatidae;Myliobatis;;aquila;;1;0;0;0
-Myxine glutinosa;;101170;exact;accepted;Myxine glutinosa;101170;Myxine glutinosa;Animalia;Chordata;Myxini;Myxiniformes;Myxinidae;Myxine;;glutinosa;;1;0;0;0
-Notacanthus bonaparte;;126642;exact;accepted;Notacanthus bonaparte;126642;Notacanthus bonaparte;Animalia;Chordata;Actinopterygii;Notacanthiformes;Notacanthidae;Notacanthus;;bonaparte;;1;0;0;0
-Notacanthidae;;125501;exact;accepted;Notacanthidae;125501;Notacanthidae;Animalia;Chordata;Actinopterygii;Notacanthiformes;Notacanthidae;;;;;1;;;
-Ophidion barbatum;;126675;exact;accepted;Ophidion barbatum;126675;Ophidion barbatum;Animalia;Chordata;Actinopterygii;Ophidiiformes;Ophidiidae;Ophidion;;barbatum;;1;0;0;0
-Osmerus eperlanus;;126736;exact;accepted;Osmerus eperlanus;126736;Osmerus eperlanus;Animalia;Chordata;Actinopterygii;Osmeriformes;Osmeridae;Osmerus;;eperlanus;;1;1;1;0
-Arctozenus risso;;126352;exact;accepted;Arctozenus risso;126352;Arctozenus risso;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Arctozenus;;risso;;1;0;0;0
-Lestidiops jayakari;;126354;exact;alternate representation;Lestidiops jayakari;236452;Lestidiops jayakari jayakari;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Lestidiops;;jayakari;;1;0;0;
-Lestidiops jayakari jayakari;;236452;exact;accepted;Lestidiops jayakari jayakari;236452;Lestidiops jayakari jayakari;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Lestidiops;;jayakari;jayakari;1;0;0;
-Macroparalepis affinis;;126356;exact;accepted;Macroparalepis affinis;126356;Macroparalepis affinis;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Macroparalepis;;affinis;;1;0;0;0
-Magnisudis atlantica;;126359;exact;accepted;Magnisudis atlantica;126359;Magnisudis atlantica;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Magnisudis;;atlantica;;1;0;0;0
-Paralepis coregonoides;;126361;exact;accepted;Paralepis coregonoides;126361;Paralepis coregonoides;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Paralepis;;coregonoides;;1;0;0;0
-Cyttopsis rosea;;127425;exact;accepted;Cyttopsis rosea;127425;Cyttopsis rosea;Animalia;Chordata;Actinopterygii;Zeiformes;Parazenidae;Cyttopsis;;rosea;;1;0;0;0
-Galeus melastomus;;105812;exact;accepted;Galeus melastomus;105812;Galeus melastomus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Pentanchidae;Galeus;;melastomus;;1;0;0;0
-Galeus murinus;;105813;exact;accepted;Galeus murinus;105813;Galeus murinus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Pentanchidae;Galeus;;murinus;;1;0;0;0
-Sander lucioperca;;151308;exact;accepted;Sander lucioperca;151308;Sander lucioperca;Animalia;Chordata;Actinopterygii;Perciformes;Percidae;Sander;;lucioperca;;0;1;1;0
-Lampetra fluviatilis;;101172;exact;accepted;Lampetra fluviatilis;101172;Lampetra fluviatilis;Animalia;Chordata;Petromyzonti;Petromyzontiformes;Petromyzontidae;Lampetra;;fluviatilis;;1;1;1;0
-Petromyzon marinus;;101174;exact;accepted;Petromyzon marinus;101174;Petromyzon marinus;Animalia;Chordata;Petromyzonti;Petromyzontiformes;Petromyzontidae;Petromyzon;;marinus;;1;1;1;0
-Petromyzontidae;;101163;exact;accepted;Petromyzontidae;101163;Petromyzontidae;Animalia;Chordata;Petromyzonti;Petromyzontiformes;Petromyzontidae;;;;;1;;;
-Pholis gunnellus;;126996;exact;accepted;Pholis gunnellus;126996;Pholis gunnellus;Animalia;Chordata;Actinopterygii;Perciformes;Pholidae;Pholis;;gunnellus;;1;1;0;0
-Polymetme corythaeola;;127300;exact;accepted;Polymetme corythaeola;127300;Polymetme corythaeola;Animalia;Chordata;Actinopterygii;Stomiiformes;Phosichthyidae;Polymetme;;corythaeola;;1;0;0;0
-Polymetme thaeocoryla;;127301;exact;accepted;Polymetme thaeocoryla;127301;Polymetme thaeocoryla;Animalia;Chordata;Actinopterygii;Stomiiformes;Phosichthyidae;Polymetme;;thaeocoryla;;1;0;0;0
-Phycis blennoides;;126501;exact;accepted;Phycis blennoides;126501;Phycis blennoides;Animalia;Chordata;Actinopterygii;Gadiformes;Phycidae;Phycis;;blennoides;;1;0;0;0
-Phycidae;;125475;exact;accepted;Phycidae;125475;Phycidae;Animalia;Chordata;Actinopterygii;Gadiformes;Phycidae;;;;;1;;;
-Glyptocephalus cynoglossus;;127136;exact;accepted;Glyptocephalus cynoglossus;127136;Glyptocephalus cynoglossus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Glyptocephalus;;cynoglossus;;1;0;0;0
-Hippoglossoides platessoides;;127137;exact;accepted;Hippoglossoides platessoides;127137;Hippoglossoides platessoides;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Hippoglossoides;;platessoides;;1;0;0;0
-Hippoglossus hippoglossus;;127138;exact;accepted;Hippoglossus hippoglossus;127138;Hippoglossus hippoglossus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Hippoglossus;;hippoglossus;;1;0;0;0
-Limanda limanda;;127139;exact;accepted;Limanda limanda;127139;Limanda limanda;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Limanda;;limanda;;1;0;0;0
-Microstomus kitt;;127140;exact;accepted;Microstomus kitt;127140;Microstomus kitt;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Microstomus;;kitt;;1;0;0;0
-Platichthys flesus;;127141;exact;accepted;Platichthys flesus;127141;Platichthys flesus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Platichthys;;flesus;;1;1;1;0
-Pleuronectes platessa;;127143;exact;accepted;Pleuronectes platessa;127143;Pleuronectes platessa;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Pleuronectes;;platessa;;1;1;0;0
-Pleuronectidae;;125579;exact;accepted;Pleuronectidae;125579;Pleuronectidae;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;;;;;1;1;1;
-Polyprion americanus;;126998;exact;accepted;Polyprion americanus;126998;Polyprion americanus;Animalia;Chordata;Actinopterygii;Perciformes;Polyprionidae;Polyprion;;americanus;;1;0;0;0
-Cottunculus microps;;127235;exact;accepted;Cottunculus microps;127235;Cottunculus microps;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Psychrolutidae;Cottunculus;;microps;;1;0;0;0
-Amblyraja radiata;;105865;exact;accepted;Amblyraja radiata;105865;Amblyraja radiata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Amblyraja;;radiata;;1;1;0;0
-Dipturus batis;;105869;exact;accepted;Dipturus batis;105869;Dipturus batis;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;batis;;1;0;0;0
-Dipturus nidarosiensis;;105871;exact;accepted;Dipturus nidarosiensis;105871;Dipturus nidarosiensis;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;nidarosiensis;;1;0;0;0
-Dipturus oxyrinchus;;105872;exact;accepted;Dipturus oxyrinchus;105872;Dipturus oxyrinchus;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;oxyrinchus;;1;0;0;0
-Dipturus;;105762;exact;accepted;Dipturus;105762;Dipturus;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;;;1;1;0;0
-Leucoraja circularis;;105873;exact;accepted;Leucoraja circularis;105873;Leucoraja circularis;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;circularis;;1;0;0;0
-Leucoraja fullonica;;105874;exact;accepted;Leucoraja fullonica;105874;Leucoraja fullonica;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;fullonica;;1;0;0;0
-Leucoraja naevus;;105876;exact;accepted;Leucoraja naevus;105876;Leucoraja naevus;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;naevus;;1;0;0;0
-Raja brachyura;;;ambiguous;;;;;;;;;;;;;;;;;
-Raja clavata;;105883;exact;accepted;Raja clavata;105883;Raja clavata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;clavata;;1;0;0;0
-Raja microocellata;;105885;exact;accepted;Raja microocellata;105885;Raja microocellata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;microocellata;;1;0;0;0
-Raja montagui;;105887;exact;accepted;Raja montagui;105887;Raja montagui;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;montagui;;1;0;0;0
-Raja undulata;;105891;exact;accepted;Raja undulata;105891;Raja undulata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;undulata;;1;0;0;0
-Raja;;105766;exact;accepted;Raja;105766;Raja;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;;;1;1;0;0
-Rajella bathyphila;;105892;exact;accepted;Rajella bathyphila;105892;Rajella bathyphila;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rajella;;bathyphila;;1;0;0;0
-Rajella fyllae;;105894;exact;accepted;Rajella fyllae;105894;Rajella fyllae;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rajella;;fyllae;;1;0;0;0
-Rajella lintea;;1019159;exact;accepted;Rajella lintea;1019159;Rajella lintea;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rajella;;lintea;;1;0;0;0
-Rostroraja alba;;105896;exact;accepted;Rostroraja alba;105896;Rostroraja alba;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rostroraja;;alba;;1;0;0;0
-Rajidae;;105711;exact;accepted;Rajidae;105711;Rajidae;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;;;;;1;;;
-Salmo salar;;127186;exact;accepted;Salmo salar;127186;Salmo salar;Animalia;Chordata;Actinopterygii;Salmoniformes;Salmonidae;Salmo;;salar;;1;1;1;0
-Salmo trutta trutta;;;ambiguous;;;;;;;;;;;;;;;;;
-Salmo;;126141;exact;accepted;Salmo;126141;Salmo;Animalia;Chordata;Actinopterygii;Salmoniformes;Salmonidae;Salmo;;;;1;1;1;0
-Argyrosomus regius;;127007;exact;accepted;Argyrosomus regius;127007;Argyrosomus regius;Animalia;Chordata;Actinopterygii;Perciformes;Sciaenidae;Argyrosomus;;regius;;1;1;0;0
-Umbrina canariensis;;127011;exact;accepted;Umbrina canariensis;127011;Umbrina canariensis;Animalia;Chordata;Actinopterygii;Perciformes;Sciaenidae;Umbrina;;canariensis;;1;0;0;0
-Umbrina cirrosa;;127012;exact;accepted;Umbrina cirrosa;127012;Umbrina cirrosa;Animalia;Chordata;Actinopterygii;Perciformes;Sciaenidae;Umbrina;;cirrosa;;1;1;0;0
-Scomberesox saurus saurus;;236461;exact;accepted;Scomberesox saurus saurus;236461;Scomberesox saurus saurus;Animalia;Chordata;Actinopterygii;Beloniformes;Scomberesocidae;Scomberesox;;saurus;saurus;1;0;0;
-Sarda sarda;;127021;exact;accepted;Sarda sarda;127021;Sarda sarda;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Sarda;;sarda;;1;1;0;0
-Scomber colias;;151174;exact;accepted;Scomber colias;151174;Scomber colias;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Scomber;;colias;;1;1;0;0
-Scomber japonicus;;127022;exact;accepted;Scomber japonicus;127022;Scomber japonicus;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Scomber;;japonicus;;1;0;0;0
-Scomber scombrus;;127023;exact;accepted;Scomber scombrus;127023;Scomber scombrus;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Scomber;;scombrus;;1;1;0;0
-Lepidorhombus boscii;;127145;exact;accepted;Lepidorhombus boscii;127145;Lepidorhombus boscii;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Lepidorhombus;;boscii;;1;0;0;0
-Lepidorhombus whiffiagonis;;127146;exact;accepted;Lepidorhombus whiffiagonis;127146;Lepidorhombus whiffiagonis;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Lepidorhombus;;whiffiagonis;;1;0;0;0
-Phrynorhombus norvegicus;;127147;exact;accepted;Phrynorhombus norvegicus;127147;Phrynorhombus norvegicus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Phrynorhombus;;norvegicus;;1;0;0;0
-Scophthalmus maximus;;127149;exact;accepted;Scophthalmus maximus;127149;Scophthalmus maximus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;maximus;;1;1;0;0
-Scophthalmus rhombus;;127150;exact;accepted;Scophthalmus rhombus;127150;Scophthalmus rhombus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;rhombus;;1;0;0;0
-Scophthalmus;;126124;exact;accepted;Scophthalmus;126124;Scophthalmus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;;;1;1;0;0
-Zeugopterus punctatus;;127151;exact;accepted;Zeugopterus punctatus;127151;Zeugopterus punctatus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Zeugopterus;;punctatus;;1;0;0;0
-Zeugopterus regius;;236488;exact;accepted;Zeugopterus regius;236488;Zeugopterus regius;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Zeugopterus;;regius;;1;1;0;0
-Zeugopterus;;126125;exact;accepted;Zeugopterus;126125;Zeugopterus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Zeugopterus;;;;1;1;0;0
-Scorpaena loppei;;127244;exact;accepted;Scorpaena loppei;127244;Scorpaena loppei;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;loppei;;1;0;0;0
-Scorpaena notata;;127246;exact;accepted;Scorpaena notata;127246;Scorpaena notata;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;notata;;1;0;0;0
-Scorpaena porcus;;127247;exact;accepted;Scorpaena porcus;127247;Scorpaena porcus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;porcus;;1;0;0;0
-Scorpaena scrofa;;127248;exact;accepted;Scorpaena scrofa;127248;Scorpaena scrofa;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;scrofa;;1;1;0;0
-Scorpaenidae;;125595;exact;accepted;Scorpaenidae;125595;Scorpaenidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;;;;;1;;1;
-Scyliorhinus canicula;;105814;exact;accepted;Scyliorhinus canicula;105814;Scyliorhinus canicula;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;canicula;;1;0;0;0
-Scyliorhinus stellaris;;105815;exact;accepted;Scyliorhinus stellaris;105815;Scyliorhinus stellaris;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;stellaris;;1;0;0;0
-Scyliorhinus;;105729;exact;accepted;Scyliorhinus;105729;Scyliorhinus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;;;1;0;0;0
-Scyliorhinidae;;105693;exact;accepted;Scyliorhinidae;105693;Scyliorhinidae;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;;;;;1;;;
-Helicolenus dactylopterus;;127251;exact;accepted;Helicolenus dactylopterus;127251;Helicolenus dactylopterus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Helicolenus;;dactylopterus;;1;0;0;0
-Sebastes mentella;;127254;exact;accepted;Sebastes mentella;127254;Sebastes mentella;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;mentella;;1;0;0;0
-Sebastes norvegicus;;151324;exact;accepted;Sebastes norvegicus;151324;Sebastes norvegicus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;norvegicus;;1;0;0;0
-Sebastes viviparus;;127255;exact;accepted;Sebastes viviparus;127255;Sebastes viviparus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;viviparus;;1;0;0;0
-Sebastes;;126175;exact;accepted;Sebastes;126175;Sebastes;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;;;1;1;0;0
-Serranus cabrilla;;127041;exact;accepted;Serranus cabrilla;127041;Serranus cabrilla;Animalia;Chordata;Actinopterygii;Perciformes;Serranidae;Serranus;;cabrilla;;1;0;0;0
-Serranus scriba;;127043;exact;accepted;Serranus scriba;127043;Serranus scriba;Animalia;Chordata;Actinopterygii;Perciformes;Serranidae;Serranus;;scriba;;1;0;0;0
-Bathysolea profundicola;;127152;exact;accepted;Bathysolea profundicola;127152;Bathysolea profundicola;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Bathysolea;;profundicola;;1;0;0;0
-Buglossidium luteum;;127153;exact;accepted;Buglossidium luteum;127153;Buglossidium luteum;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Buglossidium;;luteum;;1;0;0;0
-Dicologlossa cuneata;;127154;exact;accepted;Dicologlossa cuneata;127154;Dicologlossa cuneata;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Dicologlossa;;cuneata;;1;1;0;0
-Microchirus variegatus;;274304;exact;accepted;Microchirus variegatus;274304;Microchirus variegatus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Microchirus;;variegatus;;1;0;0;0
-Microchirus;;126129;exact;accepted;Microchirus;126129;Microchirus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Microchirus;;;;1;0;0;0
-Pegusa lascaris;;127156;exact;accepted;Pegusa lascaris;127156;Pegusa lascaris;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Pegusa;;lascaris;;1;1;0;0
-Solea senegalensis;;127159;exact;accepted;Solea senegalensis;127159;Solea senegalensis;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Solea;;senegalensis;;1;0;0;0
-Solea solea;;127160;exact;accepted;Solea solea;127160;Solea solea;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Solea;;solea;;1;1;0;0
-Centroscymnus coelolepis;;105907;exact;accepted;Centroscymnus coelolepis;105907;Centroscymnus coelolepis;Animalia;Chordata;Elasmobranchii;Squaliformes;Somniosidae;Centroscymnus;;coelolepis;;1;0;0;0
-Centroscymnus crepidater;;105908;exact;accepted;Centroscymnus crepidater;105908;Centroscymnus crepidater;Animalia;Chordata;Elasmobranchii;Squaliformes;Somniosidae;Centroscymnus;;crepidater;;1;0;0;
-Scymnodon ringens;;105918;exact;accepted;Scymnodon ringens;105918;Scymnodon ringens;Animalia;Chordata;Elasmobranchii;Squaliformes;Somniosidae;Scymnodon;;ringens;;1;0;0;0
-Boops boops;;127047;exact;accepted;Boops boops;127047;Boops boops;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Boops;;boops;;1;0;0;0
-Diplodus sargus;;127053;exact;accepted;Diplodus sargus;127053;Diplodus sargus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Diplodus;;sargus;;1;1;0;0
-Diplodus vulgaris;;127054;exact;accepted;Diplodus vulgaris;127054;Diplodus vulgaris;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Diplodus;;vulgaris;;1;0;0;0
-Lithognathus mormyrus;;127055;exact;accepted;Lithognathus mormyrus;127055;Lithognathus mormyrus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Lithognathus;;mormyrus;;1;1;0;0
-Pagellus acarne;;127057;exact;accepted;Pagellus acarne;127057;Pagellus acarne;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;acarne;;1;0;0;0
-Pagellus bogaraveo;;127059;exact;accepted;Pagellus bogaraveo;127059;Pagellus bogaraveo;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;bogaraveo;;1;0;0;0
-Pagellus erythrinus;;127060;exact;accepted;Pagellus erythrinus;127060;Pagellus erythrinus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;erythrinus;;1;0;0;0
-Pagrus pagrus;;127063;exact;accepted;Pagrus pagrus;127063;Pagrus pagrus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagrus;;pagrus;;1;0;0;0
-Sarpa salpa;;127064;exact;accepted;Sarpa salpa;127064;Sarpa salpa;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Sarpa;;salpa;;1;1;0;0
-Sparus aurata;;151523;exact;accepted;Sparus aurata;151523;Sparus aurata;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Sparus;;aurata;;1;1;0;0
-Spondyliosoma cantharus;;127066;exact;accepted;Spondyliosoma cantharus;127066;Spondyliosoma cantharus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Spondyliosoma;;cantharus;;1;0;0;0
-Squalus acanthias;;105923;exact;accepted;Squalus acanthias;105923;Squalus acanthias;Animalia;Chordata;Elasmobranchii;Squaliformes;Squalidae;Squalus;;acanthias;;1;1;0;0
-Argyropelecus hemigymnus;;127309;exact;accepted;Argyropelecus hemigymnus;127309;Argyropelecus hemigymnus;Animalia;Chordata;Actinopterygii;Stomiiformes;Sternoptychidae;Argyropelecus;;hemigymnus;;1;0;0;0
-Argyropelecus olfersii;;274967;exact;accepted;Argyropelecus olfersii;274967;Argyropelecus olfersii;Animalia;Chordata;Actinopterygii;Stomiiformes;Sternoptychidae;Argyropelecus;;olfersii;;1;0;0;0
-Maurolicus muelleri;;127312;exact;accepted;Maurolicus muelleri;127312;Maurolicus muelleri;Animalia;Chordata;Actinopterygii;Stomiiformes;Sternoptychidae;Maurolicus;;muelleri;;1;0;0;0
-Anisarchus medius;;127070;exact;accepted;Anisarchus medius;127070;Anisarchus medius;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Anisarchus;;medius;;1;0;0;0
-Chirolophis ascanii;;127071;exact;accepted;Chirolophis ascanii;127071;Chirolophis ascanii;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Chirolophis;;ascanii;;1;0;0;0
-Leptoclinus maculatus;;127072;exact;accepted;Leptoclinus maculatus;127072;Leptoclinus maculatus;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Leptoclinus;;maculatus;;1;0;0;0
-Lumpenus lampretaeformis;;154675;exact;accepted;Lumpenus lampretaeformis;154675;Lumpenus lampretaeformis;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Lumpenus;;lampretaeformis;;1;0;0;0
-Chauliodus sloani;;127338;exact;accepted;Chauliodus sloani;127338;Chauliodus sloani;Animalia;Chordata;Actinopterygii;Stomiiformes;Stomiidae;Chauliodus;;sloani;;1;0;0;0
-Stomias boa boa;;234601;exact;accepted;Stomias boa boa;234601;Stomias boa boa;Animalia;Chordata;Actinopterygii;Stomiiformes;Stomiidae;Stomias;;boa;boa;1;0;0;
-Stomias boa ferox;;158737;exact;accepted;Stomias boa ferox;158737;Stomias boa ferox;Animalia;Chordata;Actinopterygii;Stomiiformes;Stomiidae;Stomias;;boa;ferox;1;0;0;0
-Synaphobranchus kaupii;;126328;exact;accepted;Synaphobranchus kaupii;126328;Synaphobranchus kaupii;Animalia;Chordata;Actinopterygii;Anguilliformes;Synaphobranchidae;Synaphobranchus;;kaupii;;1;0;0;0
-Entelurus aequoreus;;127379;exact;accepted;Entelurus aequoreus;127379;Entelurus aequoreus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Entelurus;;aequoreus;;1;1;0;0
-Hippocampus hippocampus;;127380;exact;accepted;Hippocampus hippocampus;127380;Hippocampus hippocampus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Hippocampus;;hippocampus;;1;0;0;0
-Nerophis lumbriciformis;;127383;exact;accepted;Nerophis lumbriciformis;127383;Nerophis lumbriciformis;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Nerophis;;lumbriciformis;;1;0;0;0
-Nerophis ophidion;;127385;exact;accepted;Nerophis ophidion;127385;Nerophis ophidion;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Nerophis;;ophidion;;1;1;0;0
-Syngnathus acus;;127387;exact;accepted;Syngnathus acus;127387;Syngnathus acus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;acus;;1;1;0;0
-Syngnathus rostellatus;;127389;exact;accepted;Syngnathus rostellatus;127389;Syngnathus rostellatus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;rostellatus;;1;1;0;0
-Syngnathus typhle;;127393;exact;accepted;Syngnathus typhle;127393;Syngnathus typhle;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;typhle;;1;1;0;0
-Syngnathus;;126227;exact;accepted;Syngnathus;126227;Syngnathus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;;;1;1;1;0
-Syngnathidae;;125606;exact;accepted;Syngnathidae;125606;Syngnathidae;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;;;;;1;;;
-Tetronarce nobiliana;;321911;exact;accepted;Tetronarce nobiliana;321911;Tetronarce nobiliana;Animalia;Chordata;Elasmobranchii;Torpediniformes;Torpedinidae;Tetronarce;;nobiliana;;1;0;0;
-Torpedo marmorata;;271684;exact;accepted;Torpedo marmorata;271684;Torpedo marmorata;Animalia;Chordata;Elasmobranchii;Torpediniformes;Torpedinidae;Torpedo;;marmorata;;1;1;0;0
-Hoplostethus mediterraneus mediterraneus;;159409;exact;accepted;Hoplostethus mediterraneus mediterraneus;159409;Hoplostethus mediterraneus mediterraneus;Animalia;Chordata;Actinopterygii;Beryciformes;Trachichthyidae;Hoplostethus;;mediterraneus;mediterraneus;1;0;0;0
-Echiichthys vipera;;150630;exact;accepted;Echiichthys vipera;150630;Echiichthys vipera;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Echiichthys;;vipera;;1;0;0;0
-Echiichthys;;150629;exact;accepted;Echiichthys;150629;Echiichthys;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Echiichthys;;;;1;0;0;0
-Trachinus draco;;127082;exact;accepted;Trachinus draco;127082;Trachinus draco;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Trachinus;;draco;;1;0;0;0
-Trachipterus arcticus;;126527;exact;accepted;Trachipterus arcticus;126527;Trachipterus arcticus;Animalia;Chordata;Actinopterygii;Lampriformes;Trachipteridae;Trachipterus;;arcticus;;1;0;0;0
-Galeorhinus galeus;;105820;exact;accepted;Galeorhinus galeus;105820;Galeorhinus galeus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Galeorhinus;;galeus;;1;0;0;0
-Mustelus asterias;;105821;exact;accepted;Mustelus asterias;105821;Mustelus asterias;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;asterias;;1;0;0;0
-Mustelus mustelus;;105822;exact;accepted;Mustelus mustelus;105822;Mustelus mustelus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;mustelus;;1;0;0;0
-Mustelus;;105732;exact;accepted;Mustelus;105732;Mustelus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;;;1;1;0;0
-Aphanopus carbo;;127085;exact;accepted;Aphanopus carbo;127085;Aphanopus carbo;Animalia;Chordata;Actinopterygii;Perciformes;Trichiuridae;Aphanopus;;carbo;;1;0;0;0
-Lepidopus caudatus;;127088;exact;accepted;Lepidopus caudatus;127088;Lepidopus caudatus;Animalia;Chordata;Actinopterygii;Perciformes;Trichiuridae;Lepidopus;;caudatus;;1;0;0;0
-Chelidonichthys cuculus;;127259;exact;accepted;Chelidonichthys cuculus;127259;Chelidonichthys cuculus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;cuculus;;1;0;0;
-Chelidonichthys lastoviza;;127261;exact;accepted;Chelidonichthys lastoviza;127261;Chelidonichthys lastoviza;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;lastoviza;;1;0;0;
-Chelidonichthys lucerna;;127262;exact;accepted;Chelidonichthys lucerna;127262;Chelidonichthys lucerna;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;lucerna;;1;0;0;0
-Chelidonichthys obscurus;;127263;exact;accepted;Chelidonichthys obscurus;127263;Chelidonichthys obscurus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;obscurus;;1;0;0;0
-Chelidonichthys;;126178;exact;accepted;Chelidonichthys;126178;Chelidonichthys;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;;;1;1;0;0
-Eutrigla gurnardus;;150637;exact;accepted;Eutrigla gurnardus;150637;Eutrigla gurnardus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Eutrigla;;gurnardus;;1;1;0;0
-Eutrigla;;150636;exact;accepted;Eutrigla;150636;Eutrigla;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Eutrigla;;;;1;1;0;0
-Lepidotrigla dieuzeidei;;127265;exact;accepted;Lepidotrigla dieuzeidei;127265;Lepidotrigla dieuzeidei;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Lepidotrigla;;dieuzeidei;;1;0;0;0
-Trigla lyra;;127266;exact;accepted;Trigla lyra;127266;Trigla lyra;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigla;;lyra;;1;0;0;0
-Trigla;;126180;exact;accepted;Trigla;126180;Trigla;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigla;;;;1;0;0;0
-Trigloporus;;154461;exact;accepted;Trigloporus;154461;Trigloporus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigloporus;;;;1;0;0;
-Triglidae;;125598;exact;accepted;Triglidae;125598;Triglidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;;;;;1;;;
-Zenopsis conchifer;;127426;exact;accepted;Zenopsis conchifer;127426;Zenopsis conchifer;Animalia;Chordata;Actinopterygii;Zeiformes;Zeidae;Zenopsis;;conchifer;;1;0;0;0
-Zeus faber;;127427;exact;accepted;Zeus faber;127427;Zeus faber;Animalia;Chordata;Actinopterygii;Zeiformes;Zeidae;Zeus;;faber;;1;1;0;0
-Zeidae;;125617;exact;accepted;Zeidae;125617;Zeidae;Animalia;Chordata;Actinopterygii;Zeiformes;Zeidae;;;;;1;;;
-Lycenchelys muraena;;127099;exact;accepted;Lycenchelys muraena;127099;Lycenchelys muraena;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycenchelys;;muraena;;1;0;0;0
-Lycenchelys sarsii;;127101;exact;accepted;Lycenchelys sarsii;127101;Lycenchelys sarsii;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycenchelys;;sarsii;;1;0;0;0
-Lycodes eudipleurostictus;;127104;exact;accepted;Lycodes eudipleurostictus;127104;Lycodes eudipleurostictus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;eudipleurostictus;;1;0;0;0
-Lycodes gracilis;;274100;exact;accepted;Lycodes gracilis;274100;Lycodes gracilis;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;gracilis;;1;0;0;0
-Lycodes reticulatus;;127112;exact;accepted;Lycodes reticulatus;127112;Lycodes reticulatus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;reticulatus;;1;0;0;0
-Lycodes seminudus;;127115;exact;accepted;Lycodes seminudus;127115;Lycodes seminudus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;seminudus;;1;0;0;0
-Lycodes vahlii;;127118;exact;accepted;Lycodes vahlii;127118;Lycodes vahlii;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;vahlii;;1;0;0;0
-Lycodonus flagellicauda;;127119;exact;accepted;Lycodonus flagellicauda;127119;Lycodonus flagellicauda;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodonus;;flagellicauda;;1;0;0;0
-Zoarces viviparus;;127123;exact;accepted;Zoarces viviparus;127123;Zoarces viviparus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Zoarces;;viviparus;;1;1;0;0
-Zoarcidae;;125575;exact;accepted;Zoarcidae;125575;Zoarcidae;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;;;;;1;;;
+taxon;habitat;feeding.mode;tl;age.maturity;growth.coefficient;length.max;age.max;;AphiaID;Match type;Taxon status;ScientificName;AphiaID_accepted;ScientificName_accepted;Kingdom;Phylum;Class;Order;Family;Genus;Subgenus;Species;Subspecies;isMarine;isBrackish;isFresh;isTerrestrial
+Agonus cataphractus;demersal;benthivorous;3.43;3;0.474999994;21;1;;127190;exact;accepted;Agonus cataphractus;127190;Agonus cataphractus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Agonidae;Agonus;;cataphractus;;1;0;0;0
+Leptagonus decagonus;demersal;generalist;3.21;3;0.474999994;19.1;11;;127191;exact;accepted;Leptagonus decagonus;127191;Leptagonus decagonus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Agonidae;Leptagonus;;decagonus;;1;0;0;0
+Agonidae;demersal;NA;3.244444444;4.699999809;0.474999994;26.05;7;;125588;exact;accepted;Agonidae;125588;Agonidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Agonidae;;;;;1;;;
+Alepocephalus bairdii;bathydemersal;generalist;3.69;NA;0.129190112;93;38;;126682;exact;accepted;Alepocephalus bairdii;126682;Alepocephalus bairdii;Animalia;Chordata;Actinopterygii;Osmeriformes;Alepocephalidae;Alepocephalus;;bairdii;;1;0;0;0
+Xenodermichthys copei;bathypelagic;generalist;3.19;NA;0.129190112;31;26;;126714;exact;accepted;Xenodermichthys copei;126714;Xenodermichthys copei;Animalia;Chordata;Actinopterygii;Osmeriformes;Alepocephalidae;Xenodermichthys;;copei;;1;0;0;0
+Ammodytes marinus;benthopelagic;planktivorous;2.71;3.200000048;0.375567319;18.5;10;;126751;exact;accepted;Ammodytes marinus;126751;Ammodytes marinus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Ammodytes;;marinus;;1;1;0;0
+Ammodytes tobianus;demersal;planktivorous;3.08;1.5;0.650170227;17;7;;126752;exact;accepted;Ammodytes tobianus;126752;Ammodytes tobianus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Ammodytes;;tobianus;;1;1;0;0
+Ammodytes;benthopelagic;planktivorous;3.1525;3.200000048;0.551595086;17.75;7.7;;125909;exact;accepted;Ammodytes;125909;Ammodytes;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Ammodytes;;;;1;1;0;0
+Gymnammodytes semisquamatus;demersal;planktivorous;2.68;3.200000048;0.375567319;30;9.5;;126754;exact;accepted;Gymnammodytes semisquamatus;126754;Gymnammodytes semisquamatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Gymnammodytes;;semisquamatus;;1;0;0;0
+Hyperoplus immaculatus;demersal;piscivorous;4.38;2;0.400000006;35;9.5;;126755;exact;accepted;Hyperoplus immaculatus;126755;Hyperoplus immaculatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;immaculatus;;1;0;0;0
+Hyperoplus lanceolatus;demersal;generalist;3.98;2;0.400000006;40;9.5;;126756;exact;accepted;Hyperoplus lanceolatus;126756;Hyperoplus lanceolatus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;lanceolatus;;1;1;0;0
+Hyperoplus;demersal;generalist;3.98;2;0.400000006;37.5;9.5;;125911;exact;accepted;Hyperoplus;125911;Hyperoplus;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;Hyperoplus;;;;1;1;0;0
+Ammodytidae;demersal;generalist;3.318;3.200000048;0.533871799;17.75;9.5;;125516;exact;accepted;Ammodytidae;125516;Ammodytidae;Animalia;Chordata;Actinopterygii;Perciformes;Ammodytidae;;;;;1;;;
+Anarhichas denticulatus;benthopelagic;generalist;3.75;5;0.088963655;150;16;;126757;exact;accepted;Anarhichas denticulatus;126757;Anarhichas denticulatus;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;Anarhichas;;denticulatus;;1;0;0;0
+Anarhichas lupus;demersal;benthivorous;3.55;9;0.068373489;152;22;;126758;exact;accepted;Anarhichas lupus;126758;Anarhichas lupus;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;Anarhichas;;lupus;;1;0;0;0
+Anarhichas minor;demersal;benthivorous;3.62;8;0.096886078;180;40;;126759;exact;accepted;Anarhichas minor;126759;Anarhichas minor;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;Anarhichas;;minor;;1;0;0;0
+Anarhichadidae;demersal;NA;3.675;8;0.084738148;165;31;;125517;exact;accepted;Anarhichadidae;125517;Anarhichadidae;Animalia;Chordata;Actinopterygii;Perciformes;Anarhichadidae;;;;;1;;;
+Anguilla anguilla;demersal;generalist;3.55;11;0.075599998;66.2;23;;126281;exact;accepted;Anguilla anguilla;126281;Anguilla anguilla;Animalia;Chordata;Actinopterygii;Anguilliformes;Anguillidae;Anguilla;;anguilla;;1;1;1;0
+Anguilla;demersal;generalist;4.0325;11;0.103797755;66.2;33;;125620;exact;accepted;Anguilla;125620;Anguilla;Animalia;Chordata;Actinopterygii;Anguilliformes;Anguillidae;Anguilla;;;;1;1;1;0
+Argentina silus;bathydemersal;generalist;3.32;6.449999968;0.17424304;70;35;;126715;exact;accepted;Argentina silus;126715;Argentina silus;Animalia;Chordata;Actinopterygii;Argentiniformes;Argentinidae;Argentina;;silus;;1;0;0;0
+Argentina sphyraena;bathydemersal;generalist;3.62;2.5;0.277999997;21.6;16;;126716;exact;accepted;Argentina sphyraena;126716;Argentina sphyraena;Animalia;Chordata;Actinopterygii;Argentiniformes;Argentinidae;Argentina;;sphyraena;;1;0;0;0
+Argentinidae;bathydemersal;generalist;3.32;6.449999968;0.161074089;21.6;25.5;;125508;exact;accepted;Argentinidae;125508;Argentinidae;Animalia;Chordata;Actinopterygii;Argentiniformes;Argentinidae;;;;;1;;;
+Bathyraja brachyurops;bathydemersal;generalist;4.07;8;0.079260672;64.2;24.7;;271509;exact;accepted;Bathyraja brachyurops;271509;Bathyraja brachyurops;Animalia;Chordata;Elasmobranchii;Rajiformes;Arhynchobatidae;Bathyraja;;brachyurops;;1;0;0;0
+Bathyraja spinicauda;bathydemersal;generalist;4.41;8;0.079260672;172;27.42857143;;105868;exact;accepted;Bathyraja spinicauda;105868;Bathyraja spinicauda;Animalia;Chordata;Elasmobranchii;Rajiformes;Arhynchobatidae;Bathyraja;;spinicauda;;1;0;0;0
+Atherina presbyter;pelagic;planktivorous;3.67;1;0.699999988;14;4;;272030;exact;accepted;Atherina presbyter;272030;Atherina presbyter;Animalia;Chordata;Actinopterygii;Atheriniformes;Atherinidae;Atherina;;presbyter;;1;1;0;0
+Balistes capriscus;reef-associated;benthivorous;4.06;1;0.320206846;60;15;;154721;exact;accepted;Balistes capriscus;154721;Balistes capriscus;Animalia;Chordata;Actinopterygii;Tetraodontiformes;Balistidae;Balistes;;capriscus;;1;0;0;0
+Balistes;reef-associated;benthivorous;3.94;1;0.247806501;51.125;15;;126228;exact;accepted;Balistes;126228;Balistes;Animalia;Chordata;Actinopterygii;Tetraodontiformes;Balistidae;Balistes;;;;1;0;0;0
+Belone belone;pelagic;piscivorous;4.16;2;0.22512972;93;11;;126375;exact;accepted;Belone belone;126375;Belone belone;Animalia;Chordata;Actinopterygii;Beloniformes;Belonidae;Belone;;belone;;1;1;0;0
+Beryx decadactylus;bathydemersal;generalist;4.13;6.133333365;0.131990598;52;13;;126394;exact;accepted;Beryx decadactylus;126394;Beryx decadactylus;Animalia;Chordata;Actinopterygii;Beryciformes;Berycidae;Beryx;;decadactylus;;1;0;0;0
+Beryx splendens;benthopelagic;generalist;4.27;6.133333365;0.170000002;43;23;;126395;exact;accepted;Beryx splendens;126395;Beryx splendens;Animalia;Chordata;Actinopterygii;Beryciformes;Berycidae;Beryx;;splendens;;1;0;0;0
+Blennius ocellaris;demersal;benthivorous;3.49;2.5;0.424448927;17;6.4;;126761;exact;accepted;Blennius ocellaris;126761;Blennius ocellaris;Animalia;Chordata;Actinopterygii;Perciformes;Blenniidae;Blennius;;ocellaris;;1;0;0;0
+Parablennius gattorugine;demersal;benthivorous;3.59;1;0.620000005;30;6.4;;126770;exact;accepted;Parablennius gattorugine;126770;Parablennius gattorugine;Animalia;Chordata;Actinopterygii;Perciformes;Blenniidae;Parablennius;;gattorugine;;1;0;0;0
+Blenniidae;reef-associated;benthivorous;2.854333333;1.75;0.424448927;15.55;6;;125519;exact;accepted;Blenniidae;125519;Blenniidae;Animalia;Chordata;Actinopterygii;Perciformes;Blenniidae;;;;;1;1;1;
+Arnoglossus imperialis;demersal;benthivorous;3.84;1.5;0.50999999;19;7;;127124;exact;accepted;Arnoglossus imperialis;127124;Arnoglossus imperialis;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;imperialis;;1;0;0;0
+Arnoglossus laterna;demersal;benthivorous;3.59;1.5;0.246721179;17;8;;127126;exact;accepted;Arnoglossus laterna;127126;Arnoglossus laterna;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;laterna;;1;0;0;0
+Arnoglossus thori;demersal;benthivorous;3.28;1.5;0.50999999;20.5;10;;127128;exact;accepted;Arnoglossus thori;127128;Arnoglossus thori;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;thori;;1;0;0;0
+Arnoglossus;demersal;benthivorous;3.435;1.5;0.50999999;18.75;8.75;;126109;exact;accepted;Arnoglossus;126109;Arnoglossus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Bothidae;Arnoglossus;;;;1;1;0;0
+Brama brama;bathypelagic;generalist;4.08;4;0.083999999;100;9;;126783;exact;accepted;Brama brama;126783;Brama brama;Animalia;Chordata;Actinopterygii;Perciformes;Bramidae;Brama;;brama;;1;0;0;0
+Pterycombus brama;pelagic;generalist;4.4;4;0.083999999;46;10;;126785;exact;accepted;Pterycombus brama;126785;Pterycombus brama;Animalia;Chordata;Actinopterygii;Perciformes;Bramidae;Pterycombus;;brama;;1;0;0;0
+Callionymus lyra;demersal;benthivorous;3.27;2.5;0.471167981;30;7;;126792;exact;accepted;Callionymus lyra;126792;Callionymus lyra;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;lyra;;1;0;0;0
+Callionymus maculatus;demersal;benthivorous;3.31;4;0.471167981;13;1;;126793;exact;accepted;Callionymus maculatus;126793;Callionymus maculatus;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;maculatus;;1;0;0;0
+Callionymus reticulatus;demersal;benthivorous;3.28;3.3;0.471167981;11;5;;126795;exact;accepted;Callionymus reticulatus;126795;Callionymus reticulatus;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;reticulatus;;1;1;0;0
+Callionymus;demersal;benthivorous;3.17;3.3;0.471167981;21.5;5;;125930;exact;accepted;Callionymus;125930;Callionymus;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;Callionymus;;;;1;1;1;0
+Callionymidae;demersal;benthivorous;3.17;3.25;0.471167981;21.5;5;;125522;exact;accepted;Callionymidae;125522;Callionymidae;Animalia;Chordata;Actinopterygii;Perciformes;Callionymidae;;;;;1;;;
+Capros aper;demersal;generalist;3.14;3.280000011;0.254811604;18;26;;127419;exact;accepted;Capros aper;127419;Capros aper;Animalia;Chordata;Actinopterygii;Perciformes;Caproidae;Capros;;aper;;1;0;0;0
+Naucrates ductor;reef-associated;planktivorous;3.98;2.702727264;2.34890493;34;19.75;;126811;exact;accepted;Naucrates ductor;126811;Naucrates ductor;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Naucrates;;ductor;;1;0;0;0
+Trachurus mediterraneus;pelagic;generalist;3.77;1.4;0.309120989;26;12;;126820;exact;accepted;Trachurus mediterraneus;126820;Trachurus mediterraneus;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Trachurus;;mediterraneus;;1;1;0;0
+Trachurus picturatus;pelagic;generalist;3.32;3.4725;0.166283544;60;18;;126821;exact;accepted;Trachurus picturatus;126821;Trachurus picturatus;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Trachurus;;picturatus;;1;0;0;0
+Trachurus trachurus;pelagic;generalist;3.71;2.649999989;0.179520728;41;40;;126822;exact;accepted;Trachurus trachurus;126822;Trachurus trachurus;Animalia;Chordata;Actinopterygii;Perciformes;Carangidae;Trachurus;;trachurus;;1;0;0;0
+Echiodon drummondii;bathydemersal;generalist;4.03;NA;NA;30;NA;;126663;exact;accepted;Echiodon drummondii;126663;Echiodon drummondii;Animalia;Chordata;Actinopterygii;Ophidiiformes;Carapidae;Echiodon;;drummondii;;1;0;0;0
+Macroramphosus scolopax;demersal;benthivorous;3.47;NA;0.402788647;22.8;6;;127378;exact;accepted;Macroramphosus scolopax;127378;Macroramphosus scolopax;Animalia;Chordata;Actinopterygii;Syngnathiformes;Centriscidae;Macroramphosus;;scolopax;;1;0;0;0
+Macrorhamphosus scolopax;pelagic;benthivorous;3.4;NA;0.549697916;18.9;6;;217972;exact;unaccepted;Macrorhamphosus scolopax;127378;Macroramphosus scolopax;Animalia;Chordata;Actinopterygii;Syngnathiformes;Centriscidae;Macrorhamphosus;;scolopax;;1;0;0;
+Centrolophus niger;bathypelagic;benthivorous;3.92;6;0.242093761;74;12;;126831;exact;accepted;Centrolophus niger;126831;Centrolophus niger;Animalia;Chordata;Actinopterygii;Perciformes;Centrolophidae;Centrolophus;;niger;;1;0;0;0
+Schedophilus medusophagus;pelagic;planktivorous;4;6;0.242093761;51;12;;126833;exact;accepted;Schedophilus medusophagus;126833;Schedophilus medusophagus;Animalia;Chordata;Actinopterygii;Perciformes;Centrolophidae;Schedophilus;;medusophagus;;1;0;0;0
+Centrophorus granulosus;bathydemersal;piscivorous;4.11;25;0.044389505;170;62;;105899;exact;accepted;Centrophorus granulosus;105899;Centrophorus granulosus;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Centrophorus;;granulosus;;1;0;0;0
+Centrophorus squamosus;bathydemersal;generalist;4.47;25;0.044389505;145;62;;105901;exact;accepted;Centrophorus squamosus;105901;Centrophorus squamosus;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Centrophorus;;squamosus;;1;0;0;0
+Deania calcea;bathydemersal;piscivorous;4.33;25;0.10048771;80;33.5;;105903;exact;accepted;Deania calcea;105903;Deania calcea;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Deania;;calcea;;1;0;0;0
+Deania profundorum;bathydemersal;piscivorous;4.36;25;0.10048771;79;33.5;;105905;exact;accepted;Deania profundorum;105905;Deania profundorum;Animalia;Chordata;Elasmobranchii;Squaliformes;Centrophoridae;Deania;;profundorum;;1;0;0;0
+Cepola macrophthalma;demersal;planktivorous;3.130000114;2.35;0.203325036;73;6.5;;126835;exact;accepted;Cepola macrophthalma;126835;Cepola macrophthalma;Animalia;Chordata;Actinopterygii;Perciformes;Cepolidae;Cepola;;macrophthalma;;1;0;0;0
+Chimaera monstrosa;bathydemersal;benthivorous;3.52;12;0.20616094;57.1;30;;105824;exact;accepted;Chimaera monstrosa;105824;Chimaera monstrosa;Animalia;Chordata;Holocephali;Chimaeriformes;Chimaeridae;Chimaera;;monstrosa;;1;0;0;0
+Chimaera opalescens;bathydemersal;benthivorous;3.52;12;0.20616094;109.8;29;;712407;exact;accepted;Chimaera opalescens;712407;Chimaera opalescens;Animalia;Chordata;Holocephali;Chimaeriformes;Chimaeridae;Chimaera;;opalescens;;1;0;0;
+Hydrolagus mirabilis;bathydemersal;generalist;3.94;12;0.20616094;41;28;;105826;exact;accepted;Hydrolagus mirabilis;105826;Hydrolagus mirabilis;Animalia;Chordata;Holocephali;Chimaeriformes;Chimaeridae;Hydrolagus;;mirabilis;;1;0;0;0
+Chlorophthalmus agassizi;bathydemersal;benthivorous;3.66;3;0.239999995;16.3;10;;126336;exact;accepted;Chlorophthalmus agassizi;126336;Chlorophthalmus agassizi;Animalia;Chordata;Actinopterygii;Aulopiformes;Chlorophthalmidae;Chlorophthalmus;;agassizi;;1;1;0;0
+Alosa agone;pelagic;generalist;3.887;3;0.293263837;34;5.5;;416357;exact;accepted;Alosa agone;416357;Alosa agone;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;agone;;0;0;1;0
+Alosa alosa;pelagic;generalist;2.95;3.5;0.324994616;65;10;;126413;exact;accepted;Alosa alosa;126413;Alosa alosa;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;alosa;;1;1;1;0
+Alosa fallax;pelagic;generalist;4.03;2.5;0.331593228;42.9;25;;126415;exact;accepted;Alosa fallax;126415;Alosa fallax;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;fallax;;1;1;1;0
+Alosa;benthopelagic;generalist;3.887;3.300000012;0.293263837;51.66667;5;;125715;exact;accepted;Alosa;125715;Alosa;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Alosa;;;;1;1;1;0
+Clupea harengus;benthopelagic;planktivorous;3.38;3.219761908;0.340761766;25.6;18.5;;126417;exact;accepted;Clupea harengus;126417;Clupea harengus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Clupea;;harengus;;1;1;0;0
+Sardina pilchardus;pelagic;planktivorous;3.06;1.74000001;0.357535654;27;14;;126421;exact;accepted;Sardina pilchardus;126421;Sardina pilchardus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Sardina;;pilchardus;;1;1;1;0
+Spratelloides lewisi;pelagic;planktivorous;3.02;2.655483874;5.103077826;7;0.300000012;;272278;exact;accepted;Spratelloides lewisi;272278;Spratelloides lewisi;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Spratelloides;;lewisi;;1;0;0;0
+Sprattus sprattus;pelagic;planktivorous;3.01;2;0.595018239;13.6;6;;126425;exact;accepted;Sprattus sprattus;126425;Sprattus sprattus;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;Sprattus;;sprattus;;1;1;0;0
+Clupeidae;pelagic;NA;3.354848485;2.655483874;0.34929492;48.42;12.01136364;;125464;exact;accepted;Clupeidae;125464;Clupeidae;Animalia;Chordata;Actinopterygii;Clupeiformes;Clupeidae;;;;;1;;;
+Conger conger;demersal;piscivorous;4.31;10;0.068000004;180;20;;126285;exact;accepted;Conger conger;126285;Conger conger;Animalia;Chordata;Actinopterygii;Anguilliformes;Congridae;Conger;;conger;;1;0;0;0
+Artediellus atlanticus;demersal;benthivorous;3.42;3.5;0.15483555;16.8;10;;127193;exact;accepted;Artediellus atlanticus;127193;Artediellus atlanticus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Artediellus;;atlanticus;;1;0;0;0
+Icelus bicornis;demersal;benthivorous;3.13;2;0.142581113;15.7;8;;127199;exact;accepted;Icelus bicornis;127199;Icelus bicornis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Icelus;;bicornis;;1;0;0;0
+Micrenophrys lilljeborgii;demersal;generalist;3.79;3.897727273;0.271428571;7.4;6.3;;127201;exact;accepted;Micrenophrys lilljeborgii;127201;Micrenophrys lilljeborgii;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Micrenophrys;;lilljeborgii;;1;1;0;0
+Myoxocephalus quadricornis;demersal;generalist;3.690000057;3.5;0.538999975;37;14;;254529;exact;accepted;Myoxocephalus quadricornis;254529;Myoxocephalus quadricornis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Myoxocephalus;;quadricornis;;1;1;1;
+Myoxocephalus scorpioides;demersal;benthivorous;3.39;5.375;0.538999975;30;12;;127202;exact;accepted;Myoxocephalus scorpioides;127202;Myoxocephalus scorpioides;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Myoxocephalus;;scorpioides;;1;1;0;0
+Myoxocephalus scorpius;demersal;generalist;3.89;2;0.538999975;25.7;8;;127203;exact;accepted;Myoxocephalus scorpius;127203;Myoxocephalus scorpius;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Myoxocephalus;;scorpius;;1;1;0;0
+Taurulus bubalis;demersal;benthivorous;3.59;1;0.227925873;17;4;;127204;exact;accepted;Taurulus bubalis;127204;Taurulus bubalis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Taurulus;;bubalis;;1;1;0;0
+Triglops murrayi;demersal;benthivorous;3.45;3.5;0.140066193;20;10;;127205;exact;accepted;Triglops murrayi;127205;Triglops murrayi;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Triglops;;murrayi;;1;0;0;0
+Triglops pingelii;demersal;generalist;3.42;4;0.189999998;20;6;;127207;exact;accepted;Triglops pingelii;127207;Triglops pingelii;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Triglops;;pingelii;;1;0;0;0
+Triglops;demersal;generalist;3.322;3.666666667;0.140066193;23.5;6.333333333;;126154;exact;accepted;Triglops;126154;Triglops;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;Triglops;;;;1;0;0;0
+Cottidae;demersal;NA;3.5565625;3.897727273;0.373981455;17.9;8.863636364;;125589;exact;accepted;Cottidae;125589;Cottidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cottidae;;;;;1;;;
+Cyclopterus lumpus;benthopelagic;planktivorous;3.89;3.5;0.174848775;57;13;;127214;exact;accepted;Cyclopterus lumpus;127214;Cyclopterus lumpus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Cyclopteridae;Cyclopterus;;lumpus;;1;0;0;0
+Dalatias licha;bathydemersal;piscivorous;4.23;6.8;0.1725;182;36;;105910;exact;accepted;Dalatias licha;105910;Dalatias licha;Animalia;Chordata;Elasmobranchii;Squaliformes;Dalatiidae;Dalatias;;licha;;1;0;0;0
+Dasyatis pastinaca;demersal;benthivorous;4.05;3.7;0.089000002;75;16;;105851;exact;accepted;Dasyatis pastinaca;105851;Dasyatis pastinaca;Animalia;Chordata;Elasmobranchii;Myliobatiformes;Dasyatidae;Dasyatis;;pastinaca;;1;1;0;0
+Engraulis encrasicolus;pelagic;planktivorous;3.109999895;1;0.464853665;21;3;;126426;exact;accepted;Engraulis encrasicolus;126426;Engraulis encrasicolus;Animalia;Chordata;Actinopterygii;Clupeiformes;Engraulidae;Engraulis;;encrasicolus;;1;1;0;0
+Epigonus telescopus;bathydemersal;generalist;3.59;36.19999886;0.263206802;75;104;;126858;exact;accepted;Epigonus telescopus;126858;Epigonus telescopus;Animalia;Chordata;Actinopterygii;Perciformes;Epigonidae;Epigonus;;telescopus;;1;0;0;0
+Etmopterus spinax;bathydemersal;generalist;4.14;5;0.175;60;57;;105913;exact;accepted;Etmopterus spinax;105913;Etmopterus spinax;Animalia;Chordata;Elasmobranchii;Squaliformes;Etmopteridae;Etmopterus;;spinax;;1;0;0;0
+Gadiculus argenteus;benthopelagic;planktivorous;3.6;2;0.305291094;12;3;;126435;exact;accepted;Gadiculus argenteus;126435;Gadiculus argenteus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Gadiculus;;argenteus;;1;0;0;0
+Gadiculus thori;benthopelagic;generalist;3.51;2;0.693000019;15;3;;300719;exact;accepted;Gadiculus thori;300719;Gadiculus thori;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Gadiculus;;thori;;1;0;0;
+Gadus morhua;benthopelagic;generalist;4.09;4;0.221900862;116;25;;126436;exact;accepted;Gadus morhua;126436;Gadus morhua;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Gadus;;morhua;;1;1;0;0
+Melanogrammus aeglefinus;demersal;benthivorous;4.03;2.619999886;0.229938845;75.5;20;;126437;exact;accepted;Melanogrammus aeglefinus;126437;Melanogrammus aeglefinus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Melanogrammus;;aeglefinus;;1;0;0;0
+Merlangius merlangus;benthopelagic;generalist;4.36;2;0.295267494;45.9;20;;126438;exact;accepted;Merlangius merlangus;126438;Merlangius merlangus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Merlangius;;merlangus;;1;0;0;0
+Micromesistius poutassou;bathypelagic;generalist;4.13;1.929999971;0.188924616;26;20;;126439;exact;accepted;Micromesistius poutassou;126439;Micromesistius poutassou;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Micromesistius;;poutassou;;1;0;0;0
+Pollachius pollachius;benthopelagic;generalist;4.32;2.5;0.186000004;130;15;;126440;exact;accepted;Pollachius pollachius;126440;Pollachius pollachius;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Pollachius;;pollachius;;1;0;0;0
+Pollachius virens;demersal;generalist;4.31;4.172857114;0.069774828;130;25;;126441;exact;accepted;Pollachius virens;126441;Pollachius virens;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Pollachius;;virens;;1;0;0;0
+Raniceps raninus;demersal;benthivorous;3.77;3.309999943;0.238116172;27.5;8;;126442;exact;accepted;Raniceps raninus;126442;Raniceps raninus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Raniceps;;raninus;;1;1;0;0
+Trisopterus esmarkii;benthopelagic;planktivorous;3.24;1.689999998;0.556816513;21;5;;126444;exact;accepted;Trisopterus esmarkii;126444;Trisopterus esmarkii;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;esmarkii;;1;0;0;0
+Trisopterus luscus;benthopelagic;generalist;3.566666667;1.5;0.473190425;46;6;;126445;exact;accepted;Trisopterus luscus;126445;Trisopterus luscus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;luscus;;1;1;0;0
+Trisopterus minutus;benthopelagic;generalist;3.73;2;0.50999999;24;8;;126446;exact;accepted;Trisopterus minutus;126446;Trisopterus minutus;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;Trisopterus;;minutus;;1;0;0;0
+Gadidae;benthopelagic;NA;3.884666667;2.873333295;0.195867996;60.33333;12.66666667;;125469;exact;accepted;Gadidae;125469;Gadidae;Animalia;Chordata;Actinopterygii;Gadiformes;Gadidae;;;;;1;;;
+Gasterosteus aculeatus;benthopelagic;generalist;3.31;2;2.319999933;10;8;;126505;exact;accepted;Gasterosteus aculeatus;126505;Gasterosteus aculeatus;Animalia;Chordata;Actinopterygii;Gasterosteiformes;Gasterosteidae;Gasterosteus;;aculeatus;;1;1;1;0
+Gasterosteus aculeatus williamsoni;benthopelagic;generalist;3.166666667;2;2.319999933;8.82;8;;293602;exact;accepted;Gasterosteus aculeatus williamsoni;293602;Gasterosteus aculeatus williamsoni;Animalia;Chordata;Actinopterygii;Gasterosteiformes;Gasterosteidae;Gasterosteus;;aculeatus;williamsoni;1;1;1;0
+Spinachia spinachia;benthopelagic;generalist;3.5;1;2.319999933;16;1;;126508;exact;accepted;Spinachia spinachia;126508;Spinachia spinachia;Animalia;Chordata;Actinopterygii;Gasterosteiformes;Gasterosteidae;Spinachia;;spinachia;;1;1;0;0
+Apletodon dentatus;demersal;benthivorous;3.1;NA;0.794946033;4;1;;126510;exact;accepted;Apletodon dentatus;126510;Apletodon dentatus;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Apletodon;;dentatus;;1;0;0;0
+Diplecogaster bimaculata;demersal;generalist;3.39;NA;0.794946033;6;3;;126513;exact;alternate representation;Diplecogaster bimaculata;236458;Diplecogaster bimaculata bimaculata;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Diplecogaster;;bimaculata;;1;0;0;0
+Diplecogaster bimaculata bimaculata;demersal;generalist;3.39;NA;0.794946033;3.325;3;;236458;exact;accepted;Diplecogaster bimaculata bimaculata;236458;Diplecogaster bimaculata bimaculata;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Diplecogaster;;bimaculata;bimaculata;1;0;0;
+Lepadogaster lepadogaster;demersal;benthivorous;2.78;NA;0.794946033;6.5;5;;126518;exact;accepted;Lepadogaster lepadogaster;126518;Lepadogaster lepadogaster;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Lepadogaster;;lepadogaster;;1;0;0;0
+Lepadogaster;demersal;benthivorous;2.78;NA;0.794946033;7.166667;5;;125781;exact;accepted;Lepadogaster;125781;Lepadogaster;Animalia;Chordata;Actinopterygii;Gobiesociformes;Gobiesocidae;Lepadogaster;;;;1;0;0;0
+Aphia minuta;benthopelagic;planktivorous;3.1;0.583333333;2.230000019;7.9;0.666666667;;126868;exact;accepted;Aphia minuta;126868;Aphia minuta;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Aphia;;minuta;;1;1;0;0
+Awaous commersoni;demersal;planktivorous;3.31;2;0.430000007;25;5;;277418;exact;accepted;Awaous commersoni;277418;Awaous commersoni;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Awaous;;commersoni;;0;1;1;0
+Buenia jeffreysii;demersal;benthivorous;3.62;1.181153845;0.927999973;6;2.760000002;;126872;exact;accepted;Buenia jeffreysii;126872;Buenia jeffreysii;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Buenia;;jeffreysii;;1;0;0;0
+Crystallogobius linearis;demersal;planktivorous;3.4;0.416666667;0.970000029;4.7;1;;126878;exact;accepted;Crystallogobius linearis;126878;Crystallogobius linearis;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Crystallogobius;;linearis;;1;0;0;0
+Gobius gasteveni;demersal;benthivorous;3.3;2;0.430000007;12;5;;126890;exact;accepted;Gobius gasteveni;126890;Gobius gasteveni;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;gasteveni;;1;1;0;0
+Gobius niger;demersal;benthivorous;3.31;2;0.430000007;15.2;5;;;ambiguous;;;;;;;;;;;;;;;;;
+Gobius paganellus;demersal;benthivorous;3.299999952;1.5;0.407999992;13;10;;126893;exact;accepted;Gobius paganellus;126893;Gobius paganellus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;paganellus;;1;1;1;0
+Gobius;demersal;benthivorous;3.275;1.5;0.353586284;22.5;6;;125988;exact;accepted;Gobius;125988;Gobius;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Gobius;;;;1;1;1;0
+Lesueurigobius friesii;demersal;benthivorous;3.55;2;0.699999988;9;11;;126904;exact;accepted;Lesueurigobius friesii;126904;Lesueurigobius friesii;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Lesueurigobius;;friesii;;1;0;0;0
+Lesueurigobius suerii;demersal;benthivorous;3.55;2;0.699999988;6;2.760000002;;126907;exact;accepted;Lesueurigobius suerii;126907;Lesueurigobius suerii;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Lesueurigobius;;suerii;;1;0;0;0
+Lesueurigobius;demersal;benthivorous;3.55;2;0.699999988;9;2.760000002;;125992;exact;accepted;Lesueurigobius;125992;Lesueurigobius;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Lesueurigobius;;;;1;0;0;0
+Pomatoschistus lozanoi;demersal;generalist;3.13;1;0.889999986;8;2;;126925;exact;accepted;Pomatoschistus lozanoi;126925;Pomatoschistus lozanoi;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;lozanoi;;1;1;0;0
+Pomatoschistus microps;demersal;benthivorous;3.29;1;0.294999987;5;3;;126927;exact;accepted;Pomatoschistus microps;126927;Pomatoschistus microps;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;microps;;1;1;1;0
+Pomatoschistus minutus;demersal;benthivorous;3.22;1;0.927999973;7.2;3;;126928;exact;accepted;Pomatoschistus minutus;126928;Pomatoschistus minutus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;minutus;;1;1;0;0
+Pomatoschistus norvegicus;demersal;benthivorous;3.26;1;0.927999973;8;1.830000043;;126929;exact;accepted;Pomatoschistus norvegicus;126929;Pomatoschistus norvegicus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;norvegicus;;1;0;0;0
+Pomatoschistus pictus;demersal;benthivorous;3.12;1;0.927999973;6;2;;126930;exact;accepted;Pomatoschistus pictus;126930;Pomatoschistus pictus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;pictus;;1;0;0;0
+Pomatoschistus;demersal;benthivorous;3.263333333;1;0.698505135;6.1;2.376666665;;125999;exact;accepted;Pomatoschistus;125999;Pomatoschistus;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;Pomatoschistus;;;;1;1;1;0
+Gobiidae;demersal;benthivorous;3.105945946;1.181153845;0.482039378;30;2.760000002;;125537;exact;accepted;Gobiidae;125537;Gobiidae;Animalia;Chordata;Actinopterygii;Perciformes;Gobiidae;;;;;1;1;;
+Heptranchias perlo;bathydemersal;piscivorous;4.16;16;0.25;139;32;;105832;exact;accepted;Heptranchias perlo;105832;Heptranchias perlo;Animalia;Chordata;Elasmobranchii;Hexanchiformes;Hexanchidae;Heptranchias;;perlo;;1;0;0;0
+Hexanchus griseus;bathydemersal;generalist;4.48;16;0.25;482;32;;105833;exact;accepted;Hexanchus griseus;105833;Hexanchus griseus;Animalia;Chordata;Elasmobranchii;Hexanchiformes;Hexanchidae;Hexanchus;;griseus;;1;0;0;0
+Acantholabrus palloni;reef-associated;benthivorous;3.5;3.179545457;0.199772312;25;16;;126957;exact;accepted;Acantholabrus palloni;126957;Acantholabrus palloni;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Acantholabrus;;palloni;;1;0;0;0
+Centrolabrus exoletus;reef-associated;benthivorous;3.5;3.179545457;0.745575356;13;6;;126961;exact;accepted;Centrolabrus exoletus;126961;Centrolabrus exoletus;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Centrolabrus;;exoletus;;1;0;0;0
+Ctenolabrus rupestris;reef-associated;benthivorous;3.58;2;0.330478437;18;8;;126964;exact;accepted;Ctenolabrus rupestris;126964;Ctenolabrus rupestris;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Ctenolabrus;;rupestris;;1;0;0;0
+Labrus bergylta;reef-associated;benthivorous;3.2;2;0.126966568;51;9;;126965;exact;accepted;Labrus bergylta;126965;Labrus bergylta;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Labrus;;bergylta;;1;0;0;0
+Labrus mixtus;reef-associated;benthivorous;3.91;2;0.10976339;40;20;;151501;exact;accepted;Labrus mixtus;151501;Labrus mixtus;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Labrus;;mixtus;;1;0;0;0
+Symphodus bailloni;reef-associated;benthivorous;3.357142857;1.666666667;0.353587139;20;9;;273566;exact;accepted;Symphodus bailloni;273566;Symphodus bailloni;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;bailloni;;1;0;0;0
+Symphodus melops;reef-associated;benthivorous;3.38;3;0.250826442;21;9;;273571;exact;accepted;Symphodus melops;273571;Symphodus melops;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;melops;;1;0;0;0
+Symphodus roissali;reef-associated;benthivorous;3.47;1;0.373786918;14;8;;273573;exact;accepted;Symphodus roissali;273573;Symphodus roissali;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;Symphodus;;roissali;;1;1;0;0
+Labridae;reef-associated;benthivorous;3.525333333;3.179545457;0.210495888;33.16667;6.2;;125541;exact;accepted;Labridae;125541;Labridae;Animalia;Chordata;Actinopterygii;Perciformes;Labridae;;;;;1;;;
+Lamna nasus;pelagic;piscivorous;4.57;13.5;0.0819392;329;30;;105841;exact;accepted;Lamna nasus;105841;Lamna nasus;Animalia;Chordata;Elasmobranchii;Lamniformes;Lamnidae;Lamna;;nasus;;1;0;0;0
+Careproctus reinhardti;bathydemersal;generalist;3.75;4.75;0.430000007;30;7;;127212;exact;accepted;Careproctus reinhardti;127212;Careproctus reinhardti;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Careproctus;;reinhardti;;1;0;0;0
+Liparis fabricii;bathydemersal;benthivorous;3.33;2.85;0.681480884;20;8;;127218;exact;accepted;Liparis fabricii;127218;Liparis fabricii;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Liparis;;fabricii;;1;0;0;0
+Liparis liparis liparis;demersal;benthivorous;3.59;1;0.681480884;15.2;2;;293624;exact;accepted;Liparis liparis liparis;293624;Liparis liparis liparis;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Liparis;;liparis;liparis;1;0;0;0
+Liparis montagui;demersal;benthivorous;3.45;1;0.681480884;12;2;;127220;exact;accepted;Liparis montagui;127220;Liparis montagui;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;Liparis;;montagui;;1;0;0;0
+Liparidae;bathydemersal;benthivorous;3.7225;3.2;0.525832446;30.1;8;;234519;exact;accepted;Liparidae;234519;Liparidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Liparidae;;;;;1;0;0;0
+Lophius budegassa;bathydemersal;piscivorous;4.41;8.166666667;0.085860408;93;21;;126554;exact;accepted;Lophius budegassa;126554;Lophius budegassa;Animalia;Chordata;Actinopterygii;Lophiiformes;Lophiidae;Lophius;;budegassa;;1;0;0;0
+Lophius piscatorius;bathydemersal;piscivorous;4.45;4.5;0.169017653;140;24;;126555;exact;accepted;Lophius piscatorius;126555;Lophius piscatorius;Animalia;Chordata;Actinopterygii;Lophiiformes;Lophiidae;Lophius;;piscatorius;;1;0;0;0
+Brosme brosme;demersal;generalist;3.9;7;0.091539983;120;20;;126447;exact;accepted;Brosme brosme;126447;Brosme brosme;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Brosme;;brosme;;1;0;0;0
+Ciliata mustela;demersal;generalist;3.5;1;0.077491663;25;3;;126448;exact;accepted;Ciliata mustela;126448;Ciliata mustela;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Ciliata;;mustela;;1;0;0;0
+Ciliata septentrionalis;demersal;planktivorous;3.5;1;0.077491663;12.2;3;;126449;exact;accepted;Ciliata septentrionalis;126449;Ciliata septentrionalis;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Ciliata;;septentrionalis;;1;1;0;0
+Enchelyopus cimbrius;demersal;benthivorous;3.53;3;0.200000003;41;9;;126450;exact;accepted;Enchelyopus cimbrius;126450;Enchelyopus cimbrius;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Enchelyopus;;cimbrius;;1;0;0;0
+Gaidropsarus argentatus;bathydemersal;generalist;3.39;4;0.600000024;3.4;10;;126451;exact;accepted;Gaidropsarus argentatus;126451;Gaidropsarus argentatus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;argentatus;;1;0;0;0
+Gaidropsarus biscayensis;benthopelagic;benthivorous;3.57;2.833333333;0.600000024;40;8;;126452;exact;accepted;Gaidropsarus biscayensis;126452;Gaidropsarus biscayensis;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;biscayensis;;1;0;0;0
+Gaidropsarus macrophthalmus;demersal;benthivorous;3.5;2.833333333;0.600000024;19;8;;126456;exact;accepted;Gaidropsarus macrophthalmus;126456;Gaidropsarus macrophthalmus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;macrophthalmus;;1;0;0;0
+Gaidropsarus mediterraneus;demersal;generalist;3.47;1.5;0.600000024;50;8;;126457;exact;accepted;Gaidropsarus mediterraneus;126457;Gaidropsarus mediterraneus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;mediterraneus;;1;0;0;0
+Gaidropsarus vulgaris;demersal;benthivorous;3.47;3;0.600000024;60;6;;126458;exact;accepted;Gaidropsarus vulgaris;126458;Gaidropsarus vulgaris;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;vulgaris;;1;0;0;0
+Gaidropsarus;demersal;generalist;3.475;2.833333333;0.600000024;11.2;8;;125743;exact;accepted;Gaidropsarus;125743;Gaidropsarus;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Gaidropsarus;;;;1;1;0;0
+Molva dypterygia;demersal;generalist;4.49;7;0.137194169;38;20;;126459;exact;accepted;Molva dypterygia;126459;Molva dypterygia;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Molva;;dypterygia;;1;0;0;0
+Molva macrophthalma;demersal;generalist;4.5;6.5;0.121395453;108;23;;126460;exact;accepted;Molva macrophthalma;126460;Molva macrophthalma;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Molva;;macrophthalma;;1;0;0;0
+Molva molva;demersal;generalist;4.4;6;0.079999998;200;25;;126461;exact;accepted;Molva molva;126461;Molva molva;Animalia;Chordata;Actinopterygii;Gadiformes;Lotidae;Molva;;molva;;1;0;0;0
+Coelorinchus caelorhincus;benthopelagic;benthivorous;3.49;12.4000001;0.115000002;48;10;;398381;exact;accepted;Coelorinchus caelorhincus;398381;Coelorinchus caelorhincus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Coelorinchus;;caelorhincus;;1;0;0;0
+Coelorinchus labiatus;bathydemersal;generalist;3.95;12.4000001;0.115000002;50;10;;280299;exact;accepted;Coelorinchus labiatus;280299;Coelorinchus labiatus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Coelorinchus;;labiatus;;1;0;0;0
+Coryphaenoides rupestris;bathypelagic;generalist;3.54;10;0.106179011;29.5;60;;158960;exact;accepted;Coryphaenoides rupestris;158960;Coryphaenoides rupestris;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Coryphaenoides;;rupestris;;1;0;0;0
+Hymenocephalus italicus;benthopelagic;generalist;3.4;12.4000001;0.106179011;5.3;9;;158961;exact;accepted;Hymenocephalus italicus;158961;Hymenocephalus italicus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Hymenocephalus;;italicus;;1;0;0;0
+Macrourus berglax;benthopelagic;benthivorous;3.57;14.80000019;0.090051216;110;25;;126472;exact;accepted;Macrourus berglax;126472;Macrourus berglax;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Macrourus;;berglax;;1;0;0;0
+Malacocephalus laevis;bathydemersal;generalist;3.79;14.80000019;0.106179011;60;54;;272392;exact;accepted;Malacocephalus laevis;272392;Malacocephalus laevis;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Malacocephalus;;laevis;;1;0;0;0
+Nezumia aequalis;benthopelagic;generalist;3.26;4;0.129484417;36;9;;126473;exact;accepted;Nezumia aequalis;126473;Nezumia aequalis;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Nezumia;;aequalis;;1;0;0;0
+Trachyrincus murrayi;benthopelagic;generalist;3.47;12.4000001;0.277128096;48;11;;126481;exact;accepted;Trachyrincus murrayi;126481;Trachyrincus murrayi;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Trachyrincus;;murrayi;;1;0;0;0
+Trachyrincus scabrus;bathydemersal;generalist;3.64;12.4000001;0.277128096;21.7;11;;126482;exact;accepted;Trachyrincus scabrus;126482;Trachyrincus scabrus;Animalia;Chordata;Actinopterygii;Gadiformes;Macrouridae;Trachyrincus;;scabrus;;1;0;0;0
+Merluccius merluccius;demersal;generalist;4.42;3.408749968;0.113435169;86;20;;126484;exact;accepted;Merluccius merluccius;126484;Merluccius merluccius;Animalia;Chordata;Actinopterygii;Gadiformes;Merlucciidae;Merluccius;;merluccius;;1;0;0;0
+Mola mola;pelagic;generalist;3.68;NA;0.31;333;NA;;127405;exact;accepted;Mola mola;127405;Mola mola;Animalia;Chordata;Actinopterygii;Tetraodontiformes;Molidae;Mola;;mola;;1;0;0;0
+Halargyreus johnsonii;bathypelagic;generalist;3.38;10.5;0.150000006;56;27.4;;126489;exact;accepted;Halargyreus johnsonii;126489;Halargyreus johnsonii;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Halargyreus;;johnsonii;;1;0;0;0
+Lepidion eques;benthopelagic;benthivorous;3.24;8.5;0.150000006;42;13;;126493;exact;accepted;Lepidion eques;126493;Lepidion eques;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Lepidion;;eques;;1;0;0;0
+Mora moro;benthopelagic;benthivorous;3.75;10.5;0.095180283;71.5;38;;126497;exact;accepted;Mora moro;126497;Mora moro;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Mora;;moro;;1;0;0;0
+Physiculus dalwigki;benthopelagic;generalist;4.2;10.5;0.150000006;30;27.4;;126498;exact;accepted;Physiculus dalwigki;126498;Physiculus dalwigki;Animalia;Chordata;Actinopterygii;Gadiformes;Moridae;Physiculus;;dalwigki;;1;0;0;0
+Dicentrarchus labrax;demersal;generalist;3.47;3;0.089960033;85;30;;126975;exact;accepted;Dicentrarchus labrax;126975;Dicentrarchus labrax;Animalia;Chordata;Actinopterygii;Perciformes;Moronidae;Dicentrarchus;;labrax;;1;1;1;0
+Dicentrarchus punctatus;pelagic;generalist;3.94;3;0.081774783;70;30;;126976;exact;accepted;Dicentrarchus punctatus;126976;Dicentrarchus punctatus;Animalia;Chordata;Actinopterygii;Perciformes;Moronidae;Dicentrarchus;;punctatus;;1;1;0;0
+Chelon auratus;pelagic;benthivorous;2.84;3.5;0.365999997;59;8;;1044127;exact;accepted;Chelon auratus;1044127;Chelon auratus;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Chelon;;auratus;;1;1;1;
+Chelon labrosus;demersal;benthivorous;2.59;3;0.200950405;60;25;;126977;exact;accepted;Chelon labrosus;126977;Chelon labrosus;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Chelon;;labrosus;;1;1;1;0
+Chelon ramada;pelagic;benthivorous;2.34;3;0.237049165;70;10;;1042830;exact;accepted;Chelon ramada;1042830;Chelon ramada;Animalia;Chordata;Actinopterygii;Perciformes;Mugilidae;Chelon;;ramada;;1;1;1;0
+Mullus barbatus barbatus;demersal;benthivorous;3.14;1.484285712;0.301581945;38.2;11;;293632;exact;accepted;Mullus barbatus barbatus;293632;Mullus barbatus barbatus;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;Mullus;;barbatus;barbatus;1;0;0;0
+Mullus surmuletus;demersal;benthivorous;3.45;1.484285712;0.182999998;40;11;;126986;exact;accepted;Mullus surmuletus;126986;Mullus surmuletus;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;Mullus;;surmuletus;;1;0;0;0
+Mullus;demersal;benthivorous;3.295;1.484285712;0.182999998;36;8.75;;126034;exact;accepted;Mullus;126034;Mullus;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;Mullus;;;;1;0;0;0
+Mullidae;non-pelagic;benthivorous;3.520416667;1.484285712;0.182999998;36;8.875;;125547;exact;accepted;Mullidae;125547;Mullidae;Animalia;Chordata;Actinopterygii;Perciformes;Mullidae;;;;;1;;;
+Benthosema glaciale;benthopelagic;planktivorous;2.99;2.5;0.302289314;6.5;8;;126580;exact;accepted;Benthosema glaciale;126580;Benthosema glaciale;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Benthosema;;glaciale;;1;0;0;0
+Ceratoscopelus maderensis;bathypelagic;planktivorous;3.05;0.533333331;0.384722574;8.1;5;;126585;exact;accepted;Ceratoscopelus maderensis;126585;Ceratoscopelus maderensis;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Ceratoscopelus;;maderensis;;1;0;0;0
+Lampanyctus crocodilus;bathypelagic;planktivorous;3.22;2.5;0.384722574;30;6;;126612;exact;accepted;Lampanyctus crocodilus;126612;Lampanyctus crocodilus;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Lampanyctus;;crocodilus;;1;0;0;0
+Lampanyctus;bathypelagic;planktivorous;3.25;2.5;0.384722574;8.55;6;;125825;exact;accepted;Lampanyctus;125825;Lampanyctus;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Lampanyctus;;;;1;0;0;0
+Myctophum punctatum;bathypelagic;planktivorous;3.390000105;0.533333331;0.229113984;11;5;;126627;exact;accepted;Myctophum punctatum;126627;Myctophum punctatum;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Myctophum;;punctatum;;1;0;0;0
+Myctophum;bathypelagic;planktivorous;3.408333351;0.533333331;0.280363919;5.095;5;;125829;exact;accepted;Myctophum;125829;Myctophum;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Myctophum;;;;1;1;0;0
+Notoscopelus elongatus kroyeri;pelagic;planktivorous;3.17;0.533333331;0.889999986;16.23333;5;;584805;exact;unaccepted;Notoscopelus elongatus kroyeri;272728;Notoscopelus kroyeri;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Notoscopelus;;elongatus;kroyeri;;;;
+Notoscopelus kroyeri;bathypelagic;planktivorous;3.17;0.533333331;0.889999986;18.9;2.033375;;272728;exact;accepted;Notoscopelus kroyeri;272728;Notoscopelus kroyeri;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;Notoscopelus;;kroyeri;;1;0;0;0
+Myctophidae;bathypelagic;planktivorous;3.189230769;0.533333331;0.384722574;6.467912;1.5;;125498;exact;accepted;Myctophidae;125498;Myctophidae;Animalia;Chordata;Actinopterygii;Myctophiformes;Myctophidae;;;;;1;;;
+Myliobatis aquila;benthopelagic;generalist;3.61;4.5;0.143091056;183;23;;105860;exact;accepted;Myliobatis aquila;105860;Myliobatis aquila;Animalia;Chordata;Elasmobranchii;Myliobatiformes;Myliobatidae;Myliobatis;;aquila;;1;0;0;0
+Myxine glutinosa;demersal;benthivorous;4.54;8;0.123000003;79;NA;;101170;exact;accepted;Myxine glutinosa;101170;Myxine glutinosa;Animalia;Chordata;Myxini;Myxiniformes;Myxinidae;Myxine;;glutinosa;;1;0;0;0
+Notacanthus bonaparte;bathypelagic;benthivorous;3.93;NA;NA;26;NA;;126642;exact;accepted;Notacanthus bonaparte;126642;Notacanthus bonaparte;Animalia;Chordata;Actinopterygii;Notacanthiformes;Notacanthidae;Notacanthus;;bonaparte;;1;0;0;0
+Notacanthidae;non-pelagic;benthivorous;3.93;NA;NA;80.76667;NA;;125501;exact;accepted;Notacanthidae;125501;Notacanthidae;Animalia;Chordata;Actinopterygii;Notacanthiformes;Notacanthidae;;;;;1;;;
+Ophidion barbatum;demersal;benthivorous;3.57;0.708333333;0.117197935;25;25.5;;126675;exact;accepted;Ophidion barbatum;126675;Ophidion barbatum;Animalia;Chordata;Actinopterygii;Ophidiiformes;Ophidiidae;Ophidion;;barbatum;;1;0;0;0
+Osmerus eperlanus;pelagic;planktivorous;3.460000038;2;0.273999989;32;10;;126736;exact;accepted;Osmerus eperlanus;126736;Osmerus eperlanus;Animalia;Chordata;Actinopterygii;Osmeriformes;Osmeridae;Osmerus;;eperlanus;;1;1;1;0
+Arctozenus risso;bathypelagic;generalist;3.22;6;0.699999988;30;11;;126352;exact;accepted;Arctozenus risso;126352;Arctozenus risso;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Arctozenus;;risso;;1;0;0;0
+Lestidiops jayakari;bathypelagic;generalist;4.125;6;0.699999988;20;4;;126354;exact;alternate representation;Lestidiops jayakari;236452;Lestidiops jayakari jayakari;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Lestidiops;;jayakari;;1;0;0;
+Lestidiops jayakari jayakari;bathypelagic;generalist;4.125;6;0.699999988;14.52938;4;;236452;exact;accepted;Lestidiops jayakari jayakari;236452;Lestidiops jayakari jayakari;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Lestidiops;;jayakari;jayakari;1;0;0;
+Macroparalepis affinis;bathypelagic;planktivorous;3.4;6;0.699999988;55;4;;126356;exact;accepted;Macroparalepis affinis;126356;Macroparalepis affinis;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Macroparalepis;;affinis;;1;0;0;0
+Magnisudis atlantica;bathypelagic;generalist;3.65;6;0.699999988;56;4;;126359;exact;accepted;Magnisudis atlantica;126359;Magnisudis atlantica;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Magnisudis;;atlantica;;1;0;0;0
+Paralepis coregonoides;bathypelagic;generalist;4.07;6;0.699999988;50;4;;126361;exact;accepted;Paralepis coregonoides;126361;Paralepis coregonoides;Animalia;Chordata;Actinopterygii;Aulopiformes;Paralepididae;Paralepis;;coregonoides;;1;0;0;0
+Cyttopsis rosea;bathypelagic;generalist;4.01;NA;NA;31;NA;;127425;exact;accepted;Cyttopsis rosea;127425;Cyttopsis rosea;Animalia;Chordata;Actinopterygii;Zeiformes;Parazenidae;Cyttopsis;;rosea;;1;0;0;0
+Galeus melastomus;demersal;generalist;4.17;3.5;0.383;54;8;;105812;exact;accepted;Galeus melastomus;105812;Galeus melastomus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Pentanchidae;Galeus;;melastomus;;1;0;0;0
+Galeus murinus;bathydemersal;piscivorous;4.116;3.5;0.383;63;8;;105813;exact;accepted;Galeus murinus;105813;Galeus murinus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Pentanchidae;Galeus;;murinus;;1;0;0;0
+Sander lucioperca;pelagic;piscivorous;4.04;4;0.119743974;130;17;;151308;exact;accepted;Sander lucioperca;151308;Sander lucioperca;Animalia;Chordata;Actinopterygii;Perciformes;Percidae;Sander;;lucioperca;;0;1;1;0
+Lampetra fluviatilis;demersal;piscivorous;4.5;4;0.164000005;45.2;10;;101172;exact;accepted;Lampetra fluviatilis;101172;Lampetra fluviatilis;Animalia;Chordata;Petromyzonti;Petromyzontiformes;Petromyzontidae;Lampetra;;fluviatilis;;1;1;1;0
+Petromyzon marinus;demersal;piscivorous;4.369999886;7;0.158999994;120;11;;101174;exact;accepted;Petromyzon marinus;101174;Petromyzon marinus;Animalia;Chordata;Petromyzonti;Petromyzontiformes;Petromyzontidae;Petromyzon;;marinus;;1;1;1;0
+Petromyzontidae;non-pelagic;generalist;3.804374996;5.875;0.196818839;45.42;10;;101163;exact;accepted;Petromyzontidae;101163;Petromyzontidae;Animalia;Chordata;Petromyzonti;Petromyzontiformes;Petromyzontidae;;;;;1;;;
+Pholis gunnellus;demersal;benthivorous;3.54;2;0.281060153;25;12;;126996;exact;accepted;Pholis gunnellus;126996;Pholis gunnellus;Animalia;Chordata;Actinopterygii;Perciformes;Pholidae;Pholis;;gunnellus;;1;1;0;0
+Polymetme corythaeola;benthopelagic;piscivorous;4.4;0.25999999;5.900000095;7;1;;127300;exact;accepted;Polymetme corythaeola;127300;Polymetme corythaeola;Animalia;Chordata;Actinopterygii;Stomiiformes;Phosichthyidae;Polymetme;;corythaeola;;1;0;0;0
+Polymetme thaeocoryla;bathydemersal;piscivorous;4.4;0.25999999;5.900000095;21.6;1;;127301;exact;accepted;Polymetme thaeocoryla;127301;Polymetme thaeocoryla;Animalia;Chordata;Actinopterygii;Stomiiformes;Phosichthyidae;Polymetme;;thaeocoryla;;1;0;0;0
+Phycis blennoides;benthopelagic;benthivorous;3.66;3.5;0.230658631;50;20;;126501;exact;accepted;Phycis blennoides;126501;Phycis blennoides;Animalia;Chordata;Actinopterygii;Gadiformes;Phycidae;Phycis;;blennoides;;1;0;0;0
+Phycidae;non-pelagic;NA;3.966;1.583333313;0.189999998;57;15.5;;125475;exact;accepted;Phycidae;125475;Phycidae;Animalia;Chordata;Actinopterygii;Gadiformes;Phycidae;;;;;1;;;
+Glyptocephalus cynoglossus;demersal;benthivorous;3.17;7.889230728;0.238000005;78.1;25;;127136;exact;accepted;Glyptocephalus cynoglossus;127136;Glyptocephalus cynoglossus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Glyptocephalus;;cynoglossus;;1;0;0;0
+Hippoglossoides platessoides;demersal;generalist;4.08;7.620909084;0.340000004;82.6;30;;127137;exact;accepted;Hippoglossoides platessoides;127137;Hippoglossoides platessoides;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Hippoglossoides;;platessoides;;1;0;0;0
+Hippoglossus hippoglossus;demersal;piscivorous;4;5.900000095;0.070804814;470;30;;127138;exact;accepted;Hippoglossus hippoglossus;127138;Hippoglossus hippoglossus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Hippoglossus;;hippoglossus;;1;0;0;0
+Limanda limanda;demersal;benthivorous;3.39;2.649999976;0.31138352;43.5;12;;127139;exact;accepted;Limanda limanda;127139;Limanda limanda;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Limanda;;limanda;;1;0;0;0
+Microstomus kitt;demersal;benthivorous;3.21;4;0.363178533;67;23;;127140;exact;accepted;Microstomus kitt;127140;Microstomus kitt;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Microstomus;;kitt;;1;0;0;0
+Platichthys flesus;demersal;benthivorous;3.32;3.8;0.360000014;58;15;;127141;exact;accepted;Platichthys flesus;127141;Platichthys flesus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Platichthys;;flesus;;1;1;1;0
+Pleuronectes platessa;demersal;benthivorous;3.23;3.5;0.150119375;100;30;;127143;exact;accepted;Pleuronectes platessa;127143;Pleuronectes platessa;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;Pleuronectes;;platessa;;1;1;0;0
+Pleuronectidae;demersal;benthivorous;3.511666667;3.5;0.094527637;52.5;16;;125579;exact;accepted;Pleuronectidae;125579;Pleuronectidae;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Pleuronectidae;;;;;1;1;1;
+Polyprion americanus;demersal;generalist;4.14;12.8;0.068177904;156;47;;126998;exact;accepted;Polyprion americanus;126998;Polyprion americanus;Animalia;Chordata;Actinopterygii;Perciformes;Polyprionidae;Polyprion;;americanus;;1;0;0;0
+Cottunculus microps;bathydemersal;generalist;4.14;4;NA;15.3;12;;127235;exact;accepted;Cottunculus microps;127235;Cottunculus microps;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Psychrolutidae;Cottunculus;;microps;;1;0;0;0
+Amblyraja radiata;demersal;generalist;4.2;6.979999924;0.151463222;109;28;;105865;exact;accepted;Amblyraja radiata;105865;Amblyraja radiata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Amblyraja;;radiata;;1;1;0;0
+Dipturus batis;demersal;benthivorous;3.52;11;0.057;285;51;;105869;exact;accepted;Dipturus batis;105869;Dipturus batis;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;batis;;1;0;0;0
+Dipturus nidarosiensis;demersal;generalist;3.5;10.66666667;0.057;230;51;;105871;exact;accepted;Dipturus nidarosiensis;105871;Dipturus nidarosiensis;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;nidarosiensis;;1;0;0;0
+Dipturus oxyrinchus;demersal;generalist;3.5;10.66666667;0.057;150;51;;105872;exact;accepted;Dipturus oxyrinchus;105872;Dipturus oxyrinchus;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;oxyrinchus;;1;0;0;0
+Dipturus;demersal;generalist;3.51;10.66666667;0.057;111.825;51;;105762;exact;accepted;Dipturus;105762;Dipturus;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Dipturus;;;;1;1;0;0
+Leucoraja circularis;demersal;benthivorous;3.5;6.375;0.159999996;120;20.33333333;;105873;exact;accepted;Leucoraja circularis;105873;Leucoraja circularis;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;circularis;;1;0;0;0
+Leucoraja fullonica;bathydemersal;benthivorous;3.5;6.375;0.159999996;120;20.33333333;;105874;exact;accepted;Leucoraja fullonica;105874;Leucoraja fullonica;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;fullonica;;1;0;0;0
+Leucoraja naevus;demersal;benthivorous;4.21;8.5;0.159999996;71;28;;105876;exact;accepted;Leucoraja naevus;105876;Leucoraja naevus;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Leucoraja;;naevus;;1;0;0;0
+Raja brachyura;demersal;generalist;3.76;4.835000118;0.149988502;115;15;;;ambiguous;;;;;;;;;;;;;;;;;
+Raja clavata;demersal;generalist;3.84;5.365000129;0.134355023;139;15;;105883;exact;accepted;Raja clavata;105883;Raja clavata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;clavata;;1;0;0;0
+Raja microocellata;demersal;piscivorous;3.885;4.835000118;0.074000001;87.5;24;;105885;exact;accepted;Raja microocellata;105885;Raja microocellata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;microocellata;;1;0;0;0
+Raja montagui;demersal;generalist;3.88;3.775000095;0.192277518;77;18;;105887;exact;accepted;Raja montagui;105887;Raja montagui;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;montagui;;1;0;0;0
+Raja undulata;demersal;benthivorous;3.5;8.785;0.104861559;114;28.9;;105891;exact;accepted;Raja undulata;105891;Raja undulata;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;undulata;;1;0;0;0
+Raja;demersal;generalist;3.885;4.835000118;0.139228886;95.35714;21;;105766;exact;accepted;Raja;105766;Raja;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Raja;;;;1;1;0;0
+Rajella bathyphila;bathydemersal;benthivorous;3.37;5;0.12507875;90;14;;105892;exact;accepted;Rajella bathyphila;105892;Rajella bathyphila;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rajella;;bathyphila;;1;0;0;0
+Rajella fyllae;bathydemersal;benthivorous;3.37;5;0.128473825;60;14;;105894;exact;accepted;Rajella fyllae;105894;Rajella fyllae;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rajella;;fyllae;;1;0;0;0
+Rajella lintea;bathydemersal;benthivorous;3.62;5;0.147364323;123;14;;1019159;exact;accepted;Rajella lintea;1019159;Rajella lintea;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rajella;;lintea;;1;0;0;0
+Rostroraja alba;demersal;piscivorous;4.409999847;4.952500105;0.12507875;230;21.25;;105896;exact;accepted;Rostroraja alba;105896;Rostroraja alba;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;Rostroraja;;alba;;1;0;0;0
+Rajidae;demersal;generalist;3.880666667;4.835000118;0.128473825;95.35714;21.25;;105711;exact;accepted;Rajidae;105711;Rajidae;Animalia;Chordata;Elasmobranchii;Rajiformes;Rajidae;;;;;1;;;
+Salmo salar;benthopelagic;generalist;4.5;4.190909109;0.349523332;147;13;;127186;exact;accepted;Salmo salar;127186;Salmo salar;Animalia;Chordata;Actinopterygii;Salmoniformes;Salmonidae;Salmo;;salar;;1;1;1;0
+Salmo trutta trutta;pelagic;benthivorous;3.588;3.5;0.239625505;77.75;38;;;ambiguous;;;;;;;;;;;;;;;;;
+Salmo;benthopelagic;generalist;3.588;2.875106379;0.239625505;34.5;25.5;;126141;exact;accepted;Salmo;126141;Salmo;Animalia;Chordata;Actinopterygii;Salmoniformes;Salmonidae;Salmo;;;;1;1;1;0
+Argyrosomus regius;benthopelagic;piscivorous;4.29;1.550000012;0.150000006;182;42;;127007;exact;accepted;Argyrosomus regius;127007;Argyrosomus regius;Animalia;Chordata;Actinopterygii;Perciformes;Sciaenidae;Argyrosomus;;regius;;1;1;0;0
+Umbrina canariensis;demersal;benthivorous;3.37;2.278571431;0.259000003;80;15;;127011;exact;accepted;Umbrina canariensis;127011;Umbrina canariensis;Animalia;Chordata;Actinopterygii;Perciformes;Sciaenidae;Umbrina;;canariensis;;1;0;0;0
+Umbrina cirrosa;demersal;benthivorous;3.41;2.278571431;0.279000014;73;15;;127012;exact;accepted;Umbrina cirrosa;127012;Umbrina cirrosa;Animalia;Chordata;Actinopterygii;Perciformes;Sciaenidae;Umbrina;;cirrosa;;1;1;0;0
+Scomberesox saurus saurus;pelagic;planktivorous;3.91;1;0.709999979;50;2;;236461;exact;accepted;Scomberesox saurus saurus;236461;Scomberesox saurus saurus;Animalia;Chordata;Actinopterygii;Beloniformes;Scomberesocidae;Scomberesox;;saurus;saurus;1;0;0;
+Sarda sarda;pelagic;piscivorous;4.5;1;0.497832087;91;5;;127021;exact;accepted;Sarda sarda;127021;Sarda sarda;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Sarda;;sarda;;1;1;0;0
+Scomber colias;pelagic;generalist;3.91;0.983333333;0.378585021;50;7;;151174;exact;accepted;Scomber colias;151174;Scomber colias;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Scomber;;colias;;1;1;0;0
+Scomber japonicus;pelagic;planktivorous;3.38;2;0.285769753;70;18;;127022;exact;accepted;Scomber japonicus;127022;Scomber japonicus;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Scomber;;japonicus;;1;0;0;0
+Scomber scombrus;pelagic;generalist;3.63;2.179999971;0.352649977;50;21;;127023;exact;accepted;Scomber scombrus;127023;Scomber scombrus;Animalia;Chordata;Actinopterygii;Perciformes;Scombridae;Scomber;;scombrus;;1;1;0;0
+Lepidorhombus boscii;demersal;benthivorous;3.74;1;0.139109489;35;13;;127145;exact;accepted;Lepidorhombus boscii;127145;Lepidorhombus boscii;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Lepidorhombus;;boscii;;1;0;0;0
+Lepidorhombus whiffiagonis;bathydemersal;benthivorous;4.34;2.833333333;0.1244247;47;16;;127146;exact;accepted;Lepidorhombus whiffiagonis;127146;Lepidorhombus whiffiagonis;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Lepidorhombus;;whiffiagonis;;1;0;0;0
+Phrynorhombus norvegicus;bathydemersal;benthivorous;3.98;2.7;0.202004698;12;6;;127147;exact;accepted;Phrynorhombus norvegicus;127147;Phrynorhombus norvegicus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Phrynorhombus;;norvegicus;;1;0;0;0
+Scophthalmus maximus;demersal;benthivorous;4.36;4;0.266688589;81.5;25;;127149;exact;accepted;Scophthalmus maximus;127149;Scophthalmus maximus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;maximus;;1;1;0;0
+Scophthalmus rhombus;demersal;benthivorous;4.42;3;0.419154955;46;5.724999905;;127150;exact;accepted;Scophthalmus rhombus;127150;Scophthalmus rhombus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;rhombus;;1;0;0;0
+Scophthalmus;demersal;generalist;4.166666667;4;0.245626596;54.4;9.5;;126124;exact;accepted;Scophthalmus;126124;Scophthalmus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Scophthalmus;;;;1;1;0;0
+Zeugopterus punctatus;demersal;benthivorous;3.99;2.7;0.225108875;25;9.450000095;;127151;exact;accepted;Zeugopterus punctatus;127151;Zeugopterus punctatus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Zeugopterus;;punctatus;;1;0;0;0
+Zeugopterus regius;demersal;generalist;3.99;2.7;0.225060437;20;9.450000095;;236488;exact;accepted;Zeugopterus regius;236488;Zeugopterus regius;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Zeugopterus;;regius;;1;1;0;0
+Zeugopterus;demersal;generalist;3.99;2.7;0.202004698;22.5;10.1785715;;126125;exact;accepted;Zeugopterus;126125;Zeugopterus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Scophthalmidae;Zeugopterus;;;;1;1;0;0
+Scorpaena loppei;demersal;benthivorous;3.5;1;0.507642523;12.8;5;;127244;exact;accepted;Scorpaena loppei;127244;Scorpaena loppei;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;loppei;;1;0;0;0
+Scorpaena notata;demersal;benthivorous;3.7;2;0.307325473;17.9;8;;127246;exact;accepted;Scorpaena notata;127246;Scorpaena notata;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;notata;;1;0;0;0
+Scorpaena porcus;demersal;benthivorous;3.92;3;0.171115205;30;7;;127247;exact;accepted;Scorpaena porcus;127247;Scorpaena porcus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;porcus;;1;0;0;0
+Scorpaena scrofa;demersal;benthivorous;4.25;2;0.080990898;53.6;25;;127248;exact;accepted;Scorpaena scrofa;127248;Scorpaena scrofa;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;Scorpaena;;scrofa;;1;1;0;0
+Scorpaenidae;demersal;generalist;3.764166667;2;0.084865538;30.175;6.5;;125595;exact;accepted;Scorpaenidae;125595;Scorpaenidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Scorpaenidae;;;;;1;;1;
+Scyliorhinus canicula;demersal;generalist;3.82;5;0.200000003;70;12;;105814;exact;accepted;Scyliorhinus canicula;105814;Scyliorhinus canicula;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;canicula;;1;0;0;0
+Scyliorhinus stellaris;reef-associated;generalist;4.03;5;0.200000003;170;19;;105815;exact;accepted;Scyliorhinus stellaris;105815;Scyliorhinus stellaris;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;stellaris;;1;0;0;0
+Scyliorhinus;demersal;generalist;4.048;5;0.15160639;58.66667;15.5;;105729;exact;accepted;Scyliorhinus;105729;Scyliorhinus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;Scyliorhinus;;;;1;0;0;0
+Scyliorhinidae;demersal;generalist;4;5;0.15160639;65.06;15.5;;105693;exact;accepted;Scyliorhinidae;105693;Scyliorhinidae;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Scyliorhinidae;;;;;1;;;
+Helicolenus dactylopterus;bathydemersal;generalist;3.54;13;0.074189905;32.5;43;;127251;exact;accepted;Helicolenus dactylopterus;127251;Helicolenus dactylopterus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Helicolenus;;dactylopterus;;1;0;0;0
+Sebastes mentella;bathypelagic;generalist;4.12;11.5;0.071840554;58;75;;127254;exact;accepted;Sebastes mentella;127254;Sebastes mentella;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;mentella;;1;0;0;0
+Sebastes norvegicus;benthopelagic;generalist;4.04;11;0.061433182;82;60;;151324;exact;accepted;Sebastes norvegicus;151324;Sebastes norvegicus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;norvegicus;;1;0;0;0
+Sebastes viviparus;demersal;generalist;4.03;20;0.07;35;40;;127255;exact;accepted;Sebastes viviparus;127255;Sebastes viviparus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;viviparus;;1;0;0;0
+Sebastes;non-pelagic;generalist;3.768888889;6.087672411;0.063750968;70;50.5;;126175;exact;accepted;Sebastes;126175;Sebastes;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Sebastidae;Sebastes;;;;1;1;0;0
+Serranus cabrilla;demersal;generalist;3.35;3;0.185327968;27;7;;127041;exact;accepted;Serranus cabrilla;127041;Serranus cabrilla;Animalia;Chordata;Actinopterygii;Perciformes;Serranidae;Serranus;;cabrilla;;1;0;0;0
+Serranus scriba;demersal;benthivorous;3.82;3;0.198206079;32.3;14;;127043;exact;accepted;Serranus scriba;127043;Serranus scriba;Animalia;Chordata;Actinopterygii;Perciformes;Serranidae;Serranus;;scriba;;1;0;0;0
+Bathysolea profundicola;bathydemersal;benthivorous;3.17;2.952307701;0.278444522;21;16.07999992;;127152;exact;accepted;Bathysolea profundicola;127152;Bathysolea profundicola;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Bathysolea;;profundicola;;1;0;0;0
+Buglossidium luteum;demersal;benthivorous;3.31;3;0.567581476;13.7;13;;127153;exact;accepted;Buglossidium luteum;127153;Buglossidium luteum;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Buglossidium;;luteum;;1;0;0;0
+Dicologlossa cuneata;demersal;benthivorous;3.32;2.952307701;0.279634226;30;12;;127154;exact;accepted;Dicologlossa cuneata;127154;Dicologlossa cuneata;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Dicologlossa;;cuneata;;1;1;0;0
+Microchirus variegatus;demersal;benthivorous;3.28;3;0.379236179;25.2;14;;274304;exact;accepted;Microchirus variegatus;274304;Microchirus variegatus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Microchirus;;variegatus;;1;0;0;0
+Microchirus;demersal;benthivorous;3.23;3;0.304152428;25.2;71.66666667;;126129;exact;accepted;Microchirus;126129;Microchirus;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Microchirus;;;;1;0;0;0
+Pegusa lascaris;demersal;benthivorous;3.29;4;0.411994461;35;15;;127156;exact;accepted;Pegusa lascaris;127156;Pegusa lascaris;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Pegusa;;lascaris;;1;1;0;0
+Solea senegalensis;demersal;benthivorous;3.25;2.943636374;0.18164134;60;26.4;;127159;exact;accepted;Solea senegalensis;127159;Solea senegalensis;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Solea;;senegalensis;;1;0;0;0
+Solea solea;demersal;benthivorous;3.21;2.943636374;0.31314343;60;26.39999962;;127160;exact;accepted;Solea solea;127160;Solea solea;Animalia;Chordata;Actinopterygii;Pleuronectiformes;Soleidae;Solea;;solea;;1;1;0;0
+Centroscymnus coelolepis;bathydemersal;generalist;4.48;12;0.1065;87.6;54;;105907;exact;accepted;Centroscymnus coelolepis;105907;Centroscymnus coelolepis;Animalia;Chordata;Elasmobranchii;Squaliformes;Somniosidae;Centroscymnus;;coelolepis;;1;0;0;0
+Centroscymnus crepidater;bathydemersal;piscivorous;4.16;12;0.1065;130;54;;105908;exact;accepted;Centroscymnus crepidater;105908;Centroscymnus crepidater;Animalia;Chordata;Elasmobranchii;Squaliformes;Somniosidae;Centroscymnus;;crepidater;;1;0;0;
+Scymnodon ringens;bathypelagic;generalist;4.216666667;79.33333333;0.05725;110;223;;105918;exact;accepted;Scymnodon ringens;105918;Scymnodon ringens;Animalia;Chordata;Elasmobranchii;Squaliformes;Somniosidae;Scymnodon;;ringens;;1;0;0;0
+Boops boops;demersal;planktivorous;2.79;1.5;0.206638608;36;6;;127047;exact;accepted;Boops boops;127047;Boops boops;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Boops;;boops;;1;0;0;0
+Diplodus sargus;demersal;benthivorous;3.216;2.811999989;0.184678988;32;10;;127053;exact;accepted;Diplodus sargus;127053;Diplodus sargus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Diplodus;;sargus;;1;1;0;0
+Diplodus vulgaris;benthopelagic;benthivorous;3.52;2;0.374604128;45;6;;127054;exact;accepted;Diplodus vulgaris;127054;Diplodus vulgaris;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Diplodus;;vulgaris;;1;0;0;0
+Lithognathus mormyrus;demersal;benthivorous;3.42;2.2;0.212134083;55;12;;127055;exact;accepted;Lithognathus mormyrus;127055;Lithognathus mormyrus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Lithognathus;;mormyrus;;1;1;0;0
+Pagellus acarne;benthopelagic;benthivorous;3.81;2.5;0.249991448;37;7;;127057;exact;accepted;Pagellus acarne;127057;Pagellus acarne;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;acarne;;1;0;0;0
+Pagellus bogaraveo;benthopelagic;generalist;4.21;2.5;0.170149382;53;20;;127059;exact;accepted;Pagellus bogaraveo;127059;Pagellus bogaraveo;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;bogaraveo;;1;0;0;0
+Pagellus erythrinus;benthopelagic;benthivorous;3.48;3;0.136000007;60;20;;127060;exact;accepted;Pagellus erythrinus;127060;Pagellus erythrinus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagellus;;erythrinus;;1;0;0;0
+Pagrus pagrus;benthopelagic;benthivorous;3.86;1.933333317;0.064999998;91;18;;127063;exact;accepted;Pagrus pagrus;127063;Pagrus pagrus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Pagrus;;pagrus;;1;0;0;0
+Sarpa salpa;benthopelagic;herbivorous;2;2;0.2;45.2;15;;127064;exact;accepted;Sarpa salpa;127064;Sarpa salpa;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Sarpa;;salpa;;1;1;0;0
+Sparus aurata;demersal;generalist;3.7;3.087142839;0.250291003;70;11;;151523;exact;accepted;Sparus aurata;151523;Sparus aurata;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Sparus;;aurata;;1;1;0;0
+Spondyliosoma cantharus;benthopelagic;generalist;3.34;2.8;0.300000012;40;14;;127066;exact;accepted;Spondyliosoma cantharus;127066;Spondyliosoma cantharus;Animalia;Chordata;Actinopterygii;Perciformes;Sparidae;Spondyliosoma;;cantharus;;1;0;0;0
+Squalus acanthias;benthopelagic;generalist;4.37;8.820000076;0.149875057;110;75;;105923;exact;accepted;Squalus acanthias;105923;Squalus acanthias;Animalia;Chordata;Elasmobranchii;Squaliformes;Squalidae;Squalus;;acanthias;;1;1;0;0
+Argyropelecus hemigymnus;bathypelagic;planktivorous;3.06;1;0.670000017;2.8;1;;127309;exact;accepted;Argyropelecus hemigymnus;127309;Argyropelecus hemigymnus;Animalia;Chordata;Actinopterygii;Stomiiformes;Sternoptychidae;Argyropelecus;;hemigymnus;;1;0;0;0
+Argyropelecus olfersii;bathypelagic;generalist;3.36;1;0.670000017;9;1;;274967;exact;accepted;Argyropelecus olfersii;274967;Argyropelecus olfersii;Animalia;Chordata;Actinopterygii;Stomiiformes;Sternoptychidae;Argyropelecus;;olfersii;;1;0;0;0
+Maurolicus muelleri;bathypelagic;planktivorous;3.01;1;0.953008001;4.8;8;;127312;exact;accepted;Maurolicus muelleri;127312;Maurolicus muelleri;Animalia;Chordata;Actinopterygii;Stomiiformes;Sternoptychidae;Maurolicus;;muelleri;;1;0;0;0
+Anisarchus medius;demersal;benthivorous;3.22;6;0.115954606;30;13;;127070;exact;accepted;Anisarchus medius;127070;Anisarchus medius;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Anisarchus;;medius;;1;0;0;0
+Chirolophis ascanii;benthopelagic;benthivorous;3.23;3.25;0.204999998;25;10;;127071;exact;accepted;Chirolophis ascanii;127071;Chirolophis ascanii;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Chirolophis;;ascanii;;1;0;0;0
+Leptoclinus maculatus;demersal;benthivorous;3.28;3.25;0.204999998;23;10;;127072;exact;accepted;Leptoclinus maculatus;127072;Leptoclinus maculatus;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Leptoclinus;;maculatus;;1;0;0;0
+Lumpenus lampretaeformis;demersal;benthivorous;3.59;3;0.204999998;34.5;9;;154675;exact;accepted;Lumpenus lampretaeformis;154675;Lumpenus lampretaeformis;Animalia;Chordata;Actinopterygii;Perciformes;Stichaeidae;Lumpenus;;lampretaeformis;;1;0;0;0
+Chauliodus sloani;bathypelagic;generalist;4.2;NA;0.349999994;11.1;8;;127338;exact;accepted;Chauliodus sloani;127338;Chauliodus sloani;Animalia;Chordata;Actinopterygii;Stomiiformes;Stomiidae;Chauliodus;;sloani;;1;0;0;0
+Stomias boa boa;bathypelagic;piscivorous;3.95;NA;0.5;32.2;6.833333333;;234601;exact;accepted;Stomias boa boa;234601;Stomias boa boa;Animalia;Chordata;Actinopterygii;Stomiiformes;Stomiidae;Stomias;;boa;boa;1;0;0;
+Stomias boa ferox;bathypelagic;piscivorous;3.62;NA;0.5;30;6.833333333;;158737;exact;accepted;Stomias boa ferox;158737;Stomias boa ferox;Animalia;Chordata;Actinopterygii;Stomiiformes;Stomiidae;Stomias;;boa;ferox;1;0;0;0
+Synaphobranchus kaupii;bathydemersal;generalist;4.09;NA;0.52;53.5;NA;;126328;exact;accepted;Synaphobranchus kaupii;126328;Synaphobranchus kaupii;Animalia;Chordata;Actinopterygii;Anguilliformes;Synaphobranchidae;Synaphobranchus;;kaupii;;1;0;0;0
+Entelurus aequoreus;demersal;generalist;3.539999962;2;0.737754285;60;7.51;;127379;exact;accepted;Entelurus aequoreus;127379;Entelurus aequoreus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Entelurus;;aequoreus;;1;1;0;0
+Hippocampus hippocampus;demersal;generalist;3.15;0.35;1.257468592;15;1;;127380;exact;accepted;Hippocampus hippocampus;127380;Hippocampus hippocampus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Hippocampus;;hippocampus;;1;0;0;0
+Nerophis lumbriciformis;demersal;generalist;4.03;0.545999998;1.052000046;17;3.833333333;;127383;exact;accepted;Nerophis lumbriciformis;127383;Nerophis lumbriciformis;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Nerophis;;lumbriciformis;;1;0;0;0
+Nerophis ophidion;demersal;generalist;4.01;0.545999998;1.052000046;29;3.833333333;;127385;exact;accepted;Nerophis ophidion;127385;Nerophis ophidion;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Nerophis;;ophidion;;1;1;0;0
+Syngnathus acus;demersal;benthivorous;3.33;1.5;0.633993391;21.4;3;;127387;exact;accepted;Syngnathus acus;127387;Syngnathus acus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;acus;;1;1;0;0
+Syngnathus rostellatus;demersal;planktivorous;3.69;1.5;0.746999979;19;3;;127389;exact;accepted;Syngnathus rostellatus;127389;Syngnathus rostellatus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;rostellatus;;1;1;0;0
+Syngnathus typhle;demersal;planktivorous;4.31;1.5;0.558000028;35;3;;127393;exact;accepted;Syngnathus typhle;127393;Syngnathus typhle;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;typhle;;1;1;0;0
+Syngnathus;demersal;generalist;3.48;1.5;0.633993391;19;3;;126227;exact;accepted;Syngnathus;126227;Syngnathus;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;Syngnathus;;;;1;1;1;0
+Syngnathidae;demersal;generalist;3.298333333;0.545999998;0.737754285;21.33333;3.833333333;;125606;exact;accepted;Syngnathidae;125606;Syngnathidae;Animalia;Chordata;Actinopterygii;Syngnathiformes;Syngnathidae;;;;;1;;;
+Tetronarce nobiliana;benthopelagic;piscivorous;4.5;8;0.083544257;73;16;;321911;exact;accepted;Tetronarce nobiliana;321911;Tetronarce nobiliana;Animalia;Chordata;Elasmobranchii;Torpediniformes;Torpedinidae;Tetronarce;;nobiliana;;1;0;0;
+Torpedo marmorata;reef-associated;benthivorous;4.5;8;0.083544257;100;16;;271684;exact;accepted;Torpedo marmorata;271684;Torpedo marmorata;Animalia;Chordata;Elasmobranchii;Torpediniformes;Torpedinidae;Torpedo;;marmorata;;1;1;0;0
+Hoplostethus mediterraneus mediterraneus;benthopelagic;benthivorous;3.49;4;0.12179163;16.2;11;;159409;exact;accepted;Hoplostethus mediterraneus mediterraneus;159409;Hoplostethus mediterraneus mediterraneus;Animalia;Chordata;Actinopterygii;Beryciformes;Trachichthyidae;Hoplostethus;;mediterraneus;mediterraneus;1;0;0;0
+Echiichthys vipera;demersal;benthivorous;4.41;1;0.33;15;14;;150630;exact;accepted;Echiichthys vipera;150630;Echiichthys vipera;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Echiichthys;;vipera;;1;0;0;0
+Echiichthys;demersal;generalist;4.41;1;0.33;15;14;;150629;exact;accepted;Echiichthys;150629;Echiichthys;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Echiichthys;;;;1;0;0;0
+Trachinus draco;demersal;generalist;4.18;1;0.16;53;13.5;;127082;exact;accepted;Trachinus draco;127082;Trachinus draco;Animalia;Chordata;Actinopterygii;Perciformes;Trachinidae;Trachinus;;draco;;1;0;0;0
+Trachipterus arcticus;bathypelagic;piscivorous;4.5;NA;0.07;300;NA;;126527;exact;accepted;Trachipterus arcticus;126527;Trachipterus arcticus;Animalia;Chordata;Actinopterygii;Lampriformes;Trachipteridae;Trachipterus;;arcticus;;1;0;0;0
+Galeorhinus galeus;benthopelagic;piscivorous;4.34;5.532142835;0.118741874;195;57;;105820;exact;accepted;Galeorhinus galeus;105820;Galeorhinus galeus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Galeorhinus;;galeus;;1;0;0;0
+Mustelus asterias;demersal;benthivorous;3.676;5;0.167449083;140;11.86363636;;105821;exact;accepted;Mustelus asterias;105821;Mustelus asterias;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;asterias;;1;0;0;0
+Mustelus mustelus;demersal;generalist;3.75;13.5;0.082359178;164;24;;105822;exact;accepted;Mustelus mustelus;105822;Mustelus mustelus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;mustelus;;1;0;0;0
+Mustelus;demersal;generalist;3.676;4.944999969;0.167449083;129.4231;11.86363636;;105732;exact;accepted;Mustelus;105732;Mustelus;Animalia;Chordata;Elasmobranchii;Carcharhiniformes;Triakidae;Mustelus;;;;1;1;0;0
+Aphanopus carbo;bathypelagic;piscivorous;4.48;4.5;0.109999999;118;32;;127085;exact;accepted;Aphanopus carbo;127085;Aphanopus carbo;Animalia;Chordata;Actinopterygii;Perciformes;Trichiuridae;Aphanopus;;carbo;;1;0;0;0
+Lepidopus caudatus;benthopelagic;generalist;3.82;4.5;0.167016848;164;7;;127088;exact;accepted;Lepidopus caudatus;127088;Lepidopus caudatus;Animalia;Chordata;Actinopterygii;Perciformes;Trichiuridae;Lepidopus;;caudatus;;1;0;0;0
+Chelidonichthys cuculus;demersal;generalist;3.81;3.5;0.487414116;34;17;;127259;exact;accepted;Chelidonichthys cuculus;127259;Chelidonichthys cuculus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;cuculus;;1;0;0;
+Chelidonichthys lastoviza;demersal;benthivorous;3.49;3;0.613292138;30;18;;127261;exact;accepted;Chelidonichthys lastoviza;127261;Chelidonichthys lastoviza;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;lastoviza;;1;0;0;
+Chelidonichthys lucerna;demersal;generalist;3.98;3.5;0.330000013;56;15;;127262;exact;accepted;Chelidonichthys lucerna;127262;Chelidonichthys lucerna;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;lucerna;;1;0;0;0
+Chelidonichthys obscurus;demersal;benthivorous;3.74;2.614285707;0.423900123;34;16.66666667;;127263;exact;accepted;Chelidonichthys obscurus;127263;Chelidonichthys obscurus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;obscurus;;1;0;0;0
+Chelidonichthys;demersal;generalist;3.88;2.614285707;0.423900123;41.33333;16.66666667;;126178;exact;accepted;Chelidonichthys;126178;Chelidonichthys;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Chelidonichthys;;;;1;1;0;0
+Eutrigla gurnardus;demersal;generalist;3.87;2.774999996;0.159999996;36;21;;150637;exact;accepted;Eutrigla gurnardus;150637;Eutrigla gurnardus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Eutrigla;;gurnardus;;1;1;0;0
+Eutrigla;demersal;generalist;3.87;2.774999996;0.159999996;36;21;;150636;exact;accepted;Eutrigla;150636;Eutrigla;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Eutrigla;;;;1;1;0;0
+Lepidotrigla dieuzeidei;demersal;generalist;3.66;2;0.371678891;20;5;;127265;exact;accepted;Lepidotrigla dieuzeidei;127265;Lepidotrigla dieuzeidei;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Lepidotrigla;;dieuzeidei;;1;0;0;0
+Trigla lyra;bathydemersal;benthivorous;3.65;2.774999996;0.15322286;47.2;8;;127266;exact;accepted;Trigla lyra;127266;Trigla lyra;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigla;;lyra;;1;0;0;0
+Trigla;demersal;benthivorous;3.65;2.774999996;0.15322286;47.2;8;;126180;exact;accepted;Trigla;126180;Trigla;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigla;;;;1;0;0;0
+Trigloporus;demersal;benthivorous;3.49;3;0.613292138;30;18;;154461;exact;accepted;Trigloporus;154461;Trigloporus;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;Trigloporus;;;;1;0;0;
+Triglidae;demersal;generalist;3.736666667;2.774999996;0.405833862;40;16.125;;125598;exact;accepted;Triglidae;125598;Triglidae;Animalia;Chordata;Actinopterygii;Scorpaeniformes;Triglidae;;;;;1;;;
+Zenopsis conchifer;benthopelagic;generalist;4.5;4;0.147;80;29;;127426;exact;accepted;Zenopsis conchifer;127426;Zenopsis conchifer;Animalia;Chordata;Actinopterygii;Zeiformes;Zeidae;Zenopsis;;conchifer;;1;0;0;0
+Zeus faber;benthopelagic;piscivorous;4.5;4;0.147;60;18;;127427;exact;accepted;Zeus faber;127427;Zeus faber;Animalia;Chordata;Actinopterygii;Zeiformes;Zeidae;Zeus;;faber;;1;1;0;0
+Zeidae;benthopelagic;generalist;4.5;4;0.147;59.5;23.5;;125617;exact;accepted;Zeidae;125617;Zeidae;Animalia;Chordata;Actinopterygii;Zeiformes;Zeidae;;;;;1;;;
+Lycenchelys muraena;bathydemersal;benthivorous;3.5;4;0.217577502;22.6;7;;127099;exact;accepted;Lycenchelys muraena;127099;Lycenchelys muraena;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycenchelys;;muraena;;1;0;0;0
+Lycenchelys sarsii;bathydemersal;benthivorous;3.21;4;0.217577502;23;6;;127101;exact;accepted;Lycenchelys sarsii;127101;Lycenchelys sarsii;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycenchelys;;sarsii;;1;0;0;0
+Lycodes eudipleurostictus;demersal;benthivorous;3.5;3;0.214680646;45;13;;127104;exact;accepted;Lycodes eudipleurostictus;127104;Lycodes eudipleurostictus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;eudipleurostictus;;1;0;0;0
+Lycodes gracilis;demersal;benthivorous;3.651666667;3;0.214680646;28;11;;274100;exact;accepted;Lycodes gracilis;274100;Lycodes gracilis;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;gracilis;;1;0;0;0
+Lycodes reticulatus;bathydemersal;benthivorous;3.49;4;0.214680646;76;27;;127112;exact;accepted;Lycodes reticulatus;127112;Lycodes reticulatus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;reticulatus;;1;0;0;0
+Lycodes seminudus;bathydemersal;generalist;3.79;4;0.214680646;56;15;;127115;exact;accepted;Lycodes seminudus;127115;Lycodes seminudus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;seminudus;;1;0;0;0
+Lycodes vahlii;bathydemersal;generalist;3.4;3.6;0.214680646;57;14.41666667;;127118;exact;accepted;Lycodes vahlii;127118;Lycodes vahlii;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodes;;vahlii;;1;0;0;0
+Lycodonus flagellicauda;bathydemersal;benthivorous;3.5;2;0.214680646;19.9;5;;127119;exact;accepted;Lycodonus flagellicauda;127119;Lycodonus flagellicauda;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Lycodonus;;flagellicauda;;1;0;0;0
+Zoarces viviparus;demersal;benthivorous;3.725;1.5;0.088267472;31.5;14;;127123;exact;accepted;Zoarces viviparus;127123;Zoarces viviparus;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;Zoarces;;viviparus;;1;1;0;0
+Zoarcidae;bathydemersal;generalist;3.47;3.53125;0.242686347;37.2;11;;125575;exact;accepted;Zoarcidae;125575;Zoarcidae;Animalia;Chordata;Actinopterygii;Perciformes;Zoarcidae;;;;;1;;;

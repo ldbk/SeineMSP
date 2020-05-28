@@ -31,7 +31,7 @@ HH<- HH[,-c(1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 18, 23, 24, 25, 26, 27, 2
 HL<- HL[,-c(1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 15, 16, 18, 19, 20, 21, 23, 24, 25, 28)] # RecordType, Survey, Quarter (all 4), Country, Ship (GWD ou THA2), Gear, SweepLngt, GearExp (NA), DoorType (P ou R), SpecCodeType (all W), SpecVal, Sex, CatIdentifier, NoMeas, SubFactor, SubWgt (NA), LngtCode, LngtClass, HLNoAtLngt, Date of calculation.
 HL<- unique(HL)
 
-tabessai<- HL %>% dplyr::select(ValidAphiaID, ScientificName_WoRMS, SpecCode)
+#tabessai<- HL %>% dplyr::select(ValidAphiaID, ScientificName_WoRMS, SpecCode)
 HL$ValidAphiaID[is.na(HL$ValidAphiaID)]<-	HL$SpecCode[is.na(HL$ValidAphiaID)]
 HL<- HL[!is.na(HL$ValidAphiaID),]
 HL<- HL[, -4]
@@ -76,13 +76,13 @@ J2<- J2[, -c(3, 4, 7, 8, 9, 10, 11, 12, 13)]
 
 
 # Final
-save(J2, file= "C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/J2Datras.RData")
+write.csv(J2, file= "C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/J2Datras.csv")
 
 
 # Especes
 J2esp<- J2 %>% dplyr::select(ScientificName_WoRMS)
 J2esp<- unique(J2esp)
-write.csv(J2esp, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Tabespeces.csv")
+write.csv(J2esp, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/DATRAS_taxons_original.csv")
 
 
 

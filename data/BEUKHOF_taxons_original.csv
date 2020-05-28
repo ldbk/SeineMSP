@@ -1,365 +1,365 @@
-"","Taxons.Beukhof"
-"1","Agonus cataphractus"
-"2","Leptagonus decagonus"
-"3","Agonidae"
-"4","Alepocephalus bairdii"
-"5","Xenodermichthys copei"
-"6","Ammodytes marinus"
-"7","Ammodytes tobianus"
-"8","Ammodytes"
-"9","Gymnammodytes semisquamatus"
-"10","Hyperoplus immaculatus"
-"11","Hyperoplus lanceolatus"
-"12","Hyperoplus"
-"13","Ammodytidae"
-"14","Anarhichas denticulatus"
-"15","Anarhichas lupus"
-"16","Anarhichas minor"
-"17","Anarhichadidae"
-"18","Anguilla anguilla"
-"19","Anguilla"
-"20","Argentina silus"
-"21","Argentina sphyraena"
-"22","Argentinidae"
-"23","Bathyraja brachyurops"
-"24","Bathyraja spinicauda"
-"25","Atherina presbyter"
-"26","Balistes capriscus"
-"27","Balistes"
-"28","Belone belone"
-"29","Beryx decadactylus"
-"30","Beryx splendens"
-"31","Blennius ocellaris"
-"32","Parablennius gattorugine"
-"33","Blenniidae"
-"34","Arnoglossus imperialis"
-"35","Arnoglossus laterna"
-"36","Arnoglossus thori"
-"37","Arnoglossus"
-"38","Brama brama"
-"39","Pterycombus brama"
-"40","Callionymus lyra"
-"41","Callionymus maculatus"
-"42","Callionymus reticulatus"
-"43","Callionymus"
-"44","Callionymidae"
-"45","Capros aper"
-"46","Naucrates ductor"
-"47","Trachurus mediterraneus"
-"48","Trachurus picturatus"
-"49","Trachurus trachurus"
-"50","Echiodon drummondii"
-"51","Macroramphosus scolopax"
-"52","Macrorhamphosus scolopax"
-"53","Centrolophus niger"
-"54","Schedophilus medusophagus"
-"55","Centrophorus granulosus"
-"56","Centrophorus squamosus"
-"57","Deania calcea"
-"58","Deania profundorum"
-"59","Cepola macrophthalma"
-"60","Chimaera monstrosa"
-"61","Chimaera opalescens"
-"62","Hydrolagus mirabilis"
-"63","Chlorophthalmus agassizi"
-"64","Alosa agone"
-"65","Alosa alosa"
-"66","Alosa fallax"
-"67","Alosa"
-"68","Clupea harengus"
-"69","Sardina pilchardus"
-"70","Spratelloides lewisi"
-"71","Sprattus sprattus"
-"72","Clupeidae"
-"73","Conger conger"
-"74","Artediellus atlanticus"
-"75","Icelus bicornis"
-"76","Micrenophrys lilljeborgii"
-"77","Myoxocephalus quadricornis"
-"78","Myoxocephalus scorpioides"
-"79","Myoxocephalus scorpius"
-"80","Taurulus bubalis"
-"81","Triglops murrayi"
-"82","Triglops pingelii"
-"83","Triglops"
-"84","Cottidae"
-"85","Cyclopterus lumpus"
-"86","Dalatias licha"
-"87","Dasyatis pastinaca"
-"88","Engraulis encrasicolus"
-"89","Epigonus telescopus"
-"90","Etmopterus spinax"
-"91","Gadiculus argenteus"
-"92","Gadiculus thori"
-"93","Gadus morhua"
-"94","Melanogrammus aeglefinus"
-"95","Merlangius merlangus"
-"96","Micromesistius poutassou"
-"97","Pollachius pollachius"
-"98","Pollachius virens"
-"99","Raniceps raninus"
-"100","Trisopterus esmarkii"
-"101","Trisopterus luscus"
-"102","Trisopterus minutus"
-"103","Gadidae"
-"104","Gasterosteus aculeatus"
-"105","Gasterosteus aculeatus williamsoni"
-"106","Spinachia spinachia"
-"107","Apletodon dentatus"
-"108","Diplecogaster bimaculata"
-"109","Diplecogaster bimaculata bimaculata"
-"110","Lepadogaster lepadogaster"
-"111","Lepadogaster"
-"112","Aphia minuta"
-"113","Awaous commersoni"
-"114","Buenia jeffreysii"
-"115","Crystallogobius linearis"
-"116","Gobius gasteveni"
-"117","Gobius niger"
-"118","Gobius paganellus"
-"119","Gobius"
-"120","Lesueurigobius friesii"
-"121","Lesueurigobius suerii"
-"122","Lesueurigobius"
-"123","Pomatoschistus lozanoi"
-"124","Pomatoschistus microps"
-"125","Pomatoschistus minutus"
-"126","Pomatoschistus norvegicus"
-"127","Pomatoschistus pictus"
-"128","Pomatoschistus"
-"129","Gobiidae"
-"130","Heptranchias perlo"
-"131","Hexanchus griseus"
-"132","Acantholabrus palloni"
-"133","Centrolabrus exoletus"
-"134","Ctenolabrus rupestris"
-"135","Labrus bergylta"
-"136","Labrus mixtus"
-"137","Symphodus bailloni"
-"138","Symphodus melops"
-"139","Symphodus roissali"
-"140","Labridae"
-"141","Lamna nasus"
-"142","Careproctus reinhardti"
-"143","Liparis fabricii"
-"144","Liparis liparis liparis"
-"145","Liparis montagui"
-"146","Liparidae"
-"147","Lophius budegassa"
-"148","Lophius piscatorius"
-"149","Brosme brosme"
-"150","Ciliata mustela"
-"151","Ciliata septentrionalis"
-"152","Enchelyopus cimbrius"
-"153","Gaidropsarus argentatus"
-"154","Gaidropsarus biscayensis"
-"155","Gaidropsarus macrophthalmus"
-"156","Gaidropsarus mediterraneus"
-"157","Gaidropsarus vulgaris"
-"158","Gaidropsarus"
-"159","Molva dypterygia"
-"160","Molva macrophthalma"
-"161","Molva molva"
-"162","Coelorinchus caelorhincus"
-"163","Coelorinchus labiatus"
-"164","Coryphaenoides rupestris"
-"165","Hymenocephalus italicus"
-"166","Macrourus berglax"
-"167","Malacocephalus laevis"
-"168","Nezumia aequalis"
-"169","Trachyrincus murrayi"
-"170","Trachyrincus scabrus"
-"171","Merluccius merluccius"
-"172","Mola mola"
-"173","Halargyreus johnsonii"
-"174","Lepidion eques"
-"175","Mora moro"
-"176","Physiculus dalwigki"
-"177","Dicentrarchus labrax"
-"178","Dicentrarchus punctatus"
-"179","Chelon auratus"
-"180","Chelon labrosus"
-"181","Chelon ramada"
-"182","Mullus barbatus barbatus"
-"183","Mullus surmuletus"
-"184","Mullus"
-"185","Mullidae"
-"186","Benthosema glaciale"
-"187","Ceratoscopelus maderensis"
-"188","Lampanyctus crocodilus"
-"189","Lampanyctus"
-"190","Myctophum punctatum"
-"191","Myctophum"
-"192","Notoscopelus elongatus kroyeri"
-"193","Notoscopelus kroyeri"
-"194","Myctophidae"
-"195","Myliobatis aquila"
-"196","Myxine glutinosa"
-"197","Notacanthus bonaparte"
-"198","Notacanthidae"
-"199","Ophidion barbatum"
-"200","Osmerus eperlanus"
-"201","Arctozenus risso"
-"202","Lestidiops jayakari"
-"203","Lestidiops jayakari jayakari"
-"204","Macroparalepis affinis"
-"205","Magnisudis atlantica"
-"206","Paralepis coregonoides"
-"207","Cyttopsis rosea"
-"208","Galeus melastomus"
-"209","Galeus murinus"
-"210","Sander lucioperca"
-"211","Lampetra fluviatilis"
-"212","Petromyzon marinus"
-"213","Petromyzontidae"
-"214","Pholis gunnellus"
-"215","Polymetme corythaeola"
-"216","Polymetme thaeocoryla"
-"217","Phycis blennoides"
-"218","Phycidae"
-"219","Glyptocephalus cynoglossus"
-"220","Hippoglossoides platessoides"
-"221","Hippoglossus hippoglossus"
-"222","Limanda limanda"
-"223","Microstomus kitt"
-"224","Platichthys flesus"
-"225","Pleuronectes platessa"
-"226","Pleuronectidae"
-"227","Polyprion americanus"
-"228","Cottunculus microps"
-"229","Amblyraja radiata"
-"230","Dipturus batis"
-"231","Dipturus nidarosiensis"
-"232","Dipturus oxyrinchus"
-"233","Dipturus"
-"234","Leucoraja circularis"
-"235","Leucoraja fullonica"
-"236","Leucoraja naevus"
-"237","Raja brachyura"
-"238","Raja clavata"
-"239","Raja microocellata"
-"240","Raja montagui"
-"241","Raja undulata"
-"242","Raja"
-"243","Rajella bathyphila"
-"244","Rajella fyllae"
-"245","Rajella lintea"
-"246","Rostroraja alba"
-"247","Rajidae"
-"248","Salmo salar"
-"249","Salmo trutta trutta"
-"250","Salmo"
-"251","Argyrosomus regius"
-"252","Umbrina canariensis"
-"253","Umbrina cirrosa"
-"254","Scomberesox saurus saurus"
-"255","Sarda sarda"
-"256","Scomber colias"
-"257","Scomber japonicus"
-"258","Scomber scombrus"
-"259","Lepidorhombus boscii"
-"260","Lepidorhombus whiffiagonis"
-"261","Phrynorhombus norvegicus"
-"262","Scophthalmus maximus"
-"263","Scophthalmus rhombus"
-"264","Scophthalmus"
-"265","Zeugopterus punctatus"
-"266","Zeugopterus regius"
-"267","Zeugopterus"
-"268","Scorpaena loppei"
-"269","Scorpaena notata"
-"270","Scorpaena porcus"
-"271","Scorpaena scrofa"
-"272","Scorpaenidae"
-"273","Scyliorhinus canicula"
-"274","Scyliorhinus stellaris"
-"275","Scyliorhinus"
-"276","Scyliorhinidae"
-"277","Helicolenus dactylopterus"
-"278","Sebastes mentella"
-"279","Sebastes norvegicus"
-"280","Sebastes viviparus"
-"281","Sebastes"
-"282","Serranus cabrilla"
-"283","Serranus scriba"
-"284","Bathysolea profundicola"
-"285","Buglossidium luteum"
-"286","Dicologlossa cuneata"
-"287","Microchirus variegatus"
-"288","Microchirus"
-"289","Pegusa lascaris"
-"290","Solea senegalensis"
-"291","Solea solea"
-"292","Centroscymnus coelolepis"
-"293","Centroscymnus crepidater"
-"294","Scymnodon ringens"
-"295","Boops boops"
-"296","Diplodus sargus"
-"297","Diplodus vulgaris"
-"298","Lithognathus mormyrus"
-"299","Pagellus acarne"
-"300","Pagellus bogaraveo"
-"301","Pagellus erythrinus"
-"302","Pagrus pagrus"
-"303","Sarpa salpa"
-"304","Sparus aurata"
-"305","Spondyliosoma cantharus"
-"306","Squalus acanthias"
-"307","Argyropelecus hemigymnus"
-"308","Argyropelecus olfersii"
-"309","Maurolicus muelleri"
-"310","Anisarchus medius"
-"311","Chirolophis ascanii"
-"312","Leptoclinus maculatus"
-"313","Lumpenus lampretaeformis"
-"314","Chauliodus sloani"
-"315","Stomias boa boa"
-"316","Stomias boa ferox"
-"317","Synaphobranchus kaupii"
-"318","Entelurus aequoreus"
-"319","Hippocampus hippocampus"
-"320","Nerophis lumbriciformis"
-"321","Nerophis ophidion"
-"322","Syngnathus acus"
-"323","Syngnathus rostellatus"
-"324","Syngnathus typhle"
-"325","Syngnathus"
-"326","Syngnathidae"
-"327","Tetronarce nobiliana"
-"328","Torpedo marmorata"
-"329","Hoplostethus mediterraneus mediterraneus"
-"330","Echiichthys vipera"
-"331","Echiichthys"
-"332","Trachinus draco"
-"333","Trachipterus arcticus"
-"334","Galeorhinus galeus"
-"335","Mustelus asterias"
-"336","Mustelus mustelus"
-"337","Mustelus"
-"338","Aphanopus carbo"
-"339","Lepidopus caudatus"
-"340","Chelidonichthys cuculus"
-"341","Chelidonichthys lastoviza"
-"342","Chelidonichthys lucerna"
-"343","Chelidonichthys obscurus"
-"344","Chelidonichthys"
-"345","Eutrigla gurnardus"
-"346","Eutrigla"
-"347","Lepidotrigla dieuzeidei"
-"348","Trigla lyra"
-"349","Trigla"
-"350","Trigloporus"
-"351","Triglidae"
-"352","Zenopsis conchifer"
-"353","Zeus faber"
-"354","Zeidae"
-"355","Lycenchelys muraena"
-"356","Lycenchelys sarsii"
-"357","Lycodes eudipleurostictus"
-"358","Lycodes gracilis"
-"359","Lycodes reticulatus"
-"360","Lycodes seminudus"
-"361","Lycodes vahlii"
-"362","Lycodonus flagellicauda"
-"363","Zoarces viviparus"
-"364","Zoarcidae"
+"","taxon","habitat","feeding.mode","tl","age.maturity","growth.coefficient","length.max","age.max"
+"1","Agonus cataphractus","demersal","benthivorous",3.43,3,0.474999994,21,1
+"2","Leptagonus decagonus","demersal","generalist",3.21,3,0.474999994,19.1,11
+"3","Agonidae","demersal",NA,3.244444444,4.699999809,0.474999994,26.05,7
+"4","Alepocephalus bairdii","bathydemersal","generalist",3.69,NA,0.129190112,93,38
+"5","Xenodermichthys copei","bathypelagic","generalist",3.19,NA,0.129190112,31,26
+"6","Ammodytes marinus","benthopelagic","planktivorous",2.71,3.200000048,0.375567319,18.5,10
+"7","Ammodytes tobianus","demersal","planktivorous",3.08,1.5,0.650170227,17,7
+"8","Ammodytes","benthopelagic","planktivorous",3.1525,3.200000048,0.551595086,17.75,7.7
+"9","Gymnammodytes semisquamatus","demersal","planktivorous",2.68,3.200000048,0.375567319,30,9.5
+"10","Hyperoplus immaculatus","demersal","piscivorous",4.38,2,0.400000006,35,9.5
+"11","Hyperoplus lanceolatus","demersal","generalist",3.98,2,0.400000006,40,9.5
+"12","Hyperoplus","demersal","generalist",3.98,2,0.400000006,37.5,9.5
+"13","Ammodytidae","demersal","generalist",3.318,3.200000048,0.533871799,17.75,9.5
+"14","Anarhichas denticulatus","benthopelagic","generalist",3.75,5,0.088963655,150,16
+"15","Anarhichas lupus","demersal","benthivorous",3.55,9,0.068373489,152,22
+"16","Anarhichas minor","demersal","benthivorous",3.62,8,0.096886078,180,40
+"17","Anarhichadidae","demersal",NA,3.675,8,0.084738148,165,31
+"18","Anguilla anguilla","demersal","generalist",3.55,11,0.075599998,66.2,23
+"19","Anguilla","demersal","generalist",4.0325,11,0.103797755,66.2,33
+"20","Argentina silus","bathydemersal","generalist",3.32,6.449999968,0.17424304,70,35
+"21","Argentina sphyraena","bathydemersal","generalist",3.62,2.5,0.277999997,21.6,16
+"22","Argentinidae","bathydemersal","generalist",3.32,6.449999968,0.161074089,21.6,25.5
+"23","Bathyraja brachyurops","bathydemersal","generalist",4.07,8,0.079260672,64.2,24.7
+"24","Bathyraja spinicauda","bathydemersal","generalist",4.41,8,0.079260672,172,27.42857143
+"25","Atherina presbyter","pelagic","planktivorous",3.67,1,0.699999988,14,4
+"26","Balistes capriscus","reef-associated","benthivorous",4.06,1,0.320206846,60,15
+"27","Balistes","reef-associated","benthivorous",3.94,1,0.247806501,51.125,15
+"28","Belone belone","pelagic","piscivorous",4.16,2,0.22512972,93,11
+"29","Beryx decadactylus","bathydemersal","generalist",4.13,6.133333365,0.131990598,52,13
+"30","Beryx splendens","benthopelagic","generalist",4.27,6.133333365,0.170000002,43,23
+"31","Blennius ocellaris","demersal","benthivorous",3.49,2.5,0.424448927,17,6.4
+"32","Parablennius gattorugine","demersal","benthivorous",3.59,1,0.620000005,30,6.4
+"33","Blenniidae","reef-associated","benthivorous",2.854333333,1.75,0.424448927,15.55,6
+"34","Arnoglossus imperialis","demersal","benthivorous",3.84,1.5,0.50999999,19,7
+"35","Arnoglossus laterna","demersal","benthivorous",3.59,1.5,0.246721179,17,8
+"36","Arnoglossus thori","demersal","benthivorous",3.28,1.5,0.50999999,20.5,10
+"37","Arnoglossus","demersal","benthivorous",3.435,1.5,0.50999999,18.75,8.75
+"38","Brama brama","bathypelagic","generalist",4.08,4,0.083999999,100,9
+"39","Pterycombus brama","pelagic","generalist",4.4,4,0.083999999,46,10
+"40","Callionymus lyra","demersal","benthivorous",3.27,2.5,0.471167981,30,7
+"41","Callionymus maculatus","demersal","benthivorous",3.31,4,0.471167981,13,1
+"42","Callionymus reticulatus","demersal","benthivorous",3.28,3.3,0.471167981,11,5
+"43","Callionymus","demersal","benthivorous",3.17,3.3,0.471167981,21.5,5
+"44","Callionymidae","demersal","benthivorous",3.17,3.25,0.471167981,21.5,5
+"45","Capros aper","demersal","generalist",3.14,3.280000011,0.254811604,18,26
+"46","Naucrates ductor","reef-associated","planktivorous",3.98,2.702727264,2.34890493,34,19.75
+"47","Trachurus mediterraneus","pelagic","generalist",3.77,1.4,0.309120989,26,12
+"48","Trachurus picturatus","pelagic","generalist",3.32,3.4725,0.166283544,60,18
+"49","Trachurus trachurus","pelagic","generalist",3.71,2.649999989,0.179520728,41,40
+"50","Echiodon drummondii","bathydemersal","generalist",4.03,NA,NA,30,NA
+"51","Macroramphosus scolopax","demersal","benthivorous",3.47,NA,0.402788647,22.8,6
+"52","Macrorhamphosus scolopax","pelagic","benthivorous",3.4,NA,0.549697916,18.9,6
+"53","Centrolophus niger","bathypelagic","benthivorous",3.92,6,0.242093761,74,12
+"54","Schedophilus medusophagus","pelagic","planktivorous",4,6,0.242093761,51,12
+"55","Centrophorus granulosus","bathydemersal","piscivorous",4.11,25,0.044389505,170,62
+"56","Centrophorus squamosus","bathydemersal","generalist",4.47,25,0.044389505,145,62
+"57","Deania calcea","bathydemersal","piscivorous",4.33,25,0.10048771,80,33.5
+"58","Deania profundorum","bathydemersal","piscivorous",4.36,25,0.10048771,79,33.5
+"59","Cepola macrophthalma","demersal","planktivorous",3.130000114,2.35,0.203325036,73,6.5
+"60","Chimaera monstrosa","bathydemersal","benthivorous",3.52,12,0.20616094,57.1,30
+"61","Chimaera opalescens","bathydemersal","benthivorous",3.52,12,0.20616094,109.8,29
+"62","Hydrolagus mirabilis","bathydemersal","generalist",3.94,12,0.20616094,41,28
+"63","Chlorophthalmus agassizi","bathydemersal","benthivorous",3.66,3,0.239999995,16.3,10
+"64","Alosa agone","pelagic","generalist",3.887,3,0.293263837,34,5.5
+"65","Alosa alosa","pelagic","generalist",2.95,3.5,0.324994616,65,10
+"66","Alosa fallax","pelagic","generalist",4.03,2.5,0.331593228,42.9,25
+"67","Alosa","benthopelagic","generalist",3.887,3.300000012,0.293263837,51.66667,5
+"68","Clupea harengus","benthopelagic","planktivorous",3.38,3.219761908,0.340761766,25.6,18.5
+"69","Sardina pilchardus","pelagic","planktivorous",3.06,1.74000001,0.357535654,27,14
+"70","Spratelloides lewisi","pelagic","planktivorous",3.02,2.655483874,5.103077826,7,0.300000012
+"71","Sprattus sprattus","pelagic","planktivorous",3.01,2,0.595018239,13.6,6
+"72","Clupeidae","pelagic",NA,3.354848485,2.655483874,0.34929492,48.42,12.01136364
+"73","Conger conger","demersal","piscivorous",4.31,10,0.068000004,180,20
+"74","Artediellus atlanticus","demersal","benthivorous",3.42,3.5,0.15483555,16.8,10
+"75","Icelus bicornis","demersal","benthivorous",3.13,2,0.142581113,15.7,8
+"76","Micrenophrys lilljeborgii","demersal","generalist",3.79,3.897727273,0.271428571,7.4,6.3
+"77","Myoxocephalus quadricornis","demersal","generalist",3.690000057,3.5,0.538999975,37,14
+"78","Myoxocephalus scorpioides","demersal","benthivorous",3.39,5.375,0.538999975,30,12
+"79","Myoxocephalus scorpius","demersal","generalist",3.89,2,0.538999975,25.7,8
+"80","Taurulus bubalis","demersal","benthivorous",3.59,1,0.227925873,17,4
+"81","Triglops murrayi","demersal","benthivorous",3.45,3.5,0.140066193,20,10
+"82","Triglops pingelii","demersal","generalist",3.42,4,0.189999998,20,6
+"83","Triglops","demersal","generalist",3.322,3.66666666666667,0.140066193,23.5,6.333333333
+"84","Cottidae","demersal",NA,3.5565625,3.897727273,0.37398145525,17.9,8.86363636363636
+"85","Cyclopterus lumpus","benthopelagic","planktivorous",3.89,3.5,0.174848775,57,13
+"86","Dalatias licha","bathydemersal","piscivorous",4.23,6.8,0.1725,182,36
+"87","Dasyatis pastinaca","demersal","benthivorous",4.05,3.7,0.089000002,75,16
+"88","Engraulis encrasicolus","pelagic","planktivorous",3.109999895,1,0.464853665,21,3
+"89","Epigonus telescopus","bathydemersal","generalist",3.59,36.19999886,0.263206802,75,104
+"90","Etmopterus spinax","bathydemersal","generalist",4.14,5,0.175,60,57
+"91","Gadiculus argenteus","benthopelagic","planktivorous",3.6,2,0.305291094,12,3
+"92","Gadiculus thori","benthopelagic","generalist",3.51,2,0.693000019,15,3
+"93","Gadus morhua","benthopelagic","generalist",4.09,4,0.221900862,116,25
+"94","Melanogrammus aeglefinus","demersal","benthivorous",4.03,2.619999886,0.229938845,75.5,20
+"95","Merlangius merlangus","benthopelagic","generalist",4.36,2,0.295267494,45.9,20
+"96","Micromesistius poutassou","bathypelagic","generalist",4.13,1.929999971,0.188924616,26,20
+"97","Pollachius pollachius","benthopelagic","generalist",4.32,2.5,0.186000004,130,15
+"98","Pollachius virens","demersal","generalist",4.31,4.172857114,0.069774828,130,25
+"99","Raniceps raninus","demersal","benthivorous",3.77,3.309999943,0.238116172,27.5,8
+"100","Trisopterus esmarkii","benthopelagic","planktivorous",3.24,1.689999998,0.556816513,21,5
+"101","Trisopterus luscus","benthopelagic","generalist",3.566666667,1.5,0.473190425,46,6
+"102","Trisopterus minutus","benthopelagic","generalist",3.73,2,0.50999999,24,8
+"103","Gadidae","benthopelagic",NA,3.884666667,2.873333295,0.195867996,60.33333,12.66666667
+"104","Gasterosteus aculeatus","benthopelagic","generalist",3.31,2,2.319999933,10,8
+"105","Gasterosteus aculeatus williamsoni","benthopelagic","generalist",3.166666667,2,2.319999933,8.82,8
+"106","Spinachia spinachia","benthopelagic","generalist",3.5,1,2.319999933,16,1
+"107","Apletodon dentatus","demersal","benthivorous",3.1,NA,0.794946033,4,1
+"108","Diplecogaster bimaculata","demersal","generalist",3.39,NA,0.794946033,6,3
+"109","Diplecogaster bimaculata bimaculata","demersal","generalist",3.39,NA,0.794946033,3.325,3
+"110","Lepadogaster lepadogaster","demersal","benthivorous",2.78,NA,0.794946033,6.5,5
+"111","Lepadogaster","demersal","benthivorous",2.78,NA,0.794946033,7.166667,5
+"112","Aphia minuta","benthopelagic","planktivorous",3.1,0.583333333333333,2.230000019,7.9,0.666666666666667
+"113","Awaous commersoni","demersal","planktivorous",3.31,2,0.430000007,25,5
+"114","Buenia jeffreysii","demersal","benthivorous",3.62,1.181153845,0.927999973,6,2.760000002
+"115","Crystallogobius linearis","demersal","planktivorous",3.4,0.416666666666667,0.970000029,4.7,1
+"116","Gobius gasteveni","demersal","benthivorous",3.3,2,0.430000007,12,5
+"117","Gobius niger","demersal","benthivorous",3.31,2,0.430000007,15.2,5
+"118","Gobius paganellus","demersal","benthivorous",3.299999952,1.5,0.407999992,13,10
+"119","Gobius","demersal","benthivorous",3.275,1.5,0.353586284,22.5,6
+"120","Lesueurigobius friesii","demersal","benthivorous",3.55,2,0.699999988,9,11
+"121","Lesueurigobius suerii","demersal","benthivorous",3.55,2,0.699999988,6,2.760000002
+"122","Lesueurigobius","demersal","benthivorous",3.55,2,0.699999988,9,2.760000002
+"123","Pomatoschistus lozanoi","demersal","generalist",3.13,1,0.889999986,8,2
+"124","Pomatoschistus microps","demersal","benthivorous",3.29,1,0.294999987,5,3
+"125","Pomatoschistus minutus","demersal","benthivorous",3.22,1,0.927999973,7.2,3
+"126","Pomatoschistus norvegicus","demersal","benthivorous",3.26,1,0.927999973,8,1.830000043
+"127","Pomatoschistus pictus","demersal","benthivorous",3.12,1,0.927999973,6,2
+"128","Pomatoschistus","demersal","benthivorous",3.263333333,1,0.698505135,6.1,2.376666665
+"129","Gobiidae","demersal","benthivorous",3.105945946,1.181153845,0.482039378,30,2.760000002
+"130","Heptranchias perlo","bathydemersal","piscivorous",4.16,16,0.25,139,32
+"131","Hexanchus griseus","bathydemersal","generalist",4.48,16,0.25,482,32
+"132","Acantholabrus palloni","reef-associated","benthivorous",3.5,3.179545457,0.199772312,25,16
+"133","Centrolabrus exoletus","reef-associated","benthivorous",3.5,3.179545457,0.745575356,13,6
+"134","Ctenolabrus rupestris","reef-associated","benthivorous",3.58,2,0.330478437,18,8
+"135","Labrus bergylta","reef-associated","benthivorous",3.2,2,0.126966568,51,9
+"136","Labrus mixtus","reef-associated","benthivorous",3.91,2,0.10976339,40,20
+"137","Symphodus bailloni","reef-associated","benthivorous",3.357142857,1.666666667,0.353587139,20,9
+"138","Symphodus melops","reef-associated","benthivorous",3.38,3,0.250826442,21,9
+"139","Symphodus roissali","reef-associated","benthivorous",3.47,1,0.373786918,14,8
+"140","Labridae","reef-associated","benthivorous",3.525333333,3.179545457,0.210495888,33.16667,6.2
+"141","Lamna nasus","pelagic","piscivorous",4.57,13.5,0.0819392,329,30
+"142","Careproctus reinhardti","bathydemersal","generalist",3.75,4.75,0.430000007,30,7
+"143","Liparis fabricii","bathydemersal","benthivorous",3.33,2.85,0.681480884,20,8
+"144","Liparis liparis liparis","demersal","benthivorous",3.59,1,0.681480884,15.2,2
+"145","Liparis montagui","demersal","benthivorous",3.45,1,0.681480884,12,2
+"146","Liparidae","bathydemersal","benthivorous",3.7225,3.2,0.525832446,30.1,8
+"147","Lophius budegassa","bathydemersal","piscivorous",4.41,8.166666667,0.085860408,93,21
+"148","Lophius piscatorius","bathydemersal","piscivorous",4.45,4.5,0.169017653,140,24
+"149","Brosme brosme","demersal","generalist",3.9,7,0.091539983,120,20
+"150","Ciliata mustela","demersal","generalist",3.5,1,0.077491663,25,3
+"151","Ciliata septentrionalis","demersal","planktivorous",3.5,1,0.077491663,12.2,3
+"152","Enchelyopus cimbrius","demersal","benthivorous",3.53,3,0.200000003,41,9
+"153","Gaidropsarus argentatus","bathydemersal","generalist",3.39,4,0.600000024,3.4,10
+"154","Gaidropsarus biscayensis","benthopelagic","benthivorous",3.57,2.83333333333333,0.600000024,40,8
+"155","Gaidropsarus macrophthalmus","demersal","benthivorous",3.5,2.83333333333333,0.600000024,19,8
+"156","Gaidropsarus mediterraneus","demersal","generalist",3.47,1.5,0.600000024,50,8
+"157","Gaidropsarus vulgaris","demersal","benthivorous",3.47,3,0.600000024,60,6
+"158","Gaidropsarus","demersal","generalist",3.475,2.83333333333333,0.600000024,11.2,8
+"159","Molva dypterygia","demersal","generalist",4.49,7,0.137194169,38,20
+"160","Molva macrophthalma","demersal","generalist",4.5,6.5,0.121395453,108,23
+"161","Molva molva","demersal","generalist",4.4,6,0.079999998,200,25
+"162","Coelorinchus caelorhincus","benthopelagic","benthivorous",3.49,12.4000001,0.115000002,48,10
+"163","Coelorinchus labiatus","bathydemersal","generalist",3.95,12.4000001,0.115000002,50,10
+"164","Coryphaenoides rupestris","bathypelagic","generalist",3.54,10,0.106179011,29.5,60
+"165","Hymenocephalus italicus","benthopelagic","generalist",3.4,12.4000001,0.106179011,5.3,9
+"166","Macrourus berglax","benthopelagic","benthivorous",3.57,14.80000019,0.090051216,110,25
+"167","Malacocephalus laevis","bathydemersal","generalist",3.79,14.80000019,0.106179011,60,54
+"168","Nezumia aequalis","benthopelagic","generalist",3.26,4,0.129484417,36,9
+"169","Trachyrincus murrayi","benthopelagic","generalist",3.47,12.4000001,0.277128096,48,11
+"170","Trachyrincus scabrus","bathydemersal","generalist",3.64,12.4000001,0.277128096,21.7,11
+"171","Merluccius merluccius","demersal","generalist",4.42,3.408749968,0.113435169,86,20
+"172","Mola mola","pelagic","generalist",3.68,NA,0.31,333,NA
+"173","Halargyreus johnsonii","bathypelagic","generalist",3.38,10.5,0.150000006,56,27.4
+"174","Lepidion eques","benthopelagic","benthivorous",3.24,8.5,0.150000006,42,13
+"175","Mora moro","benthopelagic","benthivorous",3.75,10.5,0.095180283,71.5,38
+"176","Physiculus dalwigki","benthopelagic","generalist",4.2,10.5,0.150000006,30,27.4
+"177","Dicentrarchus labrax","demersal","generalist",3.47,3,0.089960033,85,30
+"178","Dicentrarchus punctatus","pelagic","generalist",3.94,3,0.081774783,70,30
+"179","Chelon auratus","pelagic","benthivorous",2.84,3.5,0.365999997,59,8
+"180","Chelon labrosus","demersal","benthivorous",2.59,3,0.200950405,60,25
+"181","Chelon ramada","pelagic","benthivorous",2.34,3,0.237049165,70,10
+"182","Mullus barbatus barbatus","demersal","benthivorous",3.14,1.484285712,0.301581945,38.2,11
+"183","Mullus surmuletus","demersal","benthivorous",3.45,1.484285712,0.182999998,40,11
+"184","Mullus","demersal","benthivorous",3.295,1.484285712,0.182999998,36,8.75
+"185","Mullidae","non-pelagic","benthivorous",3.520416667,1.484285712,0.182999998,36,8.875
+"186","Benthosema glaciale","benthopelagic","planktivorous",2.99,2.5,0.302289314,6.5,8
+"187","Ceratoscopelus maderensis","bathypelagic","planktivorous",3.05,0.533333331,0.384722574,8.1,5
+"188","Lampanyctus crocodilus","bathypelagic","planktivorous",3.22,2.5,0.384722574,30,6
+"189","Lampanyctus","bathypelagic","planktivorous",3.25,2.5,0.384722574,8.55,6
+"190","Myctophum punctatum","bathypelagic","planktivorous",3.390000105,0.533333331,0.229113984,11,5
+"191","Myctophum","bathypelagic","planktivorous",3.408333351,0.533333331,0.280363919,5.095,5
+"192","Notoscopelus elongatus kroyeri","pelagic","planktivorous",3.17,0.533333331,0.889999986,16.23333,5
+"193","Notoscopelus kroyeri","bathypelagic","planktivorous",3.17,0.533333331,0.889999986,18.9,2.033375
+"194","Myctophidae","bathypelagic","planktivorous",3.189230769,0.533333331,0.384722574,6.467912,1.5
+"195","Myliobatis aquila","benthopelagic","generalist",3.61,4.5,0.143091056,183,23
+"196","Myxine glutinosa","demersal","benthivorous",4.54,8,0.123000003,79,NA
+"197","Notacanthus bonaparte","bathypelagic","benthivorous",3.93,NA,NA,26,NA
+"198","Notacanthidae","non-pelagic","benthivorous",3.93,NA,NA,80.76667,NA
+"199","Ophidion barbatum","demersal","benthivorous",3.57,0.708333333333333,0.117197935,25,25.5
+"200","Osmerus eperlanus","pelagic","planktivorous",3.460000038,2,0.273999989,32,10
+"201","Arctozenus risso","bathypelagic","generalist",3.22,6,0.699999988,30,11
+"202","Lestidiops jayakari","bathypelagic","generalist",4.125,6,0.699999988,20,4
+"203","Lestidiops jayakari jayakari","bathypelagic","generalist",4.125,6,0.699999988,14.52938,4
+"204","Macroparalepis affinis","bathypelagic","planktivorous",3.4,6,0.699999988,55,4
+"205","Magnisudis atlantica","bathypelagic","generalist",3.65,6,0.699999988,56,4
+"206","Paralepis coregonoides","bathypelagic","generalist",4.07,6,0.699999988,50,4
+"207","Cyttopsis rosea","bathypelagic","generalist",4.01,NA,NA,31,NA
+"208","Galeus melastomus","demersal","generalist",4.17,3.5,0.383,54,8
+"209","Galeus murinus","bathydemersal","piscivorous",4.116,3.5,0.383,63,8
+"210","Sander lucioperca","pelagic","piscivorous",4.04,4,0.119743974,130,17
+"211","Lampetra fluviatilis","demersal","piscivorous",4.5,4,0.164000005,45.2,10
+"212","Petromyzon marinus","demersal","piscivorous",4.369999886,7,0.158999994,120,11
+"213","Petromyzontidae","non-pelagic","generalist",3.804374996,5.875,0.196818839,45.42,10
+"214","Pholis gunnellus","demersal","benthivorous",3.54,2,0.281060153,25,12
+"215","Polymetme corythaeola","benthopelagic","piscivorous",4.4,0.25999999,5.900000095,7,1
+"216","Polymetme thaeocoryla","bathydemersal","piscivorous",4.4,0.25999999,5.900000095,21.6,1
+"217","Phycis blennoides","benthopelagic","benthivorous",3.66,3.5,0.230658631,50,20
+"218","Phycidae","non-pelagic",NA,3.966,1.583333313,0.189999998,57,15.5
+"219","Glyptocephalus cynoglossus","demersal","benthivorous",3.17,7.889230728,0.238000005,78.1,25
+"220","Hippoglossoides platessoides","demersal","generalist",4.08,7.620909084,0.340000004,82.6,30
+"221","Hippoglossus hippoglossus","demersal","piscivorous",4,5.900000095,0.070804814,470,30
+"222","Limanda limanda","demersal","benthivorous",3.39,2.649999976,0.31138352,43.5,12
+"223","Microstomus kitt","demersal","benthivorous",3.21,4,0.363178533,67,23
+"224","Platichthys flesus","demersal","benthivorous",3.32,3.8,0.360000014,58,15
+"225","Pleuronectes platessa","demersal","benthivorous",3.23,3.5,0.150119375,100,30
+"226","Pleuronectidae","demersal","benthivorous",3.511666667,3.5,0.094527637,52.5,16
+"227","Polyprion americanus","demersal","generalist",4.14,12.8,0.068177904,156,47
+"228","Cottunculus microps","bathydemersal","generalist",4.14,4,NA,15.3,12
+"229","Amblyraja radiata","demersal","generalist",4.2,6.979999924,0.151463222,109,28
+"230","Dipturus batis","demersal","benthivorous",3.52,11,0.057,285,51
+"231","Dipturus nidarosiensis","demersal","generalist",3.5,10.66666667,0.057,230,51
+"232","Dipturus oxyrinchus","demersal","generalist",3.5,10.66666667,0.057,150,51
+"233","Dipturus","demersal","generalist",3.51,10.66666667,0.057,111.825,51
+"234","Leucoraja circularis","demersal","benthivorous",3.5,6.375,0.159999996,120,20.3333333333333
+"235","Leucoraja fullonica","bathydemersal","benthivorous",3.5,6.375,0.159999996,120,20.3333333333333
+"236","Leucoraja naevus","demersal","benthivorous",4.21,8.5,0.159999996,71,28
+"237","Raja brachyura","demersal","generalist",3.76,4.835000118,0.149988502,115,15
+"238","Raja clavata","demersal","generalist",3.84,5.365000129,0.134355023,139,15
+"239","Raja microocellata","demersal","piscivorous",3.885,4.835000118,0.074000001,87.5,24
+"240","Raja montagui","demersal","generalist",3.88,3.775000095,0.192277518,77,18
+"241","Raja undulata","demersal","benthivorous",3.5,8.785,0.104861559,114,28.9
+"242","Raja","demersal","generalist",3.885,4.835000118,0.139228886,95.35714,21
+"243","Rajella bathyphila","bathydemersal","benthivorous",3.37,5,0.12507875,90,14
+"244","Rajella fyllae","bathydemersal","benthivorous",3.37,5,0.128473825,60,14
+"245","Rajella lintea","bathydemersal","benthivorous",3.62,5,0.147364323,123,14
+"246","Rostroraja alba","demersal","piscivorous",4.409999847,4.952500105,0.12507875,230,21.25
+"247","Rajidae","demersal","generalist",3.880666667,4.835000118,0.128473825,95.35714,21.25
+"248","Salmo salar","benthopelagic","generalist",4.5,4.190909109,0.349523332,147,13
+"249","Salmo trutta trutta","pelagic","benthivorous",3.588,3.5,0.239625505,77.75,38
+"250","Salmo","benthopelagic","generalist",3.588,2.875106379,0.239625505,34.5,25.5
+"251","Argyrosomus regius","benthopelagic","piscivorous",4.29,1.550000012,0.150000006,182,42
+"252","Umbrina canariensis","demersal","benthivorous",3.37,2.278571431,0.259000003,80,15
+"253","Umbrina cirrosa","demersal","benthivorous",3.41,2.278571431,0.279000014,73,15
+"254","Scomberesox saurus saurus","pelagic","planktivorous",3.91,1,0.709999979,50,2
+"255","Sarda sarda","pelagic","piscivorous",4.5,1,0.497832087,91,5
+"256","Scomber colias","pelagic","generalist",3.91,0.983333333333333,0.378585021,50,7
+"257","Scomber japonicus","pelagic","planktivorous",3.38,2,0.285769753,70,18
+"258","Scomber scombrus","pelagic","generalist",3.63,2.179999971,0.352649977,50,21
+"259","Lepidorhombus boscii","demersal","benthivorous",3.74,1,0.139109489,35,13
+"260","Lepidorhombus whiffiagonis","bathydemersal","benthivorous",4.34,2.833333333,0.1244247,47,16
+"261","Phrynorhombus norvegicus","bathydemersal","benthivorous",3.98,2.7,0.202004698,12,6
+"262","Scophthalmus maximus","demersal","benthivorous",4.36,4,0.266688589,81.5,25
+"263","Scophthalmus rhombus","demersal","benthivorous",4.42,3,0.419154955,46,5.724999905
+"264","Scophthalmus","demersal","generalist",4.166666667,4,0.245626596,54.4,9.5
+"265","Zeugopterus punctatus","demersal","benthivorous",3.99,2.7,0.225108875,25,9.450000095
+"266","Zeugopterus regius","demersal","generalist",3.99,2.7,0.225060437,20,9.450000095
+"267","Zeugopterus","demersal","generalist",3.99,2.7,0.202004698,22.5,10.1785715
+"268","Scorpaena loppei","demersal","benthivorous",3.5,1,0.507642523,12.8,5
+"269","Scorpaena notata","demersal","benthivorous",3.7,2,0.307325473,17.9,8
+"270","Scorpaena porcus","demersal","benthivorous",3.92,3,0.171115205,30,7
+"271","Scorpaena scrofa","demersal","benthivorous",4.25,2,0.080990898,53.6,25
+"272","Scorpaenidae","demersal","generalist",3.764166667,2,0.084865538,30.175,6.5
+"273","Scyliorhinus canicula","demersal","generalist",3.82,5,0.200000003,70,12
+"274","Scyliorhinus stellaris","reef-associated","generalist",4.03,5,0.200000003,170,19
+"275","Scyliorhinus","demersal","generalist",4.048,5,0.15160639,58.66667,15.5
+"276","Scyliorhinidae","demersal","generalist",4,5,0.15160639,65.06,15.5
+"277","Helicolenus dactylopterus","bathydemersal","generalist",3.54,13,0.074189905,32.5,43
+"278","Sebastes mentella","bathypelagic","generalist",4.12,11.5,0.071840554,58,75
+"279","Sebastes norvegicus","benthopelagic","generalist",4.04,11,0.061433182,82,60
+"280","Sebastes viviparus","demersal","generalist",4.03,20,0.07,35,40
+"281","Sebastes","non-pelagic","generalist",3.768888889,6.087672411,0.063750968,70,50.5
+"282","Serranus cabrilla","demersal","generalist",3.35,3,0.185327968,27,7
+"283","Serranus scriba","demersal","benthivorous",3.82,3,0.198206079,32.3,14
+"284","Bathysolea profundicola","bathydemersal","benthivorous",3.17,2.952307701,0.278444522,21,16.07999992
+"285","Buglossidium luteum","demersal","benthivorous",3.31,3,0.567581476,13.7,13
+"286","Dicologlossa cuneata","demersal","benthivorous",3.32,2.952307701,0.279634226,30,12
+"287","Microchirus variegatus","demersal","benthivorous",3.28,3,0.379236179,25.2,14
+"288","Microchirus","demersal","benthivorous",3.23,3,0.304152428,25.2,71.6666666666667
+"289","Pegusa lascaris","demersal","benthivorous",3.29,4,0.411994461,35,15
+"290","Solea senegalensis","demersal","benthivorous",3.25,2.943636374,0.18164134,60,26.4
+"291","Solea solea","demersal","benthivorous",3.21,2.943636374,0.31314343,60,26.39999962
+"292","Centroscymnus coelolepis","bathydemersal","generalist",4.48,12,0.1065,87.6,54
+"293","Centroscymnus crepidater","bathydemersal","piscivorous",4.16,12,0.1065,130,54
+"294","Scymnodon ringens","bathypelagic","generalist",4.216666667,79.3333333333333,0.05725,110,223
+"295","Boops boops","demersal","planktivorous",2.79,1.5,0.206638608,36,6
+"296","Diplodus sargus","demersal","benthivorous",3.216,2.811999989,0.184678988,32,10
+"297","Diplodus vulgaris","benthopelagic","benthivorous",3.52,2,0.374604128,45,6
+"298","Lithognathus mormyrus","demersal","benthivorous",3.42,2.2,0.212134083,55,12
+"299","Pagellus acarne","benthopelagic","benthivorous",3.81,2.5,0.249991448,37,7
+"300","Pagellus bogaraveo","benthopelagic","generalist",4.21,2.5,0.170149382,53,20
+"301","Pagellus erythrinus","benthopelagic","benthivorous",3.48,3,0.136000007,60,20
+"302","Pagrus pagrus","benthopelagic","benthivorous",3.86,1.933333317,0.064999998,91,18
+"303","Sarpa salpa","benthopelagic","herbivorous",2,2,0.2,45.2,15
+"304","Sparus aurata","demersal","generalist",3.7,3.087142839,0.250291003,70,11
+"305","Spondyliosoma cantharus","benthopelagic","generalist",3.34,2.8,0.300000012,40,14
+"306","Squalus acanthias","benthopelagic","generalist",4.37,8.820000076,0.149875057,110,75
+"307","Argyropelecus hemigymnus","bathypelagic","planktivorous",3.06,1,0.670000017,2.8,1
+"308","Argyropelecus olfersii","bathypelagic","generalist",3.36,1,0.670000017,9,1
+"309","Maurolicus muelleri","bathypelagic","planktivorous",3.01,1,0.953008001,4.8,8
+"310","Anisarchus medius","demersal","benthivorous",3.22,6,0.115954606,30,13
+"311","Chirolophis ascanii","benthopelagic","benthivorous",3.23,3.25,0.204999998,25,10
+"312","Leptoclinus maculatus","demersal","benthivorous",3.28,3.25,0.204999998,23,10
+"313","Lumpenus lampretaeformis","demersal","benthivorous",3.59,3,0.204999998,34.5,9
+"314","Chauliodus sloani","bathypelagic","generalist",4.2,NA,0.349999994,11.1,8
+"315","Stomias boa boa","bathypelagic","piscivorous",3.95,NA,0.5,32.2,6.83333333333334
+"316","Stomias boa ferox","bathypelagic","piscivorous",3.62,NA,0.5,30,6.83333333333334
+"317","Synaphobranchus kaupii","bathydemersal","generalist",4.09,NA,0.52,53.5,NA
+"318","Entelurus aequoreus","demersal","generalist",3.539999962,2,0.737754285,60,7.51
+"319","Hippocampus hippocampus","demersal","generalist",3.15,0.35,1.257468592,15,1
+"320","Nerophis lumbriciformis","demersal","generalist",4.03,0.545999998,1.052000046,17,3.83333333333333
+"321","Nerophis ophidion","demersal","generalist",4.01,0.545999998,1.052000046,29,3.83333333333333
+"322","Syngnathus acus","demersal","benthivorous",3.33,1.5,0.633993391,21.4,3
+"323","Syngnathus rostellatus","demersal","planktivorous",3.69,1.5,0.746999979,19,3
+"324","Syngnathus typhle","demersal","planktivorous",4.31,1.5,0.558000028,35,3
+"325","Syngnathus","demersal","generalist",3.48,1.5,0.633993391,19,3
+"326","Syngnathidae","demersal","generalist",3.298333333,0.545999998,0.737754285,21.33333,3.83333333333333
+"327","Tetronarce nobiliana","benthopelagic","piscivorous",4.5,8,0.083544257,73,16
+"328","Torpedo marmorata","reef-associated","benthivorous",4.5,8,0.083544257,100,16
+"329","Hoplostethus mediterraneus mediterraneus","benthopelagic","benthivorous",3.49,4,0.12179163,16.2,11
+"330","Echiichthys vipera","demersal","benthivorous",4.41,1,0.33,15,14
+"331","Echiichthys","demersal","generalist",4.41,1,0.33,15,14
+"332","Trachinus draco","demersal","generalist",4.18,1,0.16,53,13.5
+"333","Trachipterus arcticus","bathypelagic","piscivorous",4.5,NA,0.07,300,NA
+"334","Galeorhinus galeus","benthopelagic","piscivorous",4.34,5.532142835,0.118741874,195,57
+"335","Mustelus asterias","demersal","benthivorous",3.676,5,0.167449083,140,11.86363636
+"336","Mustelus mustelus","demersal","generalist",3.75,13.5,0.082359178,164,24
+"337","Mustelus","demersal","generalist",3.676,4.944999969,0.167449083,129.4231,11.86363636
+"338","Aphanopus carbo","bathypelagic","piscivorous",4.48,4.5,0.109999999,118,32
+"339","Lepidopus caudatus","benthopelagic","generalist",3.82,4.5,0.167016848,164,7
+"340","Chelidonichthys cuculus","demersal","generalist",3.81,3.5,0.487414116,34,17
+"341","Chelidonichthys lastoviza","demersal","benthivorous",3.49,3,0.613292138,30,18
+"342","Chelidonichthys lucerna","demersal","generalist",3.98,3.5,0.330000013,56,15
+"343","Chelidonichthys obscurus","demersal","benthivorous",3.74,2.614285707,0.423900123,34,16.6666666666667
+"344","Chelidonichthys","demersal","generalist",3.88,2.614285707,0.423900123,41.33333,16.6666666666667
+"345","Eutrigla gurnardus","demersal","generalist",3.87,2.774999996,0.159999996,36,21
+"346","Eutrigla","demersal","generalist",3.87,2.774999996,0.159999996,36,21
+"347","Lepidotrigla dieuzeidei","demersal","generalist",3.66,2,0.371678891,20,5
+"348","Trigla lyra","bathydemersal","benthivorous",3.65,2.774999996,0.15322286,47.2,8
+"349","Trigla","demersal","benthivorous",3.65,2.774999996,0.15322286,47.2,8
+"350","Trigloporus","demersal","benthivorous",3.49,3,0.613292138,30,18
+"351","Triglidae","demersal","generalist",3.736666667,2.774999996,0.405833862,40,16.125
+"352","Zenopsis conchifer","benthopelagic","generalist",4.5,4,0.147,80,29
+"353","Zeus faber","benthopelagic","piscivorous",4.5,4,0.147,60,18
+"354","Zeidae","benthopelagic","generalist",4.5,4,0.147,59.5,23.5
+"355","Lycenchelys muraena","bathydemersal","benthivorous",3.5,4,0.217577502,22.6,7
+"356","Lycenchelys sarsii","bathydemersal","benthivorous",3.21,4,0.217577502,23,6
+"357","Lycodes eudipleurostictus","demersal","benthivorous",3.5,3,0.214680646,45,13
+"358","Lycodes gracilis","demersal","benthivorous",3.651666667,3,0.214680646,28,11
+"359","Lycodes reticulatus","bathydemersal","benthivorous",3.49,4,0.214680646,76,27
+"360","Lycodes seminudus","bathydemersal","generalist",3.79,4,0.214680646,56,15
+"361","Lycodes vahlii","bathydemersal","generalist",3.4,3.59999999999998,0.214680646,57,14.4166666666667
+"362","Lycodonus flagellicauda","bathydemersal","benthivorous",3.5,2,0.214680646,19.9,5
+"363","Zoarces viviparus","demersal","benthivorous",3.725,1.5,0.088267472,31.5,14
+"364","Zoarcidae","bathydemersal","generalist",3.47,3.53125,0.242686347,37.2,11
