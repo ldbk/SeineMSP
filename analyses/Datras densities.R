@@ -1,4 +1,4 @@
-setwd("C:/Users/jrivet/Documents/Stage M2/SeineMSP/data")
+setwd("C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/ICES")
 library(assertthat)
 library(tidyr)
 library(dplyr)
