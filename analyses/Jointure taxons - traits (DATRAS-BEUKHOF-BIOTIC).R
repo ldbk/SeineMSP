@@ -20,11 +20,11 @@ Datras<- read.csv("DATRAS_taxons_verified.csv", sep=";")
   Datras[which(Datras=="", arr.ind = T)]
   Datras[which(Datras=="", arr.ind = T)]<- NA
 }
-Datras<- Datras %>% select(-c(ScientificName, X, AphiaID, Match.type, Taxon.status, ScientificName.1, AphiaID_accepted, Kingdom, Phylum, Class, Order, Subgenus, Subspecies, isMarine, isBrackish, isFresh, isTerrestrial))
+Datras<- Datras %>% dplyr::select(-c(ScientificName, X, AphiaID, Match.type, Taxon.status, ScientificName.1, AphiaID_accepted, Kingdom, Phylum, Class, Order, Subgenus, Subspecies, isMarine, isBrackish, isFresh, isTerrestrial))
 Datras<- unique(Datras)
 Datras<- Datras %>% filter(!is.na(ScientificName_accepted))
 
-Datrasspp<- Datras %>% select(-c(ScientificName_accepted, Family))
+Datrasspp<- Datras %>% dplyr::select(-c(ScientificName_accepted, Family))
 Datrasspp<- Datrasspp %>% filter(!is.na(Genus), !is.na(Species))
 Datrasspp<- unique(Datrasspp)                                                                         # Parmis tous les taxons valides de DATRAS (184), 157 sont identifiés par un genre ET une espèce
 
@@ -33,10 +33,10 @@ Datrasspp<- unique(Datrasspp)                                                   
     # Original file
 Beukhof0<- readxl::read_excel("BEUKHOF_tab_original.xlsx")
 
-Beukhoftax<- Beukhof0 %>% select(taxon, LME, habitat,feeding.mode,tl,age.maturity,growth.coefficient,length.max,age.max)
+Beukhoftax<- Beukhof0 %>% dplyr::select(taxon, LME, habitat,feeding.mode,tl,age.maturity,growth.coefficient,length.max,age.max)
 Beukhoftax<- Beukhoftax %>% filter(LME==22 | LME==24)
 Beukhoftax<- Beukhoftax[!duplicated(Beukhoftax$taxon),]
-Beukhoftax<- Beukhoftax %>% select(-LME)
+Beukhoftax<- Beukhoftax %>% dplyr::select(-LME)
 Beukhoftax<- unique(Beukhoftax)
 write.csv(Beukhoftax, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/BEUKHOF_taxons_original.csv")
 
@@ -50,19 +50,19 @@ Beukhof<- read.csv("BEUKHOF_taxons_verified.csv", sep=";")
   Beukhof[which(Beukhof=="", arr.ind = T)]
   Beukhof[which(Beukhof=="", arr.ind = T)]<- NA
 }
-Beukhof<- Beukhof %>% select(-c(ScientificName, X, AphiaID, Match.type, Taxon.status, AphiaID_accepted, Kingdom, Phylum, Class, Order, Subgenus, Subspecies, isMarine, isBrackish, isFresh, isTerrestrial))
+Beukhof<- Beukhof %>% dplyr::select(-c(ScientificName, X, AphiaID, Match.type, Taxon.status, AphiaID_accepted, Kingdom, Phylum, Class, Order, Subgenus, Subspecies, isMarine, isBrackish, isFresh, isTerrestrial))
 Beukhof<- unique(Beukhof)
 Beukhof<- Beukhof %>% filter(!is.na(ScientificName_accepted))
 
-Beukhofspp<- Beukhof %>% select(-c(ScientificName_accepted, Family))
+Beukhofspp<- Beukhof %>% dplyr::select(-c(ScientificName_accepted, Family))
 Beukhofspp<- Beukhofspp %>% filter(!is.na(Genus), !is.na(Species))                                  # Parmi tous les taxons acceptés de Beukhof (361), 305 sont identifiés par un genre ET une espèce
 Beukhofspp<- unique(Beukhofspp)
 
 Beukhofgen<- Beukhof %>% filter(is.na(Species), !is.na(Genus)) %>% 
-  select(-c(ScientificName_accepted, Family, Species))
+  dplyr::select(-c(ScientificName_accepted, Family, Species))
 Beukhofgen<- unique(Beukhofgen)
 Beukhoffam<- Beukhof %>% filter(is.na(Genus)) %>% 
-  select(-c(ScientificName_accepted, Genus, Species))
+  dplyr::select(-c(ScientificName_accepted, Genus, Species))
 Beukhoffam<- unique(Beukhoffam)
 
 
@@ -93,14 +93,14 @@ Datrasceph<- read.csv("DATRAS_taxons_verified.csv", sep=";")
   Datrasceph[which(Datrasceph=="", arr.ind = T)]<- NA
 }
 
-Datrasceph<- Datrasceph %>% select(Class, ScientificName_accepted) %>% filter(Class=="Cephalopoda")
+Datrasceph<- Datrasceph %>% dplyr::select(Class, ScientificName_accepted) %>% filter(Class=="Cephalopoda")
 Datrasceph<- unique(Datrasceph)                                                                     # 7 taxons céphalopodes sont retirés des "missing" et sont regroupés dans un groupe à part de céphalo
 missing<- anti_join(missing, Datrasceph)                                                            # 88 taxons de DATRAS qui manquent encore dans Beukhof
 
 
 
 # BIOTIC
-missingbio<- missing %>% select(ScientificName_accepted)
+missingbio<- missing %>% dplyr::select(ScientificName_accepted)
 write.csv(missingbio, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/missingbio.csv")
 
           # Extraction sous http://www.marlin.ac.uk/biotic/upload.php
@@ -123,20 +123,19 @@ sumrez$remain<- sumrez$nbDatras-sum(sumrez[2:6])
 
 
 # FINAL
-traitgen<- gen %>% select(-c(Family, Genus, Species, taxon))
-traitfam<- fam %>% select(-c(Family, Genus, Species, taxon))
+traitgen<- gen %>% dplyr::select(-c(Family, Genus, Species, taxon))
+traitfam<- fam %>% dplyr::select(-c(Family, Genus, Species, taxon))
 traitspp<- spp %>% mutate(ScientificName_accepted="")
 traitspp$ScientificName_accepted<- paste(traitspp$Genus, traitspp$Species, sep=" ")
-traitspp<- traitspp %>% select(-c(Genus, Species, taxon))
+traitspp<- traitspp %>% dplyr::select(-c(Genus, Species, taxon))
 
 traitfish<- rbind(traitspp,traitgen,traitfam)
-traitbenthos<- missingverified %>% select(SpeciesName, LifeSpan, Maturity,Habit, Sociability, FertilizationType, ReprodFreq, Migratory)
+traitbenthos<- missingverified %>% dplyr::select(SpeciesName, LifeSpan, Maturity,Habit, Sociability, FertilizationType, ReprodFreq, Migratory)
 traitceph<- Datrasceph
 
 
 
 # Nettoyage
-
 {
   traitbenthos==""
   which(traitbenthos=="", arr.ind = T)
@@ -193,11 +192,26 @@ names(traitbenthos)[1]<- "Taxons"
 
 traitfish <- traitfish[, c(8, 1, 2, 3, 4, 5, 6, 7)]
 names(traitfish)[1]<- "Taxons"
-traitfish <- traitfish[, c(1, 5, 2, 3, 4, 6, 7)]
+traitfish <- traitfish[, c(1, 5, 2, 3, 4, 6, 7, 8)]
 names(traitfish)[2]<- "MaturityAge"
 
 traitceph<- traitceph[, c(2, 1)]
 names(traitceph)[1]<- "Taxons" 
+
+
+# Ajout IUCN infos
+
+IUCN<- read.csv("IUCN.csv")
+IUCN<- IUCN %>% dplyr::select(Species, IUCN.status)
+
+traitfish<- left_join(traitfish, IUCN, by=c("Taxons"="Species")) 
+
+
+
+
+save(traitfish, file="Traitfish.Rdata")
+save(traitbenthos, file="Traitbenthos.Rdata")
+save(traitceph, file="Traitceph.Rdata")
 
 
 

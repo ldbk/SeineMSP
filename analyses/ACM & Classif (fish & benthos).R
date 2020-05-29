@@ -190,7 +190,7 @@ Dens<- Lala %>% dplyr::select(Year, moyLong, moyLat, Cluster, Poids, Nombre, Sup
   }
 
 
-
+save(Dens, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densbenthos.Rdata")
 
 
 
@@ -222,7 +222,7 @@ traitfish$length.max<-         catvar(traitfish$length.max, c(50,100,200))
 traitfish$age.max<-            catvar(traitfish$age.max, c(5,10,20,60))
 
 traitfish<- unique(traitfish)
-
+traitfish<- traitfish[!duplicated(traitfish$Taxons),]
 
 
 # 2 FISH ACM on Burt table
@@ -346,7 +346,7 @@ Dens1<- Lele %>% dplyr::select(Year, moyLong, moyLat, Cluster, Poids, Nombre, Su
 }
 
 
-
+save(Dens1, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densfish.Rdata")
 
 
 
