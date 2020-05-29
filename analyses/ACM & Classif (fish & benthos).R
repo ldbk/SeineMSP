@@ -158,7 +158,7 @@ traitbenthos<- traitbenthos %>% mutate(Cluster= group4)
 
     # J2 preparation
 J2<- read.csv("J2Datras.csv")
-J2<- J2 %>% dplyr::select(Year, ScientificName_WoRMS, Poids, Nombre, Superficie, moyLat, moyLong)
+J2<- J2 %>% dplyr::select(-X)
 Verified<- read.csv("DATRAS_taxons_verified.csv", sep=";")
 {
   Verified==""

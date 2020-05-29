@@ -68,11 +68,9 @@ J2<- J2 %>%
 J2<- J2 %>%
   mutate(Superficie= Distance*WingSpread) %>%
   mutate(moyLat= (ShootLat+HaulLat)/2) %>%
-  mutate(moyLong= (ShootLong+HaulLong)/2) %>%
-  mutate(DensityWgt= Poids/Superficie) %>%
-  mutate(DensityNb= Nombre/Superficie)
+  mutate(moyLong= (ShootLong+HaulLong)/2)
 
-J2<- J2[, -c(3, 4, 7, 8, 9, 10, 11, 12, 13)]
+J2<- J2 %>% dplyr::select(Year, ScientificName_WoRMS, Poids, Nombre, Superficie, moyLat, moyLong)
 
 
 # Final
