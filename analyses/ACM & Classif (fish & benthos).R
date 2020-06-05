@@ -1,4 +1,3 @@
-setwd("C:/Users/jrivet/Documents/Stage M2/SeineMSP/data")
 library(dplyr)
 library(FactoMineR) # pour ACM
 library(cluster) # pour agnes
@@ -15,7 +14,7 @@ library(captioner)
 
 # 1 BENTHOS loading and tab preparation
 
-load("Traitbenthos.Rdata")
+load("data/Traitbenthos.Rdata")
 
     # Imputation
 
@@ -155,9 +154,9 @@ traitbenthos<- traitbenthos %>% mutate(Cluster= group4)
 # 5 BENTHOS Cluster densities
 
     # J2 preparation
-J2<- read.csv("J2Datras.csv")
+J2<- read.csv("data/J2Datras.csv")
 J2<- J2 %>% dplyr::select(-X)
-Verified<- read.csv("DATRAS_taxons_verified.csv", sep=";")
+Verified<- read.csv("data/DATRAS_taxons_verified.csv", sep=";")
 {
   Verified==""
   which(Verified=="", arr.ind = T)
@@ -190,7 +189,7 @@ Dens<- unique(Dens)
   }
 
 
-save(Dens, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densbenthos.Rdata")
+save(Dens, file="data/Densbenthos.Rdata")
 
 
 
@@ -198,7 +197,7 @@ save(Dens, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densbenthos.Rd
 
 # 1 FISH loading and tab preparation
 
-load("Traitfish.Rdata")
+load("data/Traitfish.Rdata")
 
     # Imputation
 
@@ -346,7 +345,7 @@ Dens1<- unique(Dens1)
 }
 
 
-save(Dens1, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densfish.Rdata")
+save(Dens1, file="data/Densfish.Rdata")
 
 
 
@@ -366,7 +365,7 @@ Densceph<- Densceph %>% mutate(Cluster=9)
 Densceph<- Densceph %>% dplyr::select(-c(Nb, Sup))
 Densceph<- unique(Densceph)
 
-save(Densceph, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densceph.Rdata")
+save(Densceph, file="data/Densceph.Rdata")
 
 
 
@@ -379,7 +378,7 @@ Dens1$Cluster<- as.character(Dens1$Cluster)
 Densceph$Cluster<- as.character(Densceph$Cluster)
 Denstot<- bind_rows(Dens1, Dens, Densceph)
 
-save(Denstot, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Denstot.Rdata")
+save(Denstot, file="data/Denstot.Rdata")
 
 
 

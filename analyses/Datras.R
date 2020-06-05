@@ -1,4 +1,4 @@
-setwd("C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/ICES")
+setwd("/data/ICES")
 library(assertthat)
 library(tidyr)
 library(dplyr)
@@ -7,9 +7,9 @@ library(raster)
 library(maps)
 library(viridis)
 
-HH<- read.csv(file="Datras HH original.csv", sep=",")
-HL<- read.csv(file="Datras HL original.csv", sep=",")
-Wing<- read.csv(file= "OuvertureCgfs2015_2019 original.csv", sep=";")
+HH<- read.csv(file="data/ICES/Datras HH original.csv", sep=",")
+HL<- read.csv(file="data/ICES/Datras HL original.csv", sep=",")
+Wing<- read.csv(file= "data/ICES/OuvertureCgfs2015_2019 original.csv", sep=";")
 
 
 # Nettoyage tableaux
@@ -72,13 +72,13 @@ J2<- J2 %>% dplyr::select(Year, ScientificName_WoRMS, Nombre, Superficie, moyLat
 
 
 # Final
-write.csv(J2, file= "C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/J2Datras.csv")
+write.csv(J2, file= "data/J2Datras.csv")
 
 
 # Especes
 J2esp<- J2 %>% dplyr::select(ScientificName_WoRMS)
 J2esp<- unique(J2esp)
-write.csv(J2esp, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/DATRAS_taxons_original.csv")
+write.csv(J2esp, file="data/DATRAS_taxons_original.csv")
 
 
 

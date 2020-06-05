@@ -1,19 +1,18 @@
-setwd("C:/Users/jrivet/Documents/Stage M2/SeineMSP/data")
 library(dplyr)
 
 
 # DATRAS
     # Original file
-Datras0<- read.csv("J2Datras.csv")
+Datras0<- read.csv("data/J2Datras.csv")
 
 Datrastax<- Datras0 %>% dplyr::select(ScientificName_WoRMS)
 Datrastax<- unique(Datrastax)
-write.csv(Datrastax, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/DATRAS_taxons_original.csv")
+write.csv(Datrastax, file="data/DATRAS_taxons_original.csv")
 
         # Verif sous marinespecies.org ou wormsbynames [worms]
 
     # WoRMS approved taxons
-Datras<- read.csv("DATRAS_taxons_verified.csv", sep=";")
+Datras<- read.csv("data/DATRAS_taxons_verified.csv", sep=";")
 {
   Datras==""
   which(Datras=="", arr.ind = T)
@@ -31,19 +30,19 @@ Datrasspp<- unique(Datrasspp)                                                   
 
 # BEUKHOF
     # Original file
-Beukhof0<- readxl::read_excel("BEUKHOF_tab_original.xlsx")
+Beukhof0<- readxl::read_excel("data/BEUKHOF_tab_original.xlsx")
 
 Beukhoftax<- Beukhof0 %>% dplyr::select(taxon, LME, habitat,feeding.mode,tl,age.maturity,growth.coefficient,length.max,age.max)
 Beukhoftax<- Beukhoftax %>% filter(LME==22 | LME==24)
 Beukhoftax<- Beukhoftax[!duplicated(Beukhoftax$taxon),]
 Beukhoftax<- Beukhoftax %>% dplyr::select(-LME)
 Beukhoftax<- unique(Beukhoftax)
-write.csv(Beukhoftax, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/BEUKHOF_taxons_original.csv")
+write.csv(Beukhoftax, file="data/BEUKHOF_taxons_original.csv")
 
         # Verif sous marinespecies.org ou wormsbynames [worms]
 
     # WoRMS approved taxons
-Beukhof<- read.csv("BEUKHOF_taxons_verified.csv", sep=";")
+Beukhof<- read.csv("data/BEUKHOF_taxons_verified.csv", sep=";")
 {
   Beukhof==""
   which(Beukhof=="", arr.ind = T)
@@ -85,7 +84,7 @@ missing<- anti_join(missing, fam)                                               
 
 
 # Cephalopodes
-Datrasceph<- read.csv("DATRAS_taxons_verified.csv", sep=";")
+Datrasceph<- read.csv("data/DATRAS_taxons_verified.csv", sep=";")
 {
   Datrasceph==""
   which(Datrasceph=="", arr.ind = T)
@@ -101,11 +100,11 @@ missing<- anti_join(missing, Datrasceph)                                        
 
 # BIOTIC
 missingbio<- missing %>% dplyr::select(ScientificName_accepted)
-write.csv(missingbio, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/missingbio.csv")
+write.csv(missingbio, file="data/missingbio.csv")
 
           # Extraction sous http://www.marlin.ac.uk/biotic/upload.php
 
-missingverified<- read.csv("missingbio_traits_biotic.csv", sep=";")                                 # 36 taxons de DATRAS sont identifiés dans BIOTIC
+missingverified<- read.csv("data/missingbio_traits_biotic.csv", sep=";")                                 # 36 taxons de DATRAS sont identifiés dans BIOTIC
 missing<- anti_join(missing, missingverified, by= c("ScientificName_accepted"="SpeciesName"))       # 52 taxons de DATRAS qui manquent encore
 
 
@@ -201,7 +200,7 @@ names(traitceph)[1]<- "Taxons"
 
 # Ajout IUCN infos
 
-IUCN<- read.csv("IUCN.csv")
+IUCN<- read.csv("data/IUCN.csv")
 IUCN<- IUCN %>% dplyr::select(Species, IUCN.status)
 
 traitfish<- left_join(traitfish, IUCN, by=c("Taxons"="Species")) 
@@ -209,9 +208,9 @@ traitfish<- left_join(traitfish, IUCN, by=c("Taxons"="Species"))
 
 
 
-save(traitfish, file="Traitfish.Rdata")
-save(traitbenthos, file="Traitbenthos.Rdata")
-save(traitceph, file="Traitceph.Rdata")
+save(traitfish, file="data/Traitfish.Rdata")
+save(traitbenthos, file="data/Traitbenthos.Rdata")
+save(traitceph, file="data/Traitceph.Rdata")
 
 
 
