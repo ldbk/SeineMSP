@@ -37,10 +37,10 @@ plot(Trait$Long, Trait$Lat)
 J2SIH<- J1SIH %>% left_join(Taxons, by="Espece")
 J2SIH<- J2SIH[, -3] 
 
-load("SIH v?rifi?.RData")
-SIHv?rifi?<- sp
-SIHv?rifi?<- SIHv?rifi?[,-c(2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)]
-J3SIH<- J2SIH %>% left_join(SIHv?rifi?, by=c("SpecCode"))
+load("SIH vérifié.RData")
+SIHvérifié<- sp
+SIHvérifié<- SIHvérifié[,-c(2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)]
+J3SIH<- J2SIH %>% left_join(SIHvérifié, by=c("SpecCode"))
 J3SIH<- J3SIH[!is.na(J3SIH$SpecCode),]
 
 J3SIH<- J3SIH[, -c(5, 9)]
@@ -182,7 +182,7 @@ J2<- J2 %>%
 J2<- J2[, -c(3, 4, 7, 8, 9, 10, 11, 12, 13)]
 
 
-save(J2, file= "C:/Users/jrivet/Documents/Stage M2/Donn?es/CGFS/J2Datras.RData")
+save(J2, file= "C:/Users/jrivet/Documents/Stage M2/Data/CGFS/J2Datras.RData")
 
 
 

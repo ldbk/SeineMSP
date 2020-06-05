@@ -177,7 +177,7 @@ Lala<- J2 %>% left_join(traitbenthos, by=c("ScientificName_accepted"="Taxons")) 
 Dens<- Lala %>% dplyr::select(Year, moyLong, moyLat, Cluster, Nombre, Superficie) %>% 
   group_by(Cluster, Year, moyLat, moyLong) %>% 
   summarize(Nb= sum(Nombre), Sup = unique(Superficie), DensNb= Nb/Sup) %>% 
-  ungroup() # Densities Nb/km2 & kg/km2
+  ungroup() # Densities Nb/km2
 
 Dens<- Dens %>% dplyr::select(-c(Nb, Sup))
 Dens<- unique(Dens)
@@ -333,8 +333,9 @@ Lele<- J2 %>% left_join(traitfish, by=c("ScientificName_accepted"="Taxons")) %>%
 Dens1<- Lele %>% dplyr::select(Year, moyLong, moyLat, Cluster, Nombre, Superficie) %>% 
   group_by(Cluster, Year, moyLat, moyLong) %>% 
   summarize(Nb= sum(Nombre), Sup= unique(Superficie), DensNb= Nb/Sup) %>% 
-  ungroup() # Densities Nb/km2 & kg/km2
+  ungroup() # Densities Nb/km2
 
+Dens1<- Dens1 %>% dplyr::select(-c(Nb, Sup))
 Dens1<- unique(Dens1)
 
 {
@@ -359,9 +360,10 @@ Lili<- J2 %>% left_join(traitceph, by=c("ScientificName_accepted"="Taxons"))
 Densceph<- Lili %>% dplyr::select(Year, moyLong, moyLat, Nombre, Superficie) %>% 
   group_by(Year, moyLat, moyLong) %>% 
   summarize(Nb= sum(Nombre), Sup= sum(Superficie), DensNb= Nb/Sup) %>% 
-  ungroup() # Densities Nb/km2 & kg/km2
+  ungroup() # Densities Nb/km2
 
 Densceph<- Densceph %>% mutate(Cluster=9)
+Densceph<- Densceph %>% dplyr::select(-c(Nb, Sup))
 Densceph<- unique(Densceph)
 
 save(Densceph, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densceph.Rdata")
@@ -375,8 +377,7 @@ save(Densceph, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densceph.R
 
 Dens1$Cluster<- as.character(Dens1$Cluster)
 Densceph$Cluster<- as.character(Densceph$Cluster)
-Denstot<- Dens1 %>% bind_rows(Dens1, Dens)
-Denstot<- Denstot %>% bind_rows(Denstot, Densceph)
+Denstot<- bind_rows(Dens1, Dens, Densceph)
 
 save(Denstot, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Denstot.Rdata")
 

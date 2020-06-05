@@ -55,13 +55,11 @@ J2<- J2 %>%
   filter(-1.5<=HaulLong & HaulLong <= 0.5 & 49<=HaulLat & HaulLat<=49.8)
 
 
-# Calcul densites
-J2$CatCatchWgt<- J2$CatCatchWgt/1000 # Converti g en kg
+# Calcul
 J2$Distance<- J2$Distance/1000 # Converti m en km 
 J2$WingSpread<- J2$WingSpread/1000 # Converti m en km
 
 J2<- J2 %>%
-  mutate(Poids= CatCatchWgt*HaulDur/60) %>% # Converti CatCatchWgt par trait de chalut
   mutate(Nombre= TotalNo*HaulDur/60) # Converti TotalNo par trait de chalut
 
 
@@ -70,7 +68,7 @@ J2<- J2 %>%
   mutate(moyLat= (ShootLat+HaulLat)/2) %>%
   mutate(moyLong= (ShootLong+HaulLong)/2)
 
-J2<- J2 %>% dplyr::select(Year, ScientificName_WoRMS, Poids, Nombre, Superficie, moyLat, moyLong)
+J2<- J2 %>% dplyr::select(Year, ScientificName_WoRMS, Nombre, Superficie, moyLat, moyLong)
 
 
 # Final
