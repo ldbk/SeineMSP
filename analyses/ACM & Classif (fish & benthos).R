@@ -362,7 +362,25 @@ Densceph<- Lili %>% dplyr::select(Year, moyLong, moyLat, Poids, Nombre, Superfic
   summarize(Nb= sum(Nombre), Wgt= sum(Poids), Sup= sum(Superficie), DensNb= Nb/Sup, DensWgt= Wgt/Sup) %>% 
   ungroup() # Densities Nb/km2 & kg/km2
 
+Densceph<- Densceph %>% mutate(Cluster=9)
+
 save(Densceph, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densceph.Rdata")
+
+
+
+
+
+
+# Tableau densites tous clusters
+
+Dens1$Cluster<- as.character(Dens1$Cluster)
+Densceph$Cluster<- as.character(Densceph$Cluster)
+Denstot<- Dens1 %>% bind_rows(Dens1, Dens)
+Denstot<- Denstot %>% bind_rows(Denstot, Densceph)
+
+save(Denstot, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Denstot.Rdata")
+
+
 
 
 
