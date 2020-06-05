@@ -137,11 +137,9 @@ plot(arbre, which=2, hang=-1)
 rect.hclust(arbre, k=4)
 
 group4<- cutree(arbre, k=4) #4 clusters
-group7<- cutree(arbre, k=7) #7 clusters
 
 #how clusters are presented in 2D in the MCA subspace
 fviz_mca_ind(rez,repel=T,habillage=as.factor(group4),addEllipses=F,axes=c(1,2))
-fviz_mca_ind(rez,repel=T,habillage=as.factor(group7),addEllipses=F,axes=c(1,2))
 
 
 traitbenthos<- traitbenthos %>% mutate(Cluster= group4)
@@ -176,11 +174,13 @@ J2<- J2 %>% left_join(Verified, by=c("ScientificName_WoRMS"="ScientificName")) %
     # Jointure
 Lala<- J2 %>% left_join(traitbenthos, by=c("ScientificName_accepted"="Taxons")) %>% filter(!is.na(Cluster))
 
-Dens<- Lala %>% dplyr::select(Year, moyLong, moyLat, Cluster, Poids, Nombre, Superficie) %>% 
+Dens<- Lala %>% dplyr::select(Year, moyLong, moyLat, Cluster, Nombre, Superficie) %>% 
   group_by(Cluster, Year, moyLat, moyLong) %>% 
-  summarize(Nb= sum(Nombre), Wgt= sum(Poids), Sup= sum(Superficie), DensNb= Nb/Sup, DensWgt= Wgt/Sup) %>% 
+  summarize(Nb= sum(Nombre), Sup = unique(Superficie), DensNb= Nb/Sup) %>% 
   ungroup() # Densities Nb/km2 & kg/km2
 
+Dens<- Dens %>% dplyr::select(-c(Nb, Sup))
+Dens<- unique(Dens)
 
 {
   Cluster5<- Dens %>% filter(Cluster==5)
@@ -317,11 +317,9 @@ plot(arbre1, which=2, hang=-1)
 rect.hclust(arbre1, k=4)
 
 group41<- cutree(arbre1,k=4) #4 clusters
-group71<- cutree(arbre1,k=7) #7 clusters
 
 #how clusters are presented in 2D in the MCA subspace
 fviz_mca_ind(rez1,repel=T, habillage=as.factor(group41), addEllipses=F, axes=c(1,2))
-fviz_mca_ind(rez1,repel=T, habillage=as.factor(group71), addEllipses=F, axes=c(1,2))
 
 traitfish<- traitfish %>% mutate(Cluster= group41)
 
@@ -332,11 +330,12 @@ traitfish<- traitfish %>% mutate(Cluster= group41)
     # Jointure
 Lele<- J2 %>% left_join(traitfish, by=c("ScientificName_accepted"="Taxons")) %>% filter(!is.na(Cluster))
 
-Dens1<- Lele %>% dplyr::select(Year, moyLong, moyLat, Cluster, Poids, Nombre, Superficie) %>% 
+Dens1<- Lele %>% dplyr::select(Year, moyLong, moyLat, Cluster, Nombre, Superficie) %>% 
   group_by(Cluster, Year, moyLat, moyLong) %>% 
-  summarize(Nb= sum(Nombre), Wgt= sum(Poids), Sup= sum(Superficie), DensNb= Nb/Sup, DensWgt= Wgt/Sup) %>% 
+  summarize(Nb= sum(Nombre), Sup= unique(Superficie), DensNb= Nb/Sup) %>% 
   ungroup() # Densities Nb/km2 & kg/km2
 
+Dens1<- unique(Dens1)
 
 {
   Cluster1<- Dens %>% filter(Cluster==1)
@@ -357,12 +356,13 @@ load("Traitceph.Rdata")
   # Densities
 Lili<- J2 %>% left_join(traitceph, by=c("ScientificName_accepted"="Taxons"))
 
-Densceph<- Lili %>% dplyr::select(Year, moyLong, moyLat, Poids, Nombre, Superficie) %>% 
+Densceph<- Lili %>% dplyr::select(Year, moyLong, moyLat, Nombre, Superficie) %>% 
   group_by(Year, moyLat, moyLong) %>% 
-  summarize(Nb= sum(Nombre), Wgt= sum(Poids), Sup= sum(Superficie), DensNb= Nb/Sup, DensWgt= Wgt/Sup) %>% 
+  summarize(Nb= sum(Nombre), Sup= sum(Superficie), DensNb= Nb/Sup) %>% 
   ungroup() # Densities Nb/km2 & kg/km2
 
 Densceph<- Densceph %>% mutate(Cluster=9)
+Densceph<- unique(Densceph)
 
 save(Densceph, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densceph.Rdata")
 
