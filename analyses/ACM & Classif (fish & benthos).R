@@ -350,3 +350,20 @@ save(Dens1, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densfish.Rdat
 
 
 
+# Cephalopodes
+
+load("Traitceph.Rdata")
+
+  # Densities
+Lili<- J2 %>% left_join(traitceph, by=c("ScientificName_accepted"="Taxons"))
+
+Densceph<- Lili %>% dplyr::select(Year, moyLong, moyLat, Poids, Nombre, Superficie) %>% 
+  group_by(Year, moyLat, moyLong) %>% 
+  summarize(Nb= sum(Nombre), Wgt= sum(Poids), Sup= sum(Superficie), DensNb= Nb/Sup, DensWgt= Wgt/Sup) %>% 
+  ungroup() # Densities Nb/km2 & kg/km2
+
+save(Densceph, file="C:/Users/jrivet/Documents/Stage M2/SeineMSP/data/Densceph.Rdata")
+
+
+
+
