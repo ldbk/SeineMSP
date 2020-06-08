@@ -105,7 +105,7 @@ write.csv(missingbio, file="data/missingbio.csv")
           # Extraction sous http://www.marlin.ac.uk/biotic/upload.php
 
 missingverified<- read.csv("data/missingbio_traits_biotic.csv", sep=";")                                 # 36 taxons de DATRAS sont identifiés dans BIOTIC
-missing<- anti_join(missing, missingverified, by= c("ScientificName_accepted"="SpeciesName"))       # 52 taxons de DATRAS qui manquent encore
+missing<- anti_join(missing, missingverified, by= c("ScientificName_accepted"="SpeciesName"))            # 52 taxons de DATRAS qui manquent encore
 
 
 
@@ -206,11 +206,40 @@ IUCN<- IUCN %>% dplyr::select(Species, IUCN.status)
 traitfish<- left_join(traitfish, IUCN, by=c("Taxons"="Species")) 
 
 
+# Modif manuelles de traitbenthos
+
+    # Pecten maximus
+traitbenthos[11,2]<- "2-3 years"
+traitbenthos[11,3]<- "11-20 years"
+traitbenthos[11,4]<- "Free living"
+traitbenthos[11,5]<- "Solitary"
+traitbenthos[11,6]<- "External"
+traitbenthos[11,7]<- "Annual protracted"
+traitbenthos[11,8]<- "Non-migratory / Resident"
+  # Crepidula fornicata
+traitbenthos[15,2]<- "< 1 year"
+traitbenthos[15,3]<- "6-10 years	"
+traitbenthos[15,4]<- "Attached"
+traitbenthos[15,5]<- "Gregarious"
+traitbenthos[15,6]<- "External"
+traitbenthos[15,7]<- "Annual protracted"
+traitbenthos[15,8]<- "Non-migratory / Resident"
+
+traitbenthos<- traitbenthos[rowSums(is.na(traitbenthos[,]))<5,]
 
 
 save(traitfish, file="data/Traitfish.Rdata")
 save(traitbenthos, file="data/Traitbenthos.Rdata")
 save(traitceph, file="data/Traitceph.Rdata")
+
+
+
+
+
+
+
+
+
 
 
 
