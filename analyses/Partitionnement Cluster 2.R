@@ -1,3 +1,6 @@
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 
 load("data/krigeage.Rdata")
 
@@ -8,19 +11,16 @@ metaTab<- Tab %>% select(Longitude, Latitude)
 Tab<- Tab %>% select(-c(Longitude,Latitude))
 
 
-# Calcul des distances entre les pixels pour pouvoir les regrouper par zones
+# Classification
+
 distance<- dist(Tab)
 distance[1:5]
 
-
-# Construction dendro
 arbreclassif<- hclust(distance)
 plot(arbreclassif, hang=-1)
 
-
-# Partitionnement dendro 
 rect.hclust(arbreclassif, 5)
-zonespixel<-cutree(arbreclassif, 5)
+zonespixel<- cutree(arbreclassif, 5)
 print(zonespixel)
 
 # zone<- sst[[1]]
@@ -36,18 +36,23 @@ print(zonespixel)
 # r1<- raster::rasterize(metaTab2new, r0, fields=zonespixel, fun=mean)
 # plot(r1)
 
-toto <- cbind(metaTab,Clust=factor(zonespixel))
-head(toto)
+toto<- cbind(metaTab, Clust=factor(zonespixel))
 
 ggplot(toto)+
-  geom_tile(aes(x=Longitude,y=Latitude,fill=Clust))+theme_minimal()+coord_fixed()
+  geom_tile(aes(x=Longitude, y=Latitude, fill=Clust)) +
+  theme_minimal() +
+  coord_fixed()
 
-tata <- left_join(toto,cbind(metaTab,Tab))
-tata <- pivot_longer(tata,cols=c(4:35),names_to="Year",values_to = "Prediction")
-tata <- tata %>% group_by(Year,Clust) %>% summarise(Prediction=mean(Prediction))
+tata <- left_join(toto, cbind(metaTab, Tab))
+tata <- pivot_longer(tata, cols=c(4:35), names_to="Year", values_to = "Prediction")
+tata <- tata %>% group_by(Year, Clust) %>%
+  summarise(Prediction=mean(Prediction))
 
 ggplot(tata)+
   geom_point(aes(x=Year,y=Prediction,col=Clust))+
   geom_line(aes(x=Year,y=Prediction,col=Clust, group=Clust))+theme_minimal()+
   facet_wrap(.~Clust)
+
+
+
 
