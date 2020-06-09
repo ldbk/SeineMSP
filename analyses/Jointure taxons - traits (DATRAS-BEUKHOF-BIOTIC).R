@@ -49,12 +49,13 @@ Beukhof<- read.csv("data/BEUKHOF_taxons_verified.csv", sep=";")
   Beukhof[which(Beukhof=="", arr.ind = T)]
   Beukhof[which(Beukhof=="", arr.ind = T)]<- NA
 }
+Beukhof<- Beukhof[!Beukhof$Taxon.status=="alternate representation",]
 Beukhof<- Beukhof %>% dplyr::select(-c(ScientificName, X, AphiaID, Match.type, Taxon.status, AphiaID_accepted, Kingdom, Phylum, Class, Order, Subgenus, Subspecies, isMarine, isBrackish, isFresh, isTerrestrial))
 Beukhof<- unique(Beukhof)
 Beukhof<- Beukhof %>% filter(!is.na(ScientificName_accepted))
 
 Beukhofspp<- Beukhof %>% dplyr::select(-c(ScientificName_accepted, Family))
-Beukhofspp<- Beukhofspp %>% filter(!is.na(Genus), !is.na(Species))                                  # Parmi tous les taxons acceptés de Beukhof (361), 305 sont identifiés par un genre ET une espèce
+Beukhofspp<- Beukhofspp %>% filter(!is.na(Genus), !is.na(Species))                                  # Parmi tous les taxons acceptés de Beukhof (361), 303 sont identifiés par un genre ET une espèce
 Beukhofspp<- unique(Beukhofspp)
 
 Beukhofgen<- Beukhof %>% filter(is.na(Species), !is.na(Genus)) %>% 
@@ -68,7 +69,7 @@ Beukhoffam<- unique(Beukhoffam)
 
 # CROISEMENT DATRAS-BEUKHOF
 spp<- inner_join(Datrasspp, Beukhofspp, by= c("Genus","Species"))
-spp<- unique(spp)                                                                                   # 84 taxons identifiés par Genre + espèce sont à la fois dans DATRAS et dans BEUKHOF
+spp<- unique(spp)                                                                                   # 83 taxons identifiés par Genre + espèce sont à la fois dans DATRAS et dans BEUKHOF
 missing<- anti_join(Datras, spp)                                                                    # 101 taxons de DATRAS qui manquent encore
 
 gen<- inner_join(missing, Beukhofgen, by="Genus") %>%
