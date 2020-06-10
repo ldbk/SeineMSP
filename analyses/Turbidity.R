@@ -86,8 +86,10 @@ ggplot(TabTurb4)+
 # Partitionnement
 
 TabTurbnew<- pivot_wider(TabTurb2, names_from = Year, values_from = moyTurb)
+TabTurbnew<- na.omit(TabTurbnew)
 metaTabnew<- TabTurbnew %>% dplyr::select(x, y)
 TabTurbnew<- TabTurbnew %>% ungroup() %>% dplyr::select(-x, -y)
+
 
 distance<- dist(TabTurbnew)
 distance[1:5]
@@ -97,12 +99,11 @@ plot(tree)
 
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
-print(zones)
 
 zone<- Turb[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
-plot(zone, xlab="Longitude", ylab="Latitude")
+#plot(zone, xlab="Longitude", ylab="Latitude")
 
 
 # Raster
@@ -110,12 +111,14 @@ r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=4
 projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
 r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-plot(r1)
+#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
-head(toto)
 
-essai<- left_join(TabPP2, toto, by=c("x", "y"))
+TabTurbnew<- bind_cols(TabTurbnew, metaTabnew)
+TabTurbnew<- pivot_longer(TabTurbnew, cols = 1:21, names_to = "Year", values_to = "moyTurb")
+
+essai<- left_join(TabTurbnew, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyTurb)) }
@@ -129,8 +132,6 @@ ggplot(toto2)+
   labs(fill="mean Turbidity")+
   theme_minimal()+
   coord_fixed()
-
-
 
 
 
