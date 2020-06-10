@@ -13,10 +13,10 @@ Part<- ggplot(toto2part)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
-  labs(fill="mean Particles")+
+  labs(fill="mean Partcles")+
   theme_minimal()+
   coord_fixed()+
-  ggtitle("Particules")
+  ggtitle("Particles")
 
 Chl<- ggplot(toto2chl)+
   geom_tile(aes(x=x,y=y,fill=mean))+
@@ -25,7 +25,7 @@ Chl<- ggplot(toto2chl)+
   labs(fill="mean chl")+
   theme_minimal()+
   coord_fixed()+
-  ggtitle("Chlorophylle")
+  ggtitle("Chlorophyll")
 
 PP<- ggplot(toto2PP)+
   geom_tile(aes(x=x,y=y,fill=mean))+
