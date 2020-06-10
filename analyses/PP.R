@@ -66,6 +66,12 @@ ggplot(TabPP2)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
+TabPP2<- TabPP %>% group_by(x,y,Year) %>% summarize(moyPP= mean(PP))
+ggplot(Tab2, aes(x= Year, y=moyPP, group=Year))+
+  ggtitle("Production primaire 1998-2018")+
+  ylab("mg C/m3/j")+
+  geom_boxplot()
+
 
 # Mean PP 1998-2018
 TabPP3<- TabPP2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPP))
@@ -91,13 +97,7 @@ geom_line(aes(x= Month, y= moybaie))+
   xlab("Mois")+
   ylab("mg C/m3/j")+
   theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
-
-TabPP2<- TabPP %>% group_by(x,y,Year) %>% summarize(moyPP= mean(PP))
-ggplot(Tab2, aes(x= Year, y=moyPP, group=Year))+
-  ggtitle("Production primaire 1998-2018")+
-  ylab("mg C/m3/j")+
-  geom_boxplot()
+  scale_fill_gradientn(colours = terrain.colors(6)) 
 
 
 
