@@ -128,15 +128,19 @@ essai<- left_join(TabDetnew, toto, by=c("x", "y"))
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyDet)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2Det<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+ggplot(toto2Det)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("Detritus")
+
+
+save(toto2Det, file="data/satellite/Detritus/Det_ggplot.Rdata")
 
 
 

@@ -123,16 +123,19 @@ essai<- left_join(TabTurbnew, toto, by=c("x", "y"))
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyTurb)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2Turb<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+ggplot(toto2Turb)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean Turbidity")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("Turbidity")
 
+
+save(toto2Turb, file="data/satellite/Turbidity/Turb_ggplot.Rdata")
 
 
 

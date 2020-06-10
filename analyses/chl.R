@@ -128,21 +128,19 @@ essai<- left_join(Tabchlnew, toto, by=c("x", "y"))
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyChl)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2chl<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+ggplot(toto2chl)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean chl")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("Chlorophyll")
 
 
-
-
-
-
+save(toto2chl, file="data/satellite/chl/chl_ggplot.Rdata")
 
 
 

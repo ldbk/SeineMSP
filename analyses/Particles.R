@@ -122,17 +122,18 @@ essai<- left_join(TabPartnew, toto, by=c("x", "y"))
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyPart)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2part<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+ggplot(toto2part)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean Particles")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("Particles")
 
-
+save(toto2part, file="data/satellite/Particles/part_ggplot.Rdata")
 
 
 

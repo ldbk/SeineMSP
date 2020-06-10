@@ -132,17 +132,19 @@ essai<- left_join(TabSal2, toto, by=c("x", "y"))
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moySal)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2Sal<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+ggplot(toto2Sal)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean salinity")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("Salinity")
 
 
+save(toto2Sal, file="data/satellite/Salinity/Sal_ggplot.Rdata")
 
 
 

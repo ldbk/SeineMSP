@@ -83,9 +83,9 @@ ggplot(TabPP3)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-setwd("C:/Users/jrivet/Documents/Stage M2/Data/PP")
+#setwd("C:/Users/jrivet/Documents/Stage M2/Data/PP")
 
-save(TabPP3, file = "CartePP.RData")
+#save(TabPP3, file = "CartePP.RData")
 
 
 # Serie tempo mean PP
@@ -139,15 +139,21 @@ essai<- left_join(TabPP2, toto, by=c("x", "y"))
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyPP)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2PP<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+ggplot(toto2PP)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean PP (mg C/m3/j)")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("Primary production")
+
+
+save(toto2PP, file="data/satellite/Primary production/PP_ggplot.Rdata")
+
+
 
 
 

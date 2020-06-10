@@ -127,17 +127,19 @@ essai<- left_join(Tabsst2, toto, by=c("x", "y"))
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moySST)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2sst<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+ggplot(toto2sst)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean SST (°C)")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("SST")
 
 
+save(toto2sst, file="data/satellite/sst/sst_ggplot.Rdata")
 
 
 
