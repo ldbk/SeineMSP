@@ -33,10 +33,9 @@ TabPP<- pivot_longer(TabPP, cols=1:251, names_to = "Secondes", values_to = "PP",
 
 {
 TabPP$Secondes<-sub("values.X","",TabPP$Secondes)
-TabPP$Secondes<-sub("e.0","e0",TabPP$Secondes)
-secsst<-as.numeric(TabPP$Secondes)
+sec<-as.numeric(TabPP$Secondes)
 Jour0<-strptime("1998-01-01", format= "%Y-%m-%d")
-TabPP$Date<- Jour0+secsst
+TabPP$Date<- Jour0+sec
 }
 {
 TabPP$Year <- as.numeric(substr(as.character(TabPP$Date),1,4))

@@ -33,7 +33,6 @@ Tabsst<- pivot_longer(Tabsst, cols=1:13232, names_to = "Secondes", values_to = "
 
 {
 Tabsst$Secondes<- sub("values.X","",Tabsst$Secondes)
-Tabsst$Secondes<- sub("e.0","e0",Tabsst$Secondes)
 secsst<- as.numeric(Tabsst$Secondes)
 Day0<-strptime("1981-01-01", format= "%Y-%m-%d")
 Date<- Day0+secsst
@@ -100,14 +99,13 @@ metaTabnew<- Tabsstnew %>% dplyr::select(x, y)
 Tabsstnew<- Tabsstnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(Tabsstnew)
-distance[1:5]
+#distance[1:5]
 
 tree<- hclust(distance)
 plot(tree)
 
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
-print(zones)
 
 zone<- sst[[1]]
 values(zone)<- NA
@@ -120,10 +118,9 @@ r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=4
 projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
 r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-plot(r1)
+#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
-head(toto)
 
 essai<- left_join(Tabsst2, toto, by=c("x", "y"))
 
