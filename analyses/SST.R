@@ -80,7 +80,7 @@ ggplot(Tabsst3)+
 
 
 # Serie tempo mean SST
-Tabsst4<- Tabsst %>% group_by(Month) %>% summarize(moybaie= mean(SST))
+Tabsst4<- Tabsst %>% group_by(Year) %>% summarize(moybaie= mean(SST))
 ggplot(Tabsst4)+
   geom_line(aes(x= Month, y= moybaie))+
   ggtitle("SST mensuelle 1981-2018")+
@@ -88,6 +88,7 @@ ggplot(Tabsst4)+
   ylab("°C")+
   theme_minimal()
 
+save(Tabsst4, file="data/satellite/sst/sst_serie.Rdata")
 
 
 

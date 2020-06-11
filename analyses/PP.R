@@ -66,7 +66,7 @@ ggplot(TabPP2)+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
 TabPP2<- TabPP %>% group_by(x,y,Year) %>% summarize(moyPP= mean(PP))
-ggplot(Tab2, aes(x= Year, y=moyPP, group=Year))+
+ggplot(TabPP2, aes(x= Year, y=moyPP, group=Year))+
   ggtitle("Production primaire 1998-2018")+
   ylab("mg C/m3/j")+
   geom_boxplot()
@@ -83,22 +83,18 @@ ggplot(TabPP3)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-#setwd("C:/Users/jrivet/Documents/Stage M2/Data/PP")
-
-#save(TabPP3, file = "CartePP.RData")
-
 
 # Serie tempo mean PP
-TabPP4<- TabPP %>% group_by(Month) %>% summarize(moybaie= mean(PP))
+TabPP4<- TabPP %>% group_by(Year) %>% summarize(moybaie= mean(PP))
 ggplot(TabPP4)+
-geom_line(aes(x= Month, y= moybaie))+
-  ggtitle("PP mensuelle 1998-2018")+
-  xlab("Mois")+
+geom_line(aes(x= Year, y= moybaie))+
+  ggtitle("PP annuelle 1998-2018")+
+  xlab("Year")+
   ylab("mg C/m3/j")+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6)) 
 
-
+save(TabPP4, file="data/satellite/Primary production/PP_serie.Rdata")
 
 
 
@@ -121,14 +117,6 @@ zone<- PP[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
-
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
@@ -174,6 +162,47 @@ PP<- ggplot(toto2PP)+
 PP
 
 save(PP, file="data/satellite/Primary production/PP_ggplot.Rdata")
+
+
+
+
+
+
+
+# Raster
+
+#r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
+#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
+
+
+  # create SpatialPointsDataFrame
+toto3PP<- toto2PP
+coordinates(toto3PP)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto3PP) <- TRUE
+  # coerce to raster
+rasterPP<- raster(toto3PP)
+rasterPP
+raster::plot(rasterPP, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

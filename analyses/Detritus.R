@@ -72,16 +72,16 @@ ggplot(TabDet3)+
 
 
 # Serie tempo mean detritus
-TabDet4<- TabDet %>% group_by(Month) %>% summarize(moybaie= mean(Detritus))
+TabDet4<- TabDet %>% group_by(Year) %>% summarize(moybaie= mean(Detritus))
 ggplot(TabDet4)+
-  geom_line(aes(x=Month, y= moybaie))+
-  ggtitle("Detritus mensuels 1997-2017")+
-  xlab("Month")+
+  geom_line(aes(x=Year, y= moybaie))+
+  ggtitle("Detritus annuels 1997-2017")+
+  xlab("Year")+
   ylab("Detritus")+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-
+save(TabDet4, file="data/satellite/Detritus/Det_serie.Rdata")
 
 
 
@@ -107,14 +107,6 @@ zone<- Detrit[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
-
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
@@ -163,6 +155,55 @@ Det
 
 save(Det, file="data/satellite/Detritus/Det_ggplot.Rdata")
 
+
+
+# Raster
+r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
+projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
+
+
+
+
+
+
+
+
+
+# Essai ggplot - polygone
+
+toto2Det<- toto2Det %>% ungroup()
+coord<- toto2Det %>% dplyr::select(x, y, Clust)
+values<- toto2Det %>% dplyr::select(Clust, mean)
+
+datapoly<- merge(values, coord, by=c("Clust"))
+
+
+p<- ggplot(datapoly, aes(x=x,y=y))+
+  geom_polygon(aes(fill=mean,group=Clust))
+
+p
+
+
+
+
+
+
+
+
+
+# Raster 
+
+metaTabutile<- toto2Det %>% dplyr::select(x, y)
+clust<- toto2Det[,3]
+
+r02<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
+projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+r12<- raster::rasterize(metaTabutile, r0, fields=clust, fun=mean)
+plot(r12)
 
 
 

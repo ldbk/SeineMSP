@@ -77,15 +77,16 @@ ggplot(Tabchl3)+
 
 
 # Serie tempo mean chl
-Tabchl4<- Tabchl %>% group_by(month) %>% summarize(moybaie= mean(Chloro))
+Tabchl4<- Tabchl %>% group_by(year) %>% summarize(moybaie= mean(Chloro))
 ggplot(Tabchl4)+
-  geom_point(aes(x= month, y= moybaie))+
+  geom_point(aes(x= year, y= moybaie))+
   ggtitle("Chlorophylle moyenne annuelle 1997-2017")+
-  xlab("Mois")+
+  xlab("Year")+
   ylab("?g/L")+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
+save(Tabchl4, file="data/satellite/chl/chl_serie.Rdata")
 
 
 

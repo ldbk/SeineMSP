@@ -70,7 +70,7 @@ ggplot(TabTurb3)+
 
 
 # Serie tempo mean turb
-TabTurb4<- TabTurb %>% group_by(Month) %>% summarize(moybaie= mean(Turbidity))
+TabTurb4<- TabTurb %>% group_by(Year) %>% summarize(moybaie= mean(Turbidity))
 ggplot(TabTurb4)+
   geom_line(aes(x=Month, y=moybaie))+
   ggtitle("Turbidité mensuelle 1997-2017")+
@@ -79,6 +79,7 @@ ggplot(TabTurb4)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
+save(TabTurb4, file="data/satellite/Turbidity/Turb_serie.Rdata")
 
 
 

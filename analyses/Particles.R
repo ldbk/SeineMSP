@@ -71,16 +71,16 @@ ggplot(TabPart3)+
 
 
 # Serie tempo mes particles
-TabPart4<- TabPart %>% group_by(Month) %>% summarize(moybaie= mean(Particules))
+TabPart4<- TabPart %>% group_by(Year) %>% summarize(moybaie= mean(Particules))
 ggplot(TabPart4)+
-  geom_line(aes(x= Month, y= moybaie))+
-  ggtitle("Particules mensuelles 1997-2017")+
-  xlab("Mois")+
+  geom_line(aes(x= Year, y= moybaie))+
+  ggtitle("Particules annuelles 1997-2017")+
+  xlab("Year")+
   ylab("Concentration en particules")+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-
+save(TabPart4, file="data/satellite/Particles/part_serie.Rdata")
 
 
 # Partitionnement

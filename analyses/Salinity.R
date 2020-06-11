@@ -64,6 +64,9 @@ ggplot(TabSal2)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
+ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+
+  geom_boxplot()
+
 
 # PP moy ens 1998-2018
 TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
@@ -77,19 +80,16 @@ ggplot(TabSal3)+
 
 
 # PP moy chaque annee (/ baie)
-TabSal4<- TabSal %>% group_by(Month) %>% summarize(moybaie= mean(Salinite))
+TabSal4<- TabSal %>% group_by(Year) %>% summarize(moybaie= mean(Salinite))
 ggplot(TabSal4)+
-  geom_line(aes(x= Month, y= moybaie))+
-  ggtitle("Salinite mensuelle 1992-2018")+
-  xlab("Month")+
+  geom_line(aes(x= Year, y= moybaie))+
+  ggtitle("Salinite annuelle 1992-2018")+
+  xlab("Year")+
   ylab("Salinité")+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-TabSal2<- TabSal %>% group_by(x,y,Year) %>% summarize(moySal= mean(Salinite))
-ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+
-  geom_boxplot()
-
+save(TabSal4, file="data/satellite/Salinity/Sal_serie.Rdata")
 
 
 
