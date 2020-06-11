@@ -92,7 +92,7 @@ TabTurbnew<- TabTurbnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 
 distance<- dist(TabTurbnew)
-distance[1:5]
+#distance[1:5]
 
 tree<- hclust(distance)
 plot(tree)
@@ -125,17 +125,41 @@ for (k in unique(essai[,"Clust"])){
 
 toto2Turb<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2Turb)+
+
+
+
+#1st Polygon
+liste <- with(toto2Turb, chull(x, y))
+hull <- toto2Turb[liste, c("x", "y")]
+Poly <- Polygon(hull)
+
+#Create SpatialPolygons objects
+SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
+buff <- raster::buffer(SpPoly, 0.1)
+
+#Cut object along coast
+coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- gDifference(buff, coast)
+PolyCut <- fortify(res)
+
+
+#Put polygon in good format for later use
+tete <- PolyCut[PolyCut$piece==1,]
+db.poly <- polygon.create(tete[,c(1,2)])
+
+Turb<- ggplot(toto2Turb)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean Turbidity")+
   theme_minimal()+
   coord_fixed()+
-  ggtitle("Turbidity")
+  ggtitle("Turbidity")+
+  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
+Turb
 
-save(toto2Turb, file="data/satellite/Turbidity/Turb_ggplot.Rdata")
+save(Turb, file="data/satellite/Turbidity/Turb_ggplot.Rdata")
 
 
 

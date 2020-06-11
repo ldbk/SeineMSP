@@ -124,16 +124,42 @@ for (k in unique(essai[,"Clust"])){
 
 toto2part<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2part)+
+
+
+
+
+#1st Polygon
+liste <- with(toto2part, chull(x, y))
+hull <- toto2part[liste, c("x", "y")]
+Poly <- Polygon(hull)
+
+#Create SpatialPolygons objects
+SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
+buff <- raster::buffer(SpPoly, 0.1)
+
+#Cut object along coast
+coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- gDifference(buff, coast)
+PolyCut <- fortify(res)
+
+
+#Put polygon in good format for later use
+tete <- PolyCut[PolyCut$piece==1,]
+db.poly <- polygon.create(tete[,c(1,2)])
+
+Part<- ggplot(toto2part)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean Particles")+
   theme_minimal()+
   coord_fixed()+
-  ggtitle("Particles")
+  ggtitle("Particles")+
+  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
-save(toto2part, file="data/satellite/Particles/part_ggplot.Rdata")
+Part
+
+save(Part, file="data/satellite/Particles/part_ggplot.Rdata")
 
 
 

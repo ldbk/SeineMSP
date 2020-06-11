@@ -109,19 +109,18 @@ metaTabnew<- TabPPnew %>% dplyr::select(x, y)
 TabPPnew<- TabPPnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(TabPPnew)
-distance[1:5]
+#distance[1:5]
 
 tree<- hclust(distance)
 plot(tree)
 
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
-print(zones)
 
 zone<- PP[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
-plot(zone, xlab="Longitude", ylab="Latitude")
+#plot(zone, xlab="Longitude", ylab="Latitude")
 
 
 # Raster
@@ -129,10 +128,9 @@ r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=4
 projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
 r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-plot(r1)
+#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
-head(toto)
 
 essai<- left_join(TabPP2, toto, by=c("x", "y"))
 
@@ -141,17 +139,41 @@ for (k in unique(essai[,"Clust"])){
 
 toto2PP<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2PP)+
+
+
+
+#1st Polygon
+liste <- with(toto2PP, chull(x, y))
+hull <- toto2PP[liste, c("x", "y")]
+Poly <- Polygon(hull)
+
+#Create SpatialPolygons objects
+SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
+buff <- raster::buffer(SpPoly, 0.1)
+
+#Cut object along coast
+coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- gDifference(buff, coast)
+PolyCut <- fortify(res)
+
+
+#Put polygon in good format for later use
+tete <- PolyCut[PolyCut$piece==1,]
+db.poly <- polygon.create(tete[,c(1,2)])
+
+PP<- ggplot(toto2PP)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean PP (mg C/m3/j)")+
   theme_minimal()+
   coord_fixed()+
-  ggtitle("Primary production")
+  ggtitle("Primary production")+
+  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
+PP
 
-save(toto2PP, file="data/satellite/Primary production/PP_ggplot.Rdata")
+save(PP, file="data/satellite/Primary production/PP_ggplot.Rdata")
 
 
 

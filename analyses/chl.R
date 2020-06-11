@@ -130,17 +130,41 @@ for (k in unique(essai[,"Clust"])){
 
 toto2chl<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2chl)+
+
+
+
+#1st Polygon
+liste <- with(toto2chl, chull(x, y))
+hull <- toto2chl[liste, c("x", "y")]
+Poly <- Polygon(hull)
+
+#Create SpatialPolygons objects
+SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
+buff <- raster::buffer(SpPoly, 0.1)
+
+#Cut object along coast
+coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- gDifference(buff, coast)
+PolyCut <- fortify(res)
+
+
+#Put polygon in good format for later use
+tete <- PolyCut[PolyCut$piece==1,]
+db.poly <- polygon.create(tete[,c(1,2)])
+
+Chl<- ggplot(toto2chl)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean chl")+
   theme_minimal()+
   coord_fixed()+
-  ggtitle("Chlorophyll")
+  ggtitle("Chlorophyll")+
+  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
+Chl
 
-save(toto2chl, file="data/satellite/chl/chl_ggplot.Rdata")
+save(Chl, file="data/satellite/chl/chl_ggplot.Rdata")
 
 
 

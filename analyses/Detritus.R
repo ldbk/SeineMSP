@@ -30,9 +30,11 @@ TabDet<- fortify(Detrit)
 pixelok<- which(!is.na(apply(TabDet,1,mean)))
 TabDet<- pivot_longer(TabDet, cols=1:244, names_to = "Date", values_to = "Detritus", values_drop_na = TRUE)
 
+{
 TabDet$Date<-sub("values.index_","",TabDet$Date)
 TabDet$Year<- as.numeric(substr(as.character(TabDet$Date),1,4))
 TabDet$Month<- as.numeric(substr(as.character(TabDet$Date), 6,7))
+}
 
 
 # Infos
@@ -93,19 +95,18 @@ metaTabnew<- TabDetnew %>% dplyr::select(x, y)
 TabDetnew<- TabDetnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(TabDetnew)
-distance[1:5]
+#distance[1:5]
 
 tree<- hclust(distance, )
 plot(tree)
 
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
-print(zones)
 
 zone<- Detrit[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
-plot(zone, xlab="Longitude", ylab="Latitude")
+#plot(zone, xlab="Longitude", ylab="Latitude")
 
 
 # Raster
@@ -113,12 +114,9 @@ r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=4
 projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
 r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-plot(r1)
+#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
-head(toto)
-
-
 
 TabDetnew<- bind_cols(TabDetnew, metaTabnew)
 TabDetnew<- pivot_longer(TabDetnew, cols = 1:21, names_to = "Year", values_to = "moyDet")
@@ -130,17 +128,40 @@ for (k in unique(essai[,"Clust"])){
 
 toto2Det<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2Det)+
+
+
+#1st Polygon
+liste <- with(toto2Det, chull(x, y))
+hull <- toto2Det[liste, c("x", "y")]
+Poly <- Polygon(hull)
+
+#Create SpatialPolygons objects
+SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
+buff <- raster::buffer(SpPoly, 0.1)
+
+#Cut object along coast
+coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- gDifference(buff, coast)
+PolyCut <- fortify(res)
+
+
+#Put polygon in good format for later use
+tete <- PolyCut[PolyCut$piece==1,]
+db.poly <- polygon.create(tete[,c(1,2)])
+
+Det<- ggplot(toto2Det)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="")+
   theme_minimal()+
   coord_fixed()+
-  ggtitle("Detritus")
+  ggtitle("Detritus")+
+  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
+Det
 
-save(toto2Det, file="data/satellite/Detritus/Det_ggplot.Rdata")
+save(Det, file="data/satellite/Detritus/Det_ggplot.Rdata")
 
 
 
