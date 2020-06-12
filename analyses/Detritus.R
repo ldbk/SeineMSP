@@ -207,11 +207,8 @@ save(rasterDetnew, file="data/satellite/Detritus/Det_raster.Rdata")
 #essai
 disdet<-disaggregate(rasterDet,fact=4)
 m1<-mask(disdet,res)
-disdet<-overlay(disdet,)
-plot(disdet)
-
-
-r0
+#disdet<-overlay(disdet,)
+#plot(disdet)
 
 
 
