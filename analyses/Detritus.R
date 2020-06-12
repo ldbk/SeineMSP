@@ -7,6 +7,7 @@ library(viridis)
 library(dplyr)
 library(tidyr)
 
+
 Detrit<- stack("data/satellite/Detritus/cdm443")
 
 
@@ -136,8 +137,8 @@ SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
 #Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 PolyCut <- fortify(res)
 
 
@@ -202,6 +203,15 @@ save(rasterDetnew, file="data/satellite/Detritus/Det_raster.Rdata")
 #r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
 #plot(r1)
 
+
+#essai
+disdet<-disaggregate(rasterDet,fact=4)
+m1<-mask(disdet,res)
+disdet<-overlay(disdet,)
+plot(disdet)
+
+
+r0
 
 
 
