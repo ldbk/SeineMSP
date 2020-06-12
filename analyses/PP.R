@@ -6,6 +6,9 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
+library(rgeos)
+library(RGeostats)
+library(rgdal)
 
 PP<- nc_open("data/satellite/Primary production/PP 1998-2018.nc")
 PP<- stack("data/satellite/Primary production/PP 1998-2018.nc")
@@ -161,22 +164,13 @@ PP<- ggplot(toto2PP)+
 
 PP
 
-save(PP, file="data/satellite/Primary production/PP_ggplot.Rdata")
-
-
-
-
 
 
 
 # Raster
 
-#r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
+r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
-
 
   # create SpatialPointsDataFrame
 toto3PP<- toto2PP
@@ -188,15 +182,16 @@ rasterPP<- raster(toto3PP)
 rasterPP
 raster::plot(rasterPP, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
 
+rasterPPnew<- resample(rasterPP, r0, method="ngb")
+plot(rasterPPnew, main="Primary production", xlab="Longitude", ylab="Latitude")
+
+save(rasterPPnew, file="data/satellite/Primary production/PP_raster.Rdata")
 
 
+# old
 
-
-
-
-
-
-
+#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
 
 
 

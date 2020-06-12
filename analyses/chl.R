@@ -111,14 +111,6 @@ values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
 
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
-
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
 Tabchlnew<- bind_cols(Tabchlnew, metaTabnew)
@@ -165,18 +157,45 @@ Chl<- ggplot(toto2chl)+
 
 Chl
 
-save(Chl, file="data/satellite/chl/chl_ggplot.Rdata")
+
+
+# Raster
+
+r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+  # create SpatialPointsDataFrame
+toto3chl<- toto2chl
+coordinates(toto3chl)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto3chl) <- TRUE
+  # coerce to raster
+rasterchlnew<- raster(toto3chl)
+rasterchlnew
+plot(rasterchlnew, main="Chl", xlab="Longitude", ylab="Latitude")
+
+save(rasterchlnew, file="data/satellite/chl/chl_raster.Rdata")
+
+
+# old
+
+#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
 
 
 
+# essai changement resolution
+
+# res: 0.01098639, 0.0109864
+#obj:res 0.011, 0.011 --> donc disaggregate
+
+#xres(rasterchlnew)
+#yres(rasterchlnew)
+
+#res(rasterchlnew)<- c((0.011/xres(rasterchlnew)), (0.011/yres(rasterchlnew)))
 
 
-
-
-
-
-
-
+#rasterchlessai<- disaggregate(rasterchlnew, fact=c(0.011/xres(rasterchlnew), 0.011/yres(rasterchlnew)))
 
 
 

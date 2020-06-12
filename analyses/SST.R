@@ -6,6 +6,9 @@ library(MASS)
 library(dplyr)
 library(tidyr)
 library(viridisLite)
+library(rgeos)
+library(RGeostats)
+library(rgdal)
 
 sst<- stack("data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581929927261.nc")
 sst<- sst-275.15
@@ -111,15 +114,7 @@ zones<- cutree(tree, 5)
 zone<- sst[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
-plot(zone, xlab="Longitude", ylab="Latitude")
-
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+#plot(zone, xlab="Longitude", ylab="Latitude")
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
@@ -162,15 +157,34 @@ SST<- ggplot(toto2sst)+
 
 SST
 
-save(SST, file="data/satellite/sst/sst_ggplot.Rdata")
 
 
 
+# Raster
+
+r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+  # create SpatialPointsDataFrame
+toto3sst<- toto2sst
+coordinates(toto3sst)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto3sst) <- TRUE
+  # coerce to raster
+rastersst<- raster(toto3sst)
+rastersst
+raster::plot(rastersst, col= terrain.colors(5), main="SST", xlab="Longitude", ylab="Latitude")
+
+rastersstnew<- resample(rastersst, r0, method="ngb")
+plot(rastersstnew, main="SST", xlab="Longitude", ylab="Latitude")
+
+save(rastersstnew, file="data/satellite/sst/sst_raster.Rdata")
 
 
+# old
 
-
-
+#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
 
 
 

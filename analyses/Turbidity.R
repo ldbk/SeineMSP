@@ -106,14 +106,6 @@ values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
 
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
-
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
 TabTurbnew<- bind_cols(TabTurbnew, metaTabnew)
@@ -160,11 +152,34 @@ Turb<- ggplot(toto2Turb)+
 
 Turb
 
-save(Turb, file="data/satellite/Turbidity/Turb_ggplot.Rdata")
 
 
 
+# Raster
 
+r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+  # create SpatialPointsDataFrame
+toto3Turb<- toto2Turb
+coordinates(toto3Turb)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto3Turb) <- TRUE
+  # coerce to raster
+rasterTurb<- raster(toto3Turb)
+rasterTurb
+raster::plot(rasterTurb, col= terrain.colors(5), main="Turbidity", xlab="Longitude", ylab="Latitude")
+
+rasterTurbnew<- resample(rasterTurb, r0, method="ngb")
+plot(rasterTurbnew, main="Turbidity", xlab="Longitude", ylab="Latitude")
+
+save(rasterTurbnew, file="data/satellite/Turbidity/Turb_raster.Rdata")
+
+
+# old
+
+#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
 
 
 

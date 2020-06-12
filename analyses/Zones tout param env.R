@@ -1,19 +1,39 @@
 library(ggplot2)
 library(gridExtra)
+library(raster)
 
 
 # Cartes
 {
-load("data/satellite/Particles/part_ggplot.Rdata")
-load("data/satellite/chl/chl_ggplot.Rdata")
-load("data/satellite/Primary production/PP_ggplot.Rdata")
-load("data/satellite/Detritus/Det_ggplot.Rdata")
-load("data/satellite/Turbidity/Turb_ggplot.Rdata")
-load("data/satellite/sst/sst_ggplot.Rdata")
-load("data/satellite/Salinity/Sal_ggplot.Rdata")
+load("data/satellite/Particles/part_raster.Rdata")
+load("data/satellite/chl/chl_raster.Rdata")
+load("data/satellite/Primary production/PP_raster.Rdata")
+load("data/satellite/Detritus/Det_raster.Rdata")
+load("data/satellite/Turbidity/Turb_raster.Rdata")
+load("data/satellite/sst/sst_raster.Rdata")
+load("data/satellite/Salinity/Sal_raster.Rdata")
 }
 
-grid.arrange(Part, Chl, PP, Det, Turb, SST, Sal, ncol=2, nrow = 4)
+par(mfrow = c(2, 4))
+
+Part<- raster::plot(rasterpartnew, main="Particles", xlab="Longitude", ylab="Latitude")
+Chl<- raster::plot(rasterchlnew, main="Chl", xlab="Longitude", ylab="Latitude")
+PP<- raster::plot(rasterPPnew, main="Primary production", xlab="Longitude", ylab="Latitude")
+Det<- raster::plot(rasterDetnew, main="Detritus", xlab="Longitude", ylab="Latitude")
+Turb<- raster::plot(rasterTurbnew, main="Turbidity", xlab="Longitude", ylab="Latitude")
+SST<- raster::plot(rastersstnew, main="SST", xlab="Longitude", ylab="Latitude")
+Sal<- raster::plot(rasterSalnew, main="Salinity", xlab="Longitude", ylab="Latitude")
+
+#grid.arrange(Part, Chl, PP, Det, Turb, SST, Sal, ncol=2, nrow = 4)
+
+
+
+
+
+
+
+
+
 
 
 # Series temporelles

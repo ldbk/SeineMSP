@@ -70,7 +70,7 @@ ggplot(TabPart3)+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# Serie tempo mes particles
+# Serie tempo mean particles
 TabPart4<- TabPart %>% group_by(Year) %>% summarize(moybaie= mean(Particules))
 ggplot(TabPart4)+
   geom_line(aes(x= Year, y= moybaie))+
@@ -103,14 +103,6 @@ zone<- Part[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
-
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
@@ -159,7 +151,34 @@ Part<- ggplot(toto2part)+
 
 Part
 
-save(Part, file="data/satellite/Particles/part_ggplot.Rdata")
+
+
+
+# Raster
+
+r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+  # create SpatialPointsDataFrame
+toto3part<- toto2part
+coordinates(toto3part)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto3part) <- TRUE
+  # coerce to raster
+rasterpart<- raster(toto3part)
+rasterpart
+raster::plot(rasterpart, col= terrain.colors(5), main="Particles", xlab="Longitude", ylab="Latitude")
+
+rasterpartnew<- resample(rasterpart, r0, method="ngb")
+plot(rasterpartnew, main="Particles", xlab="Longitude", ylab="Latitude")
+
+save(rasterpartnew, file="data/satellite/Particles/part_raster.Rdata")
+
+
+# old
+
+#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
 
 
 

@@ -53,7 +53,7 @@ sd(TabSal$Sal)
 var(TabSal$Sal)
 
 
-# Salinite moy chaque annee (/ pixel)
+# Mean salinity per year
 TabSal2<- TabSal %>% group_by(x,y,Year) %>% summarize(moySal= mean(Salinite))
 ggplot(TabSal2)+
   geom_tile(aes(x=x, y=y, fill=moySal))+
@@ -68,7 +68,7 @@ ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+
   geom_boxplot()
 
 
-# PP moy ens 1998-2018
+# Mean salinity 1998-2018
 TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
 ggplot(TabSal3)+
   geom_tile(aes(x=x, y=y, fill= moyper))+
@@ -79,7 +79,7 @@ ggplot(TabSal3)+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# PP moy chaque annee (/ baie)
+# Serie tempo mean salinity
 TabSal4<- TabSal %>% group_by(Year) %>% summarize(moybaie= mean(Salinite))
 ggplot(TabSal4)+
   geom_line(aes(x= Year, y= moybaie))+
@@ -114,14 +114,6 @@ zone<- Sal[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
-
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
@@ -165,10 +157,34 @@ Sal<- ggplot(toto2Sal)+
 
 Sal
 
-save(Sal, file="data/satellite/Salinity/Sal_ggplot.Rdata")
 
 
 
+# Raster
+
+r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+  # create SpatialPointsDataFrame
+toto3Sal<- toto2Sal
+coordinates(toto3Sal)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto3Sal) <- TRUE
+  # coerce to raster
+rasterSal<- raster(toto3Sal)
+rasterSal
+raster::plot(rasterSal, col= terrain.colors(5), main="Salinity", xlab="Longitude", ylab="Latitude")
+
+rasterSalnew<- resample(rasterSal, r0, method="ngb")
+plot(rasterSalnew, main="Salinity", xlab="Longitude", ylab="Latitude")
+
+save(rasterSalnew, file="data/satellite/Salinity/Sal_raster.Rdata")
+
+
+# old
+
+#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
+#plot(r1)
 
 
 
