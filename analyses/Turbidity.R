@@ -5,6 +5,8 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
+library(rgdal)
+library(rgeos)
 
 Turb<- stack("data/satellite/Turbidity/kd490")
 
@@ -29,12 +31,14 @@ TabTurb<-fortify(Turb)
 pixelok<- which(!is.na(apply(TabTurb,1,mean)))
 TabTurb<- pivot_longer(TabTurb, cols=1:244, names_to = "Date", values_to = "Turbidity", values_drop_na = TRUE)
 
+{
 TabTurb$Date<-sub("values.index_","",TabTurb$Date)
 TabTurb$Year <- as.numeric(substr(as.character(TabTurb$Date),1,4))
 TabTurb$Month<- as.numeric(substr(as.character(TabTurb$Date), 6,7))
+}
 
 
-# Infos Turb
+# Infos
 mean(TabTurb$Turbidity)
 min(TabTurb$Turbidity)
 max(TabTurb$Turbidity)
@@ -47,13 +51,12 @@ TabTurb2<- TabTurb %>% group_by(x,y,Year) %>% summarize(moyTurb= mean(Turbidity)
 ggplot(TabTurb2)+
   geom_tile(aes(x=x, y=y, fill=moyTurb))+
   ggtitle("Turbidité moyenne 1997-2017")+
-  facet_wrap(. ~Month)+
+  facet_wrap(. ~Year)+
   xlab("Longitude")+
   ylab("Latitude")+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-TabTurb2<- TabTurb %>% group_by(x,y,Year) %>% summarize(moyTurb= mean(Turbidity))
 ggplot(TabTurb2, aes(x=Year, y=moyTurb, group=Year))+
   geom_boxplot()
 
@@ -72,15 +75,14 @@ ggplot(TabTurb3)+
 # Serie tempo mean turb
 TabTurb4<- TabTurb %>% group_by(Year) %>% summarize(moybaie= mean(Turbidity))
 ggplot(TabTurb4)+
-  geom_line(aes(x=Month, y=moybaie))+
+  geom_line(aes(x=Year, y=moybaie))+
   ggtitle("Turbidité mensuelle 1997-2017")+
-  xlab("Month")+
+  xlab("Year")+
   ylab("Turbidité")+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
 save(TabTurb4, file="data/satellite/Turbidity/Turb_serie.Rdata")
-
 
 
 
@@ -90,7 +92,6 @@ TabTurbnew<- pivot_wider(TabTurb2, names_from = Year, values_from = moyTurb)
 TabTurbnew<- na.omit(TabTurbnew)
 metaTabnew<- TabTurbnew %>% dplyr::select(x, y)
 TabTurbnew<- TabTurbnew %>% ungroup() %>% dplyr::select(-x, -y)
-
 
 distance<- dist(TabTurbnew)
 #distance[1:5]
@@ -108,16 +109,12 @@ zone[pixelok]<- zones
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
-TabTurbnew<- bind_cols(TabTurbnew, metaTabnew)
-TabTurbnew<- pivot_longer(TabTurbnew, cols = 1:21, names_to = "Year", values_to = "moyTurb")
-
-essai<- left_join(TabTurbnew, toto, by=c("x", "y"))
+essai<- left_join(TabTurb2, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyTurb)) }
 
 toto2Turb<- left_join(toto, essai2, by="Clust")
-
 
 
 
@@ -131,8 +128,8 @@ SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
 #Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 PolyCut <- fortify(res)
 
 
@@ -154,7 +151,6 @@ Turb
 
 
 
-
 # Raster
 
 r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
@@ -168,18 +164,20 @@ gridded(toto3Turb) <- TRUE
   # coerce to raster
 rasterTurb<- raster(toto3Turb)
 rasterTurb
-raster::plot(rasterTurb, col= terrain.colors(5), main="Turbidity", xlab="Longitude", ylab="Latitude")
+plot(rasterTurb, col= terrain.colors(5), main="Turbidity", xlab="Longitude", ylab="Latitude")
 
-rasterTurbnew<- resample(rasterTurb, r0, method="ngb")
-plot(rasterTurbnew, main="Turbidity", xlab="Longitude", ylab="Latitude")
+load("data/satellite/chl/rasterChlnew.Rdata")
 
-save(rasterTurbnew, file="data/satellite/Turbidity/Turb_raster.Rdata")
+disturb<- disaggregate(rasterTurb, fact=(res(rasterTurb)/res(rasterchlnew)))
+mTurb<- mask(disturb, res)
+plot(mTurb)
+#disturb<- overlay(disturb,)
+#plot(disturb)
 
 
-# old
+save(mTurb, file="data/satellite/Turbidity/Turb_raster.Rdata")
 
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+
 
 
 

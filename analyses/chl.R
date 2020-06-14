@@ -6,11 +6,13 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
-library(viridisLite)
+library(rgdal)
+library(rgeos)
 
 chl<- stack("data/satellite/chl/chl")
 
-# Conversion raster
+
+# Conversion raster - tableau
 fortify.Raster <- function(chl, maxPixel = 1000000) {
   
   if (ncell(chl) > maxPixel) {
@@ -29,7 +31,6 @@ fortify.Raster <- function(chl, maxPixel = 1000000) {
 Tabchl<- fortify(chl)
 pixelok<- which(!is.na(apply(Tabchl,1,mean)))
 Tabchl<- pivot_longer(Tabchl, cols=1:240, names_to = "Date", values_to = "Chloro", values_drop_na = TRUE)
-
 
 {
   Tabchl$Date<- sub("values.index_","",Tabchl$Date)
@@ -59,8 +60,6 @@ ggplot(Tabchl2)+
   scale_fill_gradientn(colours = terrain.colors(6))
 
 ggplot(Tabchl2, aes(x= year, y=moyChl, group=year))+
-  ggtitle("Chlorophylle 1997-2017")+
-  ylab("?g/L")+
   geom_boxplot()
 
 
@@ -86,7 +85,7 @@ ggplot(Tabchl4)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(Tabchl4, file="data/satellite/chl/chl_serie.Rdata")
+save(Tabchl4, file="data/satellite/Chl/Chl_serie.Rdata")
 
 
 
@@ -113,16 +112,12 @@ zone[pixelok]<- zones
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
-Tabchlnew<- bind_cols(Tabchlnew, metaTabnew)
-Tabchlnew<- pivot_longer(Tabchlnew, cols = 1:21, names_to = "year", values_to = "moyChl")
-
-essai<- left_join(Tabchlnew, toto, by=c("x", "y"))
+essai<- left_join(Tabchl2, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyChl)) }
 
 toto2chl<- left_join(toto, essai2, by="Clust")
-
 
 
 
@@ -136,8 +131,8 @@ SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
 #Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 PolyCut <- fortify(res)
 
 
@@ -174,28 +169,18 @@ rasterchlnew<- raster(toto3chl)
 rasterchlnew
 plot(rasterchlnew, main="Chl", xlab="Longitude", ylab="Latitude")
 
-save(rasterchlnew, file="data/satellite/chl/chl_raster.Rdata")
+save(rasterchlnew, file="data/satellite/chl/rasterChlnew.Rdata")
+
+mChl<- mask(rasterchlnew, res)
+plot(mChl)
+#rasterchlnew<- overlay(rasterchlnew,)
+#plot(rasterchlnew)
 
 
-# old
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+save(mChl, file="data/satellite/chl/chl_raster.Rdata")
 
 
 
-# essai changement resolution
-
-# res: 0.01098639, 0.0109864
-#obj:res 0.011, 0.011 --> donc disaggregate
-
-#xres(rasterchlnew)
-#yres(rasterchlnew)
-
-#res(rasterchlnew)<- c((0.011/xres(rasterchlnew)), (0.011/yres(rasterchlnew)))
-
-
-#rasterchlessai<- disaggregate(rasterchlnew, fact=c(0.011/xres(rasterchlnew), 0.011/yres(rasterchlnew)))
 
 
 

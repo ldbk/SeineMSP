@@ -6,6 +6,8 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
+library(rgdal)
+library(rgeos)
 
 O2<- nc_open("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
 O2<- stack("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
@@ -70,10 +72,7 @@ ggplot(TabO22)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-TabO25<- TabO2 %>% group_by(x,y,Month) %>% summarize(moyO2m= mean(O2))
-ggplot(TabO25, aes(x=Month, y=moyO2m, group=Month))+
-  ggtitle("Oxygene dissous 1998-2018")+
-  ylab("mmol/m3")+
+ggplot(TabO22, aes(x=Year, y=moyO2m, group=Year))+
   geom_boxplot()
 
 
@@ -99,60 +98,100 @@ ggplot(TabO24)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-
+save(TabO24, file="data/satellite/O2/O2_serie.Rdata")
 
 
 
 # Partitionnement
 
 TabO2new<- pivot_wider(TabO22, names_from = Year, values_from = moyO2)
+TabO2new<- na.omit(TabO2new)
 metaTabnew<- TabO2new %>% dplyr::select(x, y)
 TabO2new<- TabO2new %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(TabO2new)
-distance[1:5]
+#distance[1:5]
 
 tree<- hclust(distance)
 plot(tree)
 
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
-print(zones)
 
 zone<- O2[[1]]
 values(zone)<- NA
 zone[pixelok]<- zones
-plot(zone, xlab="Longitude", ylab="Latitude")
-
-
-# Raster
-r0<- raster(nrow=80, ncol=100, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
-projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-plot(r1)
+#plot(zone, xlab="Longitude", ylab="Latitude")
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
-head(toto)
 
 essai<- left_join(TabO22, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyO2)) }
 
-toto2<- left_join(toto, essai2, by="Clust")
+toto2O2<- left_join(toto, essai2, by="Clust")
 
-ggplot(toto2)+
+
+
+#1st Polygon
+liste <- with(toto2O2, chull(x, y))
+hull <- toto2O2[liste, c("x", "y")]
+Poly <- Polygon(hull)
+
+#Create SpatialPolygons objects
+SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
+buff <- raster::buffer(SpPoly, 0.1)
+
+#Cut object along coast
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
+PolyCut <- fortify(res)
+
+
+#Put polygon in good format for later use
+tete <- PolyCut[PolyCut$piece==1,]
+db.poly <- polygon.create(tete[,c(1,2)])
+
+O2<- ggplot(toto2O2)+
   geom_tile(aes(x=x,y=y,fill=mean))+
   xlab("Longitude")+
   ylab("Latitude")+
   labs(fill="mean O2")+
   theme_minimal()+
-  coord_fixed()
+  coord_fixed()+
+  ggtitle("O2")+
+  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
+
+O2
 
 
 
+# Raster
 
+r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
+  # create SpatialPointsDataFrame
+toto3O2<- toto2O2
+coordinates(toto3O2)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto3O2) <- TRUE
+  # coerce to raster
+rasterO2<- raster(toto3O2)
+rasterO2
+plot(rasterO2, col= terrain.colors(5), main="O2", xlab="Longitude", ylab="Latitude")
+
+load("data/satellite/chl/rasterChlnew.Rdata")
+
+disO2<- disaggregate(rasterO2, fact=(res(rasterO2)/res(rasterchlnew)))
+mO2<- mask(disO2, res)
+plot(mO2)
+#disO2<- overlay(disO2,)
+#plot(disO2)
+
+
+save(mO2, file="data/satellite/O2/O2_raster.Rdata")
 
 
 

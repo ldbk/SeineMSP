@@ -6,12 +6,14 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
+library(rgdal)
+library(rgeos)
 
 Sal<- nc_open("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
 Sal<- stack("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
 
 
-# Conversion raster
+# Conversion raster - tableau
 fortify.Raster <- function(Sal, maxPixel = 1000000) {
   
   if (ncell(Sal) > maxPixel) {
@@ -24,6 +26,7 @@ fortify.Raster <- function(Sal, maxPixel = 1000000) {
     cbind(xy)
   return(out)
 }
+
 
 # Traitement tableau
 TabSal<- fortify(Sal)
@@ -46,11 +49,11 @@ TabSal<- TabSal[, -c(3, 5)]
 
 
 # Infos
-mean(TabSal$Sal)
-min(TabSal$Sal)
-max(TabSal$Sal)
-sd(TabSal$Sal)
-var(TabSal$Sal)
+mean(TabSal$Salinite)
+min(TabSal$Salinite)
+max(TabSal$Salinite)
+sd(TabSal$Salinite)
+var(TabSal$Salinite)
 
 
 # Mean salinity per year
@@ -93,11 +96,10 @@ save(TabSal4, file="data/satellite/Salinity/Sal_serie.Rdata")
 
 
 
-
-
 # Partitionnement
 
 TabSalnew<- pivot_wider(TabSal2, names_from = Year, values_from = moySal)
+TabSalnew<- na.omit(TabSalnew)
 metaTabnew<- TabSalnew %>% dplyr::select(x, y)
 TabSalnew<- TabSalnew %>% ungroup() %>% dplyr::select(-x, -y)
 
@@ -136,8 +138,8 @@ SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
 #Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 PolyCut <- fortify(res)
 
 
@@ -159,7 +161,6 @@ Sal
 
 
 
-
 # Raster
 
 r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
@@ -173,21 +174,18 @@ gridded(toto3Sal) <- TRUE
   # coerce to raster
 rasterSal<- raster(toto3Sal)
 rasterSal
-raster::plot(rasterSal, col= terrain.colors(5), main="Salinity", xlab="Longitude", ylab="Latitude")
+plot(rasterSal, col= terrain.colors(5), main="Salinity", xlab="Longitude", ylab="Latitude")
 
-rasterSalnew<- resample(rasterSal, r0, method="ngb")
-plot(rasterSalnew, main="Salinity", xlab="Longitude", ylab="Latitude")
+load("data/satellite/chl/rasterChlnew.Rdata")
 
-save(rasterSalnew, file="data/satellite/Salinity/Sal_raster.Rdata")
-
-
-# old
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+dissal<- disaggregate(rasterSal, fact=(res(rasterSal)/res(rasterchlnew)))
+mSal<- mask(dissal, res)
+plot(mSal)
+#dissal<- overlay(dissal,)
+#plot(dissal)
 
 
-
+save(mSal, file="data/satellite/Salinity/Sal_raster.Rdata")
 
 
 

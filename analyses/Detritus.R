@@ -1,12 +1,12 @@
 library(raster)
 library(rasterVis)
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
-
+library(rgdal)
+library(rgeos)
 
 Detrit<- stack("data/satellite/Detritus/cdm443")
 
@@ -86,8 +86,6 @@ save(TabDet4, file="data/satellite/Detritus/Det_serie.Rdata")
 
 
 
-
-
 # Partitionnement
 
 TabDetnew<- pivot_wider(TabDet2, names_from = Year, values_from = moyDet)
@@ -105,20 +103,13 @@ rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
 
 zone<- Detrit[[1]]
-# nrow=16, ncol=46
-#obj: nrow=45, ncol=163
-#zone<- disaggregate(zone, fact=c(3.54,2.81))
-# nrow=48, ncol=184
 values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
-TabDetnew<- bind_cols(TabDetnew, metaTabnew)
-TabDetnew<- pivot_longer(TabDetnew, cols = 1:21, names_to = "Year", values_to = "moyDet")
-
-essai<- left_join(TabDetnew, toto, by=c("x", "y"))
+essai<- left_join(TabDet2, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyDet)) }
@@ -160,59 +151,31 @@ Det
 
 
 
-
 # Raster
-
-#r0<- raster(nrow=8, ncol=17, xmn=-1.500185, xmx=0.388685, ymn=49.30047, ymx=49.83383)
-#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
 
 r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-
-# create SpatialPointsDataFrame
+  # create SpatialPointsDataFrame
 toto3Det<- toto2Det
 coordinates(toto3Det)<- ~ x + y
-# coerce to SpatialPixelsDataFrame
+  # coerce to SpatialPixelsDataFrame
 gridded(toto3Det) <- TRUE
-# coerce to raster
+  # coerce to raster
 rasterDet<- raster(toto3Det)
 rasterDet
-raster::plot(rasterDet, col= terrain.colors(5), main="Detritus", xlab="Longitude", ylab="Latitude")
-#nrow=12, ncol=43
-#obj: nrow=45, ncol=163
+plot(rasterDet, col= terrain.colors(5), main="Detritus", xlab="Longitude", ylab="Latitude")
 
-#test<- disaggregate(rasterDet, fact=c(ncol(r0)/ncol(rasterDet), nrow(r0)/nrow(rasterDet)))
-#test<- resample(test, r0, method="ngb")
+load("data/satellite/chl/rasterChlnew.Rdata")
 
-test<- disaggregate(rasterDet, fact=(res(rasterchlnew)/res(rasterDet)))
-
-mask()
-
-
-
-rasterDetnew<- resample(rasterDet, r0, method="ngb")
-plot(rasterDetnew, main="Detritus", xlab="Longitude", ylab="Latitude")
-
-save(rasterDetnew, file="data/satellite/Detritus/Det_raster.Rdata")
-
-
-# old
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
-
-
-#essai
-disdet<-disaggregate(rasterDet,fact=4)
-m1<-mask(disdet,res)
-#disdet<-overlay(disdet,)
+disdet<- disaggregate(rasterDet, fact=(res(rasterDet)/res(rasterchlnew)))
+mDet<- mask(disdet,res)
+plot(mDet)
+#disdet<- overlay(disdet,)
 #plot(disdet)
 
 
-
-
+save(mDet, file="data/satellite/Detritus/Det_raster.Rdata")
 
 
 

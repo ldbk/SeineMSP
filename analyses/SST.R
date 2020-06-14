@@ -3,12 +3,11 @@ library(raster)
 library(rasterVis)
 library(ggplot2)
 library(MASS)
+library(viridisLite)
 library(dplyr)
 library(tidyr)
-library(viridisLite)
-library(rgeos)
-library(RGeostats)
 library(rgdal)
+library(rgeos)
 
 sst<- stack("data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581929927261.nc")
 sst<- sst-275.15
@@ -95,10 +94,10 @@ save(Tabsst4, file="data/satellite/sst/sst_serie.Rdata")
 
 
 
-
 # Partitionnement
 
 Tabsstnew<- pivot_wider(Tabsst2, names_from = Year, values_from = moySST)
+Tabsstnew<- na.omit(Tabsstnew)
 metaTabnew<- Tabsstnew %>% dplyr::select(x, y)
 Tabsstnew<- Tabsstnew %>% ungroup() %>% dplyr::select(-x, -y)
 
@@ -137,8 +136,8 @@ SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
 #Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 PolyCut <- fortify(res)
 
 #Put polygon in good format for later use
@@ -159,7 +158,6 @@ SST
 
 
 
-
 # Raster
 
 r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
@@ -173,21 +171,22 @@ gridded(toto3sst) <- TRUE
   # coerce to raster
 rastersst<- raster(toto3sst)
 rastersst
-raster::plot(rastersst, col= terrain.colors(5), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst, col= terrain.colors(5), main="SST", xlab="Longitude", ylab="Latitude")
 
-rastersstnew<- resample(rastersst, r0, method="ngb")
-plot(rastersstnew, main="SST", xlab="Longitude", ylab="Latitude")
+load("data/satellite/chl/rasterChlnew.Rdata")
 
-save(rastersstnew, file="data/satellite/sst/sst_raster.Rdata")
-
-
-# old
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+dissst<- disaggregate(rastersst, fact=(res(rastersst)/res(rasterchlnew)))
+mSST<- mask(dissst, res)
+plot(mSST)
+#dissst<- overlay(dissst,)
+#plot(dissst)
 
 
+save(mSST, file="data/satellite/sst/sst_raster.Rdata")
 
   
+
+
+
 
 

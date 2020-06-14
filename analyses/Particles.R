@@ -1,11 +1,11 @@
 library(raster)
 library(rasterVis)
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
+library(rgeos)
 
 Part<- stack("data/satellite/Particles/bbp443")
 
@@ -35,6 +35,7 @@ TabPart$Date<- sub("values.index_","",TabPart$Date)
 TabPart$Year<- as.numeric(substr(as.character(TabPart$Date),1,4))
 TabPart$Month<- as.numeric(substr(as.character(TabPart$Date), 6,7))
 }
+
 
 # Infos
 mean(TabPart$Particules)
@@ -83,6 +84,7 @@ ggplot(TabPart4)+
 save(TabPart4, file="data/satellite/Particles/part_serie.Rdata")
 
 
+
 # Partitionnement
 
 TabPartnew<- pivot_wider(TabPart2, names_from = Year, values_from = moyPart)
@@ -106,17 +108,12 @@ zone[pixelok]<- zones
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
-TabPartnew<- bind_cols(TabPartnew, metaTabnew)
-TabPartnew<- pivot_longer(TabPartnew, cols = 1:21, names_to = "Year", values_to = "moyPart")
-
-essai<- left_join(TabPartnew, toto, by=c("x", "y"))
+essai<- left_join(TabPart2, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyPart)) }
 
 toto2part<- left_join(toto, essai2, by="Clust")
-
-
 
 
 
@@ -130,8 +127,8 @@ SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
 #Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 PolyCut <- fortify(res)
 
 
@@ -153,7 +150,6 @@ Part
 
 
 
-
 # Raster
 
 r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
@@ -167,20 +163,18 @@ gridded(toto3part) <- TRUE
   # coerce to raster
 rasterpart<- raster(toto3part)
 rasterpart
-raster::plot(rasterpart, col= terrain.colors(5), main="Particles", xlab="Longitude", ylab="Latitude")
+plot(rasterpart, col= terrain.colors(5), main="Particles", xlab="Longitude", ylab="Latitude")
 
-rasterpartnew<- resample(rasterpart, r0, method="ngb")
-plot(rasterpartnew, main="Particles", xlab="Longitude", ylab="Latitude")
+load("data/satellite/chl/rasterChlnew.Rdata")
 
-save(rasterpartnew, file="data/satellite/Particles/part_raster.Rdata")
-
-
-# old
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+dispart<- disaggregate(rasterpart, fact=(res(rasterpart)/res(rasterchlnew)))
+mPart<- mask(dispart, res)
+plot(mPart)
+#dispart<- overlay(dispart,)
+#plot(dispart)
 
 
+save(mPart, file="data/satellite/Particles/part_raster.Rdata")
 
 
 
