@@ -7,8 +7,8 @@ library(viridis)
 library(dplyr)
 library(tidyr)
 
-O2<- nc_open("data/O2/MetO-NWS-BIO-dm-DOXY_1591690331863.nc")
-O2<- stack("data/O2/MetO-NWS-BIO-dm-DOXY_1591690331863.nc")
+O2<- nc_open("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
+O2<- stack("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
 
 
 # Conversion raster - tableau
@@ -44,6 +44,11 @@ TabO2<- pivot_longer(TabO2, cols=1:7669, names_to = "Secondes", values_to = "O2"
   TabO2$Day<- as.numeric(substr(as.character(TabO2$Date), 9,10))
 }
 
+#length(TabO2$O2[TabO2$O2<0])
+#NEG<- TabO2 %>% filter(O2<0) %>% select(x, y, O2, Year)
+#ggplot(NEG)+ geom_point(aes(x=x, y=y))+ facet_wrap(.~Year)
+TabO2<- TabO2 %>% filter(O2>0)
+
 
 # Infos
 mean(TabO2$O2)
@@ -51,8 +56,6 @@ min(TabO2$O2)
 max(TabO2$O2)
 sd(TabO2$O2)
 var(TabO2$O2)
-
-print(TabO2$O2[TabO2$O2<0]) # PB
 
 
 # Mean O2 per year

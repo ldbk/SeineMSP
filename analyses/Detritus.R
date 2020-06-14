@@ -185,10 +185,10 @@ raster::plot(rasterDet, col= terrain.colors(5), main="Detritus", xlab="Longitude
 #test<- disaggregate(rasterDet, fact=c(ncol(r0)/ncol(rasterDet), nrow(r0)/nrow(rasterDet)))
 #test<- resample(test, r0, method="ngb")
 
-#plot(test)
+test<- disaggregate(rasterDet, fact=(res(rasterchlnew)/res(rasterDet)))
 
+mask()
 
-#r0<- extent(r0) # create an extent object from a raster object to match with crop function
 
 
 rasterDetnew<- resample(rasterDet, r0, method="ngb")
