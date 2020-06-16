@@ -40,11 +40,11 @@ Tabchl<- pivot_longer(Tabchl, cols=1:240, names_to = "Date", values_to = "Chloro
 
 
 # Infos
-mean(Tabchl$Chloro)
-min(Tabchl$Chloro)
-max(Tabchl$Chloro)
-sd(Tabchl$Chloro)
-var(Tabchl$Chloro)
+#mean(Tabchl$Chloro)
+#min(Tabchl$Chloro)
+#max(Tabchl$Chloro)
+#sd(Tabchl$Chloro)
+#var(Tabchl$Chloro)
 
 
 # Mean chl per year
@@ -121,36 +121,21 @@ toto2chl<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2chl, chull(x, y))
 hull <- toto2chl[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-Chl<- ggplot(toto2chl)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean chl")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Chlorophyll")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-Chl
+#Chl<- ggplot(toto2chl)+ geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean chl")+ theme_minimal()+coord_fixed()+ggtitle("Chlorophyll")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -173,11 +158,17 @@ save(rasterchlnew, file="data/satellite/chl/rasterChlnew.Rdata")
 
 mChl<- mask(rasterchlnew, res)
 plot(mChl)
-#rasterchlnew<- overlay(rasterchlnew,)
-#plot(rasterchlnew)
-
 
 save(mChl, file="data/satellite/chl/chl_raster.Rdata")
+
+
+
+# Polygons
+
+polChl<- rasterToPolygons(mChl, dissolve=TRUE)
+plot(polChl, col=polChl@data$Clust)
+
+writeOGR(polChl, dsn="data/satellite/chl", layer="Chl", driver="ESRI Shapefile")
 
 
 

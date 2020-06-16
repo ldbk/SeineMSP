@@ -38,11 +38,11 @@ TabPart$Month<- as.numeric(substr(as.character(TabPart$Date), 6,7))
 
 
 # Infos
-mean(TabPart$Particules)
-min(TabPart$Particules)
-max(TabPart$Particules)
-sd(TabPart$Particules)
-var(TabPart$Particules)
+#mean(TabPart$Particules)
+#min(TabPart$Particules)
+#max(TabPart$Particules)
+#sd(TabPart$Particules)
+#var(TabPart$Particules)
 
 
 # Mean particles per year 
@@ -117,36 +117,21 @@ toto2part<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2part, chull(x, y))
 hull <- toto2part[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-Part<- ggplot(toto2part)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean Particles")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Particles")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-Part
+#Part<- ggplot(toto2part)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean Particles")+theme_minimal()+coord_fixed()+ggtitle("Particles")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -170,11 +155,17 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 dispart<- disaggregate(rasterpart, fact=(res(rasterpart)/res(rasterchlnew)))
 mPart<- mask(dispart, res)
 plot(mPart)
-#dispart<- overlay(dispart,)
-#plot(dispart)
-
 
 save(mPart, file="data/satellite/Particles/part_raster.Rdata")
+
+
+
+# Polygons
+
+polPart<- rasterToPolygons(mPart, dissolve=TRUE)
+plot(polPart, col=polPart@data$Clust)
+
+writeOGR(polPart, dsn="data/satellite/Particles", layer="Part", driver="ESRI Shapefile")
 
 
 

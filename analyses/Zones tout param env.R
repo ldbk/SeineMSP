@@ -12,6 +12,7 @@ load("data/satellite/Detritus/Det_raster.Rdata")
 load("data/satellite/Turbidity/Turb_raster.Rdata")
 load("data/satellite/sst/sst_raster.Rdata")
 load("data/satellite/Salinity/Sal_raster.Rdata")
+load("data/satellite/O2/O2_raster.Rdata")
 }
 
 par(mfrow = c(2, 4))
@@ -24,6 +25,7 @@ Det<- raster::plot(mDet, main="Detritus", xlab="Longitude", ylab="Latitude")
 Turb<- raster::plot(mTurb, main="Turbidity", xlab="Longitude", ylab="Latitude")
 SST<- raster::plot(mSST, main="SST", xlab="Longitude", ylab="Latitude")
 Sal<- raster::plot(mSal, main="Salinity", xlab="Longitude", ylab="Latitude")
+O2<- raster::plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
 }
 
 #grid.arrange(Part, Chl, PP, Det, Turb, SST, Sal, ncol=2, nrow = 4)

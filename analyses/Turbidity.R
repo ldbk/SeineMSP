@@ -39,11 +39,11 @@ TabTurb$Month<- as.numeric(substr(as.character(TabTurb$Date), 6,7))
 
 
 # Infos
-mean(TabTurb$Turbidity)
-min(TabTurb$Turbidity)
-max(TabTurb$Turbidity)
-sd(TabTurb$Turbidity)
-var(TabTurb$Turbidity)
+#mean(TabTurb$Turbidity)
+#min(TabTurb$Turbidity)
+#max(TabTurb$Turbidity)
+#sd(TabTurb$Turbidity)
+#var(TabTurb$Turbidity)
 
 
 # Mean turb per year
@@ -118,36 +118,21 @@ toto2Turb<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2Turb, chull(x, y))
 hull <- toto2Turb[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-Turb<- ggplot(toto2Turb)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean Turbidity")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Turbidity")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-Turb
+#Turb<- ggplot(toto2Turb)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean Turbidity")+theme_minimal()+coord_fixed()+ggtitle("Turbidity")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -171,11 +156,17 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 disturb<- disaggregate(rasterTurb, fact=(res(rasterTurb)/res(rasterchlnew)))
 mTurb<- mask(disturb, res)
 plot(mTurb)
-#disturb<- overlay(disturb,)
-#plot(disturb)
-
 
 save(mTurb, file="data/satellite/Turbidity/Turb_raster.Rdata")
+
+
+
+# Polygons
+
+polTurb<- rasterToPolygons(mTurb, dissolve=TRUE)
+plot(polTurb, col=polTurb@data$Clust)
+
+writeOGR(polTurb, dsn="data/satellite/Turbidity", layer="Turb", driver="ESRI Shapefile")
 
 
 

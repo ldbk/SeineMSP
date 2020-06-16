@@ -46,11 +46,11 @@ TabPP$Day<- as.numeric(substr(as.character(TabPP$Date), 9,10))
 
 
 # Infos
-mean(TabPP$PP)
-min(TabPP$PP)
-max(TabPP$PP)
-sd(TabPP$PP)
-var(TabPP$PP)
+#mean(TabPP$PP)
+#min(TabPP$PP)
+#max(TabPP$PP)
+#sd(TabPP$PP)
+#var(TabPP$PP)
 
 
 # Mean PP per year
@@ -127,36 +127,21 @@ toto2PP<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2PP, chull(x, y))
 hull <- toto2PP[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-PP<- ggplot(toto2PP)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean PP (mg C/m3/j)")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Primary production")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-PP
+#PP<- ggplot(toto2PP)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean PP (mg C/m3/j)")+theme_minimal()+coord_fixed()+ggtitle("Primary production")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -180,11 +165,17 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 disPP<- disaggregate(rasterPP, fact=(res(rasterPP)/res(rasterchlnew)))
 mPP<- mask(disPP, res)
 plot(mPP)
-#disPP<- overlay(disPP,)
-#plot(disPP)
-
 
 save(mPP, file="data/satellite/Primary production/PP_raster.Rdata")
+
+
+
+# Polygons
+
+polPP<- rasterToPolygons(mPP, dissolve=TRUE)
+plot(polPP, col=polPP@data$Clust)
+
+writeOGR(polPP, dsn="data/satellite/Primary production", layer="PP", driver="ESRI Shapefile")
 
 
 

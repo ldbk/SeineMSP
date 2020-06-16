@@ -45,15 +45,14 @@ TabSal<- pivot_longer(TabSal, cols=1:323, names_to = "Secondes", values_to = "Sa
   TabSal$Month<- as.numeric(substr(as.character(TabSal$Date), 6,7))
   TabSal$Day  <- as.numeric(substr(as.character(TabSal$Date), 9,10))
 }
-TabSal<- TabSal[, -c(3, 5)]
 
 
 # Infos
-mean(TabSal$Salinite)
-min(TabSal$Salinite)
-max(TabSal$Salinite)
-sd(TabSal$Salinite)
-var(TabSal$Salinite)
+#mean(TabSal$Salinite)
+#min(TabSal$Salinite)
+#max(TabSal$Salinite)
+#sd(TabSal$Salinite)
+#var(TabSal$Salinite)
 
 
 # Mean salinity per year
@@ -128,36 +127,21 @@ toto2Sal<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2Sal, chull(x, y))
 hull <- toto2Sal[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-Sal<- ggplot(toto2Sal)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean salinity")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Salinity")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-Sal
+#Sal<- ggplot(toto2Sal)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean salinity")+theme_minimal()+coord_fixed()+ggtitle("Salinity")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -181,11 +165,17 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 dissal<- disaggregate(rasterSal, fact=(res(rasterSal)/res(rasterchlnew)))
 mSal<- mask(dissal, res)
 plot(mSal)
-#dissal<- overlay(dissal,)
-#plot(dissal)
-
 
 save(mSal, file="data/satellite/Salinity/Sal_raster.Rdata")
+
+
+
+# Polygons
+
+polSal<- rasterToPolygons(mSal, dissolve=TRUE)
+plot(polSal, col=polSal@data$Clust)
+
+writeOGR(polSal, dsn="data/satellite/Salinity", layer="Sal", driver="ESRI Shapefile")
 
 
 

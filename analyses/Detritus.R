@@ -39,11 +39,11 @@ TabDet$Month<- as.numeric(substr(as.character(TabDet$Date), 6,7))
 
 
 # Infos
-mean(TabDet$Detritus)
-min(TabDet$Detritus)
-max(TabDet$Detritus)
-sd(TabDet$Detritus)
-var(TabDet$Detritus)
+#mean(TabDet$Detritus)
+#min(TabDet$Detritus)
+#max(TabDet$Detritus)
+#sd(TabDet$Detritus)
+#var(TabDet$Detritus)
 
 
 # Mean detritus per year
@@ -118,36 +118,21 @@ toto2Det<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2Det, chull(x, y))
 hull <- toto2Det[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-Det<- ggplot(toto2Det)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Detritus")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-Det
+#Det<- ggplot(toto2Det)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="")+theme_minimal()+coord_fixed()+ggtitle("Detritus")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -171,11 +156,17 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 disdet<- disaggregate(rasterDet, fact=(res(rasterDet)/res(rasterchlnew)))
 mDet<- mask(disdet,res)
 plot(mDet)
-#disdet<- overlay(disdet,)
-#plot(disdet)
-
 
 save(mDet, file="data/satellite/Detritus/Det_raster.Rdata")
+
+
+
+# Polygons
+
+polDet<- rasterToPolygons(mDet, dissolve=TRUE)
+plot(polDet, col=polDet@data$Clust)
+
+writeOGR(polDet, dsn="data/satellite/Detritus", layer="Det", driver="ESRI Shapefile")
 
 
 

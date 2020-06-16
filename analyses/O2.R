@@ -53,11 +53,11 @@ TabO2<- TabO2 %>% filter(O2>0)
 
 
 # Infos
-mean(TabO2$O2)
-min(TabO2$O2)
-max(TabO2$O2)
-sd(TabO2$O2)
-var(TabO2$O2)
+#mean(TabO2$O2)
+#min(TabO2$O2)
+#max(TabO2$O2)
+#sd(TabO2$O2)
+#var(TabO2$O2)
 
 
 # Mean O2 per year
@@ -134,36 +134,21 @@ toto2O2<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2O2, chull(x, y))
 hull <- toto2O2[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-O2<- ggplot(toto2O2)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean O2")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("O2")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-O2
+#O2<- ggplot(toto2O2)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean O2")+theme_minimal()+coord_fixed()+ggtitle("O2")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -187,11 +172,17 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 disO2<- disaggregate(rasterO2, fact=(res(rasterO2)/res(rasterchlnew)))
 mO2<- mask(disO2, res)
 plot(mO2)
-#disO2<- overlay(disO2,)
-#plot(disO2)
-
 
 save(mO2, file="data/satellite/O2/O2_raster.Rdata")
+
+
+
+# Polygons
+
+polO2<- rasterToPolygons(mO2, dissolve=TRUE)
+plot(polO2, col=polO2@data$Clust)
+
+writeOGR(polO2, dsn="data/satellite/O2", layer="O2", driver="ESRI Shapefile")
 
 
 

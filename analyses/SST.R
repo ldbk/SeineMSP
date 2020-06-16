@@ -46,11 +46,11 @@ Tabsst$Day  <- as.numeric(substr(as.character(Tabsst$Date), 9,10))
 
 
 # Infos
-mean(Tabsst$SST)
-min(Tabsst$SST)
-max(Tabsst$SST)
-sd(Tabsst$SST)
-var(Tabsst$SST)
+#mean(Tabsst$SST)
+#min(Tabsst$SST)
+#max(Tabsst$SST)
+#sd(Tabsst$SST)
+#var(Tabsst$SST)
 
 
 # Mean SST per year
@@ -126,35 +126,21 @@ toto2sst<- left_join(toto, essai2, by="Clust")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2sst, chull(x, y))
 hull <- toto2sst[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-SST<- ggplot(toto2sst)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean SST (°C)")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("SST")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-SST
+#SST<- ggplot(toto2sst)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean SST (°C)")+theme_minimal()+coord_fixed()+ggtitle("SST")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -178,13 +164,19 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 dissst<- disaggregate(rastersst, fact=(res(rastersst)/res(rasterchlnew)))
 mSST<- mask(dissst, res)
 plot(mSST)
-#dissst<- overlay(dissst,)
-#plot(dissst)
-
 
 save(mSST, file="data/satellite/sst/sst_raster.Rdata")
 
-  
+
+
+# Polygons
+
+polSST<- rasterToPolygons(mSST, dissolve=TRUE)
+plot(polSST, col=polSST@data$Clust)
+
+writeOGR(polSST, dsn="data/satellite/sst", layer="SST", driver="ESRI Shapefile")
+
+
 
 
 
