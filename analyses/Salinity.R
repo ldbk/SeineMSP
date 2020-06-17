@@ -8,6 +8,7 @@ library(dplyr)
 library(tidyr)
 library(rgdal)
 library(rgeos)
+library(NbClust)
 
 Sal<- nc_open("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
 Sal<- stack("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
@@ -108,8 +109,12 @@ distance<- dist(TabSalnew)
 tree<- hclust(distance)
 plot(tree)
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+TabSal5<- TabSal3 %>% ungroup() %>% dplyr::select(moyper)
+NbClust(TabSal5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  4
+
+rect.hclust(tree, 4)
+zones<- cutree(tree, 4)
 
 zone<- Sal[[1]]
 values(zone)<- NA
@@ -124,6 +129,8 @@ for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moySal)) }
 
 toto2Sal<- left_join(toto, essai2, by="Clust")
+
+save(toto2Sal, file="data/satellite/Salinity/toto2Sal.Rdata")
 
 
 
@@ -147,7 +154,7 @@ res <- rgeos::gDifference(buff, coast)
 
 # Raster
 
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
   # create SpatialPointsDataFrame
@@ -158,7 +165,7 @@ gridded(toto3Sal) <- TRUE
   # coerce to raster
 rasterSal<- raster(toto3Sal)
 rasterSal
-plot(rasterSal, col= terrain.colors(5), main="Salinity", xlab="Longitude", ylab="Latitude")
+plot(rasterSal, col= terrain.colors(4), main="Salinity", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 

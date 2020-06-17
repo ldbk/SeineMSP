@@ -7,6 +7,7 @@ library(dplyr)
 library(tidyr)
 library(rgdal)
 library(rgeos)
+library(NbClust)
 
 Turb<- stack("data/satellite/Turbidity/kd490")
 
@@ -99,8 +100,12 @@ distance<- dist(TabTurbnew)
 tree<- hclust(distance)
 plot(tree)
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+TabTurb5<- TabTurb3 %>% ungroup() %>% dplyr::select(moyper)
+NbClust(TabTurb5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  7
+
+rect.hclust(tree, 7)
+zones<- cutree(tree, 7)
 
 zone<- Turb[[1]]
 values(zone)<- NA
@@ -115,6 +120,8 @@ for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyTurb)) }
 
 toto2Turb<- left_join(toto, essai2, by="Clust")
+
+save(toto2Turb, file="data/satellite/Turbidity/toto2Turb.Rdata")
 
 
 
@@ -138,7 +145,7 @@ res <- rgeos::gDifference(buff, coast)
 
 # Raster
 
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
   # create SpatialPointsDataFrame
@@ -149,7 +156,7 @@ gridded(toto3Turb) <- TRUE
   # coerce to raster
 rasterTurb<- raster(toto3Turb)
 rasterTurb
-plot(rasterTurb, col= terrain.colors(5), main="Turbidity", xlab="Longitude", ylab="Latitude")
+plot(rasterTurb, col= terrain.colors(7), main="Turbidity", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 

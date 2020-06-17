@@ -6,6 +6,7 @@ library(viridis)
 library(dplyr)
 library(tidyr)
 library(rgeos)
+library(NbClust)
 
 Part<- stack("data/satellite/Particles/bbp443")
 
@@ -98,8 +99,12 @@ distance<- dist(TabPartnew)
 tree<- hclust(distance)
 plot(tree)
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+TabPart5<- TabPart3 %>% ungroup() %>% dplyr::select(moyper)
+NbClust(TabPart5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  3
+
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- Part[[1]]
 values(zone)<- NA
@@ -114,6 +119,8 @@ for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyPart)) }
 
 toto2part<- left_join(toto, essai2, by="Clust")
+
+save(toto2part, file="data/satellite/Particles/toto2part.Rdata")
 
 
 
@@ -137,7 +144,7 @@ res <- rgeos::gDifference(buff, coast)
 
 # Raster
 
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
   # create SpatialPointsDataFrame
@@ -148,7 +155,7 @@ gridded(toto3part) <- TRUE
   # coerce to raster
 rasterpart<- raster(toto3part)
 rasterpart
-plot(rasterpart, col= terrain.colors(5), main="Particles", xlab="Longitude", ylab="Latitude")
+plot(rasterpart, col= terrain.colors(3), main="Particles", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 

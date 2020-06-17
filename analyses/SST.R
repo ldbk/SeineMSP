@@ -8,6 +8,7 @@ library(dplyr)
 library(tidyr)
 library(rgdal)
 library(rgeos)
+library(NbClust)
 
 sst<- stack("data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581929927261.nc")
 sst<- sst-275.15
@@ -107,8 +108,12 @@ distance<- dist(Tabsstnew)
 tree<- hclust(distance)
 plot(tree)
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+Tabsst5<- Tabsst3 %>% ungroup() %>% dplyr::select(moyper)
+NbClust(Tabsst5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  3
+
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- sst[[1]]
 values(zone)<- NA
@@ -123,6 +128,8 @@ for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moySST)) }
 
 toto2sst<- left_join(toto, essai2, by="Clust")
+
+save(toto2sst, file="data/satellite/sst/toto2sst.Rdata")
 
 
 
@@ -157,7 +164,7 @@ gridded(toto3sst) <- TRUE
   # coerce to raster
 rastersst<- raster(toto3sst)
 rastersst
-plot(rastersst, col= terrain.colors(5), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst, col= terrain.colors(3), main="SST", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 

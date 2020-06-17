@@ -8,6 +8,7 @@ library(dplyr)
 library(tidyr)
 library(rgdal)
 library(rgeos)
+library(NbClust)
 
 chl<- stack("data/satellite/chl/chl")
 
@@ -102,6 +103,10 @@ distance<- dist(Tabchlnew)
 tree<- hclust(distance)
 plot(tree)
 
+Tabchl5<- Tabchl3 %>% ungroup() %>% dplyr::select(moyper)
+NbClust(Tabchl5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  5
+
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
 
@@ -118,6 +123,8 @@ for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyChl)) }
 
 toto2chl<- left_join(toto, essai2, by="Clust")
+
+save(toto2chl, file="data/satellite/chl/toto2chl.Rdata")
 
 
 
@@ -172,7 +179,11 @@ writeOGR(polChl, dsn="data/satellite/chl", layer="Chl", driver="ESRI Shapefile")
 
 
 
+# Pour full_join
 
-
+toto4chl<- toto2chl
+toto4chl<- toto4chl %>% select(-Clust)
+Tabchlfin<- toto4chl
+save(Tabchlfin, file="data/satellite/chl/Tabchlfin.Rdata")
 
 

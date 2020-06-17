@@ -8,6 +8,7 @@ library(dplyr)
 library(tidyr)
 library(rgdal)
 library(rgeos)
+library(NbClust)
 
 PP<- nc_open("data/satellite/Primary production/PP 1998-2018.nc")
 PP<- stack("data/satellite/Primary production/PP 1998-2018.nc")
@@ -108,8 +109,12 @@ distance<- dist(TabPPnew)
 tree<- hclust(distance)
 plot(tree)
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+TabPP5<- TabPP3 %>% ungroup() %>% dplyr::select(moyper)
+NbClust(TabPP5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  3
+
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- PP[[1]]
 values(zone)<- NA
@@ -124,6 +129,8 @@ for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyPP)) }
 
 toto2PP<- left_join(toto, essai2, by="Clust")
+
+save(toto2PP, file="data/satellite/Primary production/toto2PP.Rdata")
 
 
 
@@ -147,7 +154,7 @@ res <- rgeos::gDifference(buff, coast)
 
 # Raster
 
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
   # create SpatialPointsDataFrame
@@ -158,7 +165,7 @@ gridded(toto3PP) <- TRUE
   # coerce to raster
 rasterPP<- raster(toto3PP)
 rasterPP
-plot(rasterPP, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
+plot(rasterPP, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
