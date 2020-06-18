@@ -6,11 +6,14 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
-library(viridisLite)
+library(rgdal)
+library(rgeos)
+library(NbClust)
 
 chl<- stack("data/satellite/chl/chl")
 
-# Conversion raster
+
+# Conversion raster - tableau
 fortify.Raster <- function(chl, maxPixel = 1000000) {
   
   if (ncell(chl) > maxPixel) {
@@ -30,7 +33,6 @@ Tabchl<- fortify(chl)
 pixelok<- which(!is.na(apply(Tabchl,1,mean)))
 Tabchl<- pivot_longer(Tabchl, cols=1:240, names_to = "Date", values_to = "Chloro", values_drop_na = TRUE)
 
-
 {
   Tabchl$Date<- sub("values.index_","",Tabchl$Date)
   Tabchl$year<- as.numeric(substr(as.character(Tabchl$Date),1,4))
@@ -39,11 +41,11 @@ Tabchl<- pivot_longer(Tabchl, cols=1:240, names_to = "Date", values_to = "Chloro
 
 
 # Infos
-mean(Tabchl$Chloro)
-min(Tabchl$Chloro)
-max(Tabchl$Chloro)
-sd(Tabchl$Chloro)
-var(Tabchl$Chloro)
+#mean(Tabchl$Chloro)
+#min(Tabchl$Chloro)
+#max(Tabchl$Chloro)
+#sd(Tabchl$Chloro)
+#var(Tabchl$Chloro)
 
 
 # Mean chl per year
@@ -59,8 +61,6 @@ ggplot(Tabchl2)+
   scale_fill_gradientn(colours = terrain.colors(6))
 
 ggplot(Tabchl2, aes(x= year, y=moyChl, group=year))+
-  ggtitle("Chlorophylle 1997-2017")+
-  ylab("?g/L")+
   geom_boxplot()
 
 
@@ -86,7 +86,7 @@ ggplot(Tabchl4)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(Tabchl4, file="data/satellite/chl/chl_serie.Rdata")
+save(Tabchl4, file="data/satellite/Chl/Chl_serie.Rdata")
 
 
 
@@ -103,6 +103,10 @@ distance<- dist(Tabchlnew)
 tree<- hclust(distance)
 plot(tree)
 
+Tabchl5<- Tabchl3 %>% ungroup() %>% dplyr::select(moyper)
+NbClust(Tabchl5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  5
+
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
 
@@ -113,55 +117,38 @@ zone[pixelok]<- zones
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
-Tabchlnew<- bind_cols(Tabchlnew, metaTabnew)
-Tabchlnew<- pivot_longer(Tabchlnew, cols = 1:21, names_to = "year", values_to = "moyChl")
-
-essai<- left_join(Tabchlnew, toto, by=c("x", "y"))
+essai<- left_join(Tabchl2, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyChl)) }
 
 toto2chl<- left_join(toto, essai2, by="Clust")
 
+save(toto2chl, file="data/satellite/chl/toto2chl.Rdata")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2chl, chull(x, y))
 hull <- toto2chl[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
-PolyCut <- fortify(res)
+  # Cut object along coast
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-Chl<- ggplot(toto2chl)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean chl")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Chlorophyll")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-Chl
+#Chl<- ggplot(toto2chl)+ geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean chl")+ theme_minimal()+coord_fixed()+ggtitle("Chlorophyll")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
 # Raster
 
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
   # create SpatialPointsDataFrame
@@ -174,28 +161,24 @@ rasterchlnew<- raster(toto3chl)
 rasterchlnew
 plot(rasterchlnew, main="Chl", xlab="Longitude", ylab="Latitude")
 
-save(rasterchlnew, file="data/satellite/chl/chl_raster.Rdata")
+save(rasterchlnew, file="data/satellite/chl/rasterChlnew.Rdata")
+
+mChl<- mask(rasterchlnew, res)
+plot(mChl)
+
+save(mChl, file="data/satellite/chl/chl_raster.Rdata")
 
 
-# old
 
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+# Polygons
 
+polChl<- rasterToPolygons(mChl, dissolve=TRUE)
+plot(polChl, col=polChl@data$Clust)
 
+writeOGR(polChl, dsn="data/satellite/chl", layer="Chl", driver="ESRI Shapefile")
 
-# essai changement resolution
+save(polChl, file="data/satellite/chl/chl_polygons.Rdata")
 
-# res: 0.01098639, 0.0109864
-#obj:res 0.011, 0.011 --> donc disaggregate
-
-#xres(rasterchlnew)
-#yres(rasterchlnew)
-
-#res(rasterchlnew)<- c((0.011/xres(rasterchlnew)), (0.011/yres(rasterchlnew)))
-
-
-#rasterchlessai<- disaggregate(rasterchlnew, fact=c(0.011/xres(rasterchlnew), 0.011/yres(rasterchlnew)))
 
 
 

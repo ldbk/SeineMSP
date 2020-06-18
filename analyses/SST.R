@@ -3,12 +3,12 @@ library(raster)
 library(rasterVis)
 library(ggplot2)
 library(MASS)
+library(viridisLite)
 library(dplyr)
 library(tidyr)
-library(viridisLite)
-library(rgeos)
-library(RGeostats)
 library(rgdal)
+library(rgeos)
+library(NbClust)
 
 sst<- stack("data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581929927261.nc")
 sst<- sst-275.15
@@ -47,11 +47,11 @@ Tabsst$Day  <- as.numeric(substr(as.character(Tabsst$Date), 9,10))
 
 
 # Infos
-mean(Tabsst$SST)
-min(Tabsst$SST)
-max(Tabsst$SST)
-sd(Tabsst$SST)
-var(Tabsst$SST)
+#mean(Tabsst$SST)
+#min(Tabsst$SST)
+#max(Tabsst$SST)
+#sd(Tabsst$SST)
+#var(Tabsst$SST)
 
 
 # Mean SST per year
@@ -95,10 +95,10 @@ save(Tabsst4, file="data/satellite/sst/sst_serie.Rdata")
 
 
 
-
 # Partitionnement
 
 Tabsstnew<- pivot_wider(Tabsst2, names_from = Year, values_from = moySST)
+Tabsstnew<- na.omit(Tabsstnew)
 metaTabnew<- Tabsstnew %>% dplyr::select(x, y)
 Tabsstnew<- Tabsstnew %>% ungroup() %>% dplyr::select(-x, -y)
 
@@ -108,8 +108,12 @@ distance<- dist(Tabsstnew)
 tree<- hclust(distance)
 plot(tree)
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+Tabsst5<- Tabsst3 %>% ungroup() %>% dplyr::select(moyper)
+#NbClust(Tabsst5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  3
+
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- sst[[1]]
 values(zone)<- NA
@@ -125,38 +129,25 @@ for (k in unique(essai[,"Clust"])){
 
 toto2sst<- left_join(toto, essai2, by="Clust")
 
+save(toto2sst, file="data/satellite/sst/toto2sst.Rdata")
 
 
-#1st Polygon
+
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2sst, chull(x, y))
 hull <- toto2sst[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
-PolyCut <- fortify(res)
+  # Cut object along coast
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-SST<- ggplot(toto2sst)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean SST (°C)")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("SST")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-SST
-
+#SST<- ggplot(toto2sst)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean SST (°C)")+theme_minimal()+coord_fixed()+ggtitle("SST")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
@@ -173,21 +164,28 @@ gridded(toto3sst) <- TRUE
   # coerce to raster
 rastersst<- raster(toto3sst)
 rastersst
-raster::plot(rastersst, col= terrain.colors(5), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst, col= terrain.colors(3), main="SST", xlab="Longitude", ylab="Latitude")
 
-rastersstnew<- resample(rastersst, r0, method="ngb")
-plot(rastersstnew, main="SST", xlab="Longitude", ylab="Latitude")
+load("data/satellite/chl/rasterChlnew.Rdata")
 
-save(rastersstnew, file="data/satellite/sst/sst_raster.Rdata")
+dissst<- disaggregate(rastersst, fact=(res(rastersst)/res(rasterchlnew)))
+mSST<- mask(dissst, res)
+plot(mSST)
 
-
-# old
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+save(mSST, file="data/satellite/sst/sst_raster.Rdata")
 
 
 
-  
+# Polygons
+
+polSST<- rasterToPolygons(mSST, dissolve=TRUE)
+plot(polSST, col=polSST@data$Clust)
+
+writeOGR(polSST, dsn="data/satellite/sst", layer="SST", driver="ESRI Shapefile")
+
+save(polSST, file="data/satellite/sst/sst_polygons.Rdata")
+
+
+
 
 

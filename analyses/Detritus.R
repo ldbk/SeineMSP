@@ -1,12 +1,13 @@
 library(raster)
 library(rasterVis)
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
-
+library(rgdal)
+library(rgeos)
+library(NbClust)
 
 Detrit<- stack("data/satellite/Detritus/cdm443")
 
@@ -39,11 +40,11 @@ TabDet$Month<- as.numeric(substr(as.character(TabDet$Date), 6,7))
 
 
 # Infos
-mean(TabDet$Detritus)
-min(TabDet$Detritus)
-max(TabDet$Detritus)
-sd(TabDet$Detritus)
-var(TabDet$Detritus)
+#mean(TabDet$Detritus)
+#min(TabDet$Detritus)
+#max(TabDet$Detritus)
+#sd(TabDet$Detritus)
+#var(TabDet$Detritus)
 
 
 # Mean detritus per year
@@ -86,8 +87,6 @@ save(TabDet4, file="data/satellite/Detritus/Det_serie.Rdata")
 
 
 
-
-
 # Partitionnement
 
 TabDetnew<- pivot_wider(TabDet2, names_from = Year, values_from = moyDet)
@@ -101,119 +100,83 @@ distance<- dist(TabDetnew)
 tree<- hclust(distance, )
 plot(tree)
 
+TabDet5<- TabDet3 %>% ungroup() %>% dplyr::select(moyper)
+#NbClust(TabDet5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  5
+
 rect.hclust(tree, 5)
 zones<- cutree(tree, 5)
 
 zone<- Detrit[[1]]
-# nrow=16, ncol=46
-#obj: nrow=45, ncol=163
-#zone<- disaggregate(zone, fact=c(3.54,2.81))
-# nrow=48, ncol=184
 values(zone)<- NA
 zone[pixelok]<- zones
 #plot(zone, xlab="Longitude", ylab="Latitude")
 
 toto <- cbind(metaTabnew, Clust=factor(zones))
 
-TabDetnew<- bind_cols(TabDetnew, metaTabnew)
-TabDetnew<- pivot_longer(TabDetnew, cols = 1:21, names_to = "Year", values_to = "moyDet")
-
-essai<- left_join(TabDetnew, toto, by=c("x", "y"))
+essai<- left_join(TabDet2, toto, by=c("x", "y"))
 
 for (k in unique(essai[,"Clust"])){
   essai2<- essai %>%  group_by(Clust) %>% summarise(mean= mean(moyDet)) }
 
 toto2Det<- left_join(toto, essai2, by="Clust")
 
+save(toto2Det, file="data/satellite/Detritus/toto2Det.Rdata")
 
 
-#1st Polygon
+
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2Det, chull(x, y))
 hull <- toto2Det[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
-PolyCut <- fortify(res)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-Det<- ggplot(toto2Det)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Detritus")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-Det
-
+#Det<- ggplot(toto2Det)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="")+theme_minimal()+coord_fixed()+ggtitle("Detritus")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
 # Raster
 
-#r0<- raster(nrow=8, ncol=17, xmn=-1.500185, xmx=0.388685, ymn=49.30047, ymx=49.83383)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
-#projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-
-
-# create SpatialPointsDataFrame
+  # create SpatialPointsDataFrame
 toto3Det<- toto2Det
 coordinates(toto3Det)<- ~ x + y
-# coerce to SpatialPixelsDataFrame
+  # coerce to SpatialPixelsDataFrame
 gridded(toto3Det) <- TRUE
-# coerce to raster
+  # coerce to raster
 rasterDet<- raster(toto3Det)
 rasterDet
-raster::plot(rasterDet, col= terrain.colors(5), main="Detritus", xlab="Longitude", ylab="Latitude")
-#nrow=12, ncol=43
-#obj: nrow=45, ncol=163
+plot(rasterDet, col= terrain.colors(5), main="Detritus", xlab="Longitude", ylab="Latitude")
 
-#test<- disaggregate(rasterDet, fact=c(ncol(r0)/ncol(rasterDet), nrow(r0)/nrow(rasterDet)))
-#test<- resample(test, r0, method="ngb")
+load("data/satellite/chl/rasterChlnew.Rdata")
 
-#plot(test)
+disdet<- disaggregate(rasterDet, fact=(res(rasterDet)/res(rasterchlnew)))
+mDet<- mask(disdet,res)
+plot(mDet)
 
-
-#r0<- extent(r0) # create an extent object from a raster object to match with crop function
-
-
-rasterDetnew<- resample(rasterDet, r0, method="ngb")
-plot(rasterDetnew, main="Detritus", xlab="Longitude", ylab="Latitude")
-
-save(rasterDetnew, file="data/satellite/Detritus/Det_raster.Rdata")
-
-
-# old
-
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
-
-
-#essai
-disdet<-disaggregate(rasterDet,fact=4)
-m1<-mask(disdet,res)
-#disdet<-overlay(disdet,)
-#plot(disdet)
+save(mDet, file="data/satellite/Detritus/Det_raster.Rdata")
 
 
 
+# Polygons
+
+polDet<- rasterToPolygons(mDet, dissolve=TRUE)
+plot(polDet, col=polDet@data$Clust)
+
+writeOGR(polDet, dsn="data/satellite/Detritus", layer="Det", driver="ESRI Shapefile")
 
 
+save(polDet, file="data/satellite/Detritus/Det_polygons.Rdata")
 
 
 

@@ -1,0 +1,785 @@
+<PAMDataset>
+  <PAMRasterBand band="1">
+    <Description>index_1997.09</Description>
+    <Histograms>
+      <HistItem>
+        <HistMin>0.08074168279848021</HistMin>
+        <HistMax>0.3600703983000763</HistMax>
+        <BucketCount>736</BucketCount>
+        <IncludeOutOfRange>0</IncludeOutOfRange>
+        <Approximate>0</Approximate>
+        <HistCounts>2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|1|1|0|0|0|1|1|0|0|2|0|1|0|1|1|2|1|0|0|1|1|1|0|1|0|0|1|2|0|2|1|1|4|2|4|4|3|0|2|1|1|0|0|1|3|2|1|4|2|0|4|3|0|2|3|1|1|0|5|4|4|3|2|2|0|1|1|1|0|1|3|0|0|2|1|3|3|1|2|3|0|1|2|0|2|1|3|2|4|2|3|0|1|1|1|1|2|1|2|1|1|1|1|2|3|0|3|3|1|2|2|4|1|0|1|1|1|1|2|1|0|0|0|0|1|2|1|2|2|0|1|1|2|3|0|1|1|1|0|2|2|2|3|0|2|2|1|1|2|0|0|0|0|1|1|1|2|1|3|2|2|2|2|0|1|1|2|2|1|0|0|1|1|1|0|3|2|4|2|1|1|1|0|2|0|2|3|1|1|0|1|1|1|1|1|1|1|1|0|1|2|0|0|0|2|0|0|1|0|0|2|1|0|2|1|1|0|1|3|2|1|0|1|0|3|3|1|2|1|0|0|0|0|5|0|1|1|0|0|0|1|0|0|1|1|0|2|1|1|0|1|0|0|0|0|2|0|0|0|0|1|0|1|0|0|1|0|1|2|0|1|0|0|1|0|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|6|0|0|0|1|0|0|0|0|0|1|0|1|0|0|0|0|1|1|0|0|0|0|1|0|1|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|1|0|3|0|0|2|0|0|0|0|0|0|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|1|0|3|2|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|1|2|1|0|0|0|0|0|0|0|1|1|0|0|1|0|0|0|2|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|1|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|3|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|1</HistCounts>
+      </HistItem>
+    </Histograms>
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">0.35988089442253</MDI>
+      <MDI key="STATISTICS_MEAN">0.16233495508099</MDI>
+      <MDI key="STATISTICS_MINIMUM">0.080931186676025</MDI>
+      <MDI key="STATISTICS_STDDEV">0.049719221293311</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">52.04</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="2">
+    <Description>index_1997.10</Description>
+    <Histograms>
+      <HistItem>
+        <HistMin>0.03875828242061012</HistMin>
+        <HistMax>0.3081933102929843</HistMax>
+        <BucketCount>736</BucketCount>
+        <IncludeOutOfRange>0</IncludeOutOfRange>
+        <Approximate>0</Approximate>
+        <HistCounts>3|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|1|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|2|0|1|0|1|0|1|0|0|3|2|3|1|0|0|3|1|1|1|0|3|3|0|2|1|2|0|2|1|0|1|4|2|0|2|0|0|1|2|1|0|2|1|1|3|2|0|3|1|2|2|0|1|2|2|0|0|2|2|2|3|0|1|2|0|3|0|0|2|0|3|2|1|2|0|0|0|3|0|3|0|1|0|2|1|0|3|0|0|0|1|0|2|5|0|0|3|0|1|1|1|3|0|0|0|0|1|0|3|2|0|1|4|2|2|3|1|1|2|2|0|2|2|5|0|0|4|3|2|2|2|1|1|2|4|0|1|2|1|1|3|2|0|5|2|1|1|2|3|3|2|0|1|0|1|0|1|1|0|0|2|1|0|0|0|1|0|7|0|3|2|1|0|2|1|1|0|0|2|0|3|2|0|2|2|0|2|0|0|1|0|1|0|0|0|1|1|2|1|1|1|2|0|1|0|0|1|2|0|1|3|1|0|0|1|0|2|0|0|2|0|0|1|0|1|2|1|0|0|4|0|0|0|1|1|0|0|0|2|0|0|0|2|0|0|0|1|2|0|0|0|0|0|1|3|0|1|0|0|2|0|0|2|0|0|0|0|3|1|0|0|0|0|2|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|1|1|0|0|0|0|0|1|0|0|0|0|0|1|2|0|0|0|1|1|0|1|1|0|0|1|1|0|0|0|0|1|0|0|0|0|0|1|0|1|0|0|0|0|0|1|0|0|0|0|1|0|0|0|0|0|1|2|0|1|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|2|0|0|0|0|0|1|1|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|1|0|0|0|0|0|0|0|0|2|0|0|0|0|0|1|0|0|0|0|0|0|2|0|0|0|0|1|0|0|0|0|0|0|0|1|3|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|4</HistCounts>
+      </HistItem>
+    </Histograms>
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">0.30801051855087</MDI>
+      <MDI key="STATISTICS_MEAN">0.1237462352511</MDI>
+      <MDI key="STATISTICS_MINIMUM">0.038941074162722</MDI>
+      <MDI key="STATISTICS_STDDEV">0.046884176681732</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">49.46</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="3">
+    <Description>index_1997.11</Description>
+    <Histograms>
+      <HistItem>
+        <HistMin>0.05478038992378455</HistMin>
+        <HistMax>0.225564174543884</HistMax>
+        <BucketCount>736</BucketCount>
+        <IncludeOutOfRange>0</IncludeOutOfRange>
+        <Approximate>0</Approximate>
+        <HistCounts>1|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|3|2|0|0|0|0|1|1|0|0|0|1|0|0|1|1|0|1|1|4|2|0|1|2|0|1|2|1|0|0|3|1|0|1|1|0|0|0|3|0|0|1|1|1|0|1|1|0|1|3|0|0|0|1|0|2|1|0|0|2|1|1|1|0|1|1|1|1|0|6|1|2|0|0|1|0|0|1|0|0|1|0|0|0|0|0|1|0|0|0|0|3|0|0|3|4|2|2|2|0|1|2|0|3|0|0|0|2|1|0|0|2|1|1|0|0|0|1|1|0|2|3|0|1|0|1|3|0|0|1|2|2|0|0|0|2|0|1|3|2|3|4|2|0|1|0|3|4|1|1|1|0|0|0|1|3|3|1|3|1|2|0|4|1|1|0|1|1|4|0|0|2|0|0|0|2|0|1|0|1|0|0|0|1|0|1|0|0|1|0|3|0|0|1|0|0|1|1|0|0|0|0|3|0|0|1|1|1|0|0|1|0|0|0|0|1|0|3|0|8|0|0|0|1|0|2|0|0|0|2|1|2|0|1|1|1|0|0|0|1|1|0|1|2|1|0|1|6|0|1|0|1|1|0|0|5|1|0|0|0|1|1|5|0|1|0|0|0|0|0|0|0|2|0|1|0|2|2|0|0|0|1|0|1|1|1|0|0|2|0|1|0|0|0|0|1|0|0|0|0|1|2|0|1|0|2|0|0|0|0|0|0|1|1|1|1|0|1|0|0|1|0|0|0|1|0|0|0|0|0|0|1|0|0|1|0|1|0|0|0|0|1|0|0|0|0|0|0|0|1|0|0|0|0|0|0|1|0|0|0|1|1|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|1|0|0|1|0|0|0|0|5|1|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|1|0|0|0|0|1|0|1|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|1|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|2|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|4|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|3</HistCounts>
+      </HistItem>
+    </Histograms>
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">0.22544831037521</MDI>
+      <MDI key="STATISTICS_MEAN">0.10844243267784</MDI>
+      <MDI key="STATISTICS_MINIMUM">0.054896254092455</MDI>
+      <MDI key="STATISTICS_STDDEV">0.033235099590198</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">43.48</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="4">
+    <Description>index_1997.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="5">
+    <Description>index_1998.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="6">
+    <Description>index_1998.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="7">
+    <Description>index_1998.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="8">
+    <Description>index_1998.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="9">
+    <Description>index_1998.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="10">
+    <Description>index_1998.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="11">
+    <Description>index_1998.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="12">
+    <Description>index_1998.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="13">
+    <Description>index_1998.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="14">
+    <Description>index_1998.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="15">
+    <Description>index_1998.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="16">
+    <Description>index_1998.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="17">
+    <Description>index_1999.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="18">
+    <Description>index_1999.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="19">
+    <Description>index_1999.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="20">
+    <Description>index_1999.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="21">
+    <Description>index_1999.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="22">
+    <Description>index_1999.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="23">
+    <Description>index_1999.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="24">
+    <Description>index_1999.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="25">
+    <Description>index_1999.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="26">
+    <Description>index_1999.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="27">
+    <Description>index_1999.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="28">
+    <Description>index_1999.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="29">
+    <Description>index_2000.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="30">
+    <Description>index_2000.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="31">
+    <Description>index_2000.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="32">
+    <Description>index_2000.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="33">
+    <Description>index_2000.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="34">
+    <Description>index_2000.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="35">
+    <Description>index_2000.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="36">
+    <Description>index_2000.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="37">
+    <Description>index_2000.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="38">
+    <Description>index_2000.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="39">
+    <Description>index_2000.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="40">
+    <Description>index_2000.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="41">
+    <Description>index_2001.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="42">
+    <Description>index_2001.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="43">
+    <Description>index_2001.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="44">
+    <Description>index_2001.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="45">
+    <Description>index_2001.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="46">
+    <Description>index_2001.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="47">
+    <Description>index_2001.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="48">
+    <Description>index_2001.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="49">
+    <Description>index_2001.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="50">
+    <Description>index_2001.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="51">
+    <Description>index_2001.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="52">
+    <Description>index_2001.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="53">
+    <Description>index_2002.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="54">
+    <Description>index_2002.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="55">
+    <Description>index_2002.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="56">
+    <Description>index_2002.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="57">
+    <Description>index_2002.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="58">
+    <Description>index_2002.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="59">
+    <Description>index_2002.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="60">
+    <Description>index_2002.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="61">
+    <Description>index_2002.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="62">
+    <Description>index_2002.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="63">
+    <Description>index_2002.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="64">
+    <Description>index_2002.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="65">
+    <Description>index_2003.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="66">
+    <Description>index_2003.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="67">
+    <Description>index_2003.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="68">
+    <Description>index_2003.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="69">
+    <Description>index_2003.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="70">
+    <Description>index_2003.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="71">
+    <Description>index_2003.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="72">
+    <Description>index_2003.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="73">
+    <Description>index_2003.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="74">
+    <Description>index_2003.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="75">
+    <Description>index_2003.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="76">
+    <Description>index_2003.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="77">
+    <Description>index_2004.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="78">
+    <Description>index_2004.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="79">
+    <Description>index_2004.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="80">
+    <Description>index_2004.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="81">
+    <Description>index_2004.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="82">
+    <Description>index_2004.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="83">
+    <Description>index_2004.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="84">
+    <Description>index_2004.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="85">
+    <Description>index_2004.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="86">
+    <Description>index_2004.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="87">
+    <Description>index_2004.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="88">
+    <Description>index_2004.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="89">
+    <Description>index_2005.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="90">
+    <Description>index_2005.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="91">
+    <Description>index_2005.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="92">
+    <Description>index_2005.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="93">
+    <Description>index_2005.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="94">
+    <Description>index_2005.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="95">
+    <Description>index_2005.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="96">
+    <Description>index_2005.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="97">
+    <Description>index_2005.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="98">
+    <Description>index_2005.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="99">
+    <Description>index_2005.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="100">
+    <Description>index_2005.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="101">
+    <Description>index_2006.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="102">
+    <Description>index_2006.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="103">
+    <Description>index_2006.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="104">
+    <Description>index_2006.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="105">
+    <Description>index_2006.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="106">
+    <Description>index_2006.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="107">
+    <Description>index_2006.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="108">
+    <Description>index_2006.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="109">
+    <Description>index_2006.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="110">
+    <Description>index_2006.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="111">
+    <Description>index_2006.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="112">
+    <Description>index_2006.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="113">
+    <Description>index_2007.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="114">
+    <Description>index_2007.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="115">
+    <Description>index_2007.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="116">
+    <Description>index_2007.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="117">
+    <Description>index_2007.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="118">
+    <Description>index_2007.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="119">
+    <Description>index_2007.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="120">
+    <Description>index_2007.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="121">
+    <Description>index_2007.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="122">
+    <Description>index_2007.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="123">
+    <Description>index_2007.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="124">
+    <Description>index_2007.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="125">
+    <Description>index_2008.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="126">
+    <Description>index_2008.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="127">
+    <Description>index_2008.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="128">
+    <Description>index_2008.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="129">
+    <Description>index_2008.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="130">
+    <Description>index_2008.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="131">
+    <Description>index_2008.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="132">
+    <Description>index_2008.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="133">
+    <Description>index_2008.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="134">
+    <Description>index_2008.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="135">
+    <Description>index_2008.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="136">
+    <Description>index_2008.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="137">
+    <Description>index_2009.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="138">
+    <Description>index_2009.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="139">
+    <Description>index_2009.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="140">
+    <Description>index_2009.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="141">
+    <Description>index_2009.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="142">
+    <Description>index_2009.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="143">
+    <Description>index_2009.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="144">
+    <Description>index_2009.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="145">
+    <Description>index_2009.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="146">
+    <Description>index_2009.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="147">
+    <Description>index_2009.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="148">
+    <Description>index_2009.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="149">
+    <Description>index_2010.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="150">
+    <Description>index_2010.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="151">
+    <Description>index_2010.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="152">
+    <Description>index_2010.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="153">
+    <Description>index_2010.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="154">
+    <Description>index_2010.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="155">
+    <Description>index_2010.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="156">
+    <Description>index_2010.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="157">
+    <Description>index_2010.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="158">
+    <Description>index_2010.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="159">
+    <Description>index_2010.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="160">
+    <Description>index_2010.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="161">
+    <Description>index_2011.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="162">
+    <Description>index_2011.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="163">
+    <Description>index_2011.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="164">
+    <Description>index_2011.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="165">
+    <Description>index_2011.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="166">
+    <Description>index_2011.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="167">
+    <Description>index_2011.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="168">
+    <Description>index_2011.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="169">
+    <Description>index_2011.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="170">
+    <Description>index_2011.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="171">
+    <Description>index_2011.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="172">
+    <Description>index_2011.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="173">
+    <Description>index_2012.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="174">
+    <Description>index_2012.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="175">
+    <Description>index_2012.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="176">
+    <Description>index_2012.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="177">
+    <Description>index_2012.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="178">
+    <Description>index_2012.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="179">
+    <Description>index_2012.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="180">
+    <Description>index_2012.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="181">
+    <Description>index_2012.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="182">
+    <Description>index_2012.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="183">
+    <Description>index_2012.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="184">
+    <Description>index_2012.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="185">
+    <Description>index_2013.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="186">
+    <Description>index_2013.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="187">
+    <Description>index_2013.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="188">
+    <Description>index_2013.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="189">
+    <Description>index_2013.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="190">
+    <Description>index_2013.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="191">
+    <Description>index_2013.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="192">
+    <Description>index_2013.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="193">
+    <Description>index_2013.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="194">
+    <Description>index_2013.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="195">
+    <Description>index_2013.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="196">
+    <Description>index_2013.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="197">
+    <Description>index_2014.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="198">
+    <Description>index_2014.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="199">
+    <Description>index_2014.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="200">
+    <Description>index_2014.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="201">
+    <Description>index_2014.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="202">
+    <Description>index_2014.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="203">
+    <Description>index_2014.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="204">
+    <Description>index_2014.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="205">
+    <Description>index_2014.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="206">
+    <Description>index_2014.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="207">
+    <Description>index_2014.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="208">
+    <Description>index_2014.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="209">
+    <Description>index_2015.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="210">
+    <Description>index_2015.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="211">
+    <Description>index_2015.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="212">
+    <Description>index_2015.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="213">
+    <Description>index_2015.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="214">
+    <Description>index_2015.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="215">
+    <Description>index_2015.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="216">
+    <Description>index_2015.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="217">
+    <Description>index_2015.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="218">
+    <Description>index_2015.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="219">
+    <Description>index_2015.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="220">
+    <Description>index_2015.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="221">
+    <Description>index_2016.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="222">
+    <Description>index_2016.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="223">
+    <Description>index_2016.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="224">
+    <Description>index_2016.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="225">
+    <Description>index_2016.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="226">
+    <Description>index_2016.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="227">
+    <Description>index_2016.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="228">
+    <Description>index_2016.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="229">
+    <Description>index_2016.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="230">
+    <Description>index_2016.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="231">
+    <Description>index_2016.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="232">
+    <Description>index_2016.12</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="233">
+    <Description>index_2017.01</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="234">
+    <Description>index_2017.02</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="235">
+    <Description>index_2017.03</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="236">
+    <Description>index_2017.04</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="237">
+    <Description>index_2017.05</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="238">
+    <Description>index_2017.06</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="239">
+    <Description>index_2017.07</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="240">
+    <Description>index_2017.08</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="241">
+    <Description>index_2017.09</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="242">
+    <Description>index_2017.10</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="243">
+    <Description>index_2017.11</Description>
+  </PAMRasterBand>
+  <PAMRasterBand band="244">
+    <Description>index_2017.12</Description>
+  </PAMRasterBand>
+</PAMDataset>
