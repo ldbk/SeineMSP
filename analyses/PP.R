@@ -9,8 +9,11 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+<<<<<<< HEAD
 
 setwd("../")
+=======
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
 PP<- nc_open("data/satellite/Primary production/PP 1998-2018.nc")
 PP<- stack("data/satellite/Primary production/PP 1998-2018.nc")
@@ -167,6 +170,7 @@ gridded(toto3PP) <- TRUE
 rasterPP<- raster(toto3PP)
 rasterPP
 <<<<<<< HEAD
+<<<<<<< HEAD
 raster::plot(rasterPP, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
 
 rasterPPnew<- resample(rasterPP, r0, method="ngb")
@@ -197,8 +201,17 @@ p2<-st_as_sf(p1)
 r2<-fasterize(p2,r1,field="Clust")
 resample(rasterPP,r2
 
+=======
+plot(rasterPP, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
 
+load("data/satellite/chl/rasterChlnew.Rdata")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
+disPP<- disaggregate(rasterPP, fact=(res(rasterPP)/res(rasterchlnew)))
+mPP<- mask(disPP, res)
+plot(mPP)
+
+<<<<<<< HEAD
 plot(r1)
 plot(p1,add=T)
 r2<-rasterize(p1,r1)
@@ -215,17 +228,30 @@ load("data/satellite/chl/rasterChlnew.Rdata")
 disPP<- disaggregate(rasterPP, fact=(res(rasterPP)/res(rasterchlnew)))
 mPP<- mask(disPP, res)
 plot(mPP)
+=======
+save(mPP, file="data/satellite/Primary production/PP_raster.Rdata")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
 save(mPP, file="data/satellite/Primary production/PP_raster.Rdata")
 
 
+# Polygons
 
+<<<<<<< HEAD
 # Polygons
 
 polPP<- rasterToPolygons(mPP, dissolve=TRUE)
 plot(polPP, col=polPP@data$Clust)
 
 writeOGR(polPP, dsn="data/satellite/Primary production", layer="PP", driver="ESRI Shapefile")
+=======
+polPP<- rasterToPolygons(mPP, dissolve=TRUE)
+plot(polPP, col=polPP@data$Clust)
+
+writeOGR(polPP, dsn="data/satellite/Primary production", layer="PP", driver="ESRI Shapefile")
+
+save(polPP, file="data/satellite/Primary production/PP_polygons.Rdata")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
 save(polPP, file="data/satellite/Primary production/PP_polygons.Rdata")
 
