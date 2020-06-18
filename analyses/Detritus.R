@@ -101,7 +101,7 @@ tree<- hclust(distance, )
 plot(tree)
 
 TabDet5<- TabDet3 %>% ungroup() %>% dplyr::select(moyper)
-NbClust(TabDet5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(TabDet5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
 # According to the majority rule, the best number of clusters is  5
 
 rect.hclust(tree, 5)
@@ -175,6 +175,8 @@ plot(polDet, col=polDet@data$Clust)
 
 writeOGR(polDet, dsn="data/satellite/Detritus", layer="Det", driver="ESRI Shapefile")
 
+
+save(polDet, file="data/satellite/Detritus/Det_polygons.Rdata")
 
 
 

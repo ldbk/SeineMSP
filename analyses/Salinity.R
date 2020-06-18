@@ -110,7 +110,7 @@ tree<- hclust(distance)
 plot(tree)
 
 TabSal5<- TabSal3 %>% ungroup() %>% dplyr::select(moyper)
-NbClust(TabSal5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(TabSal5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
 # According to the majority rule, the best number of clusters is  4
 
 rect.hclust(tree, 4)
@@ -184,7 +184,7 @@ plot(polSal, col=polSal@data$Clust)
 
 writeOGR(polSal, dsn="data/satellite/Salinity", layer="Sal", driver="ESRI Shapefile")
 
-
+save(polSal, file="data/satellite/Salinity/Sal_polygons.Rdata")
 
 
 

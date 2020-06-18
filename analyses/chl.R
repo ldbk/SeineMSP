@@ -177,13 +177,9 @@ plot(polChl, col=polChl@data$Clust)
 
 writeOGR(polChl, dsn="data/satellite/chl", layer="Chl", driver="ESRI Shapefile")
 
+save(polChl, file="data/satellite/chl/chl_polygons.Rdata")
 
 
-# Pour full_join
 
-toto4chl<- toto2chl
-toto4chl<- toto4chl %>% select(-Clust)
-Tabchlfin<- toto4chl
-save(Tabchlfin, file="data/satellite/chl/Tabchlfin.Rdata")
 
 

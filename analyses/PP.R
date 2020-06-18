@@ -110,7 +110,7 @@ tree<- hclust(distance)
 plot(tree)
 
 TabPP5<- TabPP3 %>% ungroup() %>% dplyr::select(moyper)
-NbClust(TabPP5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(TabPP5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
 # According to the majority rule, the best number of clusters is  3
 
 rect.hclust(tree, 3)
@@ -184,7 +184,7 @@ plot(polPP, col=polPP@data$Clust)
 
 writeOGR(polPP, dsn="data/satellite/Primary production", layer="PP", driver="ESRI Shapefile")
 
-
+save(polPP, file="data/satellite/Primary production/PP_polygons.Rdata")
 
 
 

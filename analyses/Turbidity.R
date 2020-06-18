@@ -101,7 +101,7 @@ tree<- hclust(distance)
 plot(tree)
 
 TabTurb5<- TabTurb3 %>% ungroup() %>% dplyr::select(moyper)
-NbClust(TabTurb5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(TabTurb5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
 # According to the majority rule, the best number of clusters is  7
 
 rect.hclust(tree, 7)
@@ -175,7 +175,7 @@ plot(polTurb, col=polTurb@data$Clust)
 
 writeOGR(polTurb, dsn="data/satellite/Turbidity", layer="Turb", driver="ESRI Shapefile")
 
-
+save(polTurb, file="data/satellite/Turbidity/Turb_polygons.Rdata")
 
 
 

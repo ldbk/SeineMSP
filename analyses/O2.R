@@ -117,7 +117,7 @@ tree<- hclust(distance)
 plot(tree)
 
 TabO25<- TabO23 %>% ungroup() %>% dplyr::select(moyper)
-NbClust(TabO25, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(TabO25, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
 # According to the majority rule, the best number of clusters is  5
 
 rect.hclust(tree, 5)
@@ -191,7 +191,7 @@ plot(polO2, col=polO2@data$Clust)
 
 writeOGR(polO2, dsn="data/satellite/O2", layer="O2", driver="ESRI Shapefile")
 
-
+save(polO2, file="data/satellite/O2/O2_polygons.Rdata")
 
 
 
