@@ -9,6 +9,11 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+<<<<<<< HEAD
+
+setwd("../")
+=======
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
 PP<- nc_open("data/satellite/Primary production/PP 1998-2018.nc")
 PP<- stack("data/satellite/Primary production/PP 1998-2018.nc")
@@ -16,7 +21,6 @@ PP<- stack("data/satellite/Primary production/PP 1998-2018.nc")
 
 # Conversion raster - tableau
 fortify.Raster <- function(PP, maxPixel = 1000000) {
-  
   if (ncell(PP) > maxPixel) {
     x <- sampleRegular(PP, maxPixel, asRaster=TRUE)
   }
@@ -165,27 +169,91 @@ gridded(toto3PP) <- TRUE
   # coerce to raster
 rasterPP<- raster(toto3PP)
 rasterPP
+<<<<<<< HEAD
+<<<<<<< HEAD
+raster::plot(rasterPP, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
+
+rasterPPnew<- resample(rasterPP, r0, method="ngb")
+plot(rasterPPnew, main="Primary production", xlab="Longitude", ylab="Latitude")
+
+save(rasterPPnew, file="data/satellite/Primary production/PP_raster.Rdata")
+
+#test loran
+r1<- raster(nrow=20, ncol=20, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+values(r1) <- rnorm(ncell(r1))
+plot(r1)
+crs(rasterPP)<-crs(r1)
+r1c<- resample(rasterPP, r1, method="ngb")
+plot(r1c)
+
+#testrasterize
+r1<- raster(nrow=200, ncol=200, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+values(r1) <- rnorm(ncell(r1))
+xy<-data.frame(toto2PP[,1:2])
+r2<-rasterize(xy,r1,as.numeric(toto2PP$Clust),background=-999)#init1$Clust)
+plot(r2)
+
+#test rasterToPolygons
+r1<- raster(nrow=10, ncol=20, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+values(r1) <- rnorm(ncell(r1))
+p1<-rasterToPolygons(rasterPP)
+p2<-st_as_sf(p1)
+r2<-fasterize(p2,r1,field="Clust")
+resample(rasterPP,r2
+
+=======
 plot(rasterPP, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
+
+load("data/satellite/chl/rasterChlnew.Rdata")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
+
+disPP<- disaggregate(rasterPP, fact=(res(rasterPP)/res(rasterchlnew)))
+mPP<- mask(disPP, res)
+plot(mPP)
+
+<<<<<<< HEAD
+plot(r1)
+plot(p1,add=T)
+r2<-rasterize(p1,r1)
+plot(r2)
+
+
+# old
+=======
+plot(rasterPP, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disPP<- disaggregate(rasterPP, fact=(res(rasterPP)/res(rasterchlnew)))
 mPP<- mask(disPP, res)
 plot(mPP)
+=======
+save(mPP, file="data/satellite/Primary production/PP_raster.Rdata")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
 save(mPP, file="data/satellite/Primary production/PP_raster.Rdata")
 
 
+# Polygons
 
+<<<<<<< HEAD
 # Polygons
 
 polPP<- rasterToPolygons(mPP, dissolve=TRUE)
 plot(polPP, col=polPP@data$Clust)
 
 writeOGR(polPP, dsn="data/satellite/Primary production", layer="PP", driver="ESRI Shapefile")
+=======
+polPP<- rasterToPolygons(mPP, dissolve=TRUE)
+plot(polPP, col=polPP@data$Clust)
+
+writeOGR(polPP, dsn="data/satellite/Primary production", layer="PP", driver="ESRI Shapefile")
 
 save(polPP, file="data/satellite/Primary production/PP_polygons.Rdata")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
+save(polPP, file="data/satellite/Primary production/PP_polygons.Rdata")
 
 
 
