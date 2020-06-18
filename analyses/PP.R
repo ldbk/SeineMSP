@@ -6,9 +6,9 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
-library(rgeos)
-library(RGeostats)
 library(rgdal)
+library(rgeos)
+library(NbClust)
 
 setwd("../")
 
@@ -40,21 +40,19 @@ TabPP$Secondes<-sub("values.X","",TabPP$Secondes)
 sec<-as.numeric(TabPP$Secondes)
 Jour0<-strptime("1998-01-01", format= "%Y-%m-%d")
 TabPP$Date<- Jour0+sec
-}
-{
+
 TabPP$Year <- as.numeric(substr(as.character(TabPP$Date),1,4))
 TabPP$Month<- as.numeric(substr(as.character(TabPP$Date), 6,7))
 TabPP$Day<- as.numeric(substr(as.character(TabPP$Date), 9,10))
 }
-TabPP<- TabPP[, -c(3, 5)]
 
 
 # Infos
-mean(TabPP$PP)
-min(TabPP$PP)
-max(TabPP$PP)
-sd(TabPP$PP)
-var(TabPP$PP)
+#mean(TabPP$PP)
+#min(TabPP$PP)
+#max(TabPP$PP)
+#sd(TabPP$PP)
+#var(TabPP$PP)
 
 
 # Mean PP per year
@@ -69,10 +67,7 @@ ggplot(TabPP2)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))  
 
-TabPP2<- TabPP %>% group_by(x,y,Year) %>% summarize(moyPP= mean(PP))
 ggplot(TabPP2, aes(x= Year, y=moyPP, group=Year))+
-  ggtitle("Production primaire 1998-2018")+
-  ylab("mg C/m3/j")+
   geom_boxplot()
 
 
@@ -105,6 +100,7 @@ save(TabPP4, file="data/satellite/Primary production/PP_serie.Rdata")
 # Partitionnement
 
 TabPPnew<- pivot_wider(TabPP2, names_from = Year, values_from = moyPP)
+TabPPnew<- na.omit(TabPPnew)
 metaTabnew<- TabPPnew %>% dplyr::select(x, y)
 TabPPnew<- TabPPnew %>% ungroup() %>% dplyr::select(-x, -y)
 
@@ -114,8 +110,12 @@ distance<- dist(TabPPnew)
 tree<- hclust(distance)
 plot(tree)
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+TabPP5<- TabPP3 %>% ungroup() %>% dplyr::select(moyper)
+#NbClust(TabPP5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+# According to the majority rule, the best number of clusters is  3
+
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- PP[[1]]
 values(zone)<- NA
@@ -131,46 +131,31 @@ for (k in unique(essai[,"Clust"])){
 
 toto2PP<- left_join(toto, essai2, by="Clust")
 
+save(toto2PP, file="data/satellite/Primary production/toto2PP.Rdata")
 
 
 
-#1st Polygon
+# Trait de cote
+  # 1st Polygon
 liste <- with(toto2PP, chull(x, y))
 hull <- toto2PP[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-#Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-#Cut object along coast
-coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
-res <- gDifference(buff, coast)
-PolyCut <- fortify(res)
+  # Cut object along coast
+coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
+res <- rgeos::gDifference(buff, coast)
 
-
-#Put polygon in good format for later use
-tete <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(tete[,c(1,2)])
-
-PP<- ggplot(toto2PP)+
-  geom_tile(aes(x=x,y=y,fill=mean))+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mean PP (mg C/m3/j)")+
-  theme_minimal()+
-  coord_fixed()+
-  ggtitle("Primary production")+
-  geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
-
-PP
-
+#PP<- ggplot(toto2PP)+geom_tile(aes(x=x,y=y,fill=mean))+xlab("Longitude")+ylab("Latitude")+labs(fill="mean PP (mg C/m3/j)")+theme_minimal()+coord_fixed()+ggtitle("Primary production")+geom_polygon(data=tete, aes(x=long,y=lat, group=group),fill=NA,col="black")
 
 
 
 # Raster
 
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
   # create SpatialPointsDataFrame
@@ -181,6 +166,7 @@ gridded(toto3PP) <- TRUE
   # coerce to raster
 rasterPP<- raster(toto3PP)
 rasterPP
+<<<<<<< HEAD
 raster::plot(rasterPP, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
 
 rasterPPnew<- resample(rasterPP, r0, method="ngb")
@@ -220,17 +206,28 @@ plot(r2)
 
 
 # old
+=======
+plot(rasterPP, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
-#r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
-#plot(r1)
+load("data/satellite/chl/rasterChlnew.Rdata")
+
+disPP<- disaggregate(rasterPP, fact=(res(rasterPP)/res(rasterchlnew)))
+mPP<- mask(disPP, res)
+plot(mPP)
+
+save(mPP, file="data/satellite/Primary production/PP_raster.Rdata")
 
 
 
+# Polygons
 
+polPP<- rasterToPolygons(mPP, dissolve=TRUE)
+plot(polPP, col=polPP@data$Clust)
 
+writeOGR(polPP, dsn="data/satellite/Primary production", layer="PP", driver="ESRI Shapefile")
 
-
-
+save(polPP, file="data/satellite/Primary production/PP_polygons.Rdata")
 
 
 

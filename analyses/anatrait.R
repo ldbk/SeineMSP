@@ -13,15 +13,15 @@ names(fishtraitlocal)[2]<- "Species"
 #https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0
 fishtraitBeuhkhof<-readxl::read_excel("../data/fishtrait/TraitCollectionFishNAtlanticNEPacificContShelf.xlsx")
 fishtrait1<-fishtraitBeuhkhof%>%mutate(Species=paste(genus,species))%>%
-	filter(Species%in%fishtraitlocal$Species)%>%
+  filter(Species%in%fishtraitlocal$Species)%>%
   filter(LME==22)
 length(unique(fishtrait1$Species))
 #11 species missing for LME 22 (North Sea)
 #try to get info from other LME : 24 for Celtic seas
 missingtrait1<-fishtraitlocal%>%filter(!Species%in%fishtrait1$Species)
 fishtrait2<-fishtraitBeuhkhof%>%mutate(Species=paste(genus,species))%>%
-	filter(Species%in%missingtrait1$Species)%>%
-	filter(LME==24)
+  filter(Species%in%missingtrait1$Species)%>%
+  filter(LME==24)
 length(unique(fishtrait2$Species))
 #bind the two files and check missing species
 fishtrait3<-rbind(fishtrait1,fishtrait2)%>%distinct()
@@ -33,20 +33,20 @@ missingtrait3%>%pull(Species)
 
 #summarise the new trait tables
 fishtraitnew<-fishtrait3%>%select(Species,habitat,feeding.mode,tl,
-				  #body.shape,offspring.size,
-				  #spawning.type,
-				  age.maturity,#fecundity,
-				  growth.coefficient,length.max,age.max)
+                                  #body.shape,offspring.size,
+                                  #spawning.type,
+                                  age.maturity,#fecundity,
+                                  growth.coefficient,length.max,age.max)
 #add IUCN status
 IUCN<- read_sheet("https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0",sheet=1,na="NA")
 names(IUCN)[12]<- "IUCN.status"
 fishtraitnew<-left_join(fishtraitnew, IUCN%>%select(Species,IUCN.status))
 #explo data
 diagmiss<-function(fishtrait){
-	nbid<-fishtrait%>%summarise_all(n_distinct)%>%t()
-	nbNA<-function(a){a[a==""]<-NA;sum(is.na(a))}
-	nbNA<-fishtrait%>%summarise_all(nbNA)%>%t()
-	return(data.frame(nbid=nbid,nbNA=nbNA))
+  nbid<-fishtrait%>%summarise_all(n_distinct)%>%t()
+  nbNA<-function(a){a[a==""]<-NA;sum(is.na(a))}
+  nbNA<-fishtrait%>%summarise_all(nbNA)%>%t()
+  return(data.frame(nbid=nbid,nbNA=nbNA))
 }
 diagmiss(fishtraitnew)
 #2 missing value in age.maturity 
@@ -58,12 +58,12 @@ diagmiss(fishtraitnew)
 #now categorize stuff
 #categorize numerical values 
 catvar<-function(a,value){
-  	value<-c(0,as.vector(value))
-	print(value)
-	lval<-length(value)
-	interval<-paste0("[",round(value[-lval],3),",",round(value[-1],3),"[")
-	a1<-interval[findInterval(a,value,all.inside=T)]
-	return(a1)
+  value<-c(0,as.vector(value))
+  print(value)
+  lval<-length(value)
+  interval<-paste0("[",round(value[-lval],3),",",round(value[-1],3),"[")
+  a1<-interval[findInterval(a,value,all.inside=T)]
+  return(a1)
 }
 #a quick check for the function
 table(fishtraitnew$tl,catvar(fishtraitnew$tl,c(1:5)))
@@ -120,14 +120,20 @@ stop()
 #a quick test on multiple methods
 library(fpc)
 set.seed(666) #the number of the beaaasttt
+<<<<<<< HEAD
   options(digits=3)
 clustermethod=c("kmeansCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","claraCBI")
+=======
+options(digits=3)
+clustermethod=c("kmeansCBI","hclustCBI","hclustCBI")
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 clustermethodpars <- list()
 clustermethodpars[[2]] <- clustermethodpars[[3]] <- list()
 clustermethodpars[[4]] <-  clustermethodpars[[5]] <-list()
 clustermethodpars[[6]]<-   clustermethodpars[[7]] <-list()
 clustermethodpars[[2]]$method <- "ward.D2"
 clustermethodpars[[3]]$method <- "single"
+<<<<<<< HEAD
 clustermethodpars[[4]]$method <- "complete"
 clustermethodpars[[5]]$method <- "average"
 clustermethodpars[[6]]$method <- "mcquitty"
@@ -167,6 +173,22 @@ plot(cbs$stat,cbs$sim,statistic="entropy")
 	      plot(cbs$stat,cbs$sim,statistic="pamc")
 	      plot(cbs$stat,cbs$sim,statistic="maxdiameter")
 	      print(cbs$sstat,aggregate=TRUE,weights=c(1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0))
+=======
+methodname <- c("kmeans","ward","single")
+cbs <-  clusterbenchstats(rez$ind$coord,G=2:10,
+                          clustermethod=clustermethod,scaling=FALSE,
+                          methodname=methodname,distmethod=rep(FALSE,4),
+                          clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
+                          fnruns=100,avenruns=100,multicore=TRUE)
+
+plot(cbs$stat,cbs$sim,statistic="sindex")
+plot(cbs$stat,cbs$sim,statistic="dindex")
+plot(cbs$stat,cbs$sim,statistic="avewithin")
+plot(cbs$stat,cbs$sim,statistic="entropy")
+plot(cbs$stat,cbs$sim,statistic="pamc")
+plot(cbs$stat,cbs$sim,statistic="maxdiameter")
+print(cbs$sstat,aggregate=TRUE,weights=c(1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0))
+>>>>>>> f21cafda9eb0b1cc2c00b81766d367ed685ce785
 
 	      #a plot tree with dataaaa
 	      aa<-GDAtools::burt(pipo)
@@ -222,12 +244,12 @@ diagmiss(fishtrait)
 fishtrait<-fishtrait3
 #categorize numerical values 
 catquant<-function(a,value){
-  	value<-c(0,as.vector(value))
-	print(value)
-	lval<-length(value)
-	interval<-paste0("[",round(value[-lval],3),",",round(value[-1],3),"[")
-	a1<-interval[findInterval(a,value,all.inside=T)]
-	return(a1)
+  value<-c(0,as.vector(value))
+  print(value)
+  lval<-length(value)
+  interval<-paste0("[",round(value[-lval],3),",",round(value[-1],3),"[")
+  a1<-interval[findInterval(a,value,all.inside=T)]
+  return(a1)
 }
 #a quick check for the function
 table(fishtrait$LifeSpan,catquant(fishtrait$LifeSpan,c(1,2,3,10,90)))
@@ -264,7 +286,3 @@ nb<-estim_ncpMCA(pipo)
 rez<-imputeMCA(pipo,ncp=4)
 rez<-MCA(pipo,tab.disj=rez$tab.disj.comp)
 HCPC(rez)
-
-
-
-
