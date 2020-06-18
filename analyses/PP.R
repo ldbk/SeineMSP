@@ -10,13 +10,14 @@ library(rgeos)
 library(RGeostats)
 library(rgdal)
 
+setwd("../")
+
 PP<- nc_open("data/satellite/Primary production/PP 1998-2018.nc")
 PP<- stack("data/satellite/Primary production/PP 1998-2018.nc")
 
 
 # Conversion raster - tableau
 fortify.Raster <- function(PP, maxPixel = 1000000) {
-  
   if (ncell(PP) > maxPixel) {
     x <- sampleRegular(PP, maxPixel, asRaster=TRUE)
   }
@@ -187,12 +188,41 @@ plot(rasterPPnew, main="Primary production", xlab="Longitude", ylab="Latitude")
 
 save(rasterPPnew, file="data/satellite/Primary production/PP_raster.Rdata")
 
+#test loran
+r1<- raster(nrow=20, ncol=20, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+values(r1) <- rnorm(ncell(r1))
+plot(r1)
+crs(rasterPP)<-crs(r1)
+r1c<- resample(rasterPP, r1, method="ngb")
+plot(r1c)
+
+#testrasterize
+r1<- raster(nrow=200, ncol=200, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+values(r1) <- rnorm(ncell(r1))
+xy<-data.frame(toto2PP[,1:2])
+r2<-rasterize(xy,r1,as.numeric(toto2PP$Clust),background=-999)#init1$Clust)
+plot(r2)
+
+#test rasterToPolygons
+r1<- raster(nrow=10, ncol=20, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+values(r1) <- rnorm(ncell(r1))
+p1<-rasterToPolygons(rasterPP)
+p2<-st_as_sf(p1)
+r2<-fasterize(p2,r1,field="Clust")
+resample(rasterPP,r2
+
+
+
+plot(r1)
+plot(p1,add=T)
+r2<-rasterize(p1,r1)
+plot(r2)
+
 
 # old
 
 #r1<- raster::rasterize(metaTabnew, r0, fields=zones, fun=mean)
 #plot(r1)
-
 
 
 

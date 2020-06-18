@@ -92,10 +92,12 @@ plotellipses(rez,axes=c(1,2))
 plotellipses(rez,axes=c(1,3))
 
 #classif
-arbre<-cluster::agnes(rez$ind$coord,method="flexible",par.method=1)
+arbre<-cluster::agnes(rez$ind$coord,method="ward",par.method=1)
 plot(arbre,which=2,hang=-1)
 rect.hclust(arbre,k=4)
 groupe<-cutree(arbre,k=4)
+
+
 #optimal number of cluster
 #funcluster<-function(a,n){list(cluster=cutree(cluster::agnes(a,method="ward"),k=n))}
 #funcluster(rez$ind$coord,2)
@@ -119,25 +121,81 @@ stop()
 library(fpc)
 set.seed(666) #the number of the beaaasttt
   options(digits=3)
-clustermethod=c("kmeansCBI","hclustCBI","hclustCBI")
+clustermethod=c("kmeansCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","claraCBI")
 clustermethodpars <- list()
 clustermethodpars[[2]] <- clustermethodpars[[3]] <- list()
+clustermethodpars[[4]] <-  clustermethodpars[[5]] <-list()
+clustermethodpars[[6]]<-   clustermethodpars[[7]] <-list()
 clustermethodpars[[2]]$method <- "ward.D2"
 clustermethodpars[[3]]$method <- "single"
-methodname <- c("kmeans","ward","single")
-cbs <-  clusterbenchstats(rez$ind$coord,G=2:10,
+clustermethodpars[[4]]$method <- "complete"
+clustermethodpars[[5]]$method <- "average"
+clustermethodpars[[6]]$method <- "mcquitty"
+#clustermethodpars[[7]]$method <- ""
+methodname <- c("kmeans","ward","single","complete","average","mcquitty","clara")
+cbs <-  clusterbenchstats(rez$ind$coord,G=2:20,
 			  clustermethod=clustermethod,scaling=FALSE,
-			  methodname=methodname,distmethod=rep(FALSE,4),
+			  methodname=methodname,
+			  distmethod=rep(FALSE,length(clustermethod)),
 			clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
-			fnruns=100,avenruns=100,multicore=TRUE)
+			fnruns=100,avenruns=100,multicore=TRUE,trace=F)
 
-	    plot(cbs$stat,cbs$sim,statistic="sindex")
+#metric choices
+## cluster homogeneity
+#avetithin: individuals within cluster should be functionally similar
+#cluster homogeneity then
+plot(cbs$stat,cbs$sim,statistic="avewithin") 
+#pearsongamma: sepceis should represent the functional distance well (???)
+plot(cbs$stat,cbs$sim,statistic="pearsongamma")
+plot(cbs$stat,cbs$sim,statistic="mnnd")
+
+#cluster seperation
+#sindex: individuals should be functionaly separated from other species
+plot(cbs$stat,cbs$sim,statistic="sindex") 
+#assess connectivity: no gap in cluster : small value goooooood
+plot(cbs$stat,cbs$sim,statistic="widestgap")
+
+plot(cbs$stat,cbs$sim,statistic="withinss")
+plot(cbs$stat,cbs$sim,statistic="highdgap")
+plot(cbs$stat,cbs$sim,statistic="asw")
+
+#information stuff: cluster roughly of the same size
+#large value are good...
+plot(cbs$stat,cbs$sim,statistic="entropy")
+
 	    plot(cbs$stat,cbs$sim,statistic="dindex")
-	      plot(cbs$stat,cbs$sim,statistic="avewithin")
-	      plot(cbs$stat,cbs$sim,statistic="entropy")
 	      plot(cbs$stat,cbs$sim,statistic="pamc")
 	      plot(cbs$stat,cbs$sim,statistic="maxdiameter")
 	      print(cbs$sstat,aggregate=TRUE,weights=c(1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0))
+
+	      #a plot tree with dataaaa
+	      aa<-GDAtools::burt(pipo)
+	      aa<-t(GDAtools::dichotom(pipo))
+	      colnames(aa)<-rownames(pipo)
+	      rawnom<-row.names(pipo)
+	      ordernom<-arbre$order.lab
+	      neworder<-match(ordernom,rawnom)
+	      aa<-aa[,neworder]
+	      colnames(aa)<-ordernom
+
+#classif
+	      library(ComplexHeatmap)
+	      cluf<-function(a){cluster::agnes(rez$ind$coord,method="ward")}
+	      Heatmap(aa,cluster_columns=cluf)
+		      column_split=4)
+
+
+
+arbre<-cluster::agnes(rez$ind$coord,method="ward",par.method=1)
+plot(arbre,which=2,hang=-1)
+rect.hclust(arbre,k=4)
+groupe<-cutree(arbre,k=4)
+	      disf<-function(a){dist(rez$ind$coord)}
+	      cluf<-function(a){cluster::agnes(a,method="ward")}
+
+	      heatmap(as.numeric(pipo),Colv=NA,distfun=disf,hclusfun=cluf)#Colv=as.dendrogram(arbre),
+		      reorderfun = function(d, w) as.dendrogram(arbre))
+	      gplots::heatmap.2(aa,Rowv=NA,Colv=as.dendrogram(arbre))
 
 
 
