@@ -33,14 +33,7 @@ O2<- raster::plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
 
 
 
-
-
-
-
-
-
-
-# Series temporelles
+# Series temporelles (ens baie)
 {
   load("data/satellite/Particles/part_serie.Rdata")
   load("data/satellite/chl/chl_serie.Rdata")
@@ -49,6 +42,7 @@ O2<- raster::plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
   load("data/satellite/Turbidity/Turb_serie.Rdata")
   load("data/satellite/sst/sst_serie.Rdata")
   load("data/satellite/Salinity/Sal_serie.Rdata")
+  load("data/satellite/O2/O2_serie.Rdata")
 }
 
 PartS<- ggplot(TabPart4)+
@@ -106,8 +100,35 @@ SalS<- ggplot(TabSal4)+
   theme_minimal()+
   scale_fill_gradientn(colours = terrain.colors(6))
 
-grid.arrange(PartS, ChlS, PPS, DetS, TurbS, sstS, SalS, ncol=2, nrow = 4)
+O2S<- ggplot(TabO24)+
+  geom_line(aes(x=Year, y=moybaie))+
+  ggtitle("O2 annuel 1998-2018")+
+  xlab("Year")+
+  ylab("mmol/m3")+
+  theme_minimal()+
+  scale_fill_gradientn(colours = terrain.colors(6)) 
 
+
+grid.arrange(PartS, ChlS, PPS, DetS, TurbS, sstS, SalS, O2S, ncol=2, nrow = 4)
+
+
+
+
+# Series tempo (par zone)
+
+{
+  load("data/satellite/Particles/Part_seriebyzone.Rdata")
+  load("data/satellite/chl/chl_seriebyzone.Rdata")
+  load("data/satellite/Primary production/PP_seriebyzone.Rdata")
+  load("data/satellite/Detritus/Det_seriebyzone.Rdata")
+  load("data/satellite/Turbidity/Turb_seriebyzone.Rdata")
+  load("data/satellite/sst/sst_seriebyzone.Rdata")
+  load("data/satellite/Salinity/Sal_seriebyzone.Rdata")
+  load("data/satellite/O2/O2_seriebyzone.Rdata")
+}
+
+
+grid.arrange(ggseriePart, ggseriechl, ggseriePP, ggserieDet, ggserieTurb, ggseriesst, ggserieSal, ggserieO2, ncol=2, nrow = 4)
 
 
 

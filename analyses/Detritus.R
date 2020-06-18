@@ -91,7 +91,7 @@ save(TabDet4, file="data/satellite/Detritus/Det_serie.Rdata")
 
 TabDetnew<- pivot_wider(TabDet2, names_from = Year, values_from = moyDet)
 TabDetnew<- na.omit(TabDetnew)
-metaTabnew<- TabDetnew %>% dplyr::select(x, y)
+metaTabnew<- TabDetnew %>% dplyr::select(x, y) %>% ungroup()
 TabDetnew<- TabDetnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(TabDetnew)
@@ -122,6 +122,22 @@ for (k in unique(essai[,"Clust"])){
 toto2Det<- left_join(toto, essai2, by="Clust")
 
 save(toto2Det, file="data/satellite/Detritus/toto2Det.Rdata")
+
+
+
+# Serie tempo
+
+serie <- left_join(toto, cbind(metaTabnew, TabDetnew))
+serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Det")
+serie <- serie %>% group_by(Year, Clust) %>% summarise(Det=mean(Det))
+
+ggserieDet<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=Det,col=Clust))+
+  geom_line(aes(x=Year,y=Det,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
+
+save(ggserieDet, file="data/satellite/Detritus/Det_seriebyzone.Rdata")
 
 
 

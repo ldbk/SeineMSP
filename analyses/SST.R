@@ -99,7 +99,7 @@ save(Tabsst4, file="data/satellite/sst/sst_serie.Rdata")
 
 Tabsstnew<- pivot_wider(Tabsst2, names_from = Year, values_from = moySST)
 Tabsstnew<- na.omit(Tabsstnew)
-metaTabnew<- Tabsstnew %>% dplyr::select(x, y)
+metaTabnew<- Tabsstnew %>% dplyr::select(x, y) %>% ungroup()
 Tabsstnew<- Tabsstnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(Tabsstnew)
@@ -130,6 +130,22 @@ for (k in unique(essai[,"Clust"])){
 toto2sst<- left_join(toto, essai2, by="Clust")
 
 save(toto2sst, file="data/satellite/sst/toto2sst.Rdata")
+
+
+
+# Serie tempo
+
+serie <- left_join(toto, cbind(metaTabnew, Tabsstnew))
+serie <- pivot_longer(serie, cols=c(4:41), names_to="Year", values_to = "sst")
+serie <- serie %>% group_by(Year, Clust) %>% summarise(sst=mean(sst))
+
+ggseriesst<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=sst,col=Clust))+
+  geom_line(aes(x=Year,y=sst,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
+
+save(ggseriesst, file="data/satellite/sst/sst_seriebyzone.Rdata")
 
 
 

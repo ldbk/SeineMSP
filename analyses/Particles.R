@@ -90,7 +90,7 @@ save(TabPart4, file="data/satellite/Particles/part_serie.Rdata")
 
 TabPartnew<- pivot_wider(TabPart2, names_from = Year, values_from = moyPart)
 TabPartnew<- na.omit(TabPartnew)
-metaTabnew<- TabPartnew %>% dplyr::select(x, y)
+metaTabnew<- TabPartnew %>% dplyr::select(x, y) %>% ungroup()
 TabPartnew<- TabPartnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(TabPartnew)
@@ -121,6 +121,22 @@ for (k in unique(essai[,"Clust"])){
 toto2part<- left_join(toto, essai2, by="Clust")
 
 save(toto2part, file="data/satellite/Particles/toto2part.Rdata")
+
+
+
+# Serie tempo
+
+serie <- left_join(toto, cbind(metaTabnew, TabPartnew))
+serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Part")
+serie <- serie %>% group_by(Year, Clust) %>% summarise(Part=mean(Part))
+
+ggseriePart<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=Part,col=Clust))+
+  geom_line(aes(x=Year,y=Part,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
+
+save(ggseriePart, file="data/satellite/Particles/Part_seriebyzone.Rdata")
 
 
 

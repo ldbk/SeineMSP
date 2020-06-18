@@ -100,7 +100,7 @@ save(TabSal4, file="data/satellite/Salinity/Sal_serie.Rdata")
 
 TabSalnew<- pivot_wider(TabSal2, names_from = Year, values_from = moySal)
 TabSalnew<- na.omit(TabSalnew)
-metaTabnew<- TabSalnew %>% dplyr::select(x, y)
+metaTabnew<- TabSalnew %>% dplyr::select(x, y) %>% ungroup()
 TabSalnew<- TabSalnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(TabSalnew)
@@ -131,6 +131,22 @@ for (k in unique(essai[,"Clust"])){
 toto2Sal<- left_join(toto, essai2, by="Clust")
 
 save(toto2Sal, file="data/satellite/Salinity/toto2Sal.Rdata")
+
+
+
+# Serie tempo
+
+serie <- left_join(toto, cbind(metaTabnew, TabSalnew))
+serie <- pivot_longer(serie, cols=c(4:30), names_to="Year", values_to = "Sal")
+serie <- serie %>% group_by(Year, Clust) %>% summarise(Sal=mean(Sal))
+
+ggserieSal<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=Sal,col=Clust))+
+  geom_line(aes(x=Year,y=Sal,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
+
+save(ggserieSal, file="data/satellite/Salinity/Sal_seriebyzone.Rdata")
 
 
 

@@ -91,7 +91,7 @@ save(TabTurb4, file="data/satellite/Turbidity/Turb_serie.Rdata")
 
 TabTurbnew<- pivot_wider(TabTurb2, names_from = Year, values_from = moyTurb)
 TabTurbnew<- na.omit(TabTurbnew)
-metaTabnew<- TabTurbnew %>% dplyr::select(x, y)
+metaTabnew<- TabTurbnew %>% dplyr::select(x, y) %>% ungroup()
 TabTurbnew<- TabTurbnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(TabTurbnew)
@@ -122,6 +122,22 @@ for (k in unique(essai[,"Clust"])){
 toto2Turb<- left_join(toto, essai2, by="Clust")
 
 save(toto2Turb, file="data/satellite/Turbidity/toto2Turb.Rdata")
+
+
+
+# Serie tempo
+
+serie <- left_join(toto, cbind(metaTabnew, TabTurbnew))
+serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Turb")
+serie <- serie %>% group_by(Year, Clust) %>% summarise(Turb=mean(Turb))
+
+ggserieTurb<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=Turb,col=Clust))+
+  geom_line(aes(x=Year,y=Turb,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
+
+save(ggserieTurb, file="data/satellite/Turbidity/Turb_seriebyzone.Rdata")
 
 
 

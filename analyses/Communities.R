@@ -1,6 +1,7 @@
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(NbClust)
 
 load("data/krigeage.Rdata")
 names(Kriege.logdens)[6]<- "Community"
@@ -24,7 +25,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   # Classification
   
   distance<- dist(Tab2)
-  distance[1:5]
+  #distance[1:5]
   
   tree<- hclust(distance)
   plot(tree, hang=-1)
@@ -37,18 +38,18 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   zones<- cutree(tree, max(PLOM$Best.partition))
   
   
-  toto<- cbind(metaTab, Clust=factor(zones))
-  toto<- left_join(toto, Kriege.logdens[Kriege.logdens$Community==j,], by=c("Longitude", "Latitude"))
-  toto<- toto %>% select(Longitude, Latitude, Clust, Community)
+  toto<- cbind(metaTab, Clust=factor(zones))        
+  toto<- left_join(toto, Kriege.logdens[Kriege.logdens$Community==j,], by=c("Longitude", "Latitude")) 
+  toto<- toto %>% select(Longitude, Latitude, Clust, Community)   
   
   Longitude<- c(Longitude, toto$Longitude)
   Latitude<- c(Latitude, toto$Latitude)
   Clust<- c(Clust, toto$Clust)
   Community<- c(Community, toto$Community)
 
-  tata <- left_join(toto, cbind(metaTab, Tab2))
-  tata <- pivot_longer(tata, cols=c(5:36), names_to="Year", values_to = "Prediction")
-  tata <- tata %>% group_by(Year, Clust) %>% summarise(Prediction=mean(Prediction))
+  tata <- left_join(toto, cbind(metaTab, Tab2))         
+  tata <- pivot_longer(tata, cols=c(5:36), names_to="Year", values_to = "Prediction")    
+  tata <- tata %>% group_by(Year, Clust) %>% summarise(Prediction=mean(Prediction))     
   
   ggtata<-  ggplot(tata)+
     geom_point(aes(x=Year,y=Prediction,col=Clust))+
