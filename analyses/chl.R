@@ -10,7 +10,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 
-chl<- stack("data/satellite/chl/chl")
+chl<- stack("data/satellite/Chl/dataset-oc-glo-bio-multi-l4-chl_4km_monthly-rep_1592571915166.nc")
 
 
 # Conversion raster - tableau
@@ -31,12 +31,13 @@ fortify.Raster <- function(chl, maxPixel = 1000000) {
 # Traitement tableau
 Tabchl<- fortify(chl)
 pixelok<- which(!is.na(apply(Tabchl,1,mean)))
-Tabchl<- pivot_longer(Tabchl, cols=1:240, names_to = "Date", values_to = "Chloro", values_drop_na = TRUE)
+Tabchl<- pivot_longer(Tabchl, cols=1:262, names_to = "Date", values_to = "Chloro", values_drop_na = TRUE)
 
 {
-  Tabchl$Date<- sub("values.index_","",Tabchl$Date)
+  Tabchl$Date<- sub("values.X","",Tabchl$Date)
   Tabchl$year<- as.numeric(substr(as.character(Tabchl$Date),1,4))
   Tabchl$month<- as.numeric(substr(as.character(Tabchl$Date), 6,7))
+  Tabchl$day<- as.numeric(substr(as.character(Tabchl$Date), 9,10))
 }
 
 
@@ -105,10 +106,10 @@ plot(tree)
 
 Tabchl5<- Tabchl3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(Tabchl5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  5
+# According to the majority rule, the best number of clusters is  6
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+rect.hclust(tree, 6)
+zones<- cutree(tree, 6)
 
 zone<- chl[[1]]
 values(zone)<- NA
@@ -129,30 +130,30 @@ toto2chl<- left_join(toto, essai2, by="Clust")
 # Serie tempo / zone
 
 serie<- left_join(toto, cbind(metaTabnew, Tabchlnew))
-serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "chl")
+serie<- pivot_longer(serie, cols=c(4:26), names_to="Year", values_to = "chl")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(chl=mean(chl))
 
-#ggseriechl<-  ggplot(serie)+
-#  geom_point(aes(x=Year,y=chl,col=Clust))+
-#  geom_line(aes(x=Year,y=chl,col=Clust, group=Clust))+
-#  theme_minimal()+
-#  facet_wrap(.~Clust)
+ggseriechl<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=chl,col=Clust))+
+  geom_line(aes(x=Year,y=chl,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
 
 save(ggseriechl, file="data/satellite/chl/chl_seriebyzone.Rdata")
 
 
 
 # Trait de cote
-  # 1st Polygon
+# 1st Polygon
 liste <- with(toto2chl, chull(x, y))
 hull <- toto2chl[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-  # Create SpatialPolygons objects
+# Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-  # Cut object along coast
+# Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
 
@@ -165,12 +166,12 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-  # create SpatialPointsDataFrame
+# create SpatialPointsDataFrame
 toto3chl<- toto2chl
 coordinates(toto3chl)<- ~ x + y
-  # coerce to SpatialPixelsDataFrame
+# coerce to SpatialPixelsDataFrame
 gridded(toto3chl) <- TRUE
-  # coerce to raster
+# coerce to raster
 rasterchlnew<- raster(toto3chl)
 rasterchlnew
 plot(rasterchlnew, main="Chl", xlab="Longitude", ylab="Latitude")

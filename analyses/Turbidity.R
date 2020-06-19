@@ -9,7 +9,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 
-Turb<- stack("data/satellite/Turbidity/kd490")
+Turb<- stack("data/satellite/Turbidity/dataset-oc-glo-opt-multi-l4-kd490_4km_monthly-rep-v02_1592570921204.nc")
 
 
 # Conversion raster
@@ -30,12 +30,13 @@ fortify.Raster <- function(Turb, maxPixel = 1000000) {
 # Traitement tableau
 TabTurb<-fortify(Turb)
 pixelok<- which(!is.na(apply(TabTurb,1,mean)))
-TabTurb<- pivot_longer(TabTurb, cols=1:244, names_to = "Date", values_to = "Turbidity", values_drop_na = TRUE)
+TabTurb<- pivot_longer(TabTurb, cols=1:262, names_to = "Date", values_to = "Turbidity", values_drop_na = TRUE)
 
 {
-TabTurb$Date<-sub("values.index_","",TabTurb$Date)
-TabTurb$Year <- as.numeric(substr(as.character(TabTurb$Date),1,4))
-TabTurb$Month<- as.numeric(substr(as.character(TabTurb$Date), 6,7))
+  TabTurb$Date<-sub("values.X","",TabTurb$Date)
+  TabTurb$Year <- as.numeric(substr(as.character(TabTurb$Date),1,4))
+  TabTurb$Month<- as.numeric(substr(as.character(TabTurb$Date), 6,7))
+  TabTurb$Day<- as.numeric(substr(as.character(TabTurb$Date), 9,10))
 }
 
 
@@ -102,10 +103,10 @@ plot(tree)
 
 TabTurb5<- TabTurb3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabTurb5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  7
+# According to the majority rule, the best number of clusters is  3
 
-rect.hclust(tree, 7)
-zones<- cutree(tree, 7)
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- Turb[[1]]
 values(zone)<- NA
@@ -126,30 +127,30 @@ toto2Turb<- left_join(toto, essai2, by="Clust")
 # Serie tempo / zone
 
 serie<- left_join(toto, cbind(metaTabnew, TabTurbnew))
-serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Turb")
+serie<- pivot_longer(serie, cols=c(4:26), names_to="Year", values_to = "Turb")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(Turb=mean(Turb))
 
-#ggserieTurb<-  ggplot(serie)+
-#  geom_point(aes(x=Year,y=Turb,col=Clust))+
-#  geom_line(aes(x=Year,y=Turb,col=Clust, group=Clust))+
-#  theme_minimal()+
-#  facet_wrap(.~Clust)
+ggserieTurb<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=Turb,col=Clust))+
+  geom_line(aes(x=Year,y=Turb,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
 
 save(ggserieTurb, file="data/satellite/Turbidity/Turb_seriebyzone.Rdata")
 
 
 
 # Trait de cote
-  # 1st Polygon
+# 1st Polygon
 liste <- with(toto2Turb, chull(x, y))
 hull <- toto2Turb[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-  # Create SpatialPolygons objects
+# Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-  # Cut object along coast
+# Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
 
@@ -162,15 +163,15 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-  # create SpatialPointsDataFrame
+# create SpatialPointsDataFrame
 toto3Turb<- toto2Turb
 coordinates(toto3Turb)<- ~ x + y
-  # coerce to SpatialPixelsDataFrame
+# coerce to SpatialPixelsDataFrame
 gridded(toto3Turb) <- TRUE
-  # coerce to raster
+# coerce to raster
 rasterTurb<- raster(toto3Turb)
 rasterTurb
-plot(rasterTurb, col= terrain.colors(7), main="Turbidity", xlab="Longitude", ylab="Latitude")
+plot(rasterTurb, col= terrain.colors(3), main="Turbidity", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 

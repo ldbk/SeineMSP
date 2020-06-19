@@ -9,7 +9,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 
-Detrit<- stack("data/satellite/Detritus/cdm443")
+Detrit<- stack("data/satellite/Detritus/dataset-oc-glo-opt-multi-l4-cdm443_4km_monthly-rep-v02_1592570192473.nc")
 
 
 # Conversion raster - tableau
@@ -30,12 +30,13 @@ fortify.Raster <- function(Detrit, maxPixel = 1000000) {
 # Traitement tableau
 TabDet<- fortify(Detrit)
 pixelok<- which(!is.na(apply(TabDet,1,mean)))
-TabDet<- pivot_longer(TabDet, cols=1:244, names_to = "Date", values_to = "Detritus", values_drop_na = TRUE)
+TabDet<- pivot_longer(TabDet, cols=1:262, names_to = "Date", values_to = "Detritus", values_drop_na = TRUE)
 
 {
-TabDet$Date<-sub("values.index_","",TabDet$Date)
-TabDet$Year<- as.numeric(substr(as.character(TabDet$Date),1,4))
-TabDet$Month<- as.numeric(substr(as.character(TabDet$Date), 6,7))
+  TabDet$Date<-sub("values.X","",TabDet$Date)
+  TabDet$Year<- as.numeric(substr(as.character(TabDet$Date),1,4))
+  TabDet$Month<- as.numeric(substr(as.character(TabDet$Date), 6,7))
+  TabDet$Day<- as.numeric(substr(as.character(TabDet$Date), 9,10))
 }
 
 
@@ -102,10 +103,10 @@ plot(tree)
 
 TabDet5<- TabDet3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabDet5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  5
+# According to the majority rule, the best number of clusters is  3
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- Detrit[[1]]
 values(zone)<- NA
@@ -126,7 +127,7 @@ toto2Det<- left_join(toto, essai2, by="Clust")
 # Serie tempo / zone
 
 serie<- left_join(toto, cbind(metaTabnew, TabDetnew))
-serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Det")
+serie<- pivot_longer(serie, cols=c(4:26), names_to="Year", values_to = "Det")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(Det=mean(Det))
 
 ggserieDet<-  ggplot(serie)+
@@ -140,16 +141,16 @@ save(ggserieDet, file="data/satellite/Detritus/Det_seriebyzone.Rdata")
 
 
 # Trait de cote
-  # 1st Polygon
+# 1st Polygon
 liste <- with(toto2Det, chull(x, y))
 hull <- toto2Det[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-  # Create SpatialPolygons objects
+# Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-  # Cut object along coast
+# Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
 
@@ -162,15 +163,15 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-  # create SpatialPointsDataFrame
+# create SpatialPointsDataFrame
 toto3Det<- toto2Det
 coordinates(toto3Det)<- ~ x + y
-  # coerce to SpatialPixelsDataFrame
+# coerce to SpatialPixelsDataFrame
 gridded(toto3Det) <- TRUE
-  # coerce to raster
+# coerce to raster
 rasterDet<- raster(toto3Det)
 rasterDet
-plot(rasterDet, col= terrain.colors(5), main="Detritus", xlab="Longitude", ylab="Latitude")
+plot(rasterDet, col= terrain.colors(3), main="Detritus", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 

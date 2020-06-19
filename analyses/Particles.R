@@ -8,7 +8,7 @@ library(tidyr)
 library(rgeos)
 library(NbClust)
 
-Part<- stack("data/satellite/Particles/bbp443")
+Part<- stack("data/satellite/Particles/dataset-oc-glo-opt-multi-l4-bbp443_4km_monthly-rep-v02_1592568961250.nc")
 
 
 # Conversion raster - tableau
@@ -29,12 +29,13 @@ fortify.Raster <- function(Part, maxPixel = 1000000) {
 # Traitement tableau
 TabPart<- fortify(Part)
 pixelok<- which(!is.na(apply(TabPart,1,mean)))
-TabPart<- pivot_longer(TabPart, cols=1:244, names_to = "Date", values_to = "Particules", values_drop_na = TRUE)
+TabPart<- pivot_longer(TabPart, cols=1:262, names_to = "Date", values_to = "Particules", values_drop_na = TRUE)
 
 {
-TabPart$Date<- sub("values.index_","",TabPart$Date)
-TabPart$Year<- as.numeric(substr(as.character(TabPart$Date),1,4))
-TabPart$Month<- as.numeric(substr(as.character(TabPart$Date), 6,7))
+  TabPart$Date<- sub("values.X","",TabPart$Date)
+  TabPart$Year<- as.numeric(substr(as.character(TabPart$Date), 1,4))
+  TabPart$Month<- as.numeric(substr(as.character(TabPart$Date), 6,7))
+  TabPart$Day<- as.numeric(substr(as.character(TabPart$Date), 9,10))
 }
 
 
@@ -101,10 +102,10 @@ plot(tree)
 
 TabPart5<- TabPart3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabPart5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  3
+# According to the majority rule, the best number of clusters is  4
 
-rect.hclust(tree, 3)
-zones<- cutree(tree, 3)
+rect.hclust(tree, 4)
+zones<- cutree(tree, 4)
 
 zone<- Part[[1]]
 values(zone)<- NA
@@ -125,30 +126,30 @@ toto2part<- left_join(toto, essai2, by="Clust")
 # Serie tempo / zone
 
 serie<- left_join(toto, cbind(metaTabnew, TabPartnew))
-serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Part")
+serie<- pivot_longer(serie, cols=c(4:26), names_to="Year", values_to = "Part")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(Part=mean(Part))
 
-#ggseriePart<-  ggplot(serie)+
-#  geom_point(aes(x=Year,y=Part,col=Clust))+
-#  geom_line(aes(x=Year,y=Part,col=Clust, group=Clust))+
-#  theme_minimal()+
-#  facet_wrap(.~Clust)
+ggseriePart<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=Part,col=Clust))+
+  geom_line(aes(x=Year,y=Part,col=Clust, group=Clust))+
+  theme_minimal()+
+  facet_wrap(.~Clust)
 
 save(ggseriePart, file="data/satellite/Particles/Part_seriebyzone.Rdata")
 
 
 
 # Trait de cote
-  # 1st Polygon
+# 1st Polygon
 liste <- with(toto2part, chull(x, y))
 hull <- toto2part[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-  # Create SpatialPolygons objects
+# Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-  # Cut object along coast
+# Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
 
@@ -161,15 +162,15 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-  # create SpatialPointsDataFrame
+# create SpatialPointsDataFrame
 toto3part<- toto2part
 coordinates(toto3part)<- ~ x + y
-  # coerce to SpatialPixelsDataFrame
+# coerce to SpatialPixelsDataFrame
 gridded(toto3part) <- TRUE
-  # coerce to raster
+# coerce to raster
 rasterpart<- raster(toto3part)
 rasterpart
-plot(rasterpart, col= terrain.colors(3), main="Particles", xlab="Longitude", ylab="Latitude")
+plot(rasterpart, col= terrain.colors(4), main="Particles", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
