@@ -56,40 +56,40 @@ Tabsst$Day  <- as.numeric(substr(as.character(Tabsst$Date), 9,10))
 
 # Mean SST per year
 Tabsst2<- Tabsst %>% group_by(x,y,Year) %>% summarize(moySST= mean(SST))
-ggplot(Tabsst2)+
-  geom_tile(aes(x=x, y=y, fill=moySST))+
-  ggtitle("SST moyenne 1981-2018")+
-  facet_wrap(. ~ Year)+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="SST (°C)")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(Tabsst2)+
+#  geom_tile(aes(x=x, y=y, fill=moySST))+
+#  ggtitle("SST moyenne 1981-2018")+
+#  facet_wrap(. ~ Year)+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  labs(fill="SST (°C)")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-ggplot(Tabsst2, aes(x= Year, y=moySST, group=Year))+
-  geom_boxplot()
+#ggplot(Tabsst2, aes(x= Year, y=moySST, group=Year))+
+#  geom_boxplot()
 
 
 # Mean SST 1981-2018
 Tabsst3<- Tabsst2 %>% group_by(x,y) %>% summarize(moyper= mean(moySST))
-ggplot(Tabsst3)+
-  geom_tile(aes(x=x, y=y, fill= moyper))+
-  ggtitle("SST moyenne 1981-2018")+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="SST (°C)")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(Tabsst3)+
+#  geom_tile(aes(x=x, y=y, fill= moyper))+
+#  ggtitle("SST moyenne 1981-2018")+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  labs(fill="SST (°C)")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
 # Serie tempo mean SST
 Tabsst4<- Tabsst %>% group_by(Year) %>% summarize(moybaie= mean(SST))
-ggplot(Tabsst4)+
-  geom_line(aes(x= Month, y= moybaie))+
-  ggtitle("SST mensuelle 1981-2018")+
-  xlab("Month")+
-  ylab("°C")+
-  theme_minimal()
+#ggplot(Tabsst4)+
+#  geom_line(aes(x= Month, y= moybaie))+
+#  ggtitle("SST mensuelle 1981-2018")+
+#  xlab("Month")+
+#  ylab("°C")+
+#  theme_minimal()
 
 save(Tabsst4, file="data/satellite/sst/sst_serie.Rdata")
 
@@ -129,21 +129,19 @@ for (k in unique(essai[,"Clust"])){
 
 toto2sst<- left_join(toto, essai2, by="Clust")
 
-save(toto2sst, file="data/satellite/sst/toto2sst.Rdata")
 
 
+# Serie tempo / zone
 
-# Serie tempo
+serie<- left_join(toto, cbind(metaTabnew, Tabsstnew))
+serie<- pivot_longer(serie, cols=c(4:41), names_to="Year", values_to = "sst")
+serie<- serie %>% group_by(Year, Clust) %>% summarise(sst=mean(sst))
 
-serie <- left_join(toto, cbind(metaTabnew, Tabsstnew))
-serie <- pivot_longer(serie, cols=c(4:41), names_to="Year", values_to = "sst")
-serie <- serie %>% group_by(Year, Clust) %>% summarise(sst=mean(sst))
-
-ggseriesst<-  ggplot(serie)+
-  geom_point(aes(x=Year,y=sst,col=Clust))+
-  geom_line(aes(x=Year,y=sst,col=Clust, group=Clust))+
-  theme_minimal()+
-  facet_wrap(.~Clust)
+#ggseriesst<-  ggplot(serie)+
+#  geom_point(aes(x=Year,y=sst,col=Clust))+
+#  geom_line(aes(x=Year,y=sst,col=Clust, group=Clust))+
+#  theme_minimal()+
+#  facet_wrap(.~Clust)
 
 save(ggseriesst, file="data/satellite/sst/sst_seriebyzone.Rdata")
 
@@ -200,6 +198,15 @@ plot(polSST, col=polSST@data$Clust)
 writeOGR(polSST, dsn="data/satellite/sst", layer="SST", driver="ESRI Shapefile")
 
 save(polSST, file="data/satellite/sst/sst_polygons.Rdata")
+
+
+
+# Mean sst / zone
+
+summarysst<- toto2sst %>% select(Clust, mean)
+summarysst<- unique(summarysst)
+
+
 
 
 

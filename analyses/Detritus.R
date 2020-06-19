@@ -49,39 +49,39 @@ TabDet$Month<- as.numeric(substr(as.character(TabDet$Date), 6,7))
 
 # Mean detritus per year
 TabDet2<- TabDet %>% group_by(x,y,Year) %>% summarize(moyDet= mean(Detritus))
-ggplot(TabDet2)+
-  geom_tile(aes(x=x, y=y, fill=moyDet))+
-  ggtitle("Detritus moyenne 1997-2017")+
-  facet_wrap(. ~Year)+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabDet2)+
+#  geom_tile(aes(x=x, y=y, fill=moyDet))+
+#  ggtitle("Detritus moyenne 1997-2017")+
+#  facet_wrap(. ~Year)+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-ggplot(TabDet2, aes(x=Year, y=moyDet, group=Year))+
-  geom_boxplot()
+#ggplot(TabDet2, aes(x=Year, y=moyDet, group=Year))+
+#  geom_boxplot()
 
 
 # Mean detritus 1997-2017
 TabDet3<- TabDet2 %>% group_by(x,y) %>% summarize(moyper= mean(moyDet))
-ggplot(TabDet3)+
-  geom_tile(aes(x=x, y=y, fill= moyper))+
-  ggtitle("Detritus moyenne 1997-2017")+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabDet3)+
+#  geom_tile(aes(x=x, y=y, fill= moyper))+
+#  ggtitle("Detritus moyenne 1997-2017")+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
 # Serie tempo mean detritus
 TabDet4<- TabDet %>% group_by(Year) %>% summarize(moybaie= mean(Detritus))
-ggplot(TabDet4)+
-  geom_line(aes(x=Year, y= moybaie))+
-  ggtitle("Detritus annuels 1997-2017")+
-  xlab("Year")+
-  ylab("Detritus")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabDet4)+
+#  geom_line(aes(x=Year, y= moybaie))+
+#  ggtitle("Detritus annuels 1997-2017")+
+#  xlab("Year")+
+#  ylab("Detritus")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 save(TabDet4, file="data/satellite/Detritus/Det_serie.Rdata")
 
@@ -121,15 +121,13 @@ for (k in unique(essai[,"Clust"])){
 
 toto2Det<- left_join(toto, essai2, by="Clust")
 
-save(toto2Det, file="data/satellite/Detritus/toto2Det.Rdata")
 
 
+# Serie tempo / zone
 
-# Serie tempo
-
-serie <- left_join(toto, cbind(metaTabnew, TabDetnew))
-serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Det")
-serie <- serie %>% group_by(Year, Clust) %>% summarise(Det=mean(Det))
+serie<- left_join(toto, cbind(metaTabnew, TabDetnew))
+serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Det")
+serie<- serie %>% group_by(Year, Clust) %>% summarise(Det=mean(Det))
 
 ggserieDet<-  ggplot(serie)+
   geom_point(aes(x=Year,y=Det,col=Clust))+
@@ -193,6 +191,14 @@ writeOGR(polDet, dsn="data/satellite/Detritus", layer="Det", driver="ESRI Shapef
 
 
 save(polDet, file="data/satellite/Detritus/Det_polygons.Rdata")
+
+
+
+# Mean detritus per zone
+
+summaryDet<- toto2Det %>% select(Clust, mean)
+summaryDet<- unique(summaryDet)
+
 
 
 

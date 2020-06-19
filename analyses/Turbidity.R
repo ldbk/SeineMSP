@@ -49,39 +49,39 @@ TabTurb$Month<- as.numeric(substr(as.character(TabTurb$Date), 6,7))
 
 # Mean turb per year
 TabTurb2<- TabTurb %>% group_by(x,y,Year) %>% summarize(moyTurb= mean(Turbidity))
-ggplot(TabTurb2)+
-  geom_tile(aes(x=x, y=y, fill=moyTurb))+
-  ggtitle("Turbidité moyenne 1997-2017")+
-  facet_wrap(. ~Year)+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabTurb2)+
+#  geom_tile(aes(x=x, y=y, fill=moyTurb))+
+#  ggtitle("Turbidité moyenne 1997-2017")+
+#  facet_wrap(. ~Year)+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-ggplot(TabTurb2, aes(x=Year, y=moyTurb, group=Year))+
-  geom_boxplot()
+#ggplot(TabTurb2, aes(x=Year, y=moyTurb, group=Year))+
+#  geom_boxplot()
 
 
 # Mean turb 1997-2017
 TabTurb3<- TabTurb2 %>% group_by(x,y) %>% summarize(moyper= mean(moyTurb))
-ggplot(TabTurb3)+
-  geom_tile(aes(x=x, y=y, fill= moyper))+
-  ggtitle("Turbidité moyenne 1997-2017")+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabTurb3)+
+#  geom_tile(aes(x=x, y=y, fill= moyper))+
+#  ggtitle("Turbidité moyenne 1997-2017")+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
 # Serie tempo mean turb
 TabTurb4<- TabTurb %>% group_by(Year) %>% summarize(moybaie= mean(Turbidity))
-ggplot(TabTurb4)+
-  geom_line(aes(x=Year, y=moybaie))+
-  ggtitle("Turbidité mensuelle 1997-2017")+
-  xlab("Year")+
-  ylab("Turbidité")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabTurb4)+
+#  geom_line(aes(x=Year, y=moybaie))+
+#  ggtitle("Turbidité mensuelle 1997-2017")+
+#  xlab("Year")+
+#  ylab("Turbidité")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 save(TabTurb4, file="data/satellite/Turbidity/Turb_serie.Rdata")
 
@@ -121,21 +121,19 @@ for (k in unique(essai[,"Clust"])){
 
 toto2Turb<- left_join(toto, essai2, by="Clust")
 
-save(toto2Turb, file="data/satellite/Turbidity/toto2Turb.Rdata")
 
 
+# Serie tempo / zone
 
-# Serie tempo
+serie<- left_join(toto, cbind(metaTabnew, TabTurbnew))
+serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Turb")
+serie<- serie %>% group_by(Year, Clust) %>% summarise(Turb=mean(Turb))
 
-serie <- left_join(toto, cbind(metaTabnew, TabTurbnew))
-serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Turb")
-serie <- serie %>% group_by(Year, Clust) %>% summarise(Turb=mean(Turb))
-
-ggserieTurb<-  ggplot(serie)+
-  geom_point(aes(x=Year,y=Turb,col=Clust))+
-  geom_line(aes(x=Year,y=Turb,col=Clust, group=Clust))+
-  theme_minimal()+
-  facet_wrap(.~Clust)
+#ggserieTurb<-  ggplot(serie)+
+#  geom_point(aes(x=Year,y=Turb,col=Clust))+
+#  geom_line(aes(x=Year,y=Turb,col=Clust, group=Clust))+
+#  theme_minimal()+
+#  facet_wrap(.~Clust)
 
 save(ggserieTurb, file="data/satellite/Turbidity/Turb_seriebyzone.Rdata")
 
@@ -192,6 +190,15 @@ plot(polTurb, col=polTurb@data$Clust)
 writeOGR(polTurb, dsn="data/satellite/Turbidity", layer="Turb", driver="ESRI Shapefile")
 
 save(polTurb, file="data/satellite/Turbidity/Turb_polygons.Rdata")
+
+
+
+# Mean turbidity / zone
+
+summaryTurb<- toto2Turb %>% select(Clust, mean)
+summaryTurb<- unique(summaryTurb)
+
+
 
 
 

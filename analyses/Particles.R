@@ -48,39 +48,39 @@ TabPart$Month<- as.numeric(substr(as.character(TabPart$Date), 6,7))
 
 # Mean particles per year 
 TabPart2<- TabPart %>% group_by(x,y,Year) %>% summarize(moyPart= mean(Particules))
-ggplot(TabPart2)+
-  geom_tile(aes(x=x, y=y, fill=moyPart))+
-  ggtitle("PP moyenne 1998-2018")+
-  facet_wrap(. ~Year)+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabPart2)+
+#  geom_tile(aes(x=x, y=y, fill=moyPart))+
+#  ggtitle("PP moyenne 1998-2018")+
+#  facet_wrap(. ~Year)+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-ggplot(TabPart2, aes(x=Year, y=moyPart, group=Year))+
-  geom_boxplot()
+#ggplot(TabPart2, aes(x=Year, y=moyPart, group=Year))+
+#  geom_boxplot()
 
 
 # Mean particles 1998-2018
 TabPart3<- TabPart2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPart))
-ggplot(TabPart3)+
-  geom_tile(aes(x=x, y=y, fill= moyper))+
-  ggtitle("Particules moyenne 1997-2017")+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabPart3)+
+#  geom_tile(aes(x=x, y=y, fill= moyper))+
+#  ggtitle("Particules moyenne 1997-2017")+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
 # Serie tempo mean particles
 TabPart4<- TabPart %>% group_by(Year) %>% summarize(moybaie= mean(Particules))
-ggplot(TabPart4)+
-  geom_line(aes(x= Year, y= moybaie))+
-  ggtitle("Particules annuelles 1997-2017")+
-  xlab("Year")+
-  ylab("Concentration en particules")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabPart4)+
+#  geom_line(aes(x= Year, y= moybaie))+
+#  ggtitle("Particules annuelles 1997-2017")+
+#  xlab("Year")+
+#  ylab("Concentration en particules")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 save(TabPart4, file="data/satellite/Particles/part_serie.Rdata")
 
@@ -120,21 +120,19 @@ for (k in unique(essai[,"Clust"])){
 
 toto2part<- left_join(toto, essai2, by="Clust")
 
-save(toto2part, file="data/satellite/Particles/toto2part.Rdata")
 
 
+# Serie tempo / zone
 
-# Serie tempo
+serie<- left_join(toto, cbind(metaTabnew, TabPartnew))
+serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Part")
+serie<- serie %>% group_by(Year, Clust) %>% summarise(Part=mean(Part))
 
-serie <- left_join(toto, cbind(metaTabnew, TabPartnew))
-serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "Part")
-serie <- serie %>% group_by(Year, Clust) %>% summarise(Part=mean(Part))
-
-ggseriePart<-  ggplot(serie)+
-  geom_point(aes(x=Year,y=Part,col=Clust))+
-  geom_line(aes(x=Year,y=Part,col=Clust, group=Clust))+
-  theme_minimal()+
-  facet_wrap(.~Clust)
+#ggseriePart<-  ggplot(serie)+
+#  geom_point(aes(x=Year,y=Part,col=Clust))+
+#  geom_line(aes(x=Year,y=Part,col=Clust, group=Clust))+
+#  theme_minimal()+
+#  facet_wrap(.~Clust)
 
 save(ggseriePart, file="data/satellite/Particles/Part_seriebyzone.Rdata")
 
@@ -191,6 +189,15 @@ plot(polPart, col=polPart@data$Clust)
 writeOGR(polPart, dsn="data/satellite/Particles", layer="Part", driver="ESRI Shapefile")
 
 save(polPart, file="data/satellite/Particles/part_polygons.Rdata")
+
+
+
+# Mean particles / zone
+
+summaryPart<- toto2part %>% select(Clust, mean)
+summaryPart<- unique(summaryPart)
+
+
 
 
 

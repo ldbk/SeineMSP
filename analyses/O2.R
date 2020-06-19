@@ -63,41 +63,41 @@ TabO2<- TabO2 %>% filter(O2>0)
 
 # Mean O2 per year
 TabO22<- TabO2 %>% group_by(x,y,Year) %>% summarize(moyO2= mean(O2))
-ggplot(TabO22)+
-  geom_tile(aes(x=x, y=y, fill=moyO2))+
-  ggtitle("O2 moyen 1998-2018")+
-  facet_wrap(. ~Year)+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mmol/m3")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabO22)+
+#  geom_tile(aes(x=x, y=y, fill=moyO2))+
+#  ggtitle("O2 moyen 1998-2018")+
+#  facet_wrap(. ~Year)+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  labs(fill="mmol/m3")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-ggplot(TabO22, aes(x=Year, y=moyO2m, group=Year))+
-  geom_boxplot()
+#ggplot(TabO22, aes(x=Year, y=moyO2m, group=Year))+
+#  geom_boxplot()
 
 
 # Mean O2 1998-2018
 TabO23<- TabO22 %>% group_by(x,y) %>% summarize(moyper= mean(moyO2))
-ggplot(TabO23)+
-  geom_tile(aes(x=x, y=y, fill= moyper))+
-  ggtitle("O2 moyen 1998-2018")+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="mmol/m3")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabO23)+
+#  geom_tile(aes(x=x, y=y, fill= moyper))+
+#  ggtitle("O2 moyen 1998-2018")+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  labs(fill="mmol/m3")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
 # Serie tempo mean 02
 TabO24<- TabO2 %>% group_by(Year) %>% summarize(moybaie= mean(O2))
-ggplot(TabO24)+
-  geom_line(aes(x=Year, y=moybaie))+
-  ggtitle("O2 annuel 1998-2018")+
-  xlab("Year")+
-  ylab("mmol/m3")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabO24)+
+#  geom_line(aes(x=Year, y=moybaie))+
+#  ggtitle("O2 annuel 1998-2018")+
+#  xlab("Year")+
+#  ylab("mmol/m3")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 save(TabO24, file="data/satellite/O2/O2_serie.Rdata")
 
@@ -137,21 +137,19 @@ for (k in unique(essai[,"Clust"])){
 
 toto2O2<- left_join(toto, essai2, by="Clust")
 
-save(toto2O2, file="data/satellite/O2/toto2O2.Rdata")
 
 
+# Serie tempo / zone
 
-# Serie tempo
+serie<- left_join(toto, cbind(metaTabnew, TabO2new))
+serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "O2")
+serie<- serie %>% group_by(Year, Clust) %>% summarise(O2=mean(O2))
 
-serie <- left_join(toto, cbind(metaTabnew, TabO2new))
-serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "O2")
-serie <- serie %>% group_by(Year, Clust) %>% summarise(O2=mean(O2))
-
-ggserieO2<-  ggplot(serie)+
-  geom_point(aes(x=Year,y=O2,col=Clust))+
-  geom_line(aes(x=Year,y=O2,col=Clust, group=Clust))+
-  theme_minimal()+
-  facet_wrap(.~Clust)
+#ggserieO2<-  ggplot(serie)+
+#  geom_point(aes(x=Year,y=O2,col=Clust))+
+#  geom_line(aes(x=Year,y=O2,col=Clust, group=Clust))+
+#  theme_minimal()+
+#  facet_wrap(.~Clust)
 
 save(ggserieO2, file="data/satellite/O2/O2_seriebyzone.Rdata")
 
@@ -208,6 +206,15 @@ plot(polO2, col=polO2@data$Clust)
 writeOGR(polO2, dsn="data/satellite/O2", layer="O2", driver="ESRI Shapefile")
 
 save(polO2, file="data/satellite/O2/O2_polygons.Rdata")
+
+
+
+# Mean O2 / zone
+
+summaryO2<- toto2O2 %>% select(Clust, mean)
+summaryO2<- unique(summaryO2)
+
+
 
 
 

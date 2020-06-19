@@ -50,41 +50,41 @@ Tabchl<- pivot_longer(Tabchl, cols=1:240, names_to = "Date", values_to = "Chloro
 
 # Mean chl per year
 Tabchl2<- Tabchl %>% group_by(x,y,year) %>% summarize(moyChl= mean(Chloro))
-ggplot(Tabchl2)+
-  geom_tile(aes(x=x, y=y, fill=moyChl))+
-  ggtitle("Chl moyenne 1997-2017")+
-  facet_wrap(. ~ year)+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="(?g/L)")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))
+#ggplot(Tabchl2)+
+#  geom_tile(aes(x=x, y=y, fill=moyChl))+
+#  ggtitle("Chl moyenne 1997-2017")+
+#  facet_wrap(. ~ year)+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  labs(fill="(?g/L)")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))
 
-ggplot(Tabchl2, aes(x= year, y=moyChl, group=year))+
-  geom_boxplot()
+#ggplot(Tabchl2, aes(x= year, y=moyChl, group=year))+
+#  geom_boxplot()
 
 
 # Mean chl 1997-2017
 Tabchl3<- Tabchl2 %>% group_by(x,y) %>% summarize(moyper= mean(moyChl))
-ggplot(Tabchl3)+
-  geom_tile(aes(x=x, y=y, fill= moyper))+
-  ggtitle("Chlorophylle moyenne 1997-2017")+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  labs(fill="?g/L")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))
+#ggplot(Tabchl3)+
+#  geom_tile(aes(x=x, y=y, fill= moyper))+
+#  ggtitle("Chlorophylle moyenne 1997-2017")+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  labs(fill="?g/L")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))
 
 
 # Serie tempo mean chl
 Tabchl4<- Tabchl %>% group_by(year) %>% summarize(moybaie= mean(Chloro))
-ggplot(Tabchl4)+
-  geom_point(aes(x= year, y= moybaie))+
-  ggtitle("Chlorophylle moyenne annuelle 1997-2017")+
-  xlab("Year")+
-  ylab("?g/L")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(Tabchl4)+
+#  geom_point(aes(x= year, y= moybaie))+
+#  ggtitle("Chlorophylle moyenne annuelle 1997-2017")+
+#  xlab("Year")+
+#  ylab("?g/L")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 save(Tabchl4, file="data/satellite/Chl/Chl_serie.Rdata")
 
@@ -104,7 +104,7 @@ tree<- hclust(distance)
 plot(tree)
 
 Tabchl5<- Tabchl3 %>% ungroup() %>% dplyr::select(moyper)
-NbClust(Tabchl5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(Tabchl5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
 # According to the majority rule, the best number of clusters is  5
 
 rect.hclust(tree, 5)
@@ -124,21 +124,19 @@ for (k in unique(essai[,"Clust"])){
 
 toto2chl<- left_join(toto, essai2, by="Clust")
 
-save(toto2chl, file="data/satellite/chl/toto2chl.Rdata")
 
 
+# Serie tempo / zone
 
-# Serie tempo
+serie<- left_join(toto, cbind(metaTabnew, Tabchlnew))
+serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "chl")
+serie<- serie %>% group_by(Year, Clust) %>% summarise(chl=mean(chl))
 
-serie <- left_join(toto, cbind(metaTabnew, Tabchlnew))
-serie <- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "chl")
-serie <- serie %>% group_by(Year, Clust) %>% summarise(chl=mean(chl))
-
-ggseriechl<-  ggplot(serie)+
-  geom_point(aes(x=Year,y=chl,col=Clust))+
-  geom_line(aes(x=Year,y=chl,col=Clust, group=Clust))+
-  theme_minimal()+
-  facet_wrap(.~Clust)
+#ggseriechl<-  ggplot(serie)+
+#  geom_point(aes(x=Year,y=chl,col=Clust))+
+#  geom_line(aes(x=Year,y=chl,col=Clust, group=Clust))+
+#  theme_minimal()+
+#  facet_wrap(.~Clust)
 
 save(ggseriechl, file="data/satellite/chl/chl_seriebyzone.Rdata")
 
@@ -194,6 +192,15 @@ plot(polChl, col=polChl@data$Clust)
 writeOGR(polChl, dsn="data/satellite/chl", layer="Chl", driver="ESRI Shapefile")
 
 save(polChl, file="data/satellite/chl/chl_polygons.Rdata")
+
+
+
+# Mean chl / zone
+
+summarychl<- toto2chl %>% select(Clust, mean)
+summarychl<- unique(summarychl)
+
+
 
 
 

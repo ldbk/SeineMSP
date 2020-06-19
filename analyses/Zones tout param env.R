@@ -30,7 +30,7 @@ O2<- raster::plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
 
 #grid.arrange(Part, Chl, PP, Det, Turb, SST, Sal, ncol=2, nrow = 4)
 
-
+par(mfrow = c(1, 1))
 
 
 # Series temporelles (ens baie)

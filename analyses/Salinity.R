@@ -58,39 +58,39 @@ TabSal<- pivot_longer(TabSal, cols=1:323, names_to = "Secondes", values_to = "Sa
 
 # Mean salinity per year
 TabSal2<- TabSal %>% group_by(x,y,Year) %>% summarize(moySal= mean(Salinite))
-ggplot(TabSal2)+
-  geom_tile(aes(x=x, y=y, fill=moySal))+
-  ggtitle("Salinite moyenne 1992-2018")+
-  facet_wrap(. ~ Year)+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabSal2)+
+#  geom_tile(aes(x=x, y=y, fill=moySal))+
+#  ggtitle("Salinite moyenne 1992-2018")+
+#  facet_wrap(. ~ Year)+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+
-  geom_boxplot()
+#ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+
+#  geom_boxplot()
 
 
 # Mean salinity 1998-2018
 TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
-ggplot(TabSal3)+
-  geom_tile(aes(x=x, y=y, fill= moyper))+
-  ggtitle("Salinite moyenne 1992-2018")+
-  xlab("Longitude")+
-  ylab("Latitude")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabSal3)+
+#  geom_tile(aes(x=x, y=y, fill= moyper))+
+#  ggtitle("Salinite moyenne 1992-2018")+
+#  xlab("Longitude")+
+#  ylab("Latitude")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
 # Serie tempo mean salinity
 TabSal4<- TabSal %>% group_by(Year) %>% summarize(moybaie= mean(Salinite))
-ggplot(TabSal4)+
-  geom_line(aes(x= Year, y= moybaie))+
-  ggtitle("Salinite annuelle 1992-2018")+
-  xlab("Year")+
-  ylab("Salinité")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+#ggplot(TabSal4)+
+#  geom_line(aes(x= Year, y= moybaie))+
+#  ggtitle("Salinite annuelle 1992-2018")+
+#  xlab("Year")+
+#  ylab("Salinité")+
+#  theme_minimal()+
+#  scale_fill_gradientn(colours = terrain.colors(6))  
 
 save(TabSal4, file="data/satellite/Salinity/Sal_serie.Rdata")
 
@@ -130,21 +130,19 @@ for (k in unique(essai[,"Clust"])){
 
 toto2Sal<- left_join(toto, essai2, by="Clust")
 
-save(toto2Sal, file="data/satellite/Salinity/toto2Sal.Rdata")
 
 
+# Serie tempo / zone
 
-# Serie tempo
+serie<- left_join(toto, cbind(metaTabnew, TabSalnew))
+serie<- pivot_longer(serie, cols=c(4:30), names_to="Year", values_to = "Sal")
+serie<- serie %>% group_by(Year, Clust) %>% summarise(Sal=mean(Sal))
 
-serie <- left_join(toto, cbind(metaTabnew, TabSalnew))
-serie <- pivot_longer(serie, cols=c(4:30), names_to="Year", values_to = "Sal")
-serie <- serie %>% group_by(Year, Clust) %>% summarise(Sal=mean(Sal))
-
-ggserieSal<-  ggplot(serie)+
-  geom_point(aes(x=Year,y=Sal,col=Clust))+
-  geom_line(aes(x=Year,y=Sal,col=Clust, group=Clust))+
-  theme_minimal()+
-  facet_wrap(.~Clust)
+#ggserieSal<-  ggplot(serie)+
+#  geom_point(aes(x=Year,y=Sal,col=Clust))+
+#  geom_line(aes(x=Year,y=Sal,col=Clust, group=Clust))+
+#  theme_minimal()+
+#  facet_wrap(.~Clust)
 
 save(ggserieSal, file="data/satellite/Salinity/Sal_seriebyzone.Rdata")
 
@@ -201,6 +199,15 @@ plot(polSal, col=polSal@data$Clust)
 writeOGR(polSal, dsn="data/satellite/Salinity", layer="Sal", driver="ESRI Shapefile")
 
 save(polSal, file="data/satellite/Salinity/Sal_polygons.Rdata")
+
+
+
+# Mean salinity / zone
+
+summarySal<- toto2Sal %>% select(Clust, mean)
+summarySal<- unique(summarySal)
+
+
 
 
 

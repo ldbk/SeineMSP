@@ -2,6 +2,8 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(NbClust)
+library(rgdal)
+library(rgeos)
 
 load("data/krigeage.Rdata")
 names(Kriege.logdens)[6]<- "Community"
@@ -16,10 +18,10 @@ Community<- numeric()
 
 for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   
-  Tab1<- Kriege.logdens[Kriege.logdens$Community==j,] %>% select(-c(Variance, Community))
+  Tab1<- Kriege.logdens[Kriege.logdens$Community==j,] %>% dplyr::select(-Variance, -Community)
   Tab2<- pivot_wider(Tab1, names_from = Year, values_from = Prediction)
-  metaTab<- Tab2 %>% select(Longitude, Latitude)
-  Tab2<- Tab2 %>% select(-c(Longitude, Latitude))
+  metaTab<- Tab2 %>% dplyr::select(Longitude, Latitude)
+  Tab2<- Tab2 %>% dplyr::select(-c(Longitude, Latitude))
 
   
   # Classification
@@ -40,7 +42,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   
   toto<- cbind(metaTab, Clust=factor(zones))        
   toto<- left_join(toto, Kriege.logdens[Kriege.logdens$Community==j,], by=c("Longitude", "Latitude")) 
-  toto<- toto %>% select(Longitude, Latitude, Clust, Community)   
+  toto<- toto %>% dplyr::select(Longitude, Latitude, Clust, Community)   
   
   Longitude<- c(Longitude, toto$Longitude)
   Latitude<- c(Latitude, toto$Latitude)
@@ -106,7 +108,7 @@ dis<- disaggregate(raster, fact=(res(raster)/res(rasterchlnew)))
 m<- mask(dis, res)
 plot(m)
 
-#save(m, paste0("data/ICES/Community", j,"_raster.Rdata"))
+save(m, file= paste0("data/ICES/Community", j,"_raster.Rdata"))
 
 
 
@@ -118,6 +120,74 @@ plot(pol, col=pol@data$Clust)
 save(pol, file= paste0("data/ICES/Community", j,"_polygons.Rdata"))
 
 }
+
+
+
+# Every communities
+
+par(mfrow = c(3, 3))
+
+load("data/ICES/Community1_raster.Rdata")
+Com1 <- m 
+load("data/ICES/Community2_raster.Rdata")
+Com2<- m
+load("data/ICES/Community3_raster.Rdata")
+Com3<- m
+load("data/ICES/Community4_raster.Rdata")
+Com4<- m
+load("data/ICES/Community5_raster.Rdata")
+Com5<- m
+load("data/ICES/Community6_raster.Rdata")
+Com6<- m
+load("data/ICES/Community7_raster.Rdata")
+Com7<- m
+load("data/ICES/Community8_raster.Rdata")
+Com8<- m
+load("data/ICES/Community9_raster.Rdata")
+Com9<- m
+
+
+{
+  Com1<- raster::plot(Com1, main="Com1", xlab="Longitude", ylab="Latitude")
+  Com2<- raster::plot(Com2, main="Com2", xlab="Longitude", ylab="Latitude")
+  Com3<- raster::plot(Com3, main="Com3", xlab="Longitude", ylab="Latitude")
+  Com4<- raster::plot(Com4, main="Com4", xlab="Longitude", ylab="Latitude")
+  Com5<- raster::plot(Com5, main="Com5", xlab="Longitude", ylab="Latitude")
+  Com6<- raster::plot(Com6, main="Com6", xlab="Longitude", ylab="Latitude")
+  Com7<- raster::plot(Com7, main="Com7", xlab="Longitude", ylab="Latitude")
+  Com8<- raster::plot(Com8, main="Com8", xlab="Longitude", ylab="Latitude")
+  Com9<-raster::plot(Com9, main="Com9", xlab="Longitude", ylab="Latitude")
+}
+
+
+
+
+
+
+
+
+
+{
+  Com1<- raster::plot(Com1, main="Com1", xlab="Longitude", ylab="Latitude")
+  Com2<- raster::plot(Com2, main="Com2", xlab="Longitude", ylab="Latitude")
+  Com3<- raster::plot(Com3, main="Com3", xlab="Longitude", ylab="Latitude")
+  Com4<- raster::plot(Com4, main="Com4", xlab="Longitude", ylab="Latitude")
+  Com5<- raster::plot(Com5, main="Com5", xlab="Longitude", ylab="Latitude")
+  Com6<- raster::plot(Com6, main="Com6", xlab="Longitude", ylab="Latitude")
+  Com7<- raster::plot(Com7, main="Com7", xlab="Longitude", ylab="Latitude")
+  Com8<- raster::plot(Com8, main="Com8", xlab="Longitude", ylab="Latitude")
+  Com9<- raster::plot(Com9, main="Com9", xlab="Longitude", ylab="Latitude")
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
