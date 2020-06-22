@@ -208,6 +208,28 @@ summarysst<- unique(summarysst)
 
 
 
+# Pour full_join
+
+    # Conversion raster - tableau
+fortify.Raster <- function(mSST, maxPixel = 1000000) {
+  
+  if (ncell(mSST) > maxPixel) {
+    x <- sampleRegular(mSST, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(mSST, seq_len(ncell(mSST)))
+  out <- mSST %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+Tabsstfin<- fortify(mSST)
+
+save(Tabsstfin, file="data/satellite/sst/Tabsstfin.Rdata")
+
+
+
 
 
 

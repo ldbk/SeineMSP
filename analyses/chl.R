@@ -203,6 +203,28 @@ summarychl<- unique(summarychl)
 
 
 
+# Pour full_join
+
+    # Conversion raster - tableau
+fortify.Raster <- function(mChl, maxPixel = 1000000) {
+  
+  if (ncell(mChl) > maxPixel) {
+    x <- sampleRegular(mChl, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(mChl, seq_len(ncell(mChl)))
+  out <- mChl %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+Tabchlfin<- fortify(mChl)
+
+save(Tabchlfin, file="data/satellite/chl/Tabchlfin.Rdata")
+
+
+
 
 
 

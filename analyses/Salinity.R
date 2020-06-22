@@ -209,6 +209,28 @@ summarySal<- unique(summarySal)
 
 
 
+# Pour full_join
+
+    # Conversion raster - tableau
+fortify.Raster <- function(mSal, maxPixel = 1000000) {
+  
+  if (ncell(mSal) > maxPixel) {
+    x <- sampleRegular(mSal, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(mSal, seq_len(ncell(mSal)))
+  out <- mSal %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+TabSalfin<- fortify(mSal)
+
+save(TabSalfin, file="data/satellite/Salinity/TabSalfin.Rdata")
+
+
+
 
 
 

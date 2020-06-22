@@ -201,6 +201,28 @@ summaryTurb<- unique(summaryTurb)
 
 
 
+# Pour full_join
+
+    # Conversion raster - tableau
+fortify.Raster <- function(mTurb, maxPixel = 1000000) {
+  
+  if (ncell(mTurb) > maxPixel) {
+    x <- sampleRegular(mTurb, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(mTurb, seq_len(ncell(mTurb)))
+  out <- mTurb %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+TabTurbfin<- fortify(mTurb)
+
+save(TabTurbfin, file="data/satellite/Turbidity/TabTurbfin.Rdata")
+
+
+
 
 
 

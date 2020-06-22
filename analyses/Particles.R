@@ -200,6 +200,28 @@ summaryPart<- unique(summaryPart)
 
 
 
+# Pour full_join
+
+    # Conversion raster - tableau
+fortify.Raster <- function(mPart, maxPixel = 1000000) {
+  
+  if (ncell(mPart) > maxPixel) {
+    x <- sampleRegular(mPart, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(mPart, seq_len(ncell(mPart)))
+  out <- mPart %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+TabPartfin<- fortify(mPart)
+
+save(TabPartfin, file="data/satellite/Particles/TabPartfin.Rdata")
+
+
+
 
 
 

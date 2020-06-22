@@ -202,6 +202,28 @@ summaryDet<- unique(summaryDet)
 
 
 
+# Pour full_join
+
+    # Conversion raster - tableau
+fortify.Raster <- function(mDet, maxPixel = 1000000) {
+  
+  if (ncell(mDet) > maxPixel) {
+    x <- sampleRegular(mDet, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(mDet, seq_len(ncell(mDet)))
+  out <- mDet %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+TabDetfin<- fortify(mDet)
+
+save(TabDetfin, file="data/satellite/Detritus/TabDetfin.Rdata")
+
+
+
 
 
 

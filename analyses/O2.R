@@ -216,6 +216,28 @@ summaryO2<- unique(summaryO2)
 
 
 
+# Pour full_join
+
+    # Conversion raster - tableau
+fortify.Raster <- function(mO2, maxPixel = 1000000) {
+  
+  if (ncell(mO2) > maxPixel) {
+    x <- sampleRegular(mO2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(mO2, seq_len(ncell(mO2)))
+  out <- mO2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+TabO2fin<- fortify(mO2)
+
+save(TabO2fin, file="data/satellite/O2/TabO2fin.Rdata")
+
+
+
 
 
 
