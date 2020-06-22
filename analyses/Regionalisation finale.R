@@ -68,7 +68,8 @@ tata <- cbind(grd2[,c(1,2)],Clust=factor(group8))
 
 ggplot(tata)+
   geom_tile(aes(x=Long,y=Lat,fill=Clust))+
-  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  theme_minimal()
 
 
 
