@@ -5,6 +5,7 @@ library(MASS)
 library(viridis)
 library(dplyr)
 library(tidyr)
+library(rgdal)
 library(rgeos)
 library(NbClust)
 
