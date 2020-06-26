@@ -9,6 +9,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 PP<- nc_open("data/satellite/Primary production/MetO-NWS-BIO-mm-PPRD_1591275638447.nc")
 PP<- stack("data/satellite/Primary production/MetO-NWS-BIO-mm-PPRD_1591275638447.nc")
@@ -105,8 +106,8 @@ TabPPnew<- TabPPnew %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(TabPPnew)
 #distance[1:5]
 
-tree<- hclust(distance)
-plot(tree, hang=-1)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 TabPP5<- TabPP3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabPP5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")

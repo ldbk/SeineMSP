@@ -9,6 +9,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 O2<- nc_open("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
 O2<- stack("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
@@ -113,8 +114,8 @@ TabO2new<- TabO2new %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(TabO2new)
 #distance[1:5]
 
-tree<- hclust(distance)
-plot(tree)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 TabO25<- TabO23 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabO25, min.nc = 2, max.nc = 10, index="all", method = "ward.D")

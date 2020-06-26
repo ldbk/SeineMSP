@@ -8,6 +8,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 Detrit<- stack("data/satellite/Detritus/dataset-oc-glo-opt-multi-l4-cdm443_4km_monthly-rep-v02_1592570192473.nc")
 
@@ -98,8 +99,8 @@ TabDetnew<- TabDetnew %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(TabDetnew)
 #distance[1:5]
 
-tree<- hclust(distance, )
-plot(tree)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 TabDet5<- TabDet3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabDet5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
@@ -141,16 +142,16 @@ save(ggserieDet, file="data/satellite/Detritus/Det_seriebyzone.Rdata")
 
 
 # Trait de cote
-# 1st Polygon
+  # 1st Polygon
 liste <- with(toto2Det, chull(x, y))
 hull <- toto2Det[liste, c("x", "y")]
 Poly <- Polygon(hull)
 
-# Create SpatialPolygons objects
+  # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
 buff <- raster::buffer(SpPoly, 0.1)
 
-# Cut object along coast
+  # Cut object along coast
 coast <- rgdal::readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datadown
 res <- rgeos::gDifference(buff, coast)
 

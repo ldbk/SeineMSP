@@ -9,6 +9,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 Sal<- nc_open("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
 Sal<- stack("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
@@ -106,8 +107,8 @@ TabSalnew<- TabSalnew %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(TabSalnew)
 #distance[1:5]
 
-tree<- hclust(distance)
-plot(tree)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 TabSal5<- TabSal3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabSal5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")

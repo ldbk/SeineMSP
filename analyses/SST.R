@@ -9,6 +9,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 sst<- stack("data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581929927261.nc")
 sst<- sst-275.15
@@ -105,8 +106,8 @@ Tabsstnew<- Tabsstnew %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(Tabsstnew)
 #distance[1:5]
 
-tree<- hclust(distance)
-plot(tree)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 Tabsst5<- Tabsst3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(Tabsst5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")

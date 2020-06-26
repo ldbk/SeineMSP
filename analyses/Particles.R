@@ -8,6 +8,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 Part<- stack("data/satellite/Particles/dataset-oc-glo-opt-multi-l4-bbp443_4km_monthly-rep-v02_1592568961250.nc")
 
@@ -98,8 +99,8 @@ TabPartnew<- TabPartnew %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(TabPartnew)
 #distance[1:5]
 
-tree<- hclust(distance)
-plot(tree)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 TabPart5<- TabPart3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabPart5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")

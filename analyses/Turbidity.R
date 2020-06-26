@@ -8,6 +8,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 Turb<- stack("data/satellite/Turbidity/dataset-oc-glo-opt-multi-l4-kd490_4km_monthly-rep-v02_1592570921204.nc")
 
@@ -98,8 +99,8 @@ TabTurbnew<- TabTurbnew %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(TabTurbnew)
 #distance[1:5]
 
-tree<- hclust(distance)
-plot(tree)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 TabTurb5<- TabTurb3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(TabTurb5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")

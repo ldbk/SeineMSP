@@ -1,4 +1,3 @@
-setwd("/data/ICES")
 library(assertthat)
 library(tidyr)
 library(dplyr)

@@ -9,6 +9,7 @@ library(tidyr)
 library(rgdal)
 library(rgeos)
 library(NbClust)
+library(cluster)
 
 chl<- stack("data/satellite/Chl/dataset-oc-glo-bio-multi-l4-chl_4km_monthly-rep_1592571915166.nc")
 
@@ -101,8 +102,8 @@ Tabchlnew<- Tabchlnew %>% ungroup() %>% dplyr::select(-x, -y)
 distance<- dist(Tabchlnew)
 #distance[1:5]
 
-tree<- hclust(distance)
-plot(tree)
+tree<- agnes(distance, method="ward", par.method=1)
+plot(tree, which=2,hang=-1)
 
 Tabchl5<- Tabchl3 %>% ungroup() %>% dplyr::select(moyper)
 #NbClust(Tabchl5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
