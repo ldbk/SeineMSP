@@ -10,6 +10,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 O2<- nc_open("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
 O2<- stack("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
@@ -92,15 +93,16 @@ TabO23<- TabO22 %>% group_by(x,y) %>% summarize(moyper= mean(moyO2))
 
 # Serie tempo mean 02
 TabO24<- TabO2 %>% group_by(Year) %>% summarize(moybaie= mean(O2))
-#ggplot(TabO24)+
-#  geom_line(aes(x=Year, y=moybaie))+
-#  ggtitle("O2 annuel 1998-2018")+
-#  xlab("Year")+
-#  ylab("mmol/m3")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(TabO24, file="data/satellite/O2/O2_serie.Rdata")
+O2series<- ggplot(TabO24)+
+  geom_line(aes(x=Year, y=moybaie))+
+  ggtitle("Mean dissolved oxygen 1998-2018")+
+  xlab("Year")+
+  ylab("mmol/m3")+
+  theme_minimal()  
+
+save(O2series, file="results/satellite/series full bay/O2_series.Rdata")
+ggsave(plot= O2series, filename="O2.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -146,13 +148,17 @@ serie<- left_join(toto, cbind(metaTabnew, TabO2new))
 serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "O2")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(O2=mean(O2))
 
-#ggserieO2<-  ggplot(serie)+
-#  geom_point(aes(x=Year,y=O2,col=Clust))+
-#  geom_line(aes(x=Year,y=O2,col=Clust, group=Clust))+
-#  theme_minimal()+
-#  facet_wrap(.~Clust)
+ggserieO2<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=O2,col=Clust))+
+  geom_line(aes(x=Year,y=O2,col=Clust, group=Clust))+
+  ggtitle("Dissolved oxygen")+
+  ylab("mmol/m3")+
+  theme_minimal()+
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggserieO2, file="data/satellite/O2/O2_seriebyzone.Rdata")
+save(ggserieO2, file="results/satellite/series by zone/O2_seriebyzone.Rdata")
+ggsave(plot= ggserieO2, filename="O2_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -196,6 +202,10 @@ mO2<- mask(disO2, res)
 plot(mO2)
 
 save(mO2, file="data/satellite/O2/O2_raster.Rdata")
+
+jpeg(file="results/satellite/zones/O2_raster.jpeg")
+plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

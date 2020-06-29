@@ -9,6 +9,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 Part<- stack("data/satellite/Particles/dataset-oc-glo-opt-multi-l4-bbp443_4km_monthly-rep-v02_1592568961250.nc")
 
@@ -77,15 +78,16 @@ TabPart3<- TabPart2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPart))
 
 # Serie tempo mean particles
 TabPart4<- TabPart %>% group_by(Year) %>% summarize(moybaie= mean(Particules))
-#ggplot(TabPart4)+
-#  geom_line(aes(x= Year, y= moybaie))+
-#  ggtitle("Particules annuelles 1997-2017")+
-#  xlab("Year")+
-#  ylab("Concentration en particules")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(TabPart4, file="data/satellite/Particles/part_serie.Rdata")
+Partseries<- ggplot(TabPart4)+
+  geom_line(aes(x= Year, y= moybaie))+
+  ggtitle("Mean particules 1997-2019")+
+  xlab("Year")+
+  ylab("m-1")+
+  theme_minimal()
+
+save(Partseries, file="results/satellite/series full bay/part_series.Rdata")
+ggsave(plot= Partseries, filename="Particles.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -134,10 +136,14 @@ serie<- serie %>% group_by(Year, Clust) %>% summarise(Part=mean(Part))
 ggseriePart<-  ggplot(serie)+
   geom_point(aes(x=Year,y=Part,col=Clust))+
   geom_line(aes(x=Year,y=Part,col=Clust, group=Clust))+
+  ggtitle("Particles")+
+  ylab("m-1")+
   theme_minimal()+
-  facet_wrap(.~Clust)
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggseriePart, file="data/satellite/Particles/Part_seriebyzone.Rdata")
+save(ggseriePart, file="results/satellite/series by zone/Part_seriebyzone.Rdata")
+ggsave(plot= ggseriePart, filename="Part_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -181,6 +187,10 @@ mPart<- mask(dispart, res)
 plot(mPart)
 
 save(mPart, file="data/satellite/Particles/part_raster.Rdata")
+
+jpeg(file="results/satellite/zones/Part_raster.jpeg")
+plot(mPart, main="Particles", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

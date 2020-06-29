@@ -10,6 +10,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 chl<- stack("data/satellite/Chl/dataset-oc-glo-bio-multi-l4-chl_4km_monthly-rep_1592571915166.nc")
 
@@ -80,15 +81,16 @@ Tabchl3<- Tabchl2 %>% group_by(x,y) %>% summarize(moyper= mean(moyChl))
 
 # Serie tempo mean chl
 Tabchl4<- Tabchl %>% group_by(year) %>% summarize(moybaie= mean(Chloro))
-#ggplot(Tabchl4)+
-#  geom_point(aes(x= year, y= moybaie))+
-#  ggtitle("Chlorophylle moyenne annuelle 1997-2017")+
-#  xlab("Year")+
-#  ylab("?g/L")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(Tabchl4, file="data/satellite/Chl/Chl_serie.Rdata")
+Chlseries<- ggplot(Tabchl4)+
+  geom_line(aes(x= year, y= moybaie))+
+  ggtitle("Mean chlorophyll 1997-2019")+
+  xlab("Year")+
+  ylab("mg/m3")+
+  theme_minimal() 
+
+save(Chlseries, file="results/satellite/series full bay/Chl_series.Rdata")
+ggsave(plot= Chlseries, filename="chl.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -137,10 +139,14 @@ serie<- serie %>% group_by(Year, Clust) %>% summarise(chl=mean(chl))
 ggseriechl<-  ggplot(serie)+
   geom_point(aes(x=Year,y=chl,col=Clust))+
   geom_line(aes(x=Year,y=chl,col=Clust, group=Clust))+
+  ggtitle("Chlorophyll")+
+  ylab("mg/m3")+
   theme_minimal()+
-  facet_wrap(.~Clust)
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggseriechl, file="data/satellite/chl/chl_seriebyzone.Rdata")
+save(ggseriechl, file="results/satellite/series by zone/chl_seriebyzone.Rdata")
+ggsave(plot= ggseriechl, filename="chl_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -183,6 +189,10 @@ mChl<- mask(rasterchlnew, res)
 plot(mChl)
 
 save(mChl, file="data/satellite/chl/chl_raster.Rdata")
+
+jpeg(file="results/satellite/zones/chl_raster.jpeg")
+plot(mChl, main="Chlorophyll", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

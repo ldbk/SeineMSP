@@ -1,6 +1,7 @@
 library(ggplot2)
 library(gridExtra)
 library(raster)
+library(grDevices)
 
 
 # Cartes
@@ -33,83 +34,26 @@ O2<- raster::plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
 par(mfrow = c(1, 1))
 
 
+
+
+
 # Series temporelles (ens baie)
 {
-  load("data/satellite/Particles/part_serie.Rdata")
-  load("data/satellite/chl/chl_serie.Rdata")
-  load("data/satellite/Primary production/PP_serie.Rdata")
-  load("data/satellite/Detritus/Det_serie.Rdata")
-  load("data/satellite/Turbidity/Turb_serie.Rdata")
-  load("data/satellite/sst/sst_serie.Rdata")
-  load("data/satellite/Salinity/Sal_serie.Rdata")
-  load("data/satellite/O2/O2_serie.Rdata")
+  load("results/satellite/series full bay/part_series.Rdata")
+  load("results/satellite/series full bay/chl_series.Rdata")
+  load("results/satellite/series full bay/PP_series.Rdata")
+  load("results/satellite/series full bay/Det_series.Rdata")
+  load("results/satellite/series full bay/Turb_series.Rdata")
+  load("results/satellite/series full bay/sst_series.Rdata")
+  load("results/satellite/series full bay/Sal_series.Rdata")
+  load("results/satellite/series full bay/O2_series.Rdata")
 }
 
-PartS<- ggplot(TabPart4)+
-  geom_line(aes(x= Year, y= moybaie))+
-  ggtitle("Particles 1997-2017")+
-  xlab("Year")+
-  ylab("Particles")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))
 
-ChlS<- ggplot(Tabchl4)+
-  geom_line(aes(x= year, y= moybaie))+
-  ggtitle("Chlorophyll 1997-2017")+
-  xlab("Year")+
-  ylab("µg/L")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))
+grid.arrange(Partseries, Chlseries, PPseries, Detseries, Turbseries, SSTseries, Salseries, ncol=2, nrow = 4)
 
-PPS<- ggplot(TabPP4)+
-  geom_line(aes(x= Year, y= moybaie))+
-  ggtitle("PP 1998-2018")+
-  xlab("Year")+
-  ylab("mg C/m3/j")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6)) 
+par(mfrow = c(1, 1))
 
-DetS<- ggplot(TabDet4)+
-  geom_line(aes(x=Year, y= moybaie))+
-  ggtitle("Detritus 1997-2017")+
-  xlab("Year")+
-  ylab("Detritus")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6)) 
-
-TurbS<- ggplot(TabTurb4)+
-  geom_line(aes(x=Year, y=moybaie))+
-  ggtitle("Turbidity 1997-2017")+
-  xlab("Year")+
-  ylab("Turbidity")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))
-
-sstS<- ggplot(Tabsst4)+
-  geom_line(aes(x= Year, y= moybaie))+
-  ggtitle("SST 1981-2018")+
-  xlab("Year")+
-  ylab("°C")+
-  theme_minimal()
-
-SalS<- ggplot(TabSal4)+
-  geom_line(aes(x= Year, y= moybaie))+
-  ggtitle("Salinity 1992-2018")+
-  xlab("Year")+
-  ylab("Salinity")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))
-
-O2S<- ggplot(TabO24)+
-  geom_line(aes(x=Year, y=moybaie))+
-  ggtitle("O2 annuel 1998-2018")+
-  xlab("Year")+
-  ylab("mmol/m3")+
-  theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6)) 
-
-
-grid.arrange(PartS, ChlS, PPS, DetS, TurbS, sstS, SalS, O2S, ncol=2, nrow = 4)
 
 
 
@@ -117,19 +61,20 @@ grid.arrange(PartS, ChlS, PPS, DetS, TurbS, sstS, SalS, O2S, ncol=2, nrow = 4)
 # Series tempo (par zone)
 
 {
-  load("data/satellite/Particles/Part_seriebyzone.Rdata")
-  load("data/satellite/chl/chl_seriebyzone.Rdata")
-  load("data/satellite/Primary production/PP_seriebyzone.Rdata")
-  load("data/satellite/Detritus/Det_seriebyzone.Rdata")
-  load("data/satellite/Turbidity/Turb_seriebyzone.Rdata")
-  load("data/satellite/sst/sst_seriebyzone.Rdata")
-  load("data/satellite/Salinity/Sal_seriebyzone.Rdata")
-  load("data/satellite/O2/O2_seriebyzone.Rdata")
+  load("results/satellite/series by zone/Part_seriebyzone.Rdata")
+  load("results/satellite/series by zone/chl_seriebyzone.Rdata")
+  load("results/satellite/series by zone/PP_seriebyzone.Rdata")
+  load("results/satellite/series by zone/Det_seriebyzone.Rdata")
+  load("results/satellite/series by zone/Turb_seriebyzone.Rdata")
+  load("results/satellite/series by zone/sst_seriebyzone.Rdata")
+  load("results/satellite/series by zone/Sal_seriebyzone.Rdata")
+  load("results/satellite/series by zone/O2_seriebyzone.Rdata")
 }
 
 
-grid.arrange(ggseriePart, ggseriechl, ggseriePP, ggserieDet, ggserieTurb, ggseriesst, ggserieSal, ggserieO2, ncol=2, nrow = 4)
+grid.arrange(ggseriePart, ggseriechl, ggseriePP, ggserieDet, ncol=2, nrow = 2)
 
+grid.arrange(ggserieTurb, ggseriesst, ggserieSal, ggserieO2, ncol=2, nrow = 2)
 
 
 

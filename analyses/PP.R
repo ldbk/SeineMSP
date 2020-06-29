@@ -10,6 +10,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 PP<- nc_open("data/satellite/Primary production/MetO-NWS-BIO-mm-PPRD_1591275638447.nc")
 PP<- stack("data/satellite/Primary production/MetO-NWS-BIO-mm-PPRD_1591275638447.nc")
@@ -84,15 +85,16 @@ TabPP3<- TabPP2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPP))
 
 # Serie tempo mean PP
 TabPP4<- TabPP %>% group_by(Year) %>% summarize(moybaie= mean(PP))
-#ggplot(TabPP4)+
-#  geom_line(aes(x= Year, y= moybaie))+
-#  ggtitle("PP annuelle 1998-2018")+
-#  xlab("Year")+
-#  ylab("mg C/m3/j")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6)) 
 
-save(TabPP4, file="data/satellite/Primary production/PP_serie.Rdata")
+PPseries<- ggplot(TabPP4)+
+  geom_line(aes(x= Year, y= moybaie))+
+  ggtitle("Mean primary production 1998-2018")+
+  xlab("Year")+
+  ylab("mg C/m3/j")+
+  theme_minimal()
+
+save(PPseries, file="results/satellite/series full bay/PP_series.Rdata")
+ggsave(plot= PPseries, filename="PP.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -138,13 +140,17 @@ serie<- left_join(toto, cbind(metaTabnew, TabPPnew))
 serie<- pivot_longer(serie, cols=c(4:24), names_to="Year", values_to = "PP")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(PP=mean(PP))
 
-#ggseriePP<-  ggplot(serie)+
-#  geom_point(aes(x=Year,y=PP,col=Clust))+
-#  geom_line(aes(x=Year,y=PP,col=Clust, group=Clust))+
-#  theme_minimal()+
-#  facet_wrap(.~Clust)
+ggseriePP<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=PP,col=Clust))+
+  geom_line(aes(x=Year,y=PP,col=Clust, group=Clust))+
+  ggtitle("Primary production")+
+  ylab("mg C/m3/j")+
+  theme_minimal()+
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggseriePP, file="data/satellite/Primary production/PP_seriebyzone.Rdata")
+save(ggseriePP, file="results/satellite/series by zone/PP_seriebyzone.Rdata")
+ggsave(plot= ggseriePP, filename="PP_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -188,6 +194,11 @@ mPP<- mask(disPP, res)
 plot(mPP)
 
 save(mPP, file="data/satellite/Primary production/PP_raster.Rdata")
+
+jpeg(file="results/satellite/zones/PP_raster.jpeg")
+plot(mPP, main="Primary production", xlab="Longitude", ylab="Latitude")
+dev.off()
+
 
 
 library(sf)

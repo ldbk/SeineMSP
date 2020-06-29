@@ -10,6 +10,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 sst<- stack("data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581929927261.nc")
 sst<- sst-275.15
@@ -85,14 +86,16 @@ Tabsst3<- Tabsst2 %>% group_by(x,y) %>% summarize(moyper= mean(moySST))
 
 # Serie tempo mean SST
 Tabsst4<- Tabsst %>% group_by(Year) %>% summarize(moybaie= mean(SST))
-#ggplot(Tabsst4)+
-#  geom_line(aes(x= Month, y= moybaie))+
-#  ggtitle("SST mensuelle 1981-2018")+
-#  xlab("Month")+
-#  ylab("°C")+
-#  theme_minimal()
 
-save(Tabsst4, file="data/satellite/sst/sst_serie.Rdata")
+SSTseries<- ggplot(Tabsst4)+
+  geom_line(aes(x= Year, y= moybaie))+
+  ggtitle("Mean Sea Surface Temperature 1982-2018")+
+  xlab("Year")+
+  ylab("°C")+
+  theme_minimal()
+
+save(SSTseries, file="results/satellite/series full bay/sst_series.Rdata")
+ggsave(plot= SSTseries, filename="SST.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -138,13 +141,17 @@ serie<- left_join(toto, cbind(metaTabnew, Tabsstnew))
 serie<- pivot_longer(serie, cols=c(4:41), names_to="Year", values_to = "sst")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(sst=mean(sst))
 
-#ggseriesst<-  ggplot(serie)+
-#  geom_point(aes(x=Year,y=sst,col=Clust))+
-#  geom_line(aes(x=Year,y=sst,col=Clust, group=Clust))+
-#  theme_minimal()+
-#  facet_wrap(.~Clust)
+ggseriesst<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=sst,col=Clust))+
+  geom_line(aes(x=Year,y=sst,col=Clust, group=Clust))+
+  ggtitle("Sea Surface Temperature")+
+  ylab("°C")+
+  theme_minimal()+
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggseriesst, file="data/satellite/sst/sst_seriebyzone.Rdata")
+save(ggseriesst, file="results/satellite/series by zone/sst_seriebyzone.Rdata")
+ggsave(plot= ggseriesst, filename="SST_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -188,6 +195,10 @@ mSST<- mask(dissst, res)
 plot(mSST)
 
 save(mSST, file="data/satellite/sst/sst_raster.Rdata")
+
+jpeg(file="results/satellite/zones/SST_raster.jpeg")
+plot(mSST, main="Surface temperature", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

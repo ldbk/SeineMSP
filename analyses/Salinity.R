@@ -10,6 +10,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 Sal<- nc_open("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
 Sal<- stack("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
@@ -85,15 +86,16 @@ TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
 
 # Serie tempo mean salinity
 TabSal4<- TabSal %>% group_by(Year) %>% summarize(moybaie= mean(Salinite))
-#ggplot(TabSal4)+
-#  geom_line(aes(x= Year, y= moybaie))+
-#  ggtitle("Salinite annuelle 1992-2018")+
-#  xlab("Year")+
-#  ylab("Salinité")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(TabSal4, file="data/satellite/Salinity/Sal_serie.Rdata")
+Salseries<- ggplot(TabSal4)+
+  geom_line(aes(x= Year, y= moybaie))+
+  ggtitle("Mean salinity 1992-2018")+
+  xlab("Year")+
+  ylab("1E-3")+
+  theme_minimal()  
+
+save(Salseries, file="results/satellite/series full bay/Sal_series.Rdata")
+ggsave(plot= Salseries, filename="Salinity.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -139,13 +141,17 @@ serie<- left_join(toto, cbind(metaTabnew, TabSalnew))
 serie<- pivot_longer(serie, cols=c(4:30), names_to="Year", values_to = "Sal")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(Sal=mean(Sal))
 
-#ggserieSal<-  ggplot(serie)+
-#  geom_point(aes(x=Year,y=Sal,col=Clust))+
-#  geom_line(aes(x=Year,y=Sal,col=Clust, group=Clust))+
-#  theme_minimal()+
-#  facet_wrap(.~Clust)
+ggserieSal<-  ggplot(serie)+
+  geom_point(aes(x=Year,y=Sal,col=Clust))+
+  geom_line(aes(x=Year,y=Sal,col=Clust, group=Clust))+
+  ggtitle("Salinity")+
+  ylab("1E-3")+
+  theme_minimal()+
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggserieSal, file="data/satellite/Salinity/Sal_seriebyzone.Rdata")
+save(ggserieSal, file="results/satellite/series by zone/Sal_seriebyzone.Rdata")
+ggsave(plot= ggserieSal, filename="Sal_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -189,6 +195,10 @@ mSal<- mask(dissal, res)
 plot(mSal)
 
 save(mSal, file="data/satellite/Salinity/Sal_raster.Rdata")
+
+jpeg(file="results/satellite/zones/Sal_raster.jpeg")
+plot(mSal, main="Salinity", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

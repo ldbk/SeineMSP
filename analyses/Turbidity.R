@@ -9,6 +9,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 Turb<- stack("data/satellite/Turbidity/dataset-oc-glo-opt-multi-l4-kd490_4km_monthly-rep-v02_1592570921204.nc")
 
@@ -77,15 +78,16 @@ TabTurb3<- TabTurb2 %>% group_by(x,y) %>% summarize(moyper= mean(moyTurb))
 
 # Serie tempo mean turb
 TabTurb4<- TabTurb %>% group_by(Year) %>% summarize(moybaie= mean(Turbidity))
-#ggplot(TabTurb4)+
-#  geom_line(aes(x=Year, y=moybaie))+
-#  ggtitle("Turbidité mensuelle 1997-2017")+
-#  xlab("Year")+
-#  ylab("Turbidité")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(TabTurb4, file="data/satellite/Turbidity/Turb_serie.Rdata")
+Turbseries<- ggplot(TabTurb4)+
+  geom_line(aes(x=Year, y=moybaie))+
+  ggtitle("Mean turbidity 1997-2019")+
+  xlab("Year")+
+  ylab("m-1")+
+  theme_minimal() 
+
+save(Turbseries, file="results/satellite/series full bay/Turb_series.Rdata")
+ggsave(plot= Turbseries, filename="Turbidity.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -134,10 +136,14 @@ serie<- serie %>% group_by(Year, Clust) %>% summarise(Turb=mean(Turb))
 ggserieTurb<-  ggplot(serie)+
   geom_point(aes(x=Year,y=Turb,col=Clust))+
   geom_line(aes(x=Year,y=Turb,col=Clust, group=Clust))+
+  ggtitle("Turbidity")+
+  ylab("m-1")+
   theme_minimal()+
-  facet_wrap(.~Clust)
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggserieTurb, file="data/satellite/Turbidity/Turb_seriebyzone.Rdata")
+save(ggserieTurb, file="results/satellite/series by zone/Turb_seriebyzone.Rdata")
+ggsave(plot= ggserieTurb, filename="Turb_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -181,6 +187,10 @@ mTurb<- mask(disturb, res)
 plot(mTurb)
 
 save(mTurb, file="data/satellite/Turbidity/Turb_raster.Rdata")
+
+jpeg(file="results/satellite/zones/Turb_raster.jpeg")
+plot(mTurb, main="Turbidity", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

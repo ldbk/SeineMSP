@@ -9,6 +9,7 @@ library(rgdal)
 library(rgeos)
 library(NbClust)
 library(cluster)
+library(grDevices)
 
 Detrit<- stack("data/satellite/Detritus/dataset-oc-glo-opt-multi-l4-cdm443_4km_monthly-rep-v02_1592570192473.nc")
 
@@ -77,15 +78,16 @@ TabDet3<- TabDet2 %>% group_by(x,y) %>% summarize(moyper= mean(moyDet))
 
 # Serie tempo mean detritus
 TabDet4<- TabDet %>% group_by(Year) %>% summarize(moybaie= mean(Detritus))
-#ggplot(TabDet4)+
-#  geom_line(aes(x=Year, y= moybaie))+
-#  ggtitle("Detritus annuels 1997-2017")+
-#  xlab("Year")+
-#  ylab("Detritus")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
 
-save(TabDet4, file="data/satellite/Detritus/Det_serie.Rdata")
+Detseries<- ggplot(TabDet4)+
+  geom_line(aes(x=Year, y= moybaie))+
+  ggtitle("Mean detritus 1997-2019")+
+  xlab("Year")+
+  ylab("m-1")+
+  theme_minimal() 
+
+save(Detseries, file="results/satellite/series full bay/Det_series.Rdata")
+ggsave(plot= Detseries, filename="Detitrus.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
 
 
 
@@ -134,10 +136,14 @@ serie<- serie %>% group_by(Year, Clust) %>% summarise(Det=mean(Det))
 ggserieDet<-  ggplot(serie)+
   geom_point(aes(x=Year,y=Det,col=Clust))+
   geom_line(aes(x=Year,y=Det,col=Clust, group=Clust))+
+  ggtitle("Detritus")+
+  ylab("m-1")+
   theme_minimal()+
-  facet_wrap(.~Clust)
+  facet_wrap(.~Clust)+
+  guides(x = guide_axis(angle = 90))
 
-save(ggserieDet, file="data/satellite/Detritus/Det_seriebyzone.Rdata")
+save(ggserieDet, file="results/satellite/series by zone/Det_seriebyzone.Rdata")
+ggsave(plot= ggserieDet, filename="Det_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
 
 
 
@@ -181,6 +187,10 @@ mDet<- mask(disdet,res)
 plot(mDet)
 
 save(mDet, file="data/satellite/Detritus/Det_raster.Rdata")
+
+jpeg(file="results/satellite/zones/Det_raster.jpeg")
+plot(mDet, main="Detritus", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 
