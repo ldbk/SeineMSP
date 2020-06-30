@@ -84,7 +84,7 @@ TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
 #  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# Serie tempo mean salinity
+# Serie tempo mean salinity (year)
 TabSal4<- TabSal %>% group_by(Year) %>% summarize(moybaie= mean(Salinite))
 
 Salseries<- ggplot(TabSal4)+
@@ -96,6 +96,21 @@ Salseries<- ggplot(TabSal4)+
 
 save(Salseries, file="results/satellite/series full bay/Sal_series.Rdata")
 ggsave(plot= Salseries, filename="Salinity.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
+
+
+
+# Serie tempo mean salinity (month)
+TabSal6<- TabSal %>% group_by(Month) %>% summarize(moybaie= mean(Salinite))
+
+Salseries2<- ggplot(TabSal6)+
+  geom_line(aes(x= Month, y= moybaie))+
+  ggtitle("Mean salinity")+
+  xlab("Month")+
+  ylab("1E-3")+
+  theme_minimal()  
+
+save(Salseries2, file="results/satellite/series full bay/monthly/Sal_series.Rdata")
+ggsave(plot= Salseries2, filename="Salinity.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 

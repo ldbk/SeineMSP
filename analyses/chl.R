@@ -79,7 +79,7 @@ Tabchl3<- Tabchl2 %>% group_by(x,y) %>% summarize(moyper= mean(moyChl))
 #  scale_fill_gradientn(colours = terrain.colors(6))
 
 
-# Serie tempo mean chl
+# Serie tempo mean chl (year)
 Tabchl4<- Tabchl %>% group_by(year) %>% summarize(moybaie= mean(Chloro))
 
 Chlseries<- ggplot(Tabchl4)+
@@ -91,6 +91,21 @@ Chlseries<- ggplot(Tabchl4)+
 
 save(Chlseries, file="results/satellite/series full bay/Chl_series.Rdata")
 ggsave(plot= Chlseries, filename="chl.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
+
+
+
+# Serie tempo mean chl (month)
+Tabchl6<- Tabchl %>% group_by(month) %>% summarize(moybaie= mean(Chloro))
+
+Chlseries2<- ggplot(Tabchl6)+
+  geom_line(aes(x= month, y= moybaie))+
+  ggtitle("Mean chlorophyll")+
+  xlab("Month")+
+  ylab("mg/m3")+
+  theme_minimal() 
+
+save(Chlseries2, file="results/satellite/series full bay/monthly/Chl_series.Rdata")
+ggsave(plot= Chlseries2, filename="chl.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 

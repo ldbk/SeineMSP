@@ -84,7 +84,7 @@ Tabsst3<- Tabsst2 %>% group_by(x,y) %>% summarize(moyper= mean(moySST))
 #  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# Serie tempo mean SST
+# Serie tempo mean SST (year)
 Tabsst4<- Tabsst %>% group_by(Year) %>% summarize(moybaie= mean(SST))
 
 SSTseries<- ggplot(Tabsst4)+
@@ -96,6 +96,21 @@ SSTseries<- ggplot(Tabsst4)+
 
 save(SSTseries, file="results/satellite/series full bay/sst_series.Rdata")
 ggsave(plot= SSTseries, filename="SST.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
+
+
+
+# Serie tempo mean SST (month)
+Tabsst6<- Tabsst %>% group_by(Month) %>% summarize(moybaie= mean(SST))
+
+SSTseries2<- ggplot(Tabsst6)+
+  geom_line(aes(x= Month, y= moybaie))+
+  ggtitle("Mean Sea Surface Temperature")+
+  xlab("Month")+
+  ylab("°C")+
+  theme_minimal()
+
+save(SSTseries2, file="results/satellite/series full bay/monthly/sst_series.Rdata")
+ggsave(plot= SSTseries2, filename="SST.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 

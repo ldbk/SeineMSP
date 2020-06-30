@@ -91,7 +91,7 @@ TabO23<- TabO22 %>% group_by(x,y) %>% summarize(moyper= mean(moyO2))
 #  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# Serie tempo mean 02
+# Serie tempo mean 02 (year)
 TabO24<- TabO2 %>% group_by(Year) %>% summarize(moybaie= mean(O2))
 
 O2series<- ggplot(TabO24)+
@@ -103,6 +103,21 @@ O2series<- ggplot(TabO24)+
 
 save(O2series, file="results/satellite/series full bay/O2_series.Rdata")
 ggsave(plot= O2series, filename="O2.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
+
+
+
+# Serie tempo mean 02 (month)
+TabO26<- TabO2 %>% group_by(Month) %>% summarize(moybaie= mean(O2))
+
+O2series2<- ggplot(TabO26)+
+  geom_line(aes(x=Month, y=moybaie))+
+  ggtitle("Mean dissolved oxygen")+
+  xlab("Month")+
+  ylab("mmol/m3")+
+  theme_minimal()  
+
+save(O2series2, file="results/satellite/series full bay/monthly/O2_series.Rdata")
+ggsave(plot= O2series2, filename="O2.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 

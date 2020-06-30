@@ -83,7 +83,7 @@ TabPP3<- TabPP2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPP))
 #  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# Serie tempo mean PP
+# Serie tempo mean PP (year)
 TabPP4<- TabPP %>% group_by(Year) %>% summarize(moybaie= mean(PP))
 
 PPseries<- ggplot(TabPP4)+
@@ -95,6 +95,21 @@ PPseries<- ggplot(TabPP4)+
 
 save(PPseries, file="results/satellite/series full bay/PP_series.Rdata")
 ggsave(plot= PPseries, filename="PP.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
+
+
+
+# Serie tempo mean PP (month)
+TabPP6<- TabPP %>% group_by(Month) %>% summarize(moybaie= mean(PP))
+
+PPseries2<- ggplot(TabPP6)+
+  geom_line(aes(x= Month, y= moybaie))+
+  ggtitle("Mean primary production")+
+  xlab("Month")+
+  ylab("mg C/m3/j")+
+  theme_minimal()
+
+save(PPseries2, file="results/satellite/series full bay/monthlyPP_series.Rdata")
+ggsave(plot= PPseries2, filename="PP.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 

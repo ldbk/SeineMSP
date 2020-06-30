@@ -76,7 +76,7 @@ TabDet3<- TabDet2 %>% group_by(x,y) %>% summarize(moyper= mean(moyDet))
 #  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# Serie tempo mean detritus
+# Serie tempo mean detritus (year)
 TabDet4<- TabDet %>% group_by(Year) %>% summarize(moybaie= mean(Detritus))
 
 Detseries<- ggplot(TabDet4)+
@@ -88,6 +88,21 @@ Detseries<- ggplot(TabDet4)+
 
 save(Detseries, file="results/satellite/series full bay/Det_series.Rdata")
 ggsave(plot= Detseries, filename="Detitrus.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
+
+
+
+# Serie tempo mean detritus (month)
+TabDet6<- TabDet %>% group_by(Month) %>% summarize(moybaie= mean(Detritus))
+
+Detseries2<- ggplot(TabDet6)+
+  geom_line(aes(x=Month, y= moybaie))+
+  ggtitle("Mean detritus")+
+  xlab("Month")+
+  ylab("m-1")+
+  theme_minimal() 
+
+save(Detseries2, file="results/satellite/series full bay/monthly/Det_series.Rdata")
+ggsave(plot= Detseries2, filename="Detitrus.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 

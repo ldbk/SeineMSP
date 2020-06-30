@@ -76,7 +76,7 @@ TabPart3<- TabPart2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPart))
 #  scale_fill_gradientn(colours = terrain.colors(6))  
 
 
-# Serie tempo mean particles
+# Serie tempo mean particles (year)
 TabPart4<- TabPart %>% group_by(Year) %>% summarize(moybaie= mean(Particules))
 
 Partseries<- ggplot(TabPart4)+
@@ -88,6 +88,21 @@ Partseries<- ggplot(TabPart4)+
 
 save(Partseries, file="results/satellite/series full bay/part_series.Rdata")
 ggsave(plot= Partseries, filename="Particles.jpeg", path="results/satellite/series full bay", width = 13, height = 8)
+
+
+
+# Serie tempo mean particles (month)
+TabPart6<- TabPart %>% group_by(Month) %>% summarize(moybaie= mean(Particules))
+
+Partseries2<- ggplot(TabPart6)+
+  geom_line(aes(x= Month, y= moybaie))+
+  ggtitle("Mean particules")+
+  xlab("Month")+
+  ylab("m-1")+
+  theme_minimal()
+
+save(Partseries2, file="results/satellite/series full bay/monthly/part_series.Rdata")
+ggsave(plot= Partseries2, filename="Particles.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 
