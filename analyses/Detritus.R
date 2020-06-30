@@ -170,12 +170,12 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-# create SpatialPointsDataFrame
+  # create SpatialPointsDataFrame
 toto3Det<- toto2Det
 coordinates(toto3Det)<- ~ x + y
-# coerce to SpatialPixelsDataFrame
+  # coerce to SpatialPixelsDataFrame
 gridded(toto3Det) <- TRUE
-# coerce to raster
+  # coerce to raster
 rasterDet<- raster(toto3Det)
 rasterDet
 plot(rasterDet, col= terrain.colors(3), main="Detritus", xlab="Longitude", ylab="Latitude")
@@ -212,6 +212,29 @@ summaryDet<- toto2Det %>% select(Clust, mean)
 summaryDet<- unique(summaryDet)
 
 write.table(summaryDet, file="results/satellite/means by zone/summaryDet.csv", sep = ";", row.names = FALSE)
+
+
+  # create SpatialPointsDataFrame
+toto4Det<- toto2Det %>% select(-Clust)
+coordinates(toto4Det)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto4Det) <- TRUE
+  # coerce to raster
+rasterDet2<- raster(toto4Det)
+rasterDet2
+plot(rasterDet2, col= terrain.colors(3), main="Detritus", xlab="Longitude", ylab="Latitude")
+
+load("data/satellite/chl/rasterChlnew.Rdata")
+
+disdet2<- disaggregate(rasterDet2, fact=(res(rasterDet2)/res(rasterchlnew)))
+mDet2<- mask(disdet2,res)
+plot(mDet2)
+
+save(mDet2, file="results/satellite/means by zone/Det_raster.Rdata")
+
+jpeg(file="results/satellite/means by zone/Det_raster.jpeg")
+plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

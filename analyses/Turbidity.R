@@ -170,12 +170,12 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-# create SpatialPointsDataFrame
+  # create SpatialPointsDataFrame
 toto3Turb<- toto2Turb
 coordinates(toto3Turb)<- ~ x + y
-# coerce to SpatialPixelsDataFrame
+  # coerce to SpatialPixelsDataFrame
 gridded(toto3Turb) <- TRUE
-# coerce to raster
+  # coerce to raster
 rasterTurb<- raster(toto3Turb)
 rasterTurb
 plot(rasterTurb, col= terrain.colors(3), main="Turbidity", xlab="Longitude", ylab="Latitude")
@@ -211,6 +211,29 @@ summaryTurb<- toto2Turb %>% select(Clust, mean)
 summaryTurb<- unique(summaryTurb)
 
 write.table(summaryTurb, file="results/satellite/means by zone/summaryTurb.csv", sep = ";", row.names = FALSE)
+
+
+  # create SpatialPointsDataFrame
+toto4Turb<- toto2Turb %>% select(-Clust)
+coordinates(toto4Turb)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto4Turb) <- TRUE
+  # coerce to raster
+rasterTurb2<- raster(toto4Turb)
+rasterTurb2
+plot(rasterTurb2, col= terrain.colors(3), main="Turbidity", xlab="Longitude", ylab="Latitude")
+
+load("data/satellite/chl/rasterChlnew.Rdata")
+
+disturb2<- disaggregate(rasterTurb2, fact=(res(rasterTurb2)/res(rasterchlnew)))
+mTurb2<- mask(disturb2, res)
+plot(mTurb2)
+
+save(mTurb2, file="results/satellite/means by zone/Turb_raster.Rdata")
+
+jpeg(file="results/satellite/means by zone/Turb_raster.jpeg")
+plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

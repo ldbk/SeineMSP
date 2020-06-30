@@ -221,6 +221,27 @@ summarySal<- unique(summarySal)
 write.table(summarySal, file="results/satellite/means by zone/summarySal.csv", sep = ";", row.names = FALSE)
 
 
+  # create SpatialPointsDataFrame
+toto4Sal<- toto2Sal %>% select(-Clust)
+coordinates(toto4Sal)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto4Sal) <- TRUE
+  # coerce to raster
+rasterSal2<- raster(toto4Sal)
+rasterSal2
+plot(rasterSal2, col= terrain.colors(4), main="Salinity", xlab="Longitude", ylab="Latitude")
+
+dissal2<- disaggregate(rasterSal2, fact=(res(rasterSal2)/res(rasterchlnew)))
+mSal2<- mask(dissal2, res)
+plot(mSal2)
+
+save(mSal2, file="results/satellite/means by zone/Sal_raster.Rdata")
+
+jpeg(file="results/satellite/means by zone/Sal_raster.jpeg")
+plot(mSal2, main="Salinity", xlab="Longitude", ylab="Latitude")
+dev.off()
+
+
 
 # Pour full_join
 

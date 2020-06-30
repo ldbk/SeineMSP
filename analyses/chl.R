@@ -173,12 +173,12 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-# create SpatialPointsDataFrame
+  # create SpatialPointsDataFrame
 toto3chl<- toto2chl
 coordinates(toto3chl)<- ~ x + y
-# coerce to SpatialPixelsDataFrame
+  # coerce to SpatialPixelsDataFrame
 gridded(toto3chl) <- TRUE
-# coerce to raster
+  # coerce to raster
 rasterchlnew<- raster(toto3chl)
 rasterchlnew
 plot(rasterchlnew, main="Chl", xlab="Longitude", ylab="Latitude")
@@ -213,6 +213,27 @@ summarychl<- toto2chl %>% select(Clust, mean)
 summarychl<- unique(summarychl)
 
 write.table(summarychl, file="results/satellite/means by zone/summarychl.csv", sep = ";", row.names = FALSE)
+
+
+  # create SpatialPointsDataFrame
+toto4chl<- toto2chl %>% select(-Clust)
+coordinates(toto4chl)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto4chl) <- TRUE
+  # coerce to raster
+rasterchlnew2<- raster(toto4chl)
+rasterchlnew2
+plot(rasterchlnew2, main="Chl", xlab="Longitude", ylab="Latitude")
+
+mChl2<- mask(rasterchlnew2, res)
+plot(mChl2)
+
+save(mChl2, file="results/satellite/means by zone/chl_raster.Rdata")
+
+jpeg(file="results/satellite/means by zone/chl_raster.jpeg")
+plot(mChl2, main="Chlorophyll", xlab="Longitude", ylab="Latitude")
+dev.off()
+
 
 
 # Pour full_join

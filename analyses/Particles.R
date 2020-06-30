@@ -170,12 +170,12 @@ res <- rgeos::gDifference(buff, coast)
 #r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
-# create SpatialPointsDataFrame
+  # create SpatialPointsDataFrame
 toto3part<- toto2part
 coordinates(toto3part)<- ~ x + y
-# coerce to SpatialPixelsDataFrame
+  # coerce to SpatialPixelsDataFrame
 gridded(toto3part) <- TRUE
-# coerce to raster
+  # coerce to raster
 rasterpart<- raster(toto3part)
 rasterpart
 plot(rasterpart, col= terrain.colors(4), main="Particles", xlab="Longitude", ylab="Latitude")
@@ -211,6 +211,29 @@ summaryPart<- toto2part %>% select(Clust, mean)
 summaryPart<- unique(summaryPart)
 
 write.table(summaryPart, file="results/satellite/means by zone/summaryPart.csv", sep = ";", row.names = FALSE)
+
+
+  # create SpatialPointsDataFrame
+toto4part<- toto2part %>% select(-Clust)
+coordinates(toto4part)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto4part) <- TRUE
+  # coerce to raster
+rasterpart2<- raster(toto4part)
+rasterpart2
+plot(rasterpart2, col= terrain.colors(4), main="Particles", xlab="Longitude", ylab="Latitude")
+
+load("data/satellite/chl/rasterChlnew.Rdata")
+
+dispart2<- disaggregate(rasterpart2, fact=(res(rasterpart2)/res(rasterchlnew)))
+mPart2<- mask(dispart2, res)
+plot(mPart2)
+
+save(mPart2, file="results/satellite/means by zone/part_raster.Rdata")
+
+jpeg(file="results/satellite/means by zone/Part_raster.jpeg")
+plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude")
+dev.off()
 
 
 

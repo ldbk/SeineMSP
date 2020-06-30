@@ -260,6 +260,30 @@ summaryPP<- unique(summaryPP)
 write.table(summaryPP, file="results/satellite/means by zone/summaryPP.csv", sep = ";", row.names = FALSE)
 
 
+  # create SpatialPointsDataFrame
+toto4PP<- toto2PP %>% select(-Clust)
+coordinates(toto4PP)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto4PP) <- TRUE
+  # coerce to raster
+rasterPP2<- raster(toto4PP)
+rasterPP2
+raster::plot(rasterPP2, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
+
+load("data/satellite/chl/rasterChlnew.Rdata")
+
+disPP2<- disaggregate(rasterPP2, fact=(res(rasterPP2)/res(rasterchlnew)))
+mPP2<- mask(disPP2, res)
+plot(mPP2)
+
+save(mPP2, file="results/satellite/means by zone/PP_raster.Rdata")
+
+jpeg(file="results/satellite/means by zone/PP_raster.jpeg")
+plot(mPP2, main="Primary production", xlab="Longitude", ylab="Latitude")
+dev.off()
+
+
+
 # Pour full_join
 
     # Conversion raster - tableau

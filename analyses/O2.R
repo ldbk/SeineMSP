@@ -228,6 +228,29 @@ summaryO2<- unique(summaryO2)
 write.table(summaryO2, file="results/satellite/means by zone/summaryO2.csv", sep = ";", row.names = FALSE)
 
 
+  # create SpatialPointsDataFrame
+toto4O2<- toto2O2 %>% select(-Clust)
+coordinates(toto4O2)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+gridded(toto4O2) <- TRUE
+  # coerce to raster
+rasterO22<- raster(toto4O2)
+rasterO22
+plot(rasterO22, col= terrain.colors(5), main="O2", xlab="Longitude", ylab="Latitude")
+
+load("data/satellite/chl/rasterChlnew.Rdata")
+
+disO22<- disaggregate(rasterO22, fact=(res(rasterO22)/res(rasterchlnew)))
+mO22<- mask(disO22, res)
+plot(mO22)
+
+save(mO22, file="results/satellite/means by zone/O2_raster.Rdata")
+
+jpeg(file="results/satellite/means by zone/O2_raster.jpeg")
+plot(mO22, main="O2", xlab="Longitude", ylab="Latitude")
+dev.off()
+
+
 
 # Pour full_join
 
