@@ -218,6 +218,8 @@ save(polSST, file="data/satellite/sst/sst_polygons.Rdata")
 summarysst<- toto2sst %>% select(Clust, mean)
 summarysst<- unique(summarysst)
 
+write.table(summarysst, file="results/satellite/means by zone/summarysst.csv", sep = ";", row.names = FALSE)
+
 
 
 # Pour full_join

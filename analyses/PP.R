@@ -257,6 +257,7 @@ save(polPP, file="data/satellite/Primary production/PP_polygons.Rdata")
 summaryPP<- toto2PP %>% select(Clust, mean)
 summaryPP<- unique(summaryPP)
 
+write.table(summaryPP, file="results/satellite/means by zone/summaryPP.csv", sep = ";", row.names = FALSE)
 
 
 # Pour full_join

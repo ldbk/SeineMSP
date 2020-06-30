@@ -218,6 +218,8 @@ save(polSal, file="data/satellite/Salinity/Sal_polygons.Rdata")
 summarySal<- toto2Sal %>% select(Clust, mean)
 summarySal<- unique(summarySal)
 
+write.table(summarySal, file="results/satellite/means by zone/summarySal.csv", sep = ";", row.names = FALSE)
+
 
 
 # Pour full_join

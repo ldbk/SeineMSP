@@ -210,6 +210,8 @@ save(polPart, file="data/satellite/Particles/part_polygons.Rdata")
 summaryPart<- toto2part %>% select(Clust, mean)
 summaryPart<- unique(summaryPart)
 
+write.table(summaryPart, file="results/satellite/means by zone/summaryPart.csv", sep = ";", row.names = FALSE)
+
 
 
 # Pour full_join

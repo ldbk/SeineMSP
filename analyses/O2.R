@@ -225,6 +225,8 @@ save(polO2, file="data/satellite/O2/O2_polygons.Rdata")
 summaryO2<- toto2O2 %>% select(Clust, mean)
 summaryO2<- unique(summaryO2)
 
+write.table(summaryO2, file="results/satellite/means by zone/summaryO2.csv", sep = ";", row.names = FALSE)
+
 
 
 # Pour full_join

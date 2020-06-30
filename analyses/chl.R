@@ -212,6 +212,7 @@ save(polChl, file="data/satellite/chl/chl_polygons.Rdata")
 summarychl<- toto2chl %>% select(Clust, mean)
 summarychl<- unique(summarychl)
 
+write.table(summarychl, file="results/satellite/means by zone/summarychl.csv", sep = ";", row.names = FALSE)
 
 
 # Pour full_join

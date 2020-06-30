@@ -210,6 +210,8 @@ save(polTurb, file="data/satellite/Turbidity/Turb_polygons.Rdata")
 summaryTurb<- toto2Turb %>% select(Clust, mean)
 summaryTurb<- unique(summaryTurb)
 
+write.table(summaryTurb, file="results/satellite/means by zone/summaryTurb.csv", sep = ";", row.names = FALSE)
+
 
 
 # Pour full_join

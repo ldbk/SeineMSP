@@ -211,6 +211,8 @@ save(polDet, file="data/satellite/Detritus/Det_polygons.Rdata")
 summaryDet<- toto2Det %>% select(Clust, mean)
 summaryDet<- unique(summaryDet)
 
+write.table(summaryDet, file="results/satellite/means by zone/summaryDet.csv", sep = ";", row.names = FALSE)
+
 
 
 # Pour full_join
