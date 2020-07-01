@@ -108,6 +108,7 @@ ggsave(plot= O2series, filename="O2.jpeg", path="results/satellite/series full b
 
 # Serie tempo mean 02 (month)
 TabO26<- TabO2 %>% group_by(Month) %>% summarize(moybaie= mean(O2))
+save(TabO26, file= "results/satellite/series full bay/monthly/O2Tab.Rdata")
 
 O2series2<- ggplot(TabO26)+
   geom_line(aes(x=Month, y=moybaie))+
@@ -116,8 +117,15 @@ O2series2<- ggplot(TabO26)+
   ylab("mmol/m3")+
   theme_minimal()  
 
-save(O2series2, file="results/satellite/series full bay/monthly/O2_series.Rdata")
-ggsave(plot= O2series2, filename="O2.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
+O2series3<- O2series2 +
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 15, colour = "blue"))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 15, colour = "red"))
+
+save(O2series3, file="results/satellite/series full bay/monthly/O2_series.Rdata")
+ggsave(plot= O2series3, filename="O2.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 
@@ -262,7 +270,7 @@ plot(mO22)
 save(mO22, file="results/satellite/means by zone/O2_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/O2_raster.jpeg")
-plot(mO22, main="O2", xlab="Longitude", ylab="Latitude")
+plot(mO22, col= terrain.colors(5), main="O2", xlab="Longitude", ylab="Latitude")
 dev.off()
 
 

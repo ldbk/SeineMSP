@@ -100,6 +100,8 @@ ggsave(plot= PPseries, filename="PP.jpeg", path="results/satellite/series full b
 
 # Serie tempo mean PP (month)
 TabPP6<- TabPP %>% group_by(Month) %>% summarize(moybaie= mean(PP))
+save(TabPP6, file= "results/satellite/series full bay/monthly/PPTab.Rdata")
+
 
 PPseries2<- ggplot(TabPP6)+
   geom_line(aes(x= Month, y= moybaie))+
@@ -108,8 +110,15 @@ PPseries2<- ggplot(TabPP6)+
   ylab("mg C/m3/j")+
   theme_minimal()
 
-save(PPseries2, file="results/satellite/series full bay/monthlyPP_series.Rdata")
-ggsave(plot= PPseries2, filename="PP.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
+PPseries3<- PPseries2 +
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 15, colour = "blue"))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 15, colour = "red"))
+
+save(PPseries3, file="results/satellite/series full bay/monthly/PP_series.Rdata")
+ggsave(plot= PPseries3, filename="PP.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 
@@ -200,7 +209,7 @@ gridded(toto3PP) <- TRUE
   # coerce to raster
 rasterPP<- raster(toto3PP)
 rasterPP
-raster::plot(rasterPP, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
+raster::plot(rasterPP, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
@@ -283,18 +292,18 @@ gridded(toto4PP) <- TRUE
   # coerce to raster
 rasterPP2<- raster(toto4PP)
 rasterPP2
-raster::plot(rasterPP2, col= terrain.colors(5), main="Primary production", xlab="Longitude", ylab="Latitude")
+raster::plot(rasterPP2, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disPP2<- disaggregate(rasterPP2, fact=(res(rasterPP2)/res(rasterchlnew)))
 mPP2<- mask(disPP2, res)
-plot(mPP2)
+plot(mPP2, col= terrain.colors(3))
 
 save(mPP2, file="results/satellite/means by zone/PP_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/PP_raster.jpeg")
-plot(mPP2, main="Primary production", xlab="Longitude", ylab="Latitude")
+plot(mPP2, main="Primary production", xlab="Longitude", ylab="Latitude", col= terrain.colors(3))
 dev.off()
 
 

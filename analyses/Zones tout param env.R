@@ -2,6 +2,7 @@ library(ggplot2)
 library(gridExtra)
 library(raster)
 library(grDevices)
+library(cowplot)
 
 
 # Cartes
@@ -53,6 +54,100 @@ par(mfrow = c(1, 1))
 grid.arrange(Partseries, Chlseries, PPseries, Detseries, Turbseries, SSTseries, Salseries, ncol=2, nrow = 4)
 
 par(mfrow = c(1, 1))
+
+
+
+
+
+# Ens chl, PP, O2
+
+    # Series tempo mensuelles
+{
+  load("results/satellite/series full bay/monthly/chl_series.Rdata")
+  load("results/satellite/series full bay/monthly/PP_series.Rdata")
+  load("results/satellite/series full bay/monthly/O2_series.Rdata")
+}
+
+chlPPO2<- plot_grid(Chlseries3, PPseries3, O2series3,  labels=c("A", "B", "C"), ncol = 2, nrow = 2)
+ggsave(plot= chlPPO2, filename="chlPPO2.jpeg", path="results/satellite/series full bay/monthly")
+
+
+    # Series tempo mensuelles sur meme graphe
+
+{
+  load("results/satellite/series full bay/monthly/chlTab.Rdata")
+  load("results/satellite/series full bay/monthly/PPTab.Rdata")
+  load("results/satellite/series full bay/monthly/O2Tab.Rdata")
+}
+
+names(Tabchl6)[1]<- "Month"
+
+# The data have a common independent variable (x)
+Month<- as.integer(Tabchl6$Month)
+
+# Generate 4 different sets of outputs
+Chl<- Tabchl6$moybaie
+PP<- TabPP6$moybaie
+O2<- TabO26$moybaie
+
+list<- list(Chl, PP, O2)
+
+# Colors for y[[2]], y[[3]], y[[4]] points and axes
+colors= c("red", "blue")
+
+# Set the margins of the plot wider
+par(oma = c(0, 2, 2, 3))
+
+plot(Month, list[[1]], yaxt = "n", xlab = "Month", ylab = "")
+lines(Month, list[[1]])
+
+# We use the "pretty" function go generate nice axes
+axis(at = pretty(list[[1]]), side = 2)
+
+# The side for the axes.  The next one will go on 
+# the left, the following two on the right side
+sides <- list(2, 4, 4)
+
+# The number of "lines" into the margin the axes will be
+lines <- list(2, NA, 2)
+
+for(i in 2:3) {
+  par(new = TRUE)
+  plot(Month, list[[i]], axes = FALSE, col = colors[i - 1], xlab = "", ylab = "", main= "Chlorophyll (black), primary production (red), dissolved oxygen (blue)")
+  axis(at = pretty(list[[i]]), side = sides[[i-1]], line = lines[[i-1]], 
+       col = colors[i - 1])
+  lines(Month, list[[i]], col = colors[i - 1])
+}
+
+
+
+# Rasters zones
+{
+  load("results/satellite/means by zone/chl_raster.Rdata")
+  load("results/satellite/means by zone/PP_raster.Rdata")
+  load("results/satellite/means by zone/O2_raster.Rdata")
+}
+
+essai<- par(mfrow = c(2, 2))
+
+Chl<- raster::plot(mChl2, col= terrain.colors(6), main="Chlorophyll", xlab="Longitude", ylab="Latitude")
+PP<- raster::plot(mPP2, main="Primary production", xlab="Longitude", ylab="Latitude", col= terrain.colors(3))
+O2<- raster::plot(mO22, col= terrain.colors(5), main="O2", xlab="Longitude", ylab="Latitude")
+
+chlPPO22<- plot_grid(Chl, PP, O2,  labels=c("A", "B", "C"), ncol = 2, nrow = 2)
+ggsave(plot= chlPPO22, filename="chlPPO2.jpeg", path="results/satellite/means by zone")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

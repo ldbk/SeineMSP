@@ -96,6 +96,7 @@ ggsave(plot= Chlseries, filename="chl.jpeg", path="results/satellite/series full
 
 # Serie tempo mean chl (month)
 Tabchl6<- Tabchl %>% group_by(month) %>% summarize(moybaie= mean(Chloro))
+save(Tabchl6, file= "results/satellite/series full bay/monthly/chlTab.Rdata")
 
 Chlseries2<- ggplot(Tabchl6)+
   geom_line(aes(x= month, y= moybaie))+
@@ -104,8 +105,15 @@ Chlseries2<- ggplot(Tabchl6)+
   ylab("mg/m3")+
   theme_minimal() 
 
-save(Chlseries2, file="results/satellite/series full bay/monthly/Chl_series.Rdata")
-ggsave(plot= Chlseries2, filename="chl.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
+Chlseries3<- Chlseries2 +
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 15, colour = "blue"))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 15, colour = "red"))
+
+save(Chlseries3, file="results/satellite/series full bay/monthly/Chl_series.Rdata")
+ggsave(plot= Chlseries3, filename="chl.jpeg", path="results/satellite/series full bay/monthly", width = 13, height = 8)
 
 
 
@@ -196,7 +204,7 @@ gridded(toto3chl) <- TRUE
   # coerce to raster
 rasterchlnew<- raster(toto3chl)
 rasterchlnew
-plot(rasterchlnew, main="Chl", xlab="Longitude", ylab="Latitude")
+plot(rasterchlnew, col= terrain.colors(6), main="Chl", xlab="Longitude", ylab="Latitude")
 
 save(rasterchlnew, file="data/satellite/chl/rasterChlnew.Rdata")
 
@@ -238,7 +246,7 @@ gridded(toto4chl) <- TRUE
   # coerce to raster
 rasterchlnew2<- raster(toto4chl)
 rasterchlnew2
-plot(rasterchlnew2, main="Chl", xlab="Longitude", ylab="Latitude")
+plot(rasterchlnew2, col= terrain.colors(6), main="Chl", xlab="Longitude", ylab="Latitude")
 
 mChl2<- mask(rasterchlnew2, res)
 plot(mChl2)
@@ -246,7 +254,7 @@ plot(mChl2)
 save(mChl2, file="results/satellite/means by zone/chl_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/chl_raster.jpeg")
-plot(mChl2, main="Chlorophyll", xlab="Longitude", ylab="Latitude")
+plot(mChl2, col= terrain.colors(6), main="Chlorophyll", xlab="Longitude", ylab="Latitude")
 dev.off()
 
 
