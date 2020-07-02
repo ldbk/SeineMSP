@@ -85,6 +85,7 @@ TabPP3<- TabPP2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPP))
 
 # Serie tempo mean PP (year)
 TabPP4<- TabPP %>% group_by(Year) %>% summarize(moybaie= mean(PP))
+save(TabPP4, file= "results/satellite/series full bay/PPTab.Rdata")
 
 PPseries<- ggplot(TabPP4)+
   geom_line(aes(x= Year, y= moybaie))+

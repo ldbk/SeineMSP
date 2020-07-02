@@ -11,6 +11,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library("RColorBrewer")
 
 chl<- stack("data/satellite/Chl/dataset-oc-glo-bio-multi-l4-chl_4km_monthly-rep_1592571915166.nc")
 
@@ -81,6 +82,7 @@ Tabchl3<- Tabchl2 %>% group_by(x,y) %>% summarize(moyper= mean(moyChl))
 
 # Serie tempo mean chl (year)
 Tabchl4<- Tabchl %>% group_by(year) %>% summarize(moybaie= mean(Chloro))
+save(Tabchl4, file= "results/satellite/series full bay/chlTab.Rdata")
 
 Chlseries<- ggplot(Tabchl4)+
   geom_line(aes(x= year, y= moybaie))+
@@ -158,15 +160,27 @@ toto2chl<- left_join(toto, essai2, by="Clust")
 serie<- left_join(toto, cbind(metaTabnew, Tabchlnew))
 serie<- pivot_longer(serie, cols=c(4:26), names_to="Year", values_to = "chl")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(chl=mean(chl))
+save(serie, file="results/satellite/series by zone/chlTab.Rdata")
+
+clust.labs<- c("Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6")
+names(clust.labs)<- c("1", "2", "3", "4", "5", "6")
+colors<- brewer.pal(n = 6, name = "YlGnBu")
 
 ggseriechl<-  ggplot(serie)+
   geom_point(aes(x=Year,y=chl,col=Clust))+
   geom_line(aes(x=Year,y=chl,col=Clust, group=Clust))+
+  scale_colour_manual(values=colors)+
   ggtitle("Chlorophyll")+
   ylab("mg/m3")+
   theme_minimal()+
-  facet_wrap(.~Clust)+
-  guides(x = guide_axis(angle = 90))
+  facet_wrap(.~Clust, labeller = labeller(Clust= clust.labs))+
+  theme(strip.text.x = element_text(size = 20))+
+  theme(legend.position = "none")+
+  theme(axis.text.x = element_blank())+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+
+  theme(axis.text.y = element_text(size = 10))
 
 save(ggseriechl, file="results/satellite/series by zone/chl_seriebyzone.Rdata")
 ggsave(plot= ggseriechl, filename="chl_seriesbyzone.jpeg", path="results/satellite/series by zone", width = 13, height = 8)
@@ -204,7 +218,7 @@ gridded(toto3chl) <- TRUE
   # coerce to raster
 rasterchlnew<- raster(toto3chl)
 rasterchlnew
-plot(rasterchlnew, col= terrain.colors(6), main="Chl", xlab="Longitude", ylab="Latitude")
+plot(rasterchlnew, col=brewer.pal(n = 6, name = "YlGnBu"), main="Chl", xlab="Longitude", ylab="Latitude")
 
 save(rasterchlnew, file="data/satellite/chl/rasterChlnew.Rdata")
 
@@ -214,7 +228,7 @@ plot(mChl)
 save(mChl, file="data/satellite/chl/chl_raster.Rdata")
 
 jpeg(file="results/satellite/zones/chl_raster.jpeg")
-plot(mChl, main="Chlorophyll", xlab="Longitude", ylab="Latitude")
+plot(mChl, main="Chlorophyll", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 6, name = "YlGnBu"))
 dev.off()
 
 

@@ -93,6 +93,7 @@ TabO23<- TabO22 %>% group_by(x,y) %>% summarize(moyper= mean(moyO2))
 
 # Serie tempo mean 02 (year)
 TabO24<- TabO2 %>% group_by(Year) %>% summarize(moybaie= mean(O2))
+save(TabO24, file= "results/satellite/series full bay/O2Tab.Rdata")
 
 O2series<- ggplot(TabO24)+
   geom_line(aes(x=Year, y=moybaie))+

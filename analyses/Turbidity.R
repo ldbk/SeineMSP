@@ -78,6 +78,7 @@ TabTurb3<- TabTurb2 %>% group_by(x,y) %>% summarize(moyper= mean(moyTurb))
 
 # Serie tempo mean turb (year)
 TabTurb4<- TabTurb %>% group_by(Year) %>% summarize(moybaie= mean(Turbidity))
+save(TabTurb4, file= "results/satellite/series full bay/TurbTab.Rdata")
 
 Turbseries<- ggplot(TabTurb4)+
   geom_line(aes(x=Year, y=moybaie))+
@@ -93,6 +94,7 @@ ggsave(plot= Turbseries, filename="Turbidity.jpeg", path="results/satellite/seri
 
 # Serie tempo mean turb (month)
 TabTurb6<- TabTurb %>% group_by(Month) %>% summarize(moybaie= mean(Turbidity))
+save(TabTurb6, file= "results/satellite/series full bay/monthly/TurbTab.Rdata")
 
 Turbseries2<- ggplot(TabTurb6)+
   geom_line(aes(x=Month, y=moybaie))+

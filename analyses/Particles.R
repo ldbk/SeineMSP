@@ -78,6 +78,7 @@ TabPart3<- TabPart2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPart))
 
 # Serie tempo mean particles (year)
 TabPart4<- TabPart %>% group_by(Year) %>% summarize(moybaie= mean(Particules))
+save(TabPart4, file= "results/satellite/series full bay/PartTab.Rdata")
 
 Partseries<- ggplot(TabPart4)+
   geom_line(aes(x= Year, y= moybaie))+
@@ -93,6 +94,7 @@ ggsave(plot= Partseries, filename="Particles.jpeg", path="results/satellite/seri
 
 # Serie tempo mean particles (month)
 TabPart6<- TabPart %>% group_by(Month) %>% summarize(moybaie= mean(Particules))
+save(TabPart6, file= "results/satellite/series full bay/monthly/PartTab.Rdata")
 
 Partseries2<- ggplot(TabPart6)+
   geom_line(aes(x= Month, y= moybaie))+
