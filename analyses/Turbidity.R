@@ -10,6 +10,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library("RColorBrewer")
 
 Turb<- stack("data/satellite/Turbidity/dataset-oc-glo-opt-multi-l4-kd490_4km_monthly-rep-v02_1592570921204.nc")
 
@@ -195,18 +196,18 @@ gridded(toto3Turb) <- TRUE
   # coerce to raster
 rasterTurb<- raster(toto3Turb)
 rasterTurb
-plot(rasterTurb, col= terrain.colors(3), main="Turbidity", xlab="Longitude", ylab="Latitude")
+plot(rasterTurb, col=brewer.pal(n = 3, name = "PuBu"), main="Turbidity", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disturb<- disaggregate(rasterTurb, fact=(res(rasterTurb)/res(rasterchlnew)))
 mTurb<- mask(disturb, res)
-plot(mTurb)
+plot(mTurb, col=brewer.pal(n = 3, name = "PuBu"))
 
 save(mTurb, file="data/satellite/Turbidity/Turb_raster.Rdata")
 
 jpeg(file="results/satellite/zones/Turb_raster.jpeg")
-plot(mTurb, main="Turbidity", xlab="Longitude", ylab="Latitude")
+plot(mTurb, main="Turbidity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "PuBu"))
 dev.off()
 
 
@@ -238,18 +239,18 @@ gridded(toto4Turb) <- TRUE
   # coerce to raster
 rasterTurb2<- raster(toto4Turb)
 rasterTurb2
-plot(rasterTurb2, col= terrain.colors(3), main="Turbidity", xlab="Longitude", ylab="Latitude")
+plot(rasterTurb2, col=brewer.pal(n = 3, name = "PuBu"), main="Turbidity", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disturb2<- disaggregate(rasterTurb2, fact=(res(rasterTurb2)/res(rasterchlnew)))
 mTurb2<- mask(disturb2, res)
-plot(mTurb2)
+plot(mTurb2, col=brewer.pal(n = 3, name = "PuBu"))
 
 save(mTurb2, file="results/satellite/means by zone/Turb_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/Turb_raster.jpeg")
-plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude")
+plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "PuBu"))
 dev.off()
 
 

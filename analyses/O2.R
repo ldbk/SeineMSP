@@ -217,18 +217,18 @@ gridded(toto3O2) <- TRUE
   # coerce to raster
 rasterO2<- raster(toto3O2)
 rasterO2
-plot(rasterO2, col= terrain.colors(5), main="O2", xlab="Longitude", ylab="Latitude")
+plot(rasterO2, col=brewer.pal(n = 5, name = "Purples"), main="O2", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disO2<- disaggregate(rasterO2, fact=(res(rasterO2)/res(rasterchlnew)))
 mO2<- mask(disO2, res)
-plot(mO2)
+plot(mO2, col=brewer.pal(n = 5, name = "Purples"))
 
 save(mO2, file="data/satellite/O2/O2_raster.Rdata")
 
 jpeg(file="results/satellite/zones/O2_raster.jpeg")
-plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
+plot(mO2, main="O2", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 5, name = "Purples"))
 dev.off()
 
 
@@ -260,18 +260,18 @@ gridded(toto4O2) <- TRUE
   # coerce to raster
 rasterO22<- raster(toto4O2)
 rasterO22
-plot(rasterO22, col= terrain.colors(5), main="O2", xlab="Longitude", ylab="Latitude")
+plot(rasterO22, col=brewer.pal(n = 5, name = "Purples"), main="O2", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disO22<- disaggregate(rasterO22, fact=(res(rasterO22)/res(rasterchlnew)))
 mO22<- mask(disO22, res)
-plot(mO22)
+plot(mO22, col=brewer.pal(n = 5, name = "Purples"))
 
 save(mO22, file="results/satellite/means by zone/O2_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/O2_raster.jpeg")
-plot(mO22, col= terrain.colors(5), main="O2", xlab="Longitude", ylab="Latitude")
+plot(mO22, main="O2", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 5, name = "Purples"))
 dev.off()
 
 

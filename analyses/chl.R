@@ -223,7 +223,7 @@ plot(rasterchlnew, col=brewer.pal(n = 6, name = "YlGnBu"), main="Chl", xlab="Lon
 save(rasterchlnew, file="data/satellite/chl/rasterChlnew.Rdata")
 
 mChl<- mask(rasterchlnew, res)
-plot(mChl)
+plot(mChl, col=brewer.pal(n = 6, name = "YlGnBu"))
 
 save(mChl, file="data/satellite/chl/chl_raster.Rdata")
 
@@ -260,15 +260,15 @@ gridded(toto4chl) <- TRUE
   # coerce to raster
 rasterchlnew2<- raster(toto4chl)
 rasterchlnew2
-plot(rasterchlnew2, col= terrain.colors(6), main="Chl", xlab="Longitude", ylab="Latitude")
+plot(rasterchlnew2, col=brewer.pal(n = 6, name = "PuRd"), main="Chl", xlab="Longitude", ylab="Latitude")
 
 mChl2<- mask(rasterchlnew2, res)
-plot(mChl2)
+plot(mChl2, col=brewer.pal(n = 6, name = "PuRd"))
 
 save(mChl2, file="results/satellite/means by zone/chl_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/chl_raster.jpeg")
-plot(mChl2, col= terrain.colors(6), main="Chlorophyll", xlab="Longitude", ylab="Latitude")
+plot(mChl2, col=brewer.pal(n = 6, name = "PuRd"), main="Chlorophyll", xlab="Longitude", ylab="Latitude")
 dev.off()
 
 

@@ -244,18 +244,18 @@ gridded(toto4sst) <- TRUE
   # coerce to raster
 rastersst2<- raster(toto4sst)
 rastersst2
-plot(rastersst2, col= terrain.colors(3), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst2, col=brewer.pal(n = 3, name = "YlOrRd"), main="SST", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dissst2<- disaggregate(rastersst2, fact=(res(rastersst2)/res(rasterchlnew)))
 mSST2<- mask(dissst2, res)
-plot(mSST2)
+plot(mSST2, col=brewer.pal(n = 3, name = "Reds"))
 
 save(mSST2, file="results/satellite/means by zone/sst_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/SST_raster.jpeg")
-plot(mSST2, main="Surface temperature", xlab="Longitude", ylab="Latitude")
+plot(mSST2, main="Surface temperature", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "Reds"))
 dev.off()
 
 

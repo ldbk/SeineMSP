@@ -3,6 +3,7 @@ library(gridExtra)
 library(raster)
 library(grDevices)
 library(cowplot)
+library(RColorBrewer)
 
 
 # Cartes zones
@@ -30,9 +31,38 @@ Sal<- raster::plot(mSal, main="Salinity", xlab="Longitude", ylab="Latitude")
 O2<- raster::plot(mO2, main="O2", xlab="Longitude", ylab="Latitude")
 }
 
-#grid.arrange(Part, Chl, PP, Det, Turb, SST, Sal, ncol=2, nrow = 4)
+par(mfrow = c(1, 1))
+
+
+
+# Cartes zones (means)
+{
+  load("results/satellite/means by zone/chl_raster.Rdata")
+  load("results/satellite/means by zone/PP_raster.Rdata")
+  load("results/satellite/means by zone/O2_raster.Rdata")
+  load("results/satellite/means by zone/Det_raster.Rdata")
+  load("results/satellite/means by zone/Part_raster.Rdata")
+  load("results/satellite/means by zone/Turb_raster.Rdata")
+  load("results/satellite/means by zone/SST_raster.Rdata")
+  load("results/satellite/means by zone/Sal_raster.Rdata")
+}
+
+par(mfrow = c(4, 2))
+
+{
+  Chl<- raster::plot(mChl2, main="Chlorophyll", col=brewer.pal(n = 6, name = "PuRd"))
+  Part<- raster::plot(mPart2, main="Particles", col=brewer.pal(n = 4, name = "YlOrBr"))
+  PP<- raster::plot(mPP2, main="Primary production", col=brewer.pal(n = 3, name = "Greens"))
+  Det<- raster::plot(mDet2, main="Detritus", col=brewer.pal(n = 3, name = "PuBuGn"))
+  Turb<- raster::plot(mTurb2, main="Turbidity", col=brewer.pal(n = 3, name = "PuBu"))
+  SST<- raster::plot(mSST2, main="SST", col=brewer.pal(n = 3, name = "Reds"))
+  Sal<- raster::plot(mSal2, main="Salinity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "Greys"))
+  O2<- raster::plot(mO22, main="O2", col=brewer.pal(n = 5, name = "Purples"))
+}
 
 par(mfrow = c(1, 1))
+
+
 
 
 
@@ -183,7 +213,7 @@ for(i in 2:3) {
   load("results/satellite/means by zone/O2_raster.Rdata")
 }
 
-essai<- par(mfrow = c(2, 2))
+par(mfrow = c(2, 2))
 
 Chl<- raster::plot(mChl2, col= terrain.colors(6), main="Chlorophyll", xlab="Longitude", ylab="Latitude")
 PP<- raster::plot(mPP2, main="Primary production", xlab="Longitude", ylab="Latitude", col= terrain.colors(3))
@@ -312,11 +342,11 @@ for(i in 2:3) {
   load("results/satellite/means by zone/Turb_raster.Rdata")
 }
 
-essai<- par(mfrow = c(2, 2))
+par(mfrow = c(2, 2))
 
-Det<- raster::plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude")
-Part<- raster::plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude")
-Turb<- raster::plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude")
+Det<- raster::plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "YlGn"))
+Part<- raster::plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "YlOrBr"))
+Turb<- raster::plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "PuBu"))
 
 
 

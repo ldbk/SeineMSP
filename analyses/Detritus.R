@@ -10,6 +10,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library(RColorBrewer)
 
 Detrit<- stack("data/satellite/Detritus/dataset-oc-glo-opt-multi-l4-cdm443_4km_monthly-rep-v02_1592570192473.nc")
 
@@ -195,18 +196,18 @@ gridded(toto3Det) <- TRUE
   # coerce to raster
 rasterDet<- raster(toto3Det)
 rasterDet
-plot(rasterDet, col= terrain.colors(3), main="Detritus", xlab="Longitude", ylab="Latitude")
+plot(rasterDet, col=brewer.pal(n = 3, name = "YlGn"), main="Detritus", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disdet<- disaggregate(rasterDet, fact=(res(rasterDet)/res(rasterchlnew)))
 mDet<- mask(disdet,res)
-plot(mDet)
+plot(mDet, col=brewer.pal(n = 3, name = "YlGn"))
 
 save(mDet, file="data/satellite/Detritus/Det_raster.Rdata")
 
 jpeg(file="results/satellite/zones/Det_raster.jpeg")
-plot(mDet, main="Detritus", xlab="Longitude", ylab="Latitude")
+plot(mDet, main="Detritus", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "YlGn"))
 dev.off()
 
 
@@ -239,18 +240,18 @@ gridded(toto4Det) <- TRUE
   # coerce to raster
 rasterDet2<- raster(toto4Det)
 rasterDet2
-plot(rasterDet2, col= terrain.colors(3), main="Detritus", xlab="Longitude", ylab="Latitude")
+plot(rasterDet2, col=brewer.pal(n = 3, name = "PuBuGn"), main="Detritus", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disdet2<- disaggregate(rasterDet2, fact=(res(rasterDet2)/res(rasterchlnew)))
 mDet2<- mask(disdet2,res)
-plot(mDet2)
+plot(mDet2, col=brewer.pal(n = 3, name = "PuBuGn"))
 
 save(mDet2, file="results/satellite/means by zone/Det_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/Det_raster.jpeg")
-plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude")
+plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "PuBuGn"))
 dev.off()
 
 

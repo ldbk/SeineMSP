@@ -10,6 +10,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library("RColorBrewer")
 
 Part<- stack("data/satellite/Particles/dataset-oc-glo-opt-multi-l4-bbp443_4km_monthly-rep-v02_1592568961250.nc")
 
@@ -195,18 +196,18 @@ gridded(toto3part) <- TRUE
   # coerce to raster
 rasterpart<- raster(toto3part)
 rasterpart
-plot(rasterpart, col= terrain.colors(4), main="Particles", xlab="Longitude", ylab="Latitude")
+plot(rasterpart, col=brewer.pal(n = 4, name = "YlOrBr"), main="Particles", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dispart<- disaggregate(rasterpart, fact=(res(rasterpart)/res(rasterchlnew)))
 mPart<- mask(dispart, res)
-plot(mPart)
+plot(mPart, col=brewer.pal(n = 4, name = "YlOrBr"))
 
 save(mPart, file="data/satellite/Particles/part_raster.Rdata")
 
 jpeg(file="results/satellite/zones/Part_raster.jpeg")
-plot(mPart, main="Particles", xlab="Longitude", ylab="Latitude")
+plot(mPart, main="Particles", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "YlOrBr"))
 dev.off()
 
 
@@ -238,18 +239,18 @@ gridded(toto4part) <- TRUE
   # coerce to raster
 rasterpart2<- raster(toto4part)
 rasterpart2
-plot(rasterpart2, col= terrain.colors(4), main="Particles", xlab="Longitude", ylab="Latitude")
+plot(rasterpart2, col=brewer.pal(n = 4, name = "YlOrBr"), main="Particles", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dispart2<- disaggregate(rasterpart2, fact=(res(rasterpart2)/res(rasterchlnew)))
 mPart2<- mask(dispart2, res)
-plot(mPart2)
+plot(mPart2? col=brewer.pal(n = 4, name = "YlOrBr"))
 
 save(mPart2, file="results/satellite/means by zone/part_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/Part_raster.jpeg")
-plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude")
+plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "YlOrBr"))
 dev.off()
 
 
