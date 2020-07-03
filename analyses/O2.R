@@ -11,6 +11,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library(RColorBrewer)
 
 O2<- nc_open("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")
 O2<- stack("data/satellite/O2/MetO-NWS-BIO-dm-DOXY_1583828769643.nc")

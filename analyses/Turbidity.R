@@ -10,7 +10,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
-library("RColorBrewer")
+library(RColorBrewer)
 
 Turb<- stack("data/satellite/Turbidity/dataset-oc-glo-opt-multi-l4-kd490_4km_monthly-rep-v02_1592570921204.nc")
 

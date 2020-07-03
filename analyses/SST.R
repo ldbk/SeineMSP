@@ -11,6 +11,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library(RColorBrewer)
 
 sst<- stack("data/satellite/sst/IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_1581929927261.nc")
 sst<- sst-275.15
@@ -47,6 +48,7 @@ Tabsst$Month<- as.numeric(substr(as.character(Tabsst$Date), 6,7))
 Tabsst$Day  <- as.numeric(substr(as.character(Tabsst$Date), 9,10))
 }
 
+Tabsst<- na.omit(Tabsst)
 
 # Infos
 #mean(Tabsst$SST)
@@ -86,6 +88,7 @@ Tabsst3<- Tabsst2 %>% group_by(x,y) %>% summarize(moyper= mean(moySST))
 
 # Serie tempo mean SST (year)
 Tabsst4<- Tabsst %>% group_by(Year) %>% summarize(moybaie= mean(SST))
+save(Tabsst4, file= "results/satellite/series full bay/sstTab.Rdata")
 
 SSTseries<- ggplot(Tabsst4)+
   geom_line(aes(x= Year, y= moybaie))+
@@ -101,6 +104,7 @@ ggsave(plot= SSTseries, filename="SST.jpeg", path="results/satellite/series full
 
 # Serie tempo mean SST (month)
 Tabsst6<- Tabsst %>% group_by(Month) %>% summarize(moybaie= mean(SST))
+save(Tabsst6, file= "results/satellite/series full bay/monthly/sstTab.Rdata")
 
 SSTseries2<- ggplot(Tabsst6)+
   geom_line(aes(x= Month, y= moybaie))+

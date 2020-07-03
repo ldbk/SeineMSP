@@ -11,7 +11,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
-library("RColorBrewer")
+library(RColorBrewer)
 
 chl<- stack("data/satellite/Chl/dataset-oc-glo-bio-multi-l4-chl_4km_monthly-rep_1592571915166.nc")
 

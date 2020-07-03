@@ -10,7 +10,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
-library("RColorBrewer")
+library(RColorBrewer)
 
 Part<- stack("data/satellite/Particles/dataset-oc-glo-opt-multi-l4-bbp443_4km_monthly-rep-v02_1592568961250.nc")
 

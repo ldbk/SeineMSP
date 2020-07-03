@@ -11,6 +11,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library(RColorBrewer)
 
 PP<- nc_open("data/satellite/Primary production/MetO-NWS-BIO-mm-PPRD_1591275638447.nc")
 PP<- stack("data/satellite/Primary production/MetO-NWS-BIO-mm-PPRD_1591275638447.nc")

@@ -11,6 +11,7 @@ library(rgeos)
 library(NbClust)
 library(cluster)
 library(grDevices)
+library(RColorBrewer)
 
 Sal<- nc_open("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
 Sal<- stack("data/satellite/Salinity/MetO-NWS-PHY-mm-SAL_1583156080399.nc")
@@ -86,6 +87,7 @@ TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
 
 # Serie tempo mean salinity (year)
 TabSal4<- TabSal %>% group_by(Year) %>% summarize(moybaie= mean(Salinite))
+save(TabSal4, file= "results/satellite/series full bay/SalTab.Rdata")
 
 Salseries<- ggplot(TabSal4)+
   geom_line(aes(x= Year, y= moybaie))+
@@ -101,6 +103,7 @@ ggsave(plot= Salseries, filename="Salinity.jpeg", path="results/satellite/series
 
 # Serie tempo mean salinity (month)
 TabSal6<- TabSal %>% group_by(Month) %>% summarize(moybaie= mean(Salinite))
+save(TabSal6, file= "results/satellite/series full bay/monthly/SalTab.Rdata")
 
 Salseries2<- ggplot(TabSal6)+
   geom_line(aes(x= Month, y= moybaie))+

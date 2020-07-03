@@ -352,6 +352,98 @@ Turb<- raster::plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude",
 
 
 
+# Ens Salinity & sst
+
+
+    # Series tempo annuelles sur meme graphe
+
+{
+  load("results/satellite/series full bay/SalTab.Rdata")
+  load("results/satellite/series full bay/sstTab.Rdata")
+}
+
+lignes<- matrix(data=NA, nrow=10, ncol=2, dimnames = list(c("28", "29", "30", "31", "31", "32", "33", "34", "35", "36"), c("Year", "moybaie")))
+lignes<- as.data.frame(lignes)
+lignes[1, 1]<- 1982
+lignes[2, 1]<- 1983
+lignes[3, 1]<- 1984
+lignes[4, 1]<- 1985
+lignes[5, 1]<- 1986
+lignes[6, 1]<- 1987
+lignes[7, 1]<- 1988
+lignes[8, 1]<- 1989
+lignes[9, 1]<- 1990
+lignes[10, 1]<- 1991
+
+lignes$Year<- as.numeric(lignes$Year)
+lignes$moybaie<- as.numeric(lignes$moybaie)
+
+TabSal4<- dplyr::union(TabSal4, lignes)
+
+# The data have a common independent variable (x)
+Year<- as.numeric(Tabsst4$Year)
+
+# Generate 4 different sets of outputs
+Sal<- TabSal4$moybaie
+sst<- Tabsst4$moybaie
+
+list<- list(Sal, sst)
+
+# Colors for y[[2]], y[[3]], y[[4]] points and axes
+colors= c("blue")
+
+# Set the margins of the plot wider
+par(oma = c(0, 2, 2, 3))
+
+plot(Year, list[[1]], yaxt = "n", xlab = "Year", ylab = "")
+lines(Year, list[[1]])
+
+# We use the "pretty" function go generate nice axes
+axis(at = pretty(list[[1]]), side = 4)
+
+# The side for the axes.  The next one will go on 
+# the left, the following two on the right side
+sides <- list(2, 4, 4)
+
+# The number of "lines" into the margin the axes will be
+lines <- list(2, NA, 2)
+
+for(i in 2:2) {
+  par(new = TRUE)
+  plot(Year, list[[i]], axes = FALSE, col = colors[i - 1], xlab = "", ylab = "", main= "Temperature (blue), salinity (black)")
+  axis(at = pretty(list[[i]]), side = sides[[i-1]], line = lines[[i-1]], 
+       col = colors[i - 1])
+  lines(Year, list[[i]], col = colors[i - 1])
+}
+
+
+
+
+
+# Cartes zones (moyennes)
+{
+  load("results/satellite/means by zone/Det_raster.Rdata")
+  load("results/satellite/means by zone/Part_raster.Rdata")
+  load("results/satellite/means by zone/Turb_raster.Rdata")
+}
+
+par(mfrow = c(2, 2))
+
+Det<- raster::plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "YlGn"))
+Part<- raster::plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "YlOrBr"))
+Turb<- raster::plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "PuBu"))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
