@@ -166,6 +166,8 @@ lignes$moybaie<- as.numeric(lignes$moybaie)
 
 TabO24<- dplyr::union(TabO24, lignes)
 TabPP4<- dplyr::union(TabPP4, lignes)
+TabO24 <- TabO24[order(TabO24$Year),]
+TabPP4 <- TabPP4[order(TabPP4$Year),]
 
 
 # The data have a common independent variable (x)
@@ -379,6 +381,7 @@ lignes$Year<- as.numeric(lignes$Year)
 lignes$moybaie<- as.numeric(lignes$moybaie)
 
 TabSal4<- dplyr::union(TabSal4, lignes)
+TabSal4 <- TabSal4[order(TabSal4$Year),]
 
 # The data have a common independent variable (x)
 Year<- as.numeric(Tabsst4$Year)
