@@ -109,7 +109,7 @@ allnom<-allnom[!grepl("2019_12",allnom)]
 allais<-parallel::mclapply(allnom,getais,mc.cores=parallel::detectCores())
 #allais<-lapply(allnom,getais)
 allais<-stack(allais)
-stackSave(allais,file="allais.stk")
+writeRaster(allais,filename="allais",format="raster",overwrite=T)
 
 
 #a test
