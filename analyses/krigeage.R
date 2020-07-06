@@ -32,6 +32,7 @@ coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datad
 res <- gDifference(buff, coast)
 PolyCut <- fortify(res)
 
+save(PolyCut, file="data/Polycut.Rdata")
 
 #Put polygon in good format for later use
 toto <- PolyCut[PolyCut$piece==1,]
@@ -85,16 +86,16 @@ db.CGFS.std <- db.locate(db.CGFS.std,"Year","code")
 for(i in unique(db.CGFS[,"Year"])){  
   vg.data <- vario.calc(db.sel(db.CGFS.std,Year==i), lag=0.05, nlag=8)    
   plot(vg.data,npairdw=T,inches=0.1,col=rgb(0,0,0,0.25),add=!(i==1996),         
-       las=1,xlab="Distance") }
+       las=1,xlab="Distance (km)") }
 
 #Vario moyen pour toutes les années du cluster choisi
-vg.data.std <- vario.calc(db.CGFS.std, lag=0.05, nlag=8,opt.code=1,tolcode=0) 
-plot(vg.data.std,npairdw=T,inches=0.1,las=1,add=T,col=2,lwd=2)
+vg.data.std <- vario.calc(db.CGFS.std, lag=0.05, nlag=8, opt.code=1, tolcode=0) 
+plot(vg.data.std, npairdw=T, inches=0.1, las=1, add=T, col=2, lwd=2, main= "Variogramme moyen de la communauté 2 (démersale)")
 
 
 #Ajustement d'un modèle à travers le variogramme moyen
 vario1 <- vg.data.std
-vg.mod <- model.auto(vario=vario1,struct=c(1:5),npairdw=TRUE,title="",inches=.05)
+vg.mod <- model.auto(vario=vario1,struct=c(1:5),npairdw=TRUE,title="",inches=.05, main= "Modèle de la communauté 2 (démersale)", xlab="Distance (km)")
 
 
 
@@ -118,8 +119,7 @@ db.kriege <- db.sel(db.CGFS.std,Year==1996) #Selection de l'année 1996
 kres <- kriging(db.kriege, db.grid, model = vg.mod, neigh = nei2, uc=c("1"), mean=NA) #Krigeage ordianire, voisinnage unique
 
 # Plot kriged estimates: K.estim
-plot(kres,name.image=5,title="K.estim",col=topo.colors(20),xlab="",
-     ylab="",xlim=c(-1.5,0.25),pos.legend=5)
+plot(kres,name.image=5,title="Valeurs de krigeage estimées",col=topo.colors(20),xlab="Longitude",ylab="Latitude",xlim=c(-1.5,0.5),pos.legend=1)
 plot(db.sel(db.CGFS.std, Year==1996),pch=18,add=T,col="red",inches=1.5)
 plot(res,add=T)
 

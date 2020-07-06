@@ -4,10 +4,12 @@ library(ggplot2)
 library(NbClust)
 library(rgdal)
 library(rgeos)
+library(raster)
+library(ggplot2)
 
 load("data/krigeage.Rdata")
-names(Kriege.logdens)[6]<- "Community"
-Kriege.logdens$Community<- as.numeric(Kriege.logdens$Community)
+names(Kriege.dens)[6]<- "Community"
+Kriege.dens$Community<- as.numeric(Kriege.dens$Community)
 
 
 Longitude<- numeric()
@@ -16,9 +18,9 @@ Clust<- numeric()
 Community<- numeric()
 
 
-for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
+for (j in unique(data.frame(Kriege.dens)[,"Community"])){
   
-  Tab1<- Kriege.logdens[Kriege.logdens$Community==j,] %>% dplyr::select(-Variance, -Community)
+  Tab1<- Kriege.dens[Kriege.dens$Community==j,] %>% dplyr::select(-Variance, -Community)
   Tab2<- pivot_wider(Tab1, names_from = Year, values_from = Prediction)
   metaTab<- Tab2 %>% dplyr::select(Longitude, Latitude)
   Tab2<- Tab2 %>% dplyr::select(-c(Longitude, Latitude))
@@ -41,7 +43,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   
   
   toto<- cbind(metaTab, Clust=factor(zones))        
-  toto<- left_join(toto, Kriege.logdens[Kriege.logdens$Community==j,], by=c("Longitude", "Latitude")) 
+  toto<- left_join(toto, Kriege.dens[Kriege.dens$Community==j,], by=c("Longitude", "Latitude")) 
   toto<- toto %>% dplyr::select(Longitude, Latitude, Clust, Community)   
   
   Longitude<- c(Longitude, toto$Longitude)
@@ -58,6 +60,8 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
     geom_line(aes(x=Year,y=Prediction,col=Clust, group=Clust))+
     theme_minimal()+
     facet_wrap(.~Clust)
+  
+  save(ggtata, file= paste0("results/Communautes bio/Community", j,"_raster.Rdata"))
   
   print(ggtata)
   
@@ -108,7 +112,7 @@ dis<- disaggregate(raster, fact=(res(raster)/res(rasterchlnew)))
 m<- mask(dis, res)
 plot(m)
 
-save(m, file= paste0("data/ICES/Community", j,"_raster.Rdata"))
+save(m, file= paste0("results/Communautes bio/Community", j,"_raster.Rdata"))
 
 
 
@@ -117,7 +121,7 @@ save(m, file= paste0("data/ICES/Community", j,"_raster.Rdata"))
 pol<- rasterToPolygons(m, dissolve=TRUE)
 plot(pol, col=pol@data$Clust)
 
-save(pol, file= paste0("data/ICES/Community", j,"_polygons.Rdata"))
+save(pol, file= paste0("results/Communautes bio/Community", j,"_polygons.Rdata"))
 
 }
 
@@ -127,23 +131,23 @@ save(pol, file= paste0("data/ICES/Community", j,"_polygons.Rdata"))
 
 par(mfrow = c(3, 3))
 
-load("data/ICES/Community1_raster.Rdata")
+load("results/Communautes bio/Community1_raster.Rdata")
 Com1 <- m 
-load("data/ICES/Community2_raster.Rdata")
+load("results/Communautes bio/Community2_raster.Rdata")
 Com2<- m
-load("data/ICES/Community3_raster.Rdata")
+load("results/Communautes bio/Community3_raster.Rdata")
 Com3<- m
-load("data/ICES/Community4_raster.Rdata")
+load("results/Communautes bio/Community4_raster.Rdata")
 Com4<- m
-load("data/ICES/Community5_raster.Rdata")
+load("results/Communautes bio/Community5_raster.Rdata")
 Com5<- m
-load("data/ICES/Community6_raster.Rdata")
+load("results/Communautes bio/Community6_raster.Rdata")
 Com6<- m
-load("data/ICES/Community7_raster.Rdata")
+load("results/Communautes bio/Community7_raster.Rdata")
 Com7<- m
-load("data/ICES/Community8_raster.Rdata")
+load("results/Communautes bio/Community8_raster.Rdata")
 Com8<- m
-load("data/ICES/Community9_raster.Rdata")
+load("results/Communautes bio/Community9_raster.Rdata")
 Com9<- m
 
 

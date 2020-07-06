@@ -23,14 +23,14 @@ traitbenthos<-mice::complete(traitbenthos1)
 
     # Categorize numerical values
 {
-  traitbenthos$MaturityAge<- as.character(traitbenthos$MaturityAge)
-  traitbenthos$MaturityAge<- sub("< 1 year", "[0;2[", traitbenthos$MaturityAge)
-  traitbenthos$MaturityAge<- sub("<1 year", "[0;2[", traitbenthos$MaturityAge)
-  traitbenthos$MaturityAge<- sub("1 year", "[0;2[", traitbenthos$MaturityAge)
-  traitbenthos$MaturityAge<- sub("1-2 years", "[0;2[", traitbenthos$MaturityAge)
-  traitbenthos$MaturityAge<- sub("2-3 years", "[2;6[", traitbenthos$MaturityAge)
-  traitbenthos$MaturityAge<- sub("3-5 years", "[2;6[", traitbenthos$MaturityAge)
-  traitbenthos$MaturityAge<- sub("6-10 years", "[6;10[", traitbenthos$MaturityAge)
+  traitbenthos$Maturity<- as.character(traitbenthos$Maturity)
+  traitbenthos$Maturity<- sub("< 1 year", "[0;2[", traitbenthos$Maturity)
+  traitbenthos$Maturity<- sub("<1 year", "[0;2[", traitbenthos$Maturity)
+  traitbenthos$Maturity<- sub("1 year", "[0;2[", traitbenthos$Maturity)
+  traitbenthos$Maturity<- sub("1-2 years", "[0;2[", traitbenthos$Maturity)
+  traitbenthos$Maturity<- sub("2-3 years", "[2;6[", traitbenthos$Maturity)
+  traitbenthos$Maturity<- sub("3-5 years", "[2;6[", traitbenthos$Maturity)
+  traitbenthos$Maturity<- sub("6-10 years", "[6;10[", traitbenthos$Maturity)
 }
 {
   traitbenthos$LifeSpan<- as.character(traitbenthos$LifeSpan)
@@ -46,7 +46,7 @@ traitbenthos$Habit<- sub("Erect", "Attached", traitbenthos$Habit)
 
 # 2 BENTHOS ACM on Burt table
 traitbenthos1<- data.frame(traitbenthos[,-1])
-row.names(traitbenthos1)<- traitbenthos$Taxons
+row.names(traitbenthos1)<- traitbenthos[,1]
 
 rez<- MCA(traitbenthos1, ncp=999, method="Burt", graph=F)
 plt1<-plotellipses(rez, axes=c(1,2))
@@ -150,6 +150,12 @@ traitbenthos<- traitbenthos %>% mutate(Cluster= group4)
 }
 
 
+fviz_mca_biplot(rez, axes = c(1, 2), geom = "text",
+                jitter = list(what = "label", width = 20, height = 20),
+                habillage=as.factor(group4), col.var="black")
+
+
+
 
 # 5 BENTHOS Cluster densities
 
@@ -171,7 +177,7 @@ Verified$ScientificName_accepted[is.na(Verified$ScientificName_accepted)]<-	Veri
 J2<- J2 %>% left_join(Verified, by=c("ScientificName_WoRMS"="ScientificName")) %>% dplyr::select(-ScientificName_WoRMS)
 
     # Jointure
-Lala<- J2 %>% left_join(traitbenthos, by=c("ScientificName_accepted"="Taxons")) %>% filter(!is.na(Cluster))
+Lala<- J2 %>% left_join(traitbenthos, by=c("ScientificName_accepted"="SpeciesName")) %>% filter(!is.na(Cluster))
 
 Dens<- Lala %>% dplyr::select(Year, moyLong, moyLat, Cluster, Nombre, Superficie) %>% 
   group_by(Cluster, Year, moyLat, moyLong) %>% 
@@ -226,7 +232,7 @@ traitfish<- traitfish[!duplicated(traitfish$Taxons),]
 
 # 2 FISH ACM on Burt table
 traitfish1<- data.frame(traitfish[,-1])
-row.names(traitfish1)<- traitfish$Taxons
+row.names(traitfish1)<- traitfish[,1]
 
 rez1<- MCA(traitfish1, ncp=999, method="Burt", graph=F)
 plt3<-plotellipses(rez1, axes=c(1,2))
@@ -321,6 +327,12 @@ group41<- cutree(arbre1,k=4) #4 clusters
 fviz_mca_ind(rez1,repel=T, habillage=as.factor(group41), addEllipses=F, axes=c(1,2))
 
 traitfish<- traitfish %>% mutate(Cluster= group41)
+
+fviz_mca_biplot(rez1, axes = c(1, 2), geom.ind = "point", geom.var = "text",
+                jitter = list(what = "label", width = 20, height = 20),
+                habillage=as.factor(group41), col.var="black", addEllipses = TRUE)
+
+
 
 
 

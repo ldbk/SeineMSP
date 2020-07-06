@@ -3,6 +3,7 @@ library(dplyr)
 library(FactoMineR)   # pour MCA
 library(missMDA)
 library(cluster)  # pour agnes
+library(RColorBrewer)
 
 
 ########################
@@ -59,17 +60,34 @@ plt1<-plotellipses(rez, axes=c(1,2))
 plt2<-plotellipses(rez, axes=c(1,3))
 
 arbre<- agnes(rez$ind$coord, method="ward", par.method=1)
-plot(arbre, which=2,hang=-1)                                
-rect.hclust(arbre, k=8)
+plot(arbre, which=2,hang=-1)
 
-group8<- cutree(arbre,k=8)
+rect.hclust(arbre, k=(5))
 
-tata <- cbind(grd2[,c(1,2)],Clust=factor(group8))
+group6<- cutree(arbre,k=5)
 
-ggplot(tata)+
+tata <- cbind(grd2[,c(1,2)],Clust=factor(group6))
+
+Allparam<- ggplot(tata)+
   geom_tile(aes(x=Long,y=Lat,fill=Clust))+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Final bioregionalization")+
+  xlab("Longitude")+
+  ylab("Latitude")+
   theme_minimal()
+
+Allparam2<- Allparam +
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 15))+
+  theme(legend.text = element_text(size = 15))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))
+
+
+ggsave(plot= Allparam2, filename="All.jpeg", path="results/satellite/zones", width = 13, height = 8)
 
 
 
