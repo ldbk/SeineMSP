@@ -260,6 +260,8 @@ pipo<-rasterFromXYZ(tmp3%>%mutate(zone=zones))
 #final graph
 #test ggplot complet 
 tmp3<-tmp3%>%mutate(zones=zones)
+zoneAIS<-tmp3
+save(zoneAIS,file="../results/AIS/zoneAIS.rdata")
 mapz<-ggplot()+
 	#geom_sf(st_as_sf(pipo))+
 	geom_raster(data=tmp3,aes(x=x,y=y,fill=as.character(zones)))+
