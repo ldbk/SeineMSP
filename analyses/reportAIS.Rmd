@@ -1,0 +1,359 @@
+---
+title: "Analyses des activités maritimes vues par l'AIS"
+author: "Jehaaaaaanne, Thibaaaaaault, Laureeeeeeent"
+date: "`r date()`"
+output: 
+  pdf_document
+bibliography: '/home/moi/datahome/work/biblio/enfin/biblioloran.bib'
+link-citations: true
+csl: /home/moi/Downloads/tools/cls/plos-biology.csl
+---
+
+# Contexte
+
+Les activités humaines modifient profondément le fonctionnement des écosystèmes
+marins @halpern2019. Parmi ces activités, l'utilisation du domaine maritime par les navires
+contribue à ces modifications par la pêche (prélèvements dans les communautés biologiques
+et impacts des engins sur les fonds), les activités d'extraction de matériaux situés sur le fond 
+(granulats, dragage),
+les pollutions sonores et chimiques engendrées par le traffic maritime, etc.
+La quantification et la représentation de ces activitiés dans le cadre de la planification
+maritime spatiale demande de localiser précisement les navires concernés dans
+l'espace maritime. 
+A l'échelle d'un bâtiment,
+ce positionnement est effectué à l'aide des instruments de navigation. 
+La collecte et la centralisation de ces informations à l'échelle de 
+l'ensemble des navires occupant un espace maritime donné peut être effectué
+en utilisant les systèmes de surveillance maritime @dupont2020. 
+Ces systèmes incluent des transmetteurs emabrqués (Automatic Identification
+System - AIS @tetreault2005; Vessel Monitoring System - VMS @campbell2014), des enregistreurs, de
+l'observation radar ou de l'imagerie (in situ, aéroportée ou satellite).
+La disponibilité de ces informations étant rare, le choix de cette étude se
+porte sur l'information mise à disposition par le portail EMODNET et faisant
+usage de l'AIS.
+
+
+L'AIS (Automatic Identification System) est un système d'échanges automatisés de
+messages entre navires par radio VHF. Ces messages permettent la surveillance
+du trafic maritime en transmettant l'identité, le statut, la position et la
+route entre navires, stations terrestres (phares...) et bouée. Ce système
+a démontré son intérêt pour évaluer l'impact des activités humaines sur le
+milieu dans différents domaines : 
+suivi des flotilles de pêche @natale2015 @mazzaralla2015 @vespe2016 @guyader2017
+@kroodsma2018,
+suivi et pollution sonore de la navigation de plaisance @hermannsen2019, 
+suivi global du trafic maritime au sein d'une zone protégée @coomber2016.
+De plus dans le cadre de la planification maritime spatiale, l'AIS permet de
+representer de manière synoptique l'ensemble du trafic maritime @fiorini2016
+@dupont2020.
+
+Le portail EMODNET (European Marine Observation and Data Network) met à
+disposition le suivi AIS du trafic maritime européen @emodnet2019
+de 2017 à fin 2019. La typologie des navires suivis comporte 12 catégories, qui
+ont été regroupées en 5 catégories regroupant les activités majoritaires.
+Il s'agit de :
+
+- pêche : catégorie EMODNET `st_01`
+- dragage : catégorie EMODNET `st_03`
+- service : ce groupe regroupe les activités de service en mer (`st_02`), de
+  remorquage (`st_07`) et militaires (`st_11`)
+- plaisance : ce groupe regroupe les activités de navigation à la voile
+  (`st_04`) et de plaisance à moteur (`st_05`)
+- transport : ce groupe regroupe les activités de transport (passager `st_08`,
+  cargo `st_09`, transport rapide `st_06`), tanker `st_10`
+
+
+```{r packageandoptions,include=T,cache=F,echo=F,warning=F,message=F,progress=F,verbose=F,results="hide"}
+#knitr option
+operationnel<-TRUE
+knitr::opts_chunk$set(echo=FALSE, 
+		     warning=!operationnel, 
+		message=!operationnel,
+		fig.height=8,
+		progress=!operationnel,
+		verbose=!operationnel,
+		include=TRUE,
+		dev='png',autodep=FALSE)
+#package
+library(sf)
+library(tidyverse)
+library(raster)
+library(rasterVis)
+library(cowplot)
+```
+
+# Données et analyses
+
+Les données AIS sont extraites du portail Human Activities d'EMODNET en
+utilisant le service web WGC.
+Les cates mensuelles par catégories de navires ont une résolution de 1000 m.
+Les cartes mensuelles de janvier 2017 à décembre 2019 sont extraites sur la
+zone de la baie de Seine, sommées par catégories, moyennées sur l'ensemble de
+la période considérée, 
+et filtrées afin
+d'éliminer les densités élevées de trafic maritime aux alentours des zones
+portuaires ou des zones d'attente des cargos. 
+Le filtrage est opérés en remplaçant les valeurs de densité dont la
+valeurs dépassent le quantile à 99% par la moyenne de trafic sur la zone. 
+La définiton de zones homogène en terme de traffic maritime est opérée à l'aide
+d'une classification hiérarchique sur les cartes de traffic standardisées par
+type (soustraction de la moyenne et division par l'écart-type) afin d'assurer
+une représentativité comparable entre chaque type d'activité. Le nombre de
+navires étant variables entre ces activités cette étape permet d'homogénéiser
+cette disparité. La distance euclidienne et le critère de Ward sont utilisés
+dans la classification. Le nombre optimale de groupe identifié par la
+classification est identifié à l'aide de la règle de la majorité déterminé par
+30 indices de regroupements @charrad2014.
+
+```{r datais, include=T,cache=T,echo=F}
+#load the data again
+allais<-stack("../data/humanactivities/allais")
+#buil a stack by maritime activities
+#fishing : st_01
+#service : Service (pilog, search and rescue, port tender, antipol medi) st_02, 
+#		tug towing st_07
+#		military st_11
+#dredging : st_03
+#sailing: sailing st04 + pleasure craft st05
+#transport: high-speed st06, passenger st08, cargo st09, tanker st10
+#fishing
+fishingAIS<-allais[[which(grepl("st_01",names(allais)))]]
+#service
+serviceAIS<-allais[[which(grepl("st_02",names(allais)))]]
+tugAIS<-allais[[which(grepl("st_07",names(allais)))]]
+milAIS<-allais[[which(grepl("st_11",names(allais)))]]
+serviceAIS<-serviceAIS+tugAIS+milAIS
+#dredging
+dredgingAIS<-allais[[which(grepl("st_03",names(allais)))]]
+#sailing
+sailingAIS<-allais[[which(grepl("st_04",names(allais)))]]
+pleasureAIS<-allais[[which(grepl("st_05",names(allais)))]]
+sailingAIS<-sailingAIS+pleasureAIS
+#dredging
+dredgingAIS<-allais[[which(grepl("st_03",names(allais)))]]
+#transport
+speedAIS<-allais[[which(grepl("st_06",names(allais)))]]
+passengerAIS<-allais[[which(grepl("st_08",names(allais)))]]
+cargoAIS<-allais[[which(grepl("st_09",names(allais)))]]
+tankerAIS<-allais[[which(grepl("st_10",names(allais)))]]
+transportAIS<-speedAIS+passengerAIS+cargoAIS+tankerAIS
+#build time series in case
+r2tab<-function(dat=fishingAIS,nom="pêche"){
+	uu<-pivot_longer(data.frame(rasterToPoints(dat)),c(3:36))
+	uu<-uu%>%mutate(year=substr(name,9,12),month=substr(name,14,15))%>%
+		mutate(date=lubridate::ymd(paste(year,month,15)))%>%
+		mutate(var=nom)%>%transmute(x,y,date,var,value)
+	return(uu)
+}
+t1<-r2tab(fishingAIS,"pêche")
+t2<-r2tab(dredgingAIS,"dragage")
+t3<-r2tab(transportAIS,"transport")
+t4<-r2tab(sailingAIS,"plaisance")
+t5<-r2tab(serviceAIS,"service")
+tall<-rbind(t1,t2,t3,t4,t5)
+#stat tab
+tabstat<-tall%>%group_by(var)%>%
+	summarise(Moyenne=mean(value),
+		  SD=sd(value),
+		  Median=median(value),
+		  Quantile_99=quantile(value,.99),
+		  Max=max(value))
+
+
+
+
+mtsfish<-cellStats(fishingAIS,mean)
+mtsdred<-cellStats(dredgingAIS,mean)
+mtsserv<-cellStats(serviceAIS,mean)
+mtstrans<-cellStats(transportAIS,mean)
+mtssail<-cellStats(sailingAIS,mean)
+sdtsfish<-cellStats(fishingAIS,sd)
+sdtsdred<-cellStats(dredgingAIS,sd)
+sdtsserv<-cellStats(serviceAIS,sd)
+sdtstrans<-cellStats(transportAIS,sd)
+sdtssail<-cellStats(sailingAIS,mean)
+tps<-expand.grid(1:12,2017:2019)[1:34,]
+tps<-lubridate::ymd( paste(tps$Var2,tps$Var1,rep(15,34)) )
+tsais<-data.frame(date=tps,pêche=mtsfish,dragage=mtsdred,services=mtsserv,
+		  transport=mtstrans,plaisance=mtssail)
+sdtsais<-data.frame(date=tps,pêche=sdtsfish,dragage=sdtsdred,services=sdtsserv,
+		  transport=sdtstrans,plaisance=sdtssail)
+tsais<-tsais%>%tidyr::pivot_longer(pêche:plaisance)
+sdtsais<-sdtsais%>%tidyr::pivot_longer(pêche:plaisance,values_to="sd")
+tsais<-full_join(tsais,sdtsais)
+
+
+pltts<-ggplot(tsais,aes(x=date,y=value,color=name))+
+	#geom_ribbon(aes(ymin=value-sd,ymax=value+sd),fill="grey78")+
+	geom_line(size=2)+#facet_wrap(~name)
+	scale_color_brewer(palette="Spectral",name="Activité")+
+	#scale_color_distiller(palette="Spectral",name="Densité de\n navires\n(h.km^2)")+
+	ylab("Densité moyenne mensuelle de navires en heure par km^2")+
+	xlab("Mois")
+
+#test all parameters together annual values
+#plot(fishingAIS)
+#plot(log10(calc(fishingAIS,fun=mean)))
+#plot(calc(serviceAIS,fun=mean))
+
+fish=mean(fishingAIS);dred=mean(dredgingAIS)
+serv=mean(serviceAIS);trans=mean(transportAIS);sail=mean(sailingAIS)
+ais<-stack(fish,dred,serv,trans,sail)
+names(ais)<-c("pêche","dragage","services","transport","plaisance")
+r0<- raster(nrow=30, ncol=80, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+ais<-crop(ais,extent(r0))
+#ais<-resample(ais,r0)
+#plot(ais)
+```
+
+```{r anadatais, include=T,cache=T,echo=F}
+#ggplot trans for plot
+tmp<-data.frame(rasterToPoints((ais)))
+tmp2<-tmp%>%pivot_longer(pêche:plaisance)
+tmp2<-tmp2%>%group_by(name)%>%mutate(qxx=quantile(value,.99),mxx=mean(value))%>%ungroup()%>%
+	mutate(value=ifelse(value<=qxx,value,mxx))
+
+plt1<-ggplot()+
+	#geom_sf(st_as_sf(pipo))+
+	#geom_raster(data=tmp2,aes(x=x,y=y,fill=value))+
+	geom_raster(data=tmp2,aes(x=x,y=y,fill=value+1))+
+	facet_wrap(~name,ncol=2)+
+	scale_fill_distiller(palette="Spectral",name="Densité de\n navires\n(h.km^2)",trans="log10")+
+	#scale_fill_gradient(trans = 'log10')+ 
+	#scale_fill_viridis_c(trans="log")+#palette="viridis",name="Zones")+
+	#scale_fill_viridis_c(palette="rainbow")+#palette="viridis",name="Zones")+
+	borders("world",fill="grey",colour=NA)+
+	coord_sf(xlim=range(tmp2$x),ylim=range(tmp2$y))+
+	xlab("Longitude")+ylab("Latitude")#+
+
+
+#prep the data
+tmp3<-tmp2%>%dplyr::select(x,y,name,value)%>%tidyr::pivot_wider(names_from=name,values_from=value)
+tmp4<-tmp3%>%dplyr::select(-x,-y)
+#scale the data
+tmp4<-scale(tmp4)
+#distance matrix
+dais<-parallelDist::parDist(as.matrix(tmp4))
+
+#if(file.exists("nbclustAIS.rds")){
+#	rez<-readRDS("nbclustAIS.rds")
+#}else{
+#	source("FastNbClust.R")
+#	rez<-FastNbClust(tmp4, diss=dais,distance=NULL,min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+#	saveRDS(rez,file="nbclustAIS.rds")
+#
+#}
+# According to the majority rule, the best number of clusters is 6 
+#fast clustering
+tree<-fastcluster::hclust(dais,method="ward.D2")
+#plot(tree)
+#rect.hclust(tree,6)
+zones<-cutree(tree,6)
+#rebuild raster
+pipo<-rasterFromXYZ(tmp3%>%mutate(zone=zones))
+#plot(pipo)
+#tmp3%>%mutate(zones=zones)%>%dplyr::select(-x,-y)%>%group_by(zones)%>%
+#	summarise_all(.funs=list(mean=mean))#,med=median,max=max,min=min))%>%t()#(aa=summary(fish))
+
+
+
+#final graph
+#test ggplot complet 
+tmp3<-tmp3%>%mutate(zones=zones)
+mapz<-ggplot()+
+	#geom_sf(st_as_sf(pipo))+
+	geom_raster(data=tmp3,aes(x=x,y=y,fill=as.character(zones)))+
+	scale_fill_brewer(palette="Spectral",name="Zones")+
+	borders("world",fill="grey",colour=NA)+
+	coord_sf(xlim=range(tmp$x),ylim=range(tmp$y))+
+	xlab("Longitude")+ylab("Latitude")+
+	theme_bw()+
+	theme(legend.position="bottom")
+tmp4<-tmp3%>%pivot_longer(pêche:plaisance)%>%
+	mutate(zones=as.factor(zones))
+
+bpall<-ggplot()+
+	geom_boxplot(data=tmp4,aes(x=zones,y=value,fill=zones))+
+	scale_fill_brewer(palette="Spectral")+
+	facet_wrap(~name,scale="free_y",ncol=5)+
+	ylab("Densité de navires en heures par km^2")+
+	theme(legend.position="none")
+	#scale_y_log10()
+
+pltfinal<-ggplot()+
+	theme_void()+
+	coord_equal(xlim=c(0,100),ylim=c(0,100),expand=F)+
+	annotation_custom(ggplotGrob(mapz),xmin=0,xmax=100,ymin=50,ymax=100)+
+	annotation_custom(ggplotGrob(bpall),xmin=0,xmax=100,ymin=0,ymax=50)+
+	#ggtitle("Vessels activities zonation using AIS data")
+	ggtitle("Zonation des activités maritimes vues par l'AIS")
+```
+
+
+
+```{r truc,echo=F,eval=F,include=F}
+#plot(pipo)
+#plot(smooth(pol1,method="ksmooth",smoothness=3),add=T,alpha=.3)
+
+
+tmp2<-tmp%>%pivot_longer(fish:sail)
+tmp2$name[tmp2$name=="dred"]<-"dragage"
+tmp2$name[tmp2$name=="fish"]<-"pêche"
+tmp2$name[tmp2$name=="sail"]<-"plaisance"
+tmp2$name[tmp2$name=="serv"]<-"services"
+tmp2$name[tmp2$name=="trans"]<-"transport"
+tmp2<-tmp2%>%mutate(zones=as.factor(zones))
+
+bpall<-ggplot()+
+	geom_boxplot(data=tmp2,aes(x=zones,y=value,fill=zones))+
+	scale_fill_brewer(palette="Spectral")+
+	facet_wrap(~name,scale="free_y",ncol=5)+
+	ylab("Densité de navires en heures par km^2")+
+	theme(legend.position="none")
+	#scale_y_log10()
+
+	
+
+
+#save the figures
+#ggsave(file="../results/AIS/zones.png")
+#save the data 
+#tabais<-tmp
+#save(tabais,file="../results/AIS/tabais.rdata")
+
+```
+
+# Résultats
+
+## Statistiques descriptives du traffic maritime
+
+```{r truc0}
+pander::pander(tabstat)
+```
+
+
+## Cartographie du traffic maritime moyen par activités maritimes
+
+Moyenne 2017-2019 par activités regroupées.
+
+```{r truc1}
+print(plt1)
+```
+
+Série temporelle mensuelle des activités 
+
+```{r truc1bis}
+print(pltts)
+```
+
+## Zonation du traffic maritime moyen par activités maritimes
+
+
+```{r truc2}
+print(pltfinal)
+```
+
+# Bibliographie
+
+
+
