@@ -113,11 +113,11 @@ plt2<-plotellipses(rez, axes=c(1,3))
 #save(arbre, file="data/ICES/arbreavecdens.Rdata")
 load("data/ICES/arbreavecdens.Rdata")
 plot(arbre, which=2,hang=-1)                                
-rect.hclust(arbre, k=5)
-groups<- cutree(arbre,k=5)
+rect.hclust(arbre, k=4)
+groups<- cutree(arbre,k=4)
 tutu<- cbind(grd, Zone=factor(groups))
 
-colors<- brewer.pal(n = 5, name = "YlGnBu")
+colors<- brewer.pal(n = 4, name = "YlGnBu")
 ggplot(tutu)+
   geom_tile(aes(x=Long, y=Lat, fill=Zone))+
   scale_fill_manual(values=colors)+
@@ -142,7 +142,7 @@ tutuz1<- tutuz1 %>% mutate(mean1= mean(tutuz1$Pred1),
                            mean9= mean(tutuz1$Pred9))
 tutuz1<- tutuz1 %>% dplyr::select(-c(1,2,3,4,5,6,7,8,9))
 tutuz1<- unique(tutuz1)
-tutuz1<- tutuz1 %>% select(-Zone)
+tutuz1<- tutuz1 %>% dplyr::select(-Zone)
   names(tutuz1)[1]<- "Com 1"
   names(tutuz1)[2]<- "Com 2"
   names(tutuz1)[3]<- "Com 3"
@@ -173,7 +173,7 @@ tutuz2<- tutuz2 %>% mutate(mean1= mean(tutuz2$Pred1),
                            mean9= mean(tutuz2$Pred9))
 tutuz2<- tutuz2 %>% dplyr::select(-c(1,2,3,4,5,6,7,8,9))
 tutuz2<- unique(tutuz2)
-tutuz2<- tutuz2 %>% select(-Zone)
+tutuz2<- tutuz2 %>% dplyr::select(-Zone)
   names(tutuz2)[1]<- "Com 1"
   names(tutuz2)[2]<- "Com 2"
   names(tutuz2)[3]<- "Com 3"
@@ -204,7 +204,7 @@ tutuz3<- tutuz3 %>% mutate(mean1= mean(tutuz3$Pred1),
                            mean9= mean(tutuz3$Pred9))
 tutuz3<- tutuz3 %>% dplyr::select(-c(1,2,3,4,5,6,7,8,9))
 tutuz3<- unique(tutuz3)
-tutuz3<- tutuz3 %>% select(-Zone)
+tutuz3<- tutuz3 %>% dplyr::select(-Zone)
   names(tutuz3)[1]<- "Com 1"
   names(tutuz3)[2]<- "Com 2"
   names(tutuz3)[3]<- "Com 3"
@@ -234,7 +234,7 @@ tutuz4<- tutuz4 %>% mutate(mean1= mean(tutuz4$Pred1),
                            mean9= mean(tutuz4$Pred9))
 tutuz4<- tutuz4 %>% dplyr::select(-c(1,2,3,4,5,6,7,8,9))
 tutuz4<- unique(tutuz4)
-tutuz4<- tutuz4 %>% select(-Zone)
+tutuz4<- tutuz4 %>% dplyr::select(-Zone)
   names(tutuz4)[1]<- "Com 1"
   names(tutuz4)[2]<- "Com 2"
   names(tutuz4)[3]<- "Com 3"
@@ -251,43 +251,13 @@ save(bar4, file="results/Communautes bio/Composition des zones/bar4.Rdata")
 
 
 
-{
-tutuz5<- tutu %>% filter(Zone==5) %>% dplyr::select(-Long, -Lat)
-tutuz5<- unique(tutuz5)
-tutuz5<- tutuz5 %>% mutate(mean1= mean(tutuz5$Pred1), 
-                           mean2= mean(tutuz5$Pred2), 
-                           mean3= mean(tutuz5$Pred3),
-                           mean4= mean(tutuz5$Pred4),
-                           mean5= mean(tutuz5$Pred5),
-                           mean6= mean(tutuz5$Pred6),
-                           mean7= mean(tutuz5$Pred7),
-                           mean8= mean(tutuz5$Pred8),
-                           mean9= mean(tutuz5$Pred9))
+par(mfrow = c(2, 2))
 
-tutuz5<- tutuz5 %>% dplyr::select(-c(1,2,3,4,5,6,7,8,9))
-tutuz5<- unique(tutuz5)
-tutuz5<- tutuz5 %>% select(-Zone)
-names(tutuz5)[1]<- "Com 1"
-names(tutuz5)[2]<- "Com 2"
-names(tutuz5)[3]<- "Com 3"
-names(tutuz5)[4]<- "Com 4"
-names(tutuz5)[5]<- "Com 5"
-names(tutuz5)[6]<- "Com 6"
-names(tutuz5)[7]<- "Com 7"
-names(tutuz5)[8]<- "Com 8"
-names(tutuz5)[9]<- "Com 9"
-tutuz5<- as.matrix(tutuz5)
-bar5<- barplot(tutuz5, main="Proportion des communautes dans la zone 5", ylab = "Densites de capture", col="#253494")
-}
+barplot(tutuz1, main="Zone 1", ylab = "Densites de capture", col="#FFFFCC", las=2, ylim=c(0,1.2))
+barplot(tutuz2, main="Zone 2", ylab = "Densites de capture", col="#A1DAB4", las=2, ylim=c(0,1.2))
+barplot(tutuz3, main="Zone 3", ylab = "Densites de capture", col="#41B6C4", las=2, ylim=c(0,1.2))
+barplot(tutuz4, main="Zone 4", ylab = "Densites de capture", col="#2C7FB8", las=2, ylim=c(0,1.2))
 
-
-par(mfrow = c(2, 3))
-
-barplot(tutuz1, main="Zone 1", ylab = "Densites de capture", col="#FFFFCC", las=2)
-barplot(tutuz2, main="Zone 2", ylab = "Densites de capture", col="#A1DAB4", las=2)
-barplot(tutuz3, main="Zone 3", ylab = "Densites de capture", col="#41B6C4", las=2)
-barplot(tutuz4, main="Zone 4", ylab = "Densites de capture", col="#2C7FB8", las=2)
-barplot(tutuz5, main="Zone 5", ylab = "Densites de capture", col="#253494", las=2)
 
 par(mfrow = c(1, 1))
 

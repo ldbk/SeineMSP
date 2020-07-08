@@ -149,6 +149,98 @@ traitbenthos<- traitbenthos %>% mutate(Cluster= group4)
   traitbenthos$Cluster<- sub("4", "8", traitbenthos$Cluster)
 }
 
+{
+Cluster5<- traitbenthos %>% filter(Cluster==5) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster5bis<- pivot_longer(Cluster5, cols=1:7, names_to = "Trait", values_to = "Modalité")
+Freq<- as.data.frame(table(Cluster5bis$Modalité))
+names(Freq)[1]<- "Modalité"
+names(Freq)[2]<- "Fréquence"
+Cluster5bis<- Cluster5bis %>% left_join(Freq, by="Modalité")
+Cluster5bis<- unique(Cluster5bis)
+
+C5bar<- ggplot(Cluster5bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+  geom_bar(stat="identity")+
+  #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+  ggtitle("Caractéristiques de la communauté 5")+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 0))+
+  theme(axis.text.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 10))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.x = element_text(angle=90))+
+  theme(legend.text = element_text(size = 15))
+ggsave(plot= C5bar, filename="Cluster5.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+
+
+Cluster6<- traitbenthos %>% filter(Cluster==6) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster6bis<- pivot_longer(Cluster6, cols=1:7, names_to = "Trait", values_to = "Modalité")
+Freq<- as.data.frame(table(Cluster6bis$Modalité))
+names(Freq)[1]<- "Modalité"
+names(Freq)[2]<- "Fréquence"
+Cluster6bis<- Cluster6bis %>% left_join(Freq, by="Modalité")
+Cluster6bis<- unique(Cluster6bis)
+
+C6bar<- ggplot(Cluster6bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+  geom_bar(stat="identity")+
+  #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+  ggtitle("Caractéristiques de la communauté 6")+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 0))+
+  theme(axis.text.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 10))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.x = element_text(angle=90))+
+  theme(legend.text = element_text(size = 15))
+ggsave(plot= C6bar, filename="Cluster6.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+
+
+Cluster7<- traitbenthos %>% filter(Cluster==7) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster7bis<- pivot_longer(Cluster7, cols=1:7, names_to = "Trait", values_to = "Modalité")
+Freq<- as.data.frame(table(Cluster7bis$Modalité))
+names(Freq)[1]<- "Modalité"
+names(Freq)[2]<- "Fréquence"
+Cluster7bis<- Cluster7bis %>% left_join(Freq, by="Modalité")
+Cluster7bis<- unique(Cluster7bis)
+
+C7bar<- ggplot(Cluster7bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+  geom_bar(stat="identity")+
+  #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+  ggtitle("Caractéristiques de la communauté 7")+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 0))+
+  theme(axis.text.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 10))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.x = element_text(angle=90))+
+  theme(legend.text = element_text(size = 15))
+ggsave(plot= C7bar, filename="Cluster7.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+
+
+Cluster8<- traitbenthos %>% filter(Cluster==8) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster8bis<- pivot_longer(Cluster8, cols=1:7, names_to = "Trait", values_to = "Modalité")
+Freq<- as.data.frame(table(Cluster8bis$Modalité))
+names(Freq)[1]<- "Modalité"
+names(Freq)[2]<- "Fréquence"
+Cluster8bis<- Cluster8bis %>% left_join(Freq, by="Modalité")
+Cluster8bis<- unique(Cluster8bis)
+
+C8bar<- ggplot(Cluster8bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+  geom_bar(stat="identity")+
+  #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+  ggtitle("Caractéristiques de la communauté 8")+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 0))+
+  theme(axis.text.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 10))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.x = element_text(angle=90))+
+  theme(legend.text = element_text(size = 15))
+ggsave(plot= C8bar, filename="Cluster8.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+}
 
 fviz_mca_biplot(rez, axes = c(1, 2), geom = "text",
                 jitter = list(what = "label", width = 20, height = 20),
@@ -327,6 +419,99 @@ group41<- cutree(arbre1,k=4) #4 clusters
 fviz_mca_ind(rez1,repel=T, habillage=as.factor(group41), addEllipses=F, axes=c(1,2))
 
 traitfish<- traitfish %>% mutate(Cluster= group41)
+
+{
+  Cluster1<- traitfish %>% filter(Cluster==1) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster1bis<- pivot_longer(Cluster1, cols=1:8, names_to = "Trait", values_to = "Modalité")
+  Freq<- as.data.frame(table(Cluster1bis$Modalité))
+  names(Freq)[1]<- "Modalité"
+  names(Freq)[2]<- "Fréquence"
+  Cluster1bis<- Cluster1bis %>% left_join(Freq, by="Modalité")
+  Cluster1bis<- unique(Cluster1bis)
+  
+  C1bar<- ggplot(Cluster1bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+    geom_bar(stat="identity")+
+    #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+    ggtitle("Caractéristiques de la communauté 1")+
+    theme_minimal()+
+    theme(plot.title = element_text(size = 20))+
+    theme(axis.title.x = element_text(size = 0))+
+    theme(axis.text.x = element_text(size = 20))+
+    theme(axis.title.y = element_text(size = 10))+
+    theme(axis.text.y = element_text(size = 10))+
+    theme(axis.text.x = element_text(angle=90))+
+    theme(legend.text = element_text(size = 15))
+  ggsave(plot= C1bar, filename="Cluster1.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+  
+  
+  Cluster2<- traitfish %>% filter(Cluster==2) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster2bis<- pivot_longer(Cluster2, cols=1:8, names_to = "Trait", values_to = "Modalité")
+  Freq<- as.data.frame(table(Cluster2bis$Modalité))
+  names(Freq)[1]<- "Modalité"
+  names(Freq)[2]<- "Fréquence"
+  Cluster2bis<- Cluster2bis %>% left_join(Freq, by="Modalité")
+  Cluster2bis<- unique(Cluster2bis)
+  
+  C2bar<- ggplot(Cluster2bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+    geom_bar(stat="identity")+
+    #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+    ggtitle("Caractéristiques de la communauté 2")+
+    theme_minimal()+
+    theme(plot.title = element_text(size = 20))+
+    theme(axis.title.x = element_text(size = 0))+
+    theme(axis.text.x = element_text(size = 20))+
+    theme(axis.title.y = element_text(size = 10))+
+    theme(axis.text.y = element_text(size = 10))+
+    theme(axis.text.x = element_text(angle=90))+
+    theme(legend.text = element_text(size = 15))
+  ggsave(plot= C2bar, filename="Cluster2.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+  
+  
+  Cluster3<- traitfish %>% filter(Cluster==3) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster3bis<- pivot_longer(Cluster3, cols=1:8, names_to = "Trait", values_to = "Modalité")
+  Freq<- as.data.frame(table(Cluster3bis$Modalité))
+  names(Freq)[1]<- "Modalité"
+  names(Freq)[2]<- "Fréquence"
+  Cluster3bis<- Cluster3bis %>% left_join(Freq, by="Modalité")
+  Cluster3bis<- unique(Cluster3bis)
+  
+  C3bar<- ggplot(Cluster3bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+    geom_bar(stat="identity")+
+    #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+    ggtitle("Caractéristiques de la communauté 3")+
+    theme_minimal()+
+    theme(plot.title = element_text(size = 20))+
+    theme(axis.title.x = element_text(size = 0))+
+    theme(axis.text.x = element_text(size = 20))+
+    theme(axis.title.y = element_text(size = 10))+
+    theme(axis.text.y = element_text(size = 10))+
+    theme(axis.text.x = element_text(angle=90))+
+    theme(legend.text = element_text(size = 15))
+  ggsave(plot= C3bar, filename="Cluster3.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+  
+  
+  Cluster4<- traitfish %>% filter(Cluster==4) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster4bis<- pivot_longer(Cluster4, cols=1:8, names_to = "Trait", values_to = "Modalité")
+  Freq<- as.data.frame(table(Cluster4bis$Modalité))
+  names(Freq)[1]<- "Modalité"
+  names(Freq)[2]<- "Fréquence"
+  Cluster4bis<- Cluster4bis %>% left_join(Freq, by="Modalité")
+  Cluster4bis<- unique(Cluster4bis)
+  
+  C4bar<- ggplot(Cluster4bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
+    geom_bar(stat="identity")+
+    #geom_text(aes(label=Modalité), color="white", size=5, position=position_identity())+
+    ggtitle("Caractéristiques de la communauté 4")+
+    theme_minimal()+
+    theme(plot.title = element_text(size = 20))+
+    theme(axis.title.x = element_text(size = 0))+
+    theme(axis.text.x = element_text(size = 20))+
+    theme(axis.title.y = element_text(size = 10))+
+    theme(axis.text.y = element_text(size = 10))+
+    theme(axis.text.x = element_text(angle=90))+
+    theme(legend.text = element_text(size = 15))
+  ggsave(plot= C4bar, filename="Cluster4.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
+}
 
 fviz_mca_biplot(rez1, axes = c(1, 2), geom.ind = "point", geom.var = "text",
                 jitter = list(what = "label", width = 20, height = 20),
