@@ -1,4 +1,5 @@
 library(dplyr)
+library(tidyr)
 library(FactoMineR) # pour ACM
 library(cluster) # pour agnes
 library(factoextra) # pour fviz_mca_ind
@@ -83,7 +84,7 @@ if(!file.exists("cbs.rds")){
                             methodname=methodname,
                             distmethod=rep(FALSE,length(clustermethod)),
                             clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
-                            fnruns=100,avenruns=100,multicore=TRUE,trace=F)
+                            fnruns=100,avenruns=100,multicore=FALSE,trace=F)
   saveRDS(cbs,file="cbs.rds")
 }else{
   cbs<-readRDS(cbs,file="cbs.rds")
@@ -120,12 +121,14 @@ ggplot(cbslong%>%filter(!method%in%stupid),aes(x=nbclus,y=value,color=method))+
 #selected metric
 tmp1<-cbslong%>%filter(!method%in%stupid&info!=""&nbclus<=15)
 tmp2<-cbslong%>%filter(method%in%stupid&info!=""&nbclus<=15)
-ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
+comparbenthos<- ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
   geom_point()+
   geom_path()+
   geom_violin(data=tmp2,aes(x=nbclus,y=value,group=nbclus),color="grey",alpha=.2)+
   geom_point()+
-  facet_wrap(info~name,scale="free",ncol=2)
+  facet_wrap(info~name,scale="free",ncol=2)+
+  theme_minimal()
+ggsave(plot= comparbenthos, filename="Aggregation criterion.jpeg", path="results/Communautes bio", width = 13, height = 8)
 
 
 
@@ -150,7 +153,9 @@ traitbenthos<- traitbenthos %>% mutate(Cluster= group4)
 }
 
 {
-Cluster5<- traitbenthos %>% filter(Cluster==5) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster5<- traitbenthos %>% filter(Cluster==5)
+save(Cluster5, file="results/Communautes bio/Communautés/Cluster5.Rdata")
+Cluster5<- Cluster5 %>% dplyr::select(-SpeciesName, -Cluster)
 Cluster5bis<- pivot_longer(Cluster5, cols=1:7, names_to = "Trait", values_to = "Modalité")
 Freq<- as.data.frame(table(Cluster5bis$Modalité))
 names(Freq)[1]<- "Modalité"
@@ -173,7 +178,9 @@ C5bar<- ggplot(Cluster5bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
 ggsave(plot= C5bar, filename="Cluster5.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
 
 
-Cluster6<- traitbenthos %>% filter(Cluster==6) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster6<- traitbenthos %>% filter(Cluster==6)
+save(Cluster6, file="results/Communautes bio/Communautés/Cluster6.Rdata")
+Cluster6<- Cluster6 %>% dplyr::select(-SpeciesName, -Cluster)
 Cluster6bis<- pivot_longer(Cluster6, cols=1:7, names_to = "Trait", values_to = "Modalité")
 Freq<- as.data.frame(table(Cluster6bis$Modalité))
 names(Freq)[1]<- "Modalité"
@@ -196,7 +203,9 @@ C6bar<- ggplot(Cluster6bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
 ggsave(plot= C6bar, filename="Cluster6.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
 
 
-Cluster7<- traitbenthos %>% filter(Cluster==7) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster7<- traitbenthos %>% filter(Cluster==7)
+save(Cluster7, file="results/Communautes bio/Communautés/Cluster7.Rdata")
+Cluster7<- Cluster7 %>% dplyr::select(-SpeciesName, -Cluster)
 Cluster7bis<- pivot_longer(Cluster7, cols=1:7, names_to = "Trait", values_to = "Modalité")
 Freq<- as.data.frame(table(Cluster7bis$Modalité))
 names(Freq)[1]<- "Modalité"
@@ -219,7 +228,9 @@ C7bar<- ggplot(Cluster7bis, aes(x=Trait, y=Fréquence, fill=Modalité)) +
 ggsave(plot= C7bar, filename="Cluster7.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
 
 
-Cluster8<- traitbenthos %>% filter(Cluster==8) %>% dplyr::select(-SpeciesName, -Cluster)
+Cluster8<- traitbenthos %>% filter(Cluster==8) 
+save(Cluster8, file="results/Communautes bio/Communautés/Cluster8.Rdata")
+Cluster8<- Cluster8 %>% dplyr::select(-SpeciesName, -Cluster)
 Cluster8bis<- pivot_longer(Cluster8, cols=1:7, names_to = "Trait", values_to = "Modalité")
 Freq<- as.data.frame(table(Cluster8bis$Modalité))
 names(Freq)[1]<- "Modalité"
@@ -341,7 +352,7 @@ print(plt4)
 #characteristics relevant to the user. In C. H. Skiadas (ed.) Proceedings of
 #ASMDA 2017, 501-520, https://arxiv.org/abs/1703.09282
 # using clusterbenchmark from fpc
-if(!file.exists("cbs.rds")){
+if(!file.exists("cbsfish.rds")){
   set.seed(666) #the number of the beaaasttt
   options(digits=3)
   clustermethod=c("kmeansCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","claraCBI")
@@ -361,10 +372,10 @@ if(!file.exists("cbs.rds")){
                             methodname=methodname,
                             distmethod=rep(FALSE,length(clustermethod)),
                             clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
-                            fnruns=100,avenruns=100,multicore=TRUE,trace=F)
-  saveRDS(cbs,file="cbs.rds")
+                            fnruns=100,avenruns=100,multicore=FALSE,trace=F)
+  saveRDS(cbs,file="cbsfish.rds")
 }else{
-  cbs<-readRDS(cbs,file="cbs.rds")
+  cbs<-readRDS(cbs,file="cbsfish.rds")
 }
 
 #redesign cbs outputs to ease ggplot2 use
@@ -398,12 +409,15 @@ ggplot(cbslong%>%filter(!method%in%stupid),aes(x=nbclus,y=value,color=method))+
 #selected metric
 tmp1<-cbslong%>%filter(!method%in%stupid&info!=""&nbclus<=15)
 tmp2<-cbslong%>%filter(method%in%stupid&info!=""&nbclus<=15)
-ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
+comparfish<- ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
   geom_point()+
   geom_path()+
   geom_violin(data=tmp2,aes(x=nbclus,y=value,group=nbclus),color="grey",alpha=.2)+
   geom_point()+
-  facet_wrap(info~name,scale="free",ncol=2)
+  facet_wrap(info~name,scale="free",ncol=2)+
+  theme_minimal()
+ggsave(plot= comparfish, filename="Aggregation criterion fish.jpeg", path="results/Communautes bio", width = 13, height = 8)
+
 
 
 
@@ -420,8 +434,11 @@ fviz_mca_ind(rez1,repel=T, habillage=as.factor(group41), addEllipses=F, axes=c(1
 
 traitfish<- traitfish %>% mutate(Cluster= group41)
 
+
 {
-  Cluster1<- traitfish %>% filter(Cluster==1) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster1<- traitfish %>% filter(Cluster==1)
+  save(Cluster1, file="results/Communautes bio/Communautés/Cluster1.Rdata")
+  Cluster1<- Cluster1 %>% dplyr::select(-Taxons, -Cluster)
   Cluster1bis<- pivot_longer(Cluster1, cols=1:8, names_to = "Trait", values_to = "Modalité")
   Freq<- as.data.frame(table(Cluster1bis$Modalité))
   names(Freq)[1]<- "Modalité"
@@ -444,7 +461,9 @@ traitfish<- traitfish %>% mutate(Cluster= group41)
   ggsave(plot= C1bar, filename="Cluster1.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
   
   
-  Cluster2<- traitfish %>% filter(Cluster==2) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster2<- traitfish %>% filter(Cluster==2) 
+  save(Cluster2, file="results/Communautes bio/Communautés/Cluster2.Rdata")
+  Cluster2<- Cluster2 %>% dplyr::select(-Taxons, -Cluster)
   Cluster2bis<- pivot_longer(Cluster2, cols=1:8, names_to = "Trait", values_to = "Modalité")
   Freq<- as.data.frame(table(Cluster2bis$Modalité))
   names(Freq)[1]<- "Modalité"
@@ -467,7 +486,9 @@ traitfish<- traitfish %>% mutate(Cluster= group41)
   ggsave(plot= C2bar, filename="Cluster2.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
   
   
-  Cluster3<- traitfish %>% filter(Cluster==3) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster3<- traitfish %>% filter(Cluster==3)
+  save(Cluster3, file="results/Communautes bio/Communautés/Cluster3.Rdata")
+  Cluster3<- Cluster3 %>% dplyr::select(-Taxons, -Cluster)
   Cluster3bis<- pivot_longer(Cluster3, cols=1:8, names_to = "Trait", values_to = "Modalité")
   Freq<- as.data.frame(table(Cluster3bis$Modalité))
   names(Freq)[1]<- "Modalité"
@@ -490,7 +511,9 @@ traitfish<- traitfish %>% mutate(Cluster= group41)
   ggsave(plot= C3bar, filename="Cluster3.jpeg", path="results/Communautes bio/Communautés", width = 13, height = 8)
   
   
-  Cluster4<- traitfish %>% filter(Cluster==4) %>% dplyr::select(-Taxons, -Cluster)
+  Cluster4<- traitfish %>% filter(Cluster==4)
+  save(Cluster4, file="results/Communautes bio/Communautés/Cluster4.Rdata")
+  Cluster4<- Cluster4 %>% dplyr::select(-Taxons, -Cluster)
   Cluster4bis<- pivot_longer(Cluster4, cols=1:8, names_to = "Trait", values_to = "Modalité")
   Freq<- as.data.frame(table(Cluster4bis$Modalité))
   names(Freq)[1]<- "Modalité"
@@ -540,9 +563,8 @@ Dens1<- unique(Dens1)
   Cluster3<- Dens %>% filter(Cluster==3)
   Cluster4<- Dens %>% filter(Cluster==4)
 }
-
-
 save(Dens1, file="data/Densfish.Rdata")
+
 
 
 
@@ -567,8 +589,6 @@ save(Densceph, file="data/Densceph.Rdata")
 
 
 
-
-
 # Tableau densites tous clusters
 
 Dens1$Cluster<- as.character(Dens1$Cluster)
@@ -576,6 +596,23 @@ Densceph$Cluster<- as.character(Densceph$Cluster)
 Denstot<- bind_rows(Dens1, Dens, Densceph)
 
 save(Denstot, file="data/Denstot.Rdata")
+
+
+
+
+# Visualisation des clusters avec leurs traits
+
+{
+load("results/Communautes bio/Communautés/Cluster1.Rdata")
+load("results/Communautes bio/Communautés/Cluster2.Rdata")
+load("results/Communautes bio/Communautés/Cluster3.Rdata")
+load("results/Communautes bio/Communautés/Cluster4.Rdata")
+load("results/Communautes bio/Communautés/Cluster5.Rdata")
+load("results/Communautes bio/Communautés/Cluster6.Rdata")
+load("results/Communautes bio/Communautés/Cluster7.Rdata")
+load("results/Communautes bio/Communautés/Cluster8.Rdata")
+}
+
 
 
 
