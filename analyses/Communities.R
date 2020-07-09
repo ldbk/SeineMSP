@@ -36,7 +36,7 @@ for (j in unique(data.frame(Kriege.dens)[,"Community"])){
   
   Nb1<- Tab1 %>% group_by(Longitude,Latitude) %>% summarize(moyper= mean(Prediction))
   Nb2<- Nb1 %>% ungroup() %>% dplyr::select(moyper)
-  PLOM<- NbClust(Nb2, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+  PLOM<- NbClust(Nb2, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
   
   rect.hclust(tree, max(PLOM$Best.partition))
   zones<- cutree(tree, max(PLOM$Best.partition))
@@ -254,19 +254,6 @@ Com9<- m
 
 
 
-
-
-{
-  Com1<- raster::plot(Com1, main="Com1", xlab="Longitude", ylab="Latitude")
-  Com2<- raster::plot(Com2, main="Com2", xlab="Longitude", ylab="Latitude")
-  Com3<- raster::plot(Com3, main="Com3", xlab="Longitude", ylab="Latitude")
-  Com4<- raster::plot(Com4, main="Com4", xlab="Longitude", ylab="Latitude")
-  Com5<- raster::plot(Com5, main="Com5", xlab="Longitude", ylab="Latitude")
-  Com6<- raster::plot(Com6, main="Com6", xlab="Longitude", ylab="Latitude")
-  Com7<- raster::plot(Com7, main="Com7", xlab="Longitude", ylab="Latitude")
-  Com8<- raster::plot(Com8, main="Com8", xlab="Longitude", ylab="Latitude")
-  Com9<- raster::plot(Com9, main="Com9", xlab="Longitude", ylab="Latitude")
-}
 
 
 
