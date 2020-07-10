@@ -61,14 +61,23 @@ TabSal<- pivot_longer(TabSal, cols=1:323, names_to = "Secondes", values_to = "Sa
 
 # Mean salinity per year
 TabSal2<- TabSal %>% group_by(x,y,Year) %>% summarize(moySal= mean(Salinite))
-#ggplot(TabSal2)+
-#  geom_tile(aes(x=x, y=y, fill=moySal))+
-#  ggtitle("Salinite moyenne 1992-2018")+
-#  facet_wrap(. ~ Year)+
-#  xlab("Longitude")+
-#  ylab("Latitude")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
+ggplot(TabSal2)+
+  geom_tile(aes(x=x, y=y, fill= log(moySal)))+
+  ggtitle("Salinite moyenne 1992-2018")+
+  facet_wrap(. ~ Year)+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  labs(fill="log(Sal)")+
+  theme_minimal()+
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "Greys"))+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10 ))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
+
 
 #ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+
 #  geom_boxplot()

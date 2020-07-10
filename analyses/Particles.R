@@ -53,14 +53,22 @@ TabPart<- pivot_longer(TabPart, cols=1:262, names_to = "Date", values_to = "Part
 
 # Mean particles per year 
 TabPart2<- TabPart %>% group_by(x,y,Year) %>% summarize(moyPart= mean(Particules))
-#ggplot(TabPart2)+
-#  geom_tile(aes(x=x, y=y, fill=moyPart))+
-#  ggtitle("PP moyenne 1998-2018")+
-#  facet_wrap(. ~Year)+
-#  xlab("Longitude")+
-#  ylab("Latitude")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
+ggplot(TabPart2)+
+  geom_tile(aes(x=x, y=y, fill= log(moyPart)))+
+  ggtitle("Particules moyenne 1997-2019")+
+  facet_wrap(. ~ Year)+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  labs(fill="log(Part)")+
+  theme_minimal()+
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "YlOrBr"))+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10 ))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
 
 #ggplot(TabPart2, aes(x=Year, y=moyPart, group=Year))+
 #  geom_boxplot()

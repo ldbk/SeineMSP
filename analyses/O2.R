@@ -66,15 +66,22 @@ TabO2<- TabO2 %>% filter(O2>0)
 
 # Mean O2 per year
 TabO22<- TabO2 %>% group_by(x,y,Year) %>% summarize(moyO2= mean(O2))
-#ggplot(TabO22)+
-#  geom_tile(aes(x=x, y=y, fill=moyO2))+
-#  ggtitle("O2 moyen 1998-2018")+
-#  facet_wrap(. ~Year)+
-#  xlab("Longitude")+
-#  ylab("Latitude")+
-#  labs(fill="mmol/m3")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
+ggplot(TabO22)+
+  geom_tile(aes(x=x, y=y, fill= log(moyO2)))+
+  ggtitle("O2 moyen 1998-2018")+
+  facet_wrap(. ~ Year)+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  labs(fill="log(O2)")+
+  theme_minimal()+
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "Purples"))+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10 ))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
 
 #ggplot(TabO22, aes(x=Year, y=moyO2m, group=Year))+
 #  geom_boxplot()

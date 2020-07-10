@@ -60,15 +60,22 @@ Tabsst<- na.omit(Tabsst)
 
 # Mean SST per year
 Tabsst2<- Tabsst %>% group_by(x,y,Year) %>% summarize(moySST= mean(SST))
-#ggplot(Tabsst2)+
-#  geom_tile(aes(x=x, y=y, fill=moySST))+
-#  ggtitle("SST moyenne 1981-2018")+
-#  facet_wrap(. ~ Year)+
-#  xlab("Longitude")+
-#  ylab("Latitude")+
-#  labs(fill="SST (°C)")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
+ggplot(Tabsst2)+
+  geom_tile(aes(x=x, y=y, fill=moySST))+
+  ggtitle("SST moyenne 1982-2018")+
+  facet_wrap(. ~ Year)+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  labs(fill="°C")+
+  theme_minimal()+
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "YlOrRd"))+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10 ))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
 
 #ggplot(Tabsst2, aes(x= Year, y=moySST, group=Year))+
 #  geom_boxplot()

@@ -54,13 +54,20 @@ TabDet<- pivot_longer(TabDet, cols=1:262, names_to = "Date", values_to = "Detrit
 # Mean detritus per year
 TabDet2<- TabDet %>% group_by(x,y,Year) %>% summarize(moyDet= mean(Detritus))
 ggplot(TabDet2)+
-  geom_tile(aes(x=x, y=y, fill=moyDet))+
-  ggtitle("Detritus moyenne 1997-2017")+
+  geom_tile(aes(x=x, y=y, fill= log(moyDet)))+
+  ggtitle("Detritus moyenne 1997-2019")+
   facet_wrap(. ~Year)+
   xlab("Longitude")+
   ylab("Latitude")+
   theme_minimal()+
-  scale_fill_gradientn(colours = terrain.colors(6))  
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "PuBuGn"))+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10 ))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
 
 #ggplot(TabDet2, aes(x=Year, y=moyDet, group=Year))+
 #  geom_boxplot()

@@ -58,15 +58,22 @@ TabPP$Day<- as.numeric(substr(as.character(TabPP$Date), 9,10))
 
 # Mean PP per year
 TabPP2<- TabPP %>% group_by(x,y,Year) %>% summarize(moyPP= mean(PP))
-#ggplot(TabPP2)+
-#  geom_tile(aes(x=x, y=y, fill=moyPP))+
-#  ggtitle("PP moyenne 1998-2018")+
-#  facet_wrap(. ~ Year)+
-#  xlab("Longitude")+
-#  ylab("Latitude")+
-#  labs(fill="PP (mg C/m3/j)")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))  
+ggplot(TabPP2)+
+  geom_tile(aes(x=x, y=y, fill=log(moyPP)))+
+  ggtitle("PP moyenne 1998-2018")+
+  facet_wrap(. ~ Year)+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  labs(fill="log(PP)")+
+  theme_minimal()+
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "Greens"))+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10 ))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
 
 #ggplot(TabPP2, aes(x= Year, y=moyPP, group=Year))+
 #  geom_boxplot()

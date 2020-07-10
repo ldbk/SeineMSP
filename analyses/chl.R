@@ -54,15 +54,22 @@ Tabchl<- pivot_longer(Tabchl, cols=1:262, names_to = "Date", values_to = "Chloro
 
 # Mean chl per year
 Tabchl2<- Tabchl %>% group_by(x,y,year) %>% summarize(moyChl= mean(Chloro))
-#ggplot(Tabchl2)+
-#  geom_tile(aes(x=x, y=y, fill=moyChl))+
-#  ggtitle("Chl moyenne 1997-2017")+
-#  facet_wrap(. ~ year)+
-#  xlab("Longitude")+
-#  ylab("Latitude")+
-#  labs(fill="(?g/L)")+
-#  theme_minimal()+
-#  scale_fill_gradientn(colours = terrain.colors(6))
+ggplot(Tabchl2)+
+  geom_tile(aes(x=x, y=y, fill=log(moyChl)))+
+  ggtitle("Chlorophylle moyenne 1997-2019")+
+  facet_wrap(. ~ year)+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  labs(fill="log (Chl)")+
+  theme_minimal()+
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "YlGnBu"))+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10 ))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
 
 #ggplot(Tabchl2, aes(x= year, y=moyChl, group=year))+
 #  geom_boxplot()
