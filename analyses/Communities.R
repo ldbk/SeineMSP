@@ -5,11 +5,11 @@ library(NbClust)
 library(rgdal)
 library(rgeos)
 library(raster)
-library(ggplot2)
+library(fastcluster) # pour hclust
 
-load("data/krigeage.Rdata")
-names(Kriege.dens)[6]<- "Community"
-Kriege.dens$Community<- as.numeric(Kriege.dens$Community)
+load("data/krigeage log.Rdata")
+names(Kriege.logdens)[6]<- "Community"
+Kriege.logdens$Community<- as.numeric(Kriege.logdens$Community)
 
 
 Longitude<- numeric()
@@ -18,9 +18,9 @@ Clust<- numeric()
 Community<- numeric()
 
 
-for (j in unique(data.frame(Kriege.dens)[,"Community"])){
-  
-  Tab1<- Kriege.dens[Kriege.dens$Community==j,] %>% dplyr::select(-Variance, -Community)
+#for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
+for (j in c(1,2,3,6:9)){
+  Tab1<- Kriege.logdens[Kriege.logdens$Community==j,] %>% dplyr::select(-Variance, -Community)
   Tab2<- pivot_wider(Tab1, names_from = Year, values_from = Prediction)
   metaTab<- Tab2 %>% dplyr::select(Longitude, Latitude)
   Tab2<- Tab2 %>% dplyr::select(-c(Longitude, Latitude))
@@ -31,19 +31,19 @@ for (j in unique(data.frame(Kriege.dens)[,"Community"])){
   distance<- dist(Tab2)
   #distance[1:5]
   
-  tree<- hclust(distance)
+  tree<- fastcluster::hclust(distance)
   plot(tree, hang=-1)
   
-  Nb1<- Tab1 %>% group_by(Longitude,Latitude) %>% summarize(moyper= mean(Prediction))
-  Nb2<- Nb1 %>% ungroup() %>% dplyr::select(moyper)
-  PLOM<- NbClust(Nb2, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+  #Nb1<- Tab1 %>% group_by(Longitude,Latitude) %>% summarize(moyper= mean(Prediction))
+  PLOM<- NbClust(Tab2, min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
+  
   
   rect.hclust(tree, max(PLOM$Best.partition))
   zones<- cutree(tree, max(PLOM$Best.partition))
   
   
   toto<- cbind(metaTab, Clust=factor(zones))        
-  toto<- left_join(toto, Kriege.dens[Kriege.dens$Community==j,], by=c("Longitude", "Latitude")) 
+  toto<- left_join(toto, Kriege.logdens[Kriege.logdens$Community==j,], by=c("Longitude", "Latitude")) 
   toto<- toto %>% dplyr::select(Longitude, Latitude, Clust, Community)  
   
   
@@ -57,8 +57,8 @@ for (j in unique(data.frame(Kriege.dens)[,"Community"])){
   tata <- tata %>% group_by(Year, Clust) %>% summarise(Prediction=mean(Prediction))     
   
   ggtata<-  ggplot(tata)+
-    geom_point(aes(x=Year,y=Prediction,col=Clust))+
-    geom_line(aes(x=Year,y=Prediction,col=Clust, group=Clust))+
+    geom_point(aes(x=Year, y=Prediction, col=Clust))+
+    geom_line(aes(x=Year, y=Prediction, col=Clust, group=Clust))+
     theme_minimal()+
     facet_wrap(.~Clust)
   
@@ -247,20 +247,6 @@ Com9<- m
   Com8<- raster::plot(Com8, main="Com8", xlab="Longitude", ylab="Latitude")
   Com9<-raster::plot(Com9, main="Com9", xlab="Longitude", ylab="Latitude")
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

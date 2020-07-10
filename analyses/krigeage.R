@@ -1,4 +1,3 @@
-#Libraries
 library(dplyr)
 library(ggplot2)
 library(rgdal)
@@ -127,6 +126,16 @@ plot(res,add=T)
 #####
 
 
+
+
+
+
+
+
+
+
+
+
 #Boucle vario/krigeage sur tout les clusters#####
 
 Longitude <- numeric()
@@ -173,10 +182,10 @@ for (j in unique(data.frame(CGFS)[,"Cluster"])){
   db.CGFS.std@items$DensNb <- ifelse(is.finite(db.CGFS.std@items$DensNb), db.CGFS.std@items$DensNb, 0)
   
   #Vario moyen
-  vg.data.std <- vario.calc(db.CGFS.std, lag=0.05, nlag=8,opt.code=1,tolcode=0) 
+  vg.data.std <- vario.calc(db.CGFS.std, lag=0.05, nlag=8,opt.code=1, tolcode=0) 
   #plot(vg.data.std,npairdw=T,inches=0.1,las=1,add=T,col=2,lwd=2)
   vario1 <- vg.data.std
-  vg.mod <- model.auto(vario=vario1,struct=c(1:5),npairdw=TRUE,title="",inches=.05)
+  vg.mod <- model.auto(vario=vario1, struct=c(1:5), npairdw=TRUE, title="", inches=.05)
   
   
   db.CGFS.std <- db.locate(db.CGFS.std,"Year",NA)
@@ -235,6 +244,14 @@ ggplot()+
   theme_minimal() + geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group),fill=NA, col="black")
 
 save(Kriege.dens, file="data/krigeage.RData")
+
+
+
+
+
+
+
+
 
 
 
@@ -344,6 +361,6 @@ ggplot()+
   facet_wrap(.~Year) + ggtitle(paste0("Estimation des densités du Cluster ",y," d'espèces par \n krigeage ordinaire et voisinnage fixe", sep=" ")) + 
   theme_minimal() + geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group),fill=NA, col="black")
 
-save(Kriege.logdens, file="data/krigeage.RData")
+save(Kriege.logdens, file="data/krigeage log.RData")
 
 
