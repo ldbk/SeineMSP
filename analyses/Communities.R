@@ -7,7 +7,8 @@ library(rgeos)
 library(raster)
 library(fastcluster) # pour hclust
 
-load("data/krigeage log.Rdata")
+setwd("../")
+load("data/krigeage log.RData")
 names(Kriege.logdens)[6]<- "Community"
 Kriege.logdens$Community<- as.numeric(Kriege.logdens$Community)
 
@@ -18,8 +19,7 @@ Clust<- numeric()
 Community<- numeric()
 
 
-#for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
-for (j in c(1,2,3,6:9)){
+for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   Tab1<- Kriege.logdens[Kriege.logdens$Community==j,] %>% dplyr::select(-Variance, -Community)
   Tab2<- pivot_wider(Tab1, names_from = Year, values_from = Prediction)
   metaTab<- Tab2 %>% dplyr::select(Longitude, Latitude)
@@ -35,7 +35,19 @@ for (j in c(1,2,3,6:9)){
   plot(tree, hang=-1)
   
   #Nb1<- Tab1 %>% group_by(Longitude,Latitude) %>% summarize(moyper= mean(Prediction))
-  PLOM<- NbClust(Tab2, min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
+  if(j %in% c(1,2,3,9){
+  	PLOM<- NbClust(Tab2, min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
+  }
+  if(j %in% c(4){
+  	PLOM<- NbClust(Tab2[,9:32], min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
+  }
+  if(j %in% c(8){
+  	PLOM<- NbClust(Tab2[,c(28,31)], min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
+}
+  if(j %in% c(5:7){
+  	PLOM<- NbClust(Tab2[,c(27:32)], min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
+}
+	
   
   
   rect.hclust(tree, max(PLOM$Best.partition))
