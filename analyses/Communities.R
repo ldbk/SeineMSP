@@ -19,7 +19,7 @@ Community<- numeric()
 
 
 #for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
-for (j in c(1,2,3,6:9)){
+for (j in c(1,2,3,4,9)){
   Tab1<- Kriege.logdens[Kriege.logdens$Community==j,] %>% dplyr::select(-Variance, -Community)
   Tab2<- pivot_wider(Tab1, names_from = Year, values_from = Prediction)
   metaTab<- Tab2 %>% dplyr::select(Longitude, Latitude)
