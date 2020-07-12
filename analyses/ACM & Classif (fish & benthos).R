@@ -135,7 +135,7 @@ ggsave(plot= comparbenthos, filename="Aggregation criterion.jpeg", path="results
 # 4 BENTHOS Classification with Ward criterion
 
 arbre<- agnes(rez$ind$coord, method="ward", par.method=1)
-plot(arbre, which=2, hang=-1)
+plot(arbre, which=2, hang=-1, main= "Dendrogramme des taxons benthiques", xlab="")
 rect.hclust(arbre, k=4)
 
 group4<- cutree(arbre, k=4) #4 clusters

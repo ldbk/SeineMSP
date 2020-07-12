@@ -82,7 +82,7 @@ ggplot(Tabsst2)+
 
 
 # Mean SST 1981-2018
-Tabsst3<- Tabsst2 %>% group_by(x,y) %>% summarize(moyper= mean(moySST))
+#Tabsst3<- Tabsst2 %>% group_by(x,y) %>% summarize(moyper= mean(moySST))
 #ggplot(Tabsst3)+
 #  geom_tile(aes(x=x, y=y, fill= moyper))+
 #  ggtitle("SST moyenne 1981-2018")+
@@ -138,12 +138,11 @@ distance<- dist(Tabsstnew)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-Tabsst5<- Tabsst3 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(Tabsst5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  3
+#NbClust(Tabsstnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  2
 
-rect.hclust(tree, 3)
-zones<- cutree(tree, 3)
+rect.hclust(tree, 2)
+zones<- cutree(tree, 2)
 
 zone<- sst[[1]]
 values(zone)<- NA
@@ -164,7 +163,7 @@ toto2sst<- left_join(toto, essai2, by="Clust")
 # Serie tempo / zone
 
 serie<- left_join(toto, cbind(metaTabnew, Tabsstnew))
-serie<- pivot_longer(serie, cols=c(4:41), names_to="Year", values_to = "sst")
+serie<- pivot_longer(serie, cols=c(4:40), names_to="Year", values_to = "sst")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(sst=mean(sst))
 
 ggseriesst<-  ggplot(serie)+
@@ -201,7 +200,7 @@ res <- rgeos::gDifference(buff, coast)
 
 # Raster
 
-r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
+#r0<- raster(nrow=45, ncol=163, xmn=-1.400764, xmx=0.3900167, ymn=49.30618, ymx=49.80057)
 #projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 
   # create SpatialPointsDataFrame
@@ -212,18 +211,18 @@ gridded(toto3sst) <- TRUE
   # coerce to raster
 rastersst<- raster(toto3sst)
 rastersst
-plot(rastersst, col= terrain.colors(3), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst, col= c("#FFCCCC", "#FF6666"), main="SST", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dissst<- disaggregate(rastersst, fact=(res(rastersst)/res(rasterchlnew)))
 mSST<- mask(dissst, res)
-plot(mSST)
+plot(mSST, col= c("#FFCCCC", "#FF6666"))
 
 save(mSST, file="data/satellite/sst/sst_raster.Rdata")
 
 jpeg(file="results/satellite/zones/SST_raster.jpeg")
-plot(mSST, main="Surface temperature", xlab="Longitude", ylab="Latitude")
+plot(mSST, main="Surface temperature", xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"))
 dev.off()
 
 
@@ -255,18 +254,18 @@ gridded(toto4sst) <- TRUE
   # coerce to raster
 rastersst2<- raster(toto4sst)
 rastersst2
-plot(rastersst2, col=brewer.pal(n = 3, name = "YlOrRd"), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst2, col= c("#FFCCCC", "#FF6666"), main="SST", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dissst2<- disaggregate(rastersst2, fact=(res(rastersst2)/res(rasterchlnew)))
 mSST2<- mask(dissst2, res)
-plot(mSST2, col=brewer.pal(n = 3, name = "Reds"))
+plot(mSST2, col= c("#FFCCCC", "#FF6666"))
 
 save(mSST2, file="results/satellite/means by zone/sst_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/SST_raster.jpeg")
-plot(mSST2, main="Surface temperature", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "Reds"))
+plot(mSST2, main="Surface temperature", xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"))
 dev.off()
 
 

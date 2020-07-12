@@ -84,7 +84,7 @@ ggplot(TabSal2)+
 
 
 # Mean salinity 1998-2018
-TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
+#TabSal3<- TabSal2 %>% group_by(x,y) %>% summarize(moyper= mean(moySal))
 #ggplot(TabSal3)+
 #  geom_tile(aes(x=x, y=y, fill= moyper))+
 #  ggtitle("Salinite moyenne 1992-2018")+
@@ -139,12 +139,11 @@ distance<- dist(TabSalnew)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-TabSal5<- TabSal3 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(TabSal5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  4
+#NbClust(TabSalnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  3
 
-rect.hclust(tree, 4)
-zones<- cutree(tree, 4)
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- Sal[[1]]
 values(zone)<- NA
@@ -213,18 +212,18 @@ gridded(toto3Sal) <- TRUE
   # coerce to raster
 rasterSal<- raster(toto3Sal)
 rasterSal
-plot(rasterSal, col= terrain.colors(4), main="Salinity", xlab="Longitude", ylab="Latitude")
+plot(rasterSal, col= brewer.pal(n = 3, name = "Greys"), main="Salinity", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dissal<- disaggregate(rasterSal, fact=(res(rasterSal)/res(rasterchlnew)))
 mSal<- mask(dissal, res)
-plot(mSal)
+plot(mSal, col= brewer.pal(n = 3, name = "Greys"))
 
 save(mSal, file="data/satellite/Salinity/Sal_raster.Rdata")
 
 jpeg(file="results/satellite/zones/Sal_raster.jpeg")
-plot(mSal, main="Salinity", xlab="Longitude", ylab="Latitude")
+plot(mSal, main="Salinity", xlab="Longitude", ylab="Latitude", col= brewer.pal(n = 3, name = "Greys"))
 dev.off()
 
 
@@ -256,16 +255,16 @@ gridded(toto4Sal) <- TRUE
   # coerce to raster
 rasterSal2<- raster(toto4Sal)
 rasterSal2
-plot(rasterSal2, col=brewer.pal(n = 4, name = "Greys"), main="Salinity", xlab="Longitude", ylab="Latitude")
+plot(rasterSal2, col=brewer.pal(n = 3, name = "Greys"), main="Salinity", xlab="Longitude", ylab="Latitude")
 
 dissal2<- disaggregate(rasterSal2, fact=(res(rasterSal2)/res(rasterchlnew)))
 mSal2<- mask(dissal2, res)
-plot(mSal2, col=brewer.pal(n = 4, name = "Greys"))
+plot(mSal2, col=brewer.pal(n = 3, name = "Greys"))
 
 save(mSal2, file="results/satellite/means by zone/Sal_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/Sal_raster.jpeg")
-plot(mSal2, main="Salinity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "Greys"))
+plot(mSal2, main="Salinity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "Greys"))
 dev.off()
 
 

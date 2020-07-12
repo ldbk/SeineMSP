@@ -75,7 +75,7 @@ ggplot(TabPart2)+
 
 
 # Mean particles 1998-2018
-TabPart3<- TabPart2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPart))
+#TabPart3<- TabPart2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPart))
 #ggplot(TabPart3)+
 #  geom_tile(aes(x=x, y=y, fill= moyper))+
 #  ggtitle("Particules moyenne 1997-2017")+
@@ -130,12 +130,11 @@ distance<- dist(TabPartnew)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-TabPart5<- TabPart3 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(TabPart5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  4
+#NbClust(TabPartnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  2
 
-rect.hclust(tree, 4)
-zones<- cutree(tree, 4)
+rect.hclust(tree, 2)
+zones<- cutree(tree, 2)
 
 zone<- Part[[1]]
 values(zone)<- NA
@@ -204,18 +203,18 @@ gridded(toto3part) <- TRUE
   # coerce to raster
 rasterpart<- raster(toto3part)
 rasterpart
-plot(rasterpart, col=brewer.pal(n = 4, name = "YlOrBr"), main="Particles", xlab="Longitude", ylab="Latitude")
+plot(rasterpart, col=c("#FFFFCC", "#CC6633"), main="Particles", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dispart<- disaggregate(rasterpart, fact=(res(rasterpart)/res(rasterchlnew)))
 mPart<- mask(dispart, res)
-plot(mPart, col=brewer.pal(n = 4, name = "YlOrBr"))
+plot(mPart, col=c("#FFFFCC", "#CC6633"))
 
 save(mPart, file="data/satellite/Particles/part_raster.Rdata")
 
 jpeg(file="results/satellite/zones/Part_raster.jpeg")
-plot(mPart, main="Particles", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "YlOrBr"))
+plot(mPart, main="Particles", xlab="Longitude", ylab="Latitude", col=c("#FFFFCC", "#CC6633"))
 dev.off()
 
 
@@ -247,18 +246,18 @@ gridded(toto4part) <- TRUE
   # coerce to raster
 rasterpart2<- raster(toto4part)
 rasterpart2
-plot(rasterpart2, col=brewer.pal(n = 4, name = "YlOrBr"), main="Particles", xlab="Longitude", ylab="Latitude")
+plot(rasterpart2, col=c("#FFFFCC", "#CC6633"), main="Particles", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dispart2<- disaggregate(rasterpart2, fact=(res(rasterpart2)/res(rasterchlnew)))
 mPart2<- mask(dispart2, res)
-plot(mPart2? col=brewer.pal(n = 4, name = "YlOrBr"))
+plot(mPart2? col=c("#FFFFCC", "#CC6633"))
 
 save(mPart2, file="results/satellite/means by zone/part_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/Part_raster.jpeg")
-plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "YlOrBr"))
+plot(mPart2, main="Particles", xlab="Longitude", ylab="Latitude", col=c("#FFFFCC", "#CC6633"))
 dev.off()
 
 

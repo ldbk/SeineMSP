@@ -50,14 +50,14 @@ par(mfrow = c(1, 1))
 par(mfrow = c(4, 2))
 
 {
-  Chl<- raster::plot(mChl2, main="Chlorophyll", col=brewer.pal(n = 6, name = "PuRd"))
-  Part<- raster::plot(mPart2, main="Particles", col=brewer.pal(n = 4, name = "YlOrBr"))
-  PP<- raster::plot(mPP2, main="Primary production", col=brewer.pal(n = 3, name = "Greens"))
-  Det<- raster::plot(mDet2, main="Detritus", col=brewer.pal(n = 3, name = "PuBuGn"))
+  Chl<- raster::plot(mChl2, main="Chlorophyll", col=brewer.pal(n = 3, name = "PuRd"))
+  Part<- raster::plot(mPart2, main="Particles", col=c("#FFFFCC", "#CC6633"))
+  PP<- raster::plot(mPP2, main="Primary production", col=c("#CCFFCC", "#99CC99"))
+  Det<- raster::plot(mDet2, main="Detritus", col=c("#99CCCC", "#336666"))
   Turb<- raster::plot(mTurb2, main="Turbidity", col=brewer.pal(n = 3, name = "PuBu"))
-  SST<- raster::plot(mSST2, main="SST", col=brewer.pal(n = 3, name = "Reds"))
-  Sal<- raster::plot(mSal2, main="Salinity", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 4, name = "Greys"))
-  O2<- raster::plot(mO22, main="O2", col=brewer.pal(n = 5, name = "Purples"))
+  SST<- raster::plot(mSST2, main="SST", col= c("#FFCCCC", "#FF6666"))
+  Sal<- raster::plot(mSal2, main="Salinity", xlab="Longitude", ylab="Latitude", col= brewer.pal(n = 3, name = "Greys"))
+  O2<- raster::plot(mO22, main="O2", col=brewer.pal(n = 3, name = "Purples"))
 }
 
 par(mfrow = c(1, 1))

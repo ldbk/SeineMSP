@@ -4,6 +4,8 @@ library(FactoMineR)   # pour MCA
 library(missMDA)
 library(cluster)  # pour agnes
 library(RColorBrewer)
+library(NbClust)
+library(fastcluster) # pour hclust
 
 
 ########################
@@ -49,29 +51,34 @@ for (i in list(polChl,polDet,polO2,polPart,polPP,polSal,polSST,polTurb)){
   grd <- cbind(grd,pipo)
 }
 dim(na.omit(grd))
-
-grd2 <- na.omit(grd)                                                                                           
+grd2<- na.omit(grd)                                                                                           
 plot(grd2[,c(1,2)])
-grd2 <- grd2[, !duplicated(colnames(grd2))]
-grd2 <- grd2[,-3]                                                                                               
+grd2<- grd2[, !duplicated(colnames(grd2))]
+grd2<- grd2[,-3]                                                                                               
 
+
+# ACM
 rez<- MCA(grd2[,-c(1,2)], ncp=999, method="Burt", graph=F)                                                      
-plt1<-plotellipses(rez, axes=c(1,2))
-plt2<-plotellipses(rez, axes=c(1,3))
+plt1<- plotellipses(rez, axes=c(1,2))
+plt2<- plotellipses(rez, axes=c(1,3))
 
-arbre<- agnes(rez$ind$coord, method="ward", par.method=1)
+
+# Classification
+arbre<- hclust(dist(rez$ind$coord), method="ward.D2")
 plot(arbre, which=2,hang=-1)
+#NbClust(rez$ind$coord, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  10 (5 indicateurs, puis 4 indicateurs pour 6, 3 ou 2 clusters)
+rect.hclust(arbre, k=6)
+groups<- cutree(arbre, k=6)
 
-rect.hclust(arbre, k=(5))
 
-group6<- cutree(arbre,k=5)
-
-tata <- cbind(grd2[,c(1,2)],Clust=factor(group6))
+tata<- cbind(grd2[,c(1,2)],Clust=factor(groups))
 
 Allparam<- ggplot(tata)+
-  geom_tile(aes(x=Long,y=Lat,fill=Clust))+
+  geom_tile(aes(x=Long,y=Lat,fill= as.numeric(Clust)))+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
-  ggtitle("Final bioregionalization")+
+  #ggtitle("Final bioregionalization")+
+  scale_fill_gradientn(colours =brewer.pal(n = 5, name = "YlOrBr")) +
   xlab("Longitude")+
   ylab("Latitude")+
   theme_minimal()
