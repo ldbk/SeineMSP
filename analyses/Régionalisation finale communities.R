@@ -4,6 +4,8 @@ library(FactoMineR)   # pour MCA
 library(missMDA)
 library(cluster)  # pour agnes
 library(RColorBrewer)
+library(fastcluster)
+library(NbClust)
 
 {
 load(file="data/ICES/Tabfin1.Rdata")
@@ -44,23 +46,23 @@ names(Tabfin9)[5]<- "Pred9"
 Tabfin9<- Tabfin9 %>% dplyr::select(-Community, -Clust)
 }
 {
-load("results/Communautes bio/Community1_polygons.Rdata")
+load("results/Communautes bio/Zones/Community1_polygons.Rdata")
 pol1<- pol
-load("results/Communautes bio/Community2_polygons.Rdata")
+load("results/Communautes bio/Zones/Community2_polygons.Rdata")
 pol2<- pol
-load("results/Communautes bio/Community3_polygons.Rdata")
+load("results/Communautes bio/Zones/Community3_polygons.Rdata")
 pol3<- pol
-load("results/Communautes bio/Community4_polygons.Rdata")
+load("results/Communautes bio/Zones/Community4_polygons.Rdata")
 pol4<- pol
-load("results/Communautes bio/Community5_polygons.Rdata")
+load("results/Communautes bio/Zones/Community5_polygons.Rdata")
 pol5<- pol
-load("results/Communautes bio/Community6_polygons.Rdata")
+load("results/Communautes bio/Zones/Community6_polygons.Rdata")
 pol6<- pol
-load("results/Communautes bio/Community7_polygons.Rdata")
+load("results/Communautes bio/Zones/Community7_polygons.Rdata")
 pol7<- pol
-load("results/Communautes bio/Community8_polygons.Rdata")
+load("results/Communautes bio/Zones/Community8_polygons.Rdata")
 pol8<- pol
-load("results/Communautes bio/Community9_polygons.Rdata")
+load("results/Communautes bio/Zones/Community9_polygons.Rdata")
 pol9<- pol
 }
 load("data/PolyCut.Rdata")
@@ -102,21 +104,23 @@ plt2<- plotellipses(rez, axes=c(1,3))
 
 
 # Classification
-arbre<- fastcluster::hclust(dist(rez$ind$coord), method="ward.D2")
+arbre<- hclust(dist(rez$ind$coord), method="ward.D2")
 #arbre<- agnes(rez$ind$coord, method="ward", par.method=1)
 #save(arbre, file="data/ICES/arbre_régiona_fin_communi_dens.Rdata")
 #load("data/ICES/arbre_régiona_fin_communi_dens.Rdata")
 plot(arbre, which=2, hang=-1)
-NbClust::NbClust(rez$ind$coord, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(rez$ind$coord, min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
 rect.hclust(arbre, k=(5))
 groups<- cutree(arbre, k=5)
 
 tata<- cbind(grd2[,c(1,2)], Clust=factor(groups))
 
+
 Allcom<- ggplot(tata)+
-  geom_tile(aes(x=Long, y=Lat, fill=Clust))+
+  geom_tile(aes(x=Long, y=Lat, fill=as.numeric(Clust)))+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
   #ggtitle("Final bioregionalization")+
+  scale_fill_gradientn(colours =brewer.pal(n = 5, name = "YlGnBu")) +
   xlab("Longitude")+
   ylab("Latitude")+
   theme_minimal()
@@ -132,7 +136,7 @@ Allcom2<- Allcom +
   theme(axis.text.y = element_text(size = 10))
 
 
-ggsave(plot= Allcom2, filename="Biorégionalisation_dens.jpeg", path="results/Communautes bio", width = 13, height = 8)
+ggsave(plot= Allcom2, filename="Biorégionalisation.jpeg", path="results/Zones/Communautes bio", width = 13, height = 8)
 
 
 {

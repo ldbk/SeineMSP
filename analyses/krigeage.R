@@ -40,7 +40,12 @@ db.poly <- polygon.create(toto[,c(1,2)])
 
 ggplot(Denstot)+
   geom_point(aes(x=moyLong,y=moyLat))+
-  geom_polygon(data=toto, aes(x=long,y=lat, group=group),fill=NA,col="black")
+  geom_polygon(data=toto, aes(x=long,y=lat, group=group),fill=NA,col="black")+
+  theme_minimal()+
+  ylab("Latitude")+
+  xlab("Longitude")+
+  ggtitle("Coordonnées des coups de chalut CGFS 1988 - 2019")+
+  theme(plot.title = element_text(hjust = 0.5))
 #####
 
 
@@ -118,7 +123,7 @@ db.kriege <- db.sel(db.CGFS.std,Year==1996) #Selection de l'année 1996
 kres <- kriging(db.kriege, db.grid, model = vg.mod, neigh = nei2, uc=c("1"), mean=NA) #Krigeage ordianire, voisinnage unique
 
 # Plot kriged estimates: K.estim
-plot(kres,name.image=5,title="Valeurs de krigeage estimées",col=topo.colors(20),xlab="Longitude",ylab="Latitude",xlim=c(-1.5,0.5),pos.legend=1)
+plot(kres,name.image=5,title="Valeurs de krigeage interpolées pour la communauté II, l'an 1996",col=topo.colors(20),xlab="Longitude",ylab="Latitude",xlim=c(-1.5,0.5),pos.legend=1)
 plot(db.sel(db.CGFS.std, Year==1996),pch=18,add=T,col="red",inches=1.5)
 plot(res,add=T)
 
@@ -247,7 +252,15 @@ save(Kriege.dens, file="data/krigeage.RData")
 
 
 
+# Plot krigeage pour un cluster
+j<- 2
 
+ggplot()+
+  geom_raster(data=Kriege.dens[Kriege.dens$Cluster==j,],aes(x= Longitude, y= Latitude, fill = Prediction)) +
+  scale_fill_gradientn(colours = terrain.colors(20)) +
+  ggtitle(paste("Estimation des densités du Cluster 1 d'espèces par \n krigeage ordinaire et voisinnage fixe", sep=" ")) + 
+  theme_minimal() +
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group),fill=NA, col="black")
 
 
 
@@ -351,16 +364,53 @@ for (j in unique(data.frame(CGFS)[,"Cluster"])){
   
 }
 Kriege.logdens<- data.frame(Longitude=Longitude, Latitude=Latitude, Prediction=Prediction, Variance=Variance, Year=Year, Cluster=factor(Cluster))
+save(Kriege.logdens, file="data/krigeage log.RData")
 
 
 #Plot du krigeage sur toutes les années pour un cluster
-y <- 9
-ggplot()+
-  geom_raster(data=Kriege.logdens[Kriege.logdens$Cluster==y,],aes(x= Longitude, y= Latitude, fill = Prediction)) +
-  scale_fill_gradientn(colours = terrain.colors(20)) + 
-  facet_wrap(.~Year) + ggtitle(paste0("Estimation des densités du Cluster ",y," d'espèces par \n krigeage ordinaire et voisinnage fixe", sep=" ")) + 
-  theme_minimal() + geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group),fill=NA, col="black")
+y <- 2
+gg<- ggplot()+
+  geom_raster(data= Kriege.logdens[Kriege.logdens$Community==y,], aes(x= Longitude, y= Latitude, fill = Prediction)) +
+  scale_fill_gradientn(colours = brewer.pal(n=9, name = "Greys")) + 
+  facet_wrap(.~ Year) +
+  ggtitle(paste0("Estimation des densités de la communauté III")) + 
+  theme_minimal() +
+  geom_polygon(data= PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 15))
 
-save(Kriege.logdens, file="data/krigeage log.RData")
+ggsave(gg, filename = "Com IX.jpeg", path = "results/Communautes bio/Series tempo cartes", width = 13, height = 8 )
+
+
+
+# Plot krigeage pour un cluster
+j<- 3
+
+ggplot()+
+  geom_raster(data=Kriege.dens[Kriege.dens$Cluster==j,],aes(x= Longitude, y= Latitude, fill = Prediction)) +
+  scale_fill_gradientn(colours = brewer.pal(n=9, name = "Greys")) +
+  ggtitle(paste("Communauté III", sep=" ")) +
+  theme_minimal() +
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group),fill=NA, col="black")+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))
+
+
+
+
+
+colours = terrain.colors(20)
+
+
+
+
 
 
