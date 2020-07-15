@@ -88,7 +88,7 @@ ggplot(TabO22)+
 
 
 # Mean O2 1998-2018
-TabO23<- TabO22 %>% group_by(x,y) %>% summarize(moyper= mean(moyO2))
+#TabO23<- TabO22 %>% group_by(x,y) %>% summarize(moyper= mean(moyO2))
 #ggplot(TabO23)+
 #  geom_tile(aes(x=x, y=y, fill= moyper))+
 #  ggtitle("O2 moyen 1998-2018")+
@@ -151,12 +151,11 @@ distance<- dist(TabO2new)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-TabO25<- TabO23 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(TabO25, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  5
+#NbClust(TabO2new, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  3
 
-rect.hclust(tree, 5)
-zones<- cutree(tree, 5)
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- O2[[1]]
 values(zone)<- NA
@@ -225,18 +224,18 @@ gridded(toto3O2) <- TRUE
   # coerce to raster
 rasterO2<- raster(toto3O2)
 rasterO2
-plot(rasterO2, col=brewer.pal(n = 5, name = "Purples"), main="O2", xlab="Longitude", ylab="Latitude")
+plot(rasterO2, col=brewer.pal(n = 3, name = "Purples"), main="O2", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disO2<- disaggregate(rasterO2, fact=(res(rasterO2)/res(rasterchlnew)))
 mO2<- mask(disO2, res)
-plot(mO2, col=brewer.pal(n = 5, name = "Purples"))
+plot(mO2, col=brewer.pal(n = 3, name = "Purples"))
 
 save(mO2, file="data/satellite/O2/O2_raster.Rdata")
 
 jpeg(file="results/satellite/zones/O2_raster.jpeg")
-plot(mO2, main="O2", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 5, name = "Purples"))
+plot(mO2, main="O2", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "Purples"))
 dev.off()
 
 
@@ -268,18 +267,18 @@ gridded(toto4O2) <- TRUE
   # coerce to raster
 rasterO22<- raster(toto4O2)
 rasterO22
-plot(rasterO22, col=brewer.pal(n = 5, name = "Purples"), main="O2", xlab="Longitude", ylab="Latitude")
+plot(rasterO22, col=brewer.pal(n = 3, name = "Purples"), main="O2", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disO22<- disaggregate(rasterO22, fact=(res(rasterO22)/res(rasterchlnew)))
 mO22<- mask(disO22, res)
-plot(mO22, col=brewer.pal(n = 5, name = "Purples"))
+plot(mO22, col=brewer.pal(n = 3, name = "Purples"))
 
 save(mO22, file="results/satellite/means by zone/O2_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/O2_raster.jpeg")
-plot(mO22, main="O2", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 5, name = "Purples"))
+plot(mO22, main="O2", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "Purples"))
 dev.off()
 
 

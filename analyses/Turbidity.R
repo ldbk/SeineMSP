@@ -130,8 +130,7 @@ distance<- dist(TabTurbnew)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-TabTurb5<- TabTurb3 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(TabTurb5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
+#NbClust(TabTurbnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
 # According to the majority rule, the best number of clusters is  3
 
 rect.hclust(tree, 3)

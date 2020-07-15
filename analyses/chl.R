@@ -62,7 +62,7 @@ ggplot(Tabchl2)+
   ylab("Latitude")+
   labs(fill="log (Chl)")+
   theme_minimal()+
-  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "YlGnBu"))+
+  scale_fill_gradientn(colours = brewer.pal(n = 9, name = "PuRd"))+
   theme(strip.text.x = element_text(size = 15))+
   theme(axis.text.x = element_text(size = 10 ))+
   theme(plot.title = element_text(size = 20))+
@@ -76,7 +76,7 @@ ggplot(Tabchl2)+
 
 
 # Mean chl 1997-2017
-Tabchl3<- Tabchl2 %>% group_by(x,y) %>% summarize(moyper= mean(moyChl))
+#Tabchl3<- Tabchl2 %>% group_by(x,y) %>% summarize(moyper= mean(moyChl))
 #ggplot(Tabchl3)+
 #  geom_tile(aes(x=x, y=y, fill= moyper))+
 #  ggtitle("Chlorophylle moyenne 1997-2017")+
@@ -139,12 +139,11 @@ distance<- dist(Tabchlnew)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-Tabchl5<- Tabchl3 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(Tabchl5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  6
+#NbClust(Tabchlnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  3
 
-rect.hclust(tree, 6)
-zones<- cutree(tree, 6)
+rect.hclust(tree, 3)
+zones<- cutree(tree, 3)
 
 zone<- chl[[1]]
 values(zone)<- NA
@@ -169,9 +168,9 @@ serie<- pivot_longer(serie, cols=c(4:26), names_to="Year", values_to = "chl")
 serie<- serie %>% group_by(Year, Clust) %>% summarise(chl=mean(chl))
 save(serie, file="results/satellite/series by zone/chlTab.Rdata")
 
-clust.labs<- c("Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6")
-names(clust.labs)<- c("1", "2", "3", "4", "5", "6")
-colors<- brewer.pal(n = 6, name = "YlGnBu")
+clust.labs<- c("Zone 1", "Zone 2", "Zone 3")
+names(clust.labs)<- c("1", "2", "3")
+colors<- brewer.pal(n = 3, name = "YlGnBu")
 
 ggseriechl<-  ggplot(serie)+
   geom_point(aes(x=Year,y=chl,col=Clust))+
@@ -225,17 +224,17 @@ gridded(toto3chl) <- TRUE
   # coerce to raster
 rasterchlnew<- raster(toto3chl)
 rasterchlnew
-plot(rasterchlnew, col=brewer.pal(n = 6, name = "YlGnBu"), main="Chl", xlab="Longitude", ylab="Latitude")
+plot(rasterchlnew, col=brewer.pal(n = 3, name = "YlGnBu"), main="Chl", xlab="Longitude", ylab="Latitude")
 
 save(rasterchlnew, file="data/satellite/chl/rasterChlnew.Rdata")
 
 mChl<- mask(rasterchlnew, res)
-plot(mChl, col=brewer.pal(n = 6, name = "YlGnBu"))
+plot(mChl, col=brewer.pal(n = 3, name = "YlGnBu"))
 
 save(mChl, file="data/satellite/chl/chl_raster.Rdata")
 
 jpeg(file="results/satellite/zones/chl_raster.jpeg")
-plot(mChl, main="Chlorophyll", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 6, name = "YlGnBu"))
+plot(mChl, main="Chlorophyll", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "YlGnBu"))
 dev.off()
 
 
@@ -267,15 +266,15 @@ gridded(toto4chl) <- TRUE
   # coerce to raster
 rasterchlnew2<- raster(toto4chl)
 rasterchlnew2
-plot(rasterchlnew2, col=brewer.pal(n = 6, name = "PuRd"), main="Chl", xlab="Longitude", ylab="Latitude")
+plot(rasterchlnew2, col=brewer.pal(n = 3, name = "PuRd"), main="Chl", xlab="Longitude", ylab="Latitude")
 
 mChl2<- mask(rasterchlnew2, res)
-plot(mChl2, col=brewer.pal(n = 6, name = "PuRd"))
+plot(mChl2, col=brewer.pal(n = 3, name = "PuRd"))
 
 save(mChl2, file="results/satellite/means by zone/chl_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/chl_raster.jpeg")
-plot(mChl2, col=brewer.pal(n = 6, name = "PuRd"), main="Chlorophyll", xlab="Longitude", ylab="Latitude")
+plot(mChl2, col=brewer.pal(n = 3, name = "PuRd"), main="Chlorophyll", xlab="Longitude", ylab="Latitude")
 dev.off()
 
 

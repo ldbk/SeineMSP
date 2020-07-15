@@ -74,7 +74,7 @@ ggplot(TabDet2)+
 
 
 # Mean detritus 1997-2017
-TabDet3<- TabDet2 %>% group_by(x,y) %>% summarize(moyper= mean(moyDet))
+#TabDet3<- TabDet2 %>% group_by(x,y) %>% summarize(moyper= mean(moyDet))
 #ggplot(TabDet3)+
 #  geom_tile(aes(x=x, y=y, fill= moyper))+
 #  ggtitle("Detritus moyenne 1997-2017")+
@@ -129,12 +129,11 @@ distance<- dist(TabDetnew)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-TabDet5<- TabDet3 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(TabDet5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  3
+#NbClust(TabDetnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  2
 
-rect.hclust(tree, 3)
-zones<- cutree(tree, 3)
+rect.hclust(tree, 2)
+zones<- cutree(tree, 2)
 
 zone<- Detrit[[1]]
 values(zone)<- NA
@@ -203,18 +202,18 @@ gridded(toto3Det) <- TRUE
   # coerce to raster
 rasterDet<- raster(toto3Det)
 rasterDet
-plot(rasterDet, col=brewer.pal(n = 3, name = "YlGn"), main="Detritus", xlab="Longitude", ylab="Latitude")
+plot(rasterDet, col=c("#99CCCC", "#336666"), main="Detritus", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disdet<- disaggregate(rasterDet, fact=(res(rasterDet)/res(rasterchlnew)))
 mDet<- mask(disdet,res)
-plot(mDet, col=brewer.pal(n = 3, name = "YlGn"))
+plot(mDet, col=c("#99CCCC", "#336666"))
 
 save(mDet, file="data/satellite/Detritus/Det_raster.Rdata")
 
 jpeg(file="results/satellite/zones/Det_raster.jpeg")
-plot(mDet, main="Detritus", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "YlGn"))
+plot(mDet, main="Detritus", xlab="Longitude", ylab="Latitude", col=c("#99CCCC", "#336666"))
 dev.off()
 
 
@@ -247,18 +246,18 @@ gridded(toto4Det) <- TRUE
   # coerce to raster
 rasterDet2<- raster(toto4Det)
 rasterDet2
-plot(rasterDet2, col=brewer.pal(n = 3, name = "PuBuGn"), main="Detritus", xlab="Longitude", ylab="Latitude")
+plot(rasterDet2, col=c("#99CCCC", "#336666"), main="Detritus", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disdet2<- disaggregate(rasterDet2, fact=(res(rasterDet2)/res(rasterchlnew)))
 mDet2<- mask(disdet2,res)
-plot(mDet2, col=brewer.pal(n = 3, name = "PuBuGn"))
+plot(mDet2, col=c("#99CCCC", "#336666"))
 
 save(mDet2, file="results/satellite/means by zone/Det_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/Det_raster.jpeg")
-plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "PuBuGn"))
+plot(mDet2, main="Detritus", xlab="Longitude", ylab="Latitude", col=c("#99CCCC", "#336666"))
 dev.off()
 
 

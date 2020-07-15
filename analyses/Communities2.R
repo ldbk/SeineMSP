@@ -6,8 +6,8 @@ library(rgdal)
 library(rgeos)
 library(raster)
 library(fastcluster) # pour hclust
+library(RColorBrewer)
 
-setwd("../")
 load("data/krigeage log.RData")
 names(Kriege.logdens)[6]<- "Community"
 Kriege.logdens$Community<- as.numeric(Kriege.logdens$Community)
@@ -35,16 +35,16 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   plot(tree, hang=-1)
   
   #Nb1<- Tab1 %>% group_by(Longitude,Latitude) %>% summarize(moyper= mean(Prediction))
-  if(j %in% c(1,2,3,9){
+  if(j %in% c(1,2,3,9)){
   	PLOM<- NbClust(Tab2, min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
   }
-  if(j %in% c(4){
+  if(j %in% c(4)){
   	PLOM<- NbClust(Tab2[,9:32], min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
   }
-  if(j %in% c(8){
+  if(j %in% c(8)){
   	PLOM<- NbClust(Tab2[,c(28,31)], min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
 }
-  if(j %in% c(5:7){
+  if(j %in% c(5:7)){
   	PLOM<- NbClust(Tab2[,c(27:32)], min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
 }
 	
@@ -74,7 +74,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
     theme_minimal()+
     facet_wrap(.~Clust)
   
-  save(ggtata, file= paste0("results/Communautes bio/Community", j,"_raster.Rdata"))
+  save(ggtata, file= paste0("results/Communautes bio/Community", j,"_plot.Rdata"))
   
   print(ggtata)
   
@@ -90,6 +90,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
 
 }
 Tabfaunefin<- data.frame(Longitude=Longitude, Latitude=Latitude, Clust=as.factor(Clust), Community=Community)
+save(Tabfaunefin, file="results/Communautes bio/Tabfaunefin.Rdata")
 #Tabfaunefin<- Tabfaunefin %>% left_join(Kriege.dens, by=c("Longitude", "Latitude", "Community"))
 #Tabfaunefin<- Tabfaunefin %>% dplyr::select(-Variance, -Year)
 #Tabfaunefin<- unique(Tabfaunefin)
@@ -112,10 +113,11 @@ res <- rgeos::gDifference(buff, coast)
 
 
 
+
+
+# Raster avec zones
+
 for (j in unique(Tabfaunefin[,"Community"])){
-
-
-# Raster
   
     # create SpatialPointsDataFrame
 toto1<- Tabfaunefin[Tabfaunefin$Community==j,]
@@ -133,18 +135,24 @@ dis<- disaggregate(raster, fact=(res(raster)/res(rasterchlnew)))
 m<- mask(dis, res)
 plot(m)
 
-save(m, file= paste0("results/Communautes bio/Community", j,"_raster.Rdata"))
+save(m, file= paste0("results/Communautes bio/Zones/Community", j,"_rasterzones.Rdata"))
 
 
 
-# Polygons
+    # Polygons
 
 pol<- rasterToPolygons(m, dissolve=TRUE)
 plot(pol, col=pol@data$Clust)
 
-save(pol, file= paste0("results/Communautes bio/Community", j,"_polygons.Rdata"))
+save(pol, file= paste0("results/Communautes bio/Zones/Community", j,"_polygons.Rdata"))
 
 }
+
+
+
+
+
+
 
 
 
@@ -211,7 +219,7 @@ plot(m)
 save(m, file= paste0("results/Communautes bio/Community", j,"_raster.Rdata"))
 
 
-# Polygons
+# Polygons with densities
 
 poldens<- rasterToPolygons(m, dissolve=TRUE)
 plot(poldens, col=poldens@data$Prediction)
@@ -249,19 +257,19 @@ Com9<- m
 
 
 {
-  Com1<- raster::plot(Com1, main="Com1", xlab="Longitude", ylab="Latitude")
-  Com2<- raster::plot(Com2, main="Com2", xlab="Longitude", ylab="Latitude")
-  Com3<- raster::plot(Com3, main="Com3", xlab="Longitude", ylab="Latitude")
-  Com4<- raster::plot(Com4, main="Com4", xlab="Longitude", ylab="Latitude")
-  Com5<- raster::plot(Com5, main="Com5", xlab="Longitude", ylab="Latitude")
-  Com6<- raster::plot(Com6, main="Com6", xlab="Longitude", ylab="Latitude")
-  Com7<- raster::plot(Com7, main="Com7", xlab="Longitude", ylab="Latitude")
-  Com8<- raster::plot(Com8, main="Com8", xlab="Longitude", ylab="Latitude")
-  Com9<-raster::plot(Com9, main="Com9", xlab="Longitude", ylab="Latitude")
+  Com1<- raster::plot(Com1, main="Communauté I", xlab="Longitude", ylab="Latitude", col= c("#FFFFCC", "#CC6633"))
+  Com2<- raster::plot(Com2, main="Communauté II", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name = "PuBu"))
+  Com3<- raster::plot(Com3, main="Communauté III", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name = "Greys"))
+  Com4<- raster::plot(Com4, main="Communauté IV", xlab="Longitude", ylab="Latitude", col= c("#CCFFCC", "#99CC99"))
+  Com5<- raster::plot(Com5, main="Communauté V", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=3, name = "PuRd"))
+  Com6<- raster::plot(Com6, main="Communauté VI", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=3, name = "Blues"))
+  Com7<- raster::plot(Com7, main="Communauté VII", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name="Spectral"))
+  Com8<- raster::plot(Com8, main="Communauté VIII", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name="PiYG"))
+  Com9<- raster::plot(Com9, main="Communauté IX", xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"))
 }
 
 
-
+par(mfrow = c(1, 1))
 
 
 

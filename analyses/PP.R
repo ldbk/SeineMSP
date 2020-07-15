@@ -80,7 +80,7 @@ ggplot(TabPP2)+
 
 
 # Mean PP 1998-2018
-TabPP3<- TabPP2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPP))
+#TabPP3<- TabPP2 %>% group_by(x,y) %>% summarize(moyper= mean(moyPP))
 #ggplot(TabPP3)+
 #  geom_tile(aes(x=x, y=y, fill= moyper))+
 #  ggtitle("Production Primaire moyenne 1998-2018")+
@@ -144,12 +144,11 @@ distance<- dist(TabPPnew)
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2,hang=-1)
 
-TabPP5<- TabPP3 %>% ungroup() %>% dplyr::select(moyper)
-#NbClust(TabPP5, min.nc = 2, max.nc = 10, index="all", method = "ward.D")
-# According to the majority rule, the best number of clusters is  3
+#NbClust(TabPPnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
+# According to the majority rule, the best number of clusters is  2
 
-rect.hclust(tree, 3)
-zones<- cutree(tree, 3)
+rect.hclust(tree, 2)
+zones<- cutree(tree, 2)
 
 zone<- PP[[1]]
 values(zone)<- NA
@@ -218,7 +217,7 @@ gridded(toto3PP) <- TRUE
   # coerce to raster
 rasterPP<- raster(toto3PP)
 rasterPP
-raster::plot(rasterPP, col= terrain.colors(3), main="Primary production", xlab="Longitude", ylab="Latitude")
+raster::plot(rasterPP, col= c("#CCFFCC", "#99CC99"), main="Primary production", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
@@ -301,18 +300,18 @@ gridded(toto4PP) <- TRUE
   # coerce to raster
 rasterPP2<- raster(toto4PP)
 rasterPP2
-raster::plot(rasterPP2, col=brewer.pal(n = 3, name = "Greens"), main="Primary production", xlab="Longitude", ylab="Latitude")
+raster::plot(rasterPP2, col=c("#CCFFCC", "#99CC99"), main="Primary production", xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 disPP2<- disaggregate(rasterPP2, fact=(res(rasterPP2)/res(rasterchlnew)))
 mPP2<- mask(disPP2, res)
-plot(mPP2, col=brewer.pal(n = 3, name = "Greens"))
+plot(mPP2, col=c("#CCFFCC", "#99CC99"))
 
 save(mPP2, file="results/satellite/means by zone/PP_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/PP_raster.jpeg")
-plot(mPP2, main="Primary production", xlab="Longitude", ylab="Latitude", col=brewer.pal(n = 3, name = "Greens"))
+plot(mPP2, main="Primary production", xlab="Longitude", ylab="Latitude", col=c("#CCFFCC", "#99CC99"))
 dev.off()
 
 
