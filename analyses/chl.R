@@ -71,6 +71,8 @@ ggplot(Tabchl2)+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 15))
 
+save(Tabchl2, file="data/satellite/Chl/Tabchl2.Rdata")
+
 #ggplot(Tabchl2, aes(x= year, y=moyChl, group=year))+
 #  geom_boxplot()
 
@@ -137,7 +139,7 @@ distance<- dist(Tabchlnew)
 #distance[1:5]
 
 tree<- agnes(distance, method="ward", par.method=1)
-plot(tree, which=2,hang=-1)
+plot(tree, which=2,hang=-1, main= "")
 
 #NbClust(Tabchlnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
 # According to the majority rule, the best number of clusters is  3
@@ -252,7 +254,7 @@ save(polChl, file="data/satellite/chl/chl_polygons.Rdata")
 
 # Mean chl / zone
 
-summarychl<- toto2chl %>% select(Clust, mean)
+summarychl<- toto2chl %>% dplyr::select(Clust, mean)
 summarychl<- unique(summarychl)
 
 write.table(summarychl, file="results/satellite/means by zone/summarychl.csv", sep = ";", row.names = FALSE)

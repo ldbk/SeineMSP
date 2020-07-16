@@ -62,7 +62,7 @@ Tabsst<- na.omit(Tabsst)
 Tabsst2<- Tabsst %>% group_by(x,y,Year) %>% summarize(moySST= mean(SST))
 ggplot(Tabsst2)+
   geom_tile(aes(x=x, y=y, fill=moySST))+
-  ggtitle("SST moyenne 1982-2018")+
+  ggtitle("Température de surface 1982-2018")+
   facet_wrap(. ~ Year)+
   xlab("Longitude")+
   ylab("Latitude")+
@@ -71,11 +71,11 @@ ggplot(Tabsst2)+
   scale_fill_gradientn(colours = brewer.pal(n = 9, name = "YlOrRd"))+
   theme(strip.text.x = element_text(size = 15))+
   theme(axis.text.x = element_text(size = 10 ))+
-  theme(plot.title = element_text(size = 20))+
-  theme(axis.title.x = element_text(size = 15))+
-  theme(axis.title.y = element_text(size = 15))+
+  theme(plot.title = element_text(size = 30))+
+  theme(axis.title.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+
   theme(axis.text.y = element_text(size = 10))+
-  theme(legend.title = element_text(size = 15))
+  theme(legend.title = element_text(size = 20))
 
 #ggplot(Tabsst2, aes(x= Year, y=moySST, group=Year))+
 #  geom_boxplot()
@@ -211,18 +211,18 @@ gridded(toto3sst) <- TRUE
   # coerce to raster
 rastersst<- raster(toto3sst)
 rastersst
-plot(rastersst, col= c("#FFCCCC", "#FF6666"), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst, col= c("#FFCCCC", "#FF6666"), main="Température de surface", cex.main= 2, xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
 dissst<- disaggregate(rastersst, fact=(res(rastersst)/res(rasterchlnew)))
 mSST<- mask(dissst, res)
-plot(mSST, col= c("#FFCCCC", "#FF6666"))
+plot(mSST, col= c("#FFCCCC", "#FF6666"), main="Température de surface", cex.main= 2, xlab="Longitude", ylab="Latitude")
 
 save(mSST, file="data/satellite/sst/sst_raster.Rdata")
 
 jpeg(file="results/satellite/zones/SST_raster.jpeg")
-plot(mSST, main="Surface temperature", xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"))
+plot(mSST, main="Température de surface", cex.main= 2, xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"))
 dev.off()
 
 
@@ -254,7 +254,7 @@ gridded(toto4sst) <- TRUE
   # coerce to raster
 rastersst2<- raster(toto4sst)
 rastersst2
-plot(rastersst2, col= c("#FFCCCC", "#FF6666"), main="SST", xlab="Longitude", ylab="Latitude")
+plot(rastersst2, col= c("#FFCCCC", "#FF6666"), main="Température de surface", cex.main= 2,  xlab="Longitude", ylab="Latitude")
 
 load("data/satellite/chl/rasterChlnew.Rdata")
 
@@ -265,7 +265,7 @@ plot(mSST2, col= c("#FFCCCC", "#FF6666"))
 save(mSST2, file="results/satellite/means by zone/sst_raster.Rdata")
 
 jpeg(file="results/satellite/means by zone/SST_raster.jpeg")
-plot(mSST2, main="Surface temperature", xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"))
+plot(mSST2, main="Température de surface", cex.main= 2, xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"), legend(1, 2, legend= "°C"))
 dev.off()
 
 

@@ -69,6 +69,8 @@ ggplot(TabDet2)+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 15))
 
+save(TabDet2, file="data/satellite/Detritus/TabDet2.Rdata")
+
 #ggplot(TabDet2, aes(x=Year, y=moyDet, group=Year))+
 #  geom_boxplot()
 

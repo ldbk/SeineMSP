@@ -56,6 +56,8 @@ plt2<-plotellipses(rez, axes=c(1,3))
 print(plt1)
 print(plt2)
 
+fviz_mca_ind(rez, repel=T, addEllipses=F, axes=c(1,2))
+
 
 
 # 3 BENTHOS classification methods comparison
@@ -64,14 +66,14 @@ print(plt2)
 #characteristics relevant to the user. In C. H. Skiadas (ed.) Proceedings of
 #ASMDA 2017, 501-520, https://arxiv.org/abs/1703.09282
 # using clusterbenchmark from fpc
-if(!file.exists("cbs.rds")){
+if(!file.exists("cbsben.rds")){
   set.seed(666) #the number of the beaaasttt
   options(digits=3)
   clustermethod=c("kmeansCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","claraCBI")
   clustermethodpars <- list()
-  clustermethodpars[[2]] <- clustermethodpars[[3]] <- list()
-  clustermethodpars[[4]] <-  clustermethodpars[[5]] <-list()
-  clustermethodpars[[6]]<-   clustermethodpars[[7]] <-list()
+  clustermethodpars[[2]]<- clustermethodpars[[3]] <-list()
+  clustermethodpars[[4]]<- clustermethodpars[[5]] <-list()
+  clustermethodpars[[6]]<- clustermethodpars[[7]] <-list()
   clustermethodpars[[2]]$method <- "ward.D2"
   clustermethodpars[[3]]$method <- "single"
   clustermethodpars[[4]]$method <- "complete"
@@ -79,31 +81,32 @@ if(!file.exists("cbs.rds")){
   clustermethodpars[[6]]$method <- "mcquitty"
   #clustermethodpars[[7]]$method <- ""
   methodname <- c("kmeans","ward","single","complete","average","mcquitty","clara")
-  cbs <-  clusterbenchstats(rez$ind$coord,G=2:20,
+  cbsben <-  clusterbenchstats(rez$ind$coord,G=2:20,
                             clustermethod=clustermethod,scaling=FALSE,
                             methodname=methodname,
                             distmethod=rep(FALSE,length(clustermethod)),
                             clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
                             fnruns=100,avenruns=100,multicore=FALSE,trace=F)
-  saveRDS(cbs,file="cbs.rds")
+  saveRDS(cbsben, file="cbsben.rds")
 }else{
-  cbs<-readRDS(cbs,file="cbs.rds")
+  cbsben<- readRDS(cbsben, file="cbsben.rds")
 }
 
-#redesign cbs outputs to ease ggplot2 use
+
+#redesign cbsben outputs to ease ggplot2 use
 cbslong<-data.frame()
 #stupid classifier
 for(i in 1:4){
-  tmp<-bind_rows(cbs$sim[[i]][cbs$stat$minG:cbs$stat$maxG])
-  tmp$nbclus<-cbs$stat$minG:cbs$stat$maxG
-  tmp$method<-names(cbs$sim)[i]
+  tmp<-bind_rows(cbsben$sim[[i]][cbsben$stat$minG:cbsben$stat$maxG])
+  tmp$nbclus<-cbsben$stat$minG:cbsben$stat$maxG
+  tmp$method<-names(cbsben$sim)[i]
   cbslong<-rbind(cbslong,tmp)
 }
 #main methods
 for(i in 1:7){
-  tmp<-bind_rows(cbs$stat[[i]][cbs$stat$minG:cbs$stat$maxG])
-  tmp$nbclus<-cbs$stat$minG:cbs$stat$maxG
-  tmp$method<-cbs$stat$name[i]
+  tmp<-bind_rows(cbsben$stat[[i]][cbsben$stat$minG:cbsben$stat$maxG])
+  tmp$nbclus<-cbsben$stat$minG:cbsben$stat$maxG
+  tmp$method<-cbsben$stat$name[i]
   cbslong<-rbind(cbslong,tmp)
 }
 cbslong<-tidyr::pivot_longer(cbslong,avewithin:pamc)
@@ -111,16 +114,18 @@ cbslong<-tidyr::pivot_longer(cbslong,avewithin:pamc)
 cbslong<-cbslong%>%mutate(info=ifelse(name%in%c("avewithin","pearsongamma"),"Cluster homogeneity",""),
                           info=ifelse(name%in%c("sindex","widestgap"),"Cluster separation",info))
 #test ggplot
-stupid<-names(cbs$sim[1:4])
-#all
+stupid<-names(cbsben$sim[1:4])
+
+# all metrics
 ggplot(cbslong%>%filter(!method%in%stupid),aes(x=nbclus,y=value,color=method))+
   geom_point()+
   geom_point(data=cbslong%>%filter(method%in%stupid),aes(x=nbclus,y=value),color="grey",alpha=.2)+
   geom_point()+
   facet_wrap(~name,scale="free")
-#selected metric
-tmp1<-cbslong%>%filter(!method%in%stupid&info!=""&nbclus<=15)
-tmp2<-cbslong%>%filter(method%in%stupid&info!=""&nbclus<=15)
+
+# selected metrics
+tmp1<- cbslong%>%filter(!method%in%stupid&info!=""&nbclus<=15)
+tmp2<- cbslong%>%filter(method%in%stupid&info!=""&nbclus<=15)
 comparbenthos<- ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
   geom_point()+
   geom_path()+
@@ -134,17 +139,17 @@ ggsave(plot= comparbenthos, filename="Aggregation criterion.jpeg", path="results
 
 # 4 BENTHOS Classification with Ward criterion
 
-arbre<- agnes(rez$ind$coord, method="ward", par.method=1)
-plot(arbre, which=2, hang=-1, main= "Dendrogramme des taxons benthiques", xlab="")
-rect.hclust(arbre, k=4)
+tree<- agnes(rez$ind$coord, method="ward", par.method=1)
+plot(tree, which=2, hang=-1, main= "Dendrogramme des taxons benthiques", xlab="")
 
-group4<- cutree(arbre, k=4) #4 clusters
+rect.hclust(tree, k=4) # According to the aggregation criterion, the best number of clusters should be  4
+groups<- cutree(tree, k=4)
 
-#how clusters are presented in 2D in the MCA subspace
-fviz_mca_ind(rez,repel=T,habillage=as.factor(group4),addEllipses=F,axes=c(1,2))
+# Representation of clusters in 2D in the MCA subspace
+fviz_mca_ind(rez, repel=T, habillage=as.factor(groups), addEllipses=F, axes=c(1,2))
 
 
-traitbenthos<- traitbenthos %>% mutate(Cluster= group4)
+traitbenthos<- traitbenthos %>% mutate(Cluster= groups)
 {
   traitbenthos$Cluster<- sub("1", "5", traitbenthos$Cluster)
   traitbenthos$Cluster<- sub("2", "6", traitbenthos$Cluster)
@@ -367,31 +372,31 @@ if(!file.exists("cbsfish.rds")){
   clustermethodpars[[6]]$method <- "mcquitty"
   #clustermethodpars[[7]]$method <- ""
   methodname <- c("kmeans","ward","single","complete","average","mcquitty","clara")
-  cbs <-  clusterbenchstats(rez1$ind$coord,G=2:20,
+  cbsfish <-  clusterbenchstats(rez1$ind$coord,G=2:20,
                             clustermethod=clustermethod,scaling=FALSE,
                             methodname=methodname,
                             distmethod=rep(FALSE,length(clustermethod)),
                             clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
                             fnruns=100,avenruns=100,multicore=FALSE,trace=F)
-  saveRDS(cbs,file="cbsfish.rds")
+  saveRDS(cbsfish, file="cbsfish.rds")
 }else{
-  cbs<-readRDS(cbs,file="cbsfish.rds")
+  cbsfish<-readRDS(cbsfish, file="cbsfish.rds")
 }
 
 #redesign cbs outputs to ease ggplot2 use
 cbslong<-data.frame()
 #stupid classifier
 for(i in 1:4){
-  tmp<-bind_rows(cbs$sim[[i]][cbs$stat$minG:cbs$stat$maxG])
-  tmp$nbclus<-cbs$stat$minG:cbs$stat$maxG
-  tmp$method<-names(cbs$sim)[i]
+  tmp<-bind_rows(cbsfish$sim[[i]][cbsfish$stat$minG:cbsfish$stat$maxG])
+  tmp$nbclus<-cbsfish$stat$minG:cbsfish$stat$maxG
+  tmp$method<-names(cbsfish$sim)[i]
   cbslong<-rbind(cbslong,tmp)
 }
 #main methods
 for(i in 1:7){
-  tmp<-bind_rows(cbs$stat[[i]][cbs$stat$minG:cbs$stat$maxG])
-  tmp$nbclus<-cbs$stat$minG:cbs$stat$maxG
-  tmp$method<-cbs$stat$name[i]
+  tmp<-bind_rows(cbsfish$stat[[i]][cbsfish$stat$minG:cbsfish$stat$maxG])
+  tmp$nbclus<-cbsfish$stat$minG:cbsfish$stat$maxG
+  tmp$method<-cbsfish$stat$name[i]
   cbslong<-rbind(cbslong,tmp)
 }
 cbslong<-tidyr::pivot_longer(cbslong,avewithin:pamc)
@@ -399,7 +404,7 @@ cbslong<-tidyr::pivot_longer(cbslong,avewithin:pamc)
 cbslong<-cbslong%>%mutate(info=ifelse(name%in%c("avewithin","pearsongamma"),"Cluster homogeneity",""),
                           info=ifelse(name%in%c("sindex","widestgap"),"Cluster separation",info))
 #test ggplot
-stupid<-names(cbs$sim[1:4])
+stupid<-names(cbsfish$sim[1:4])
 #all
 ggplot(cbslong%>%filter(!method%in%stupid),aes(x=nbclus,y=value,color=method))+
   geom_point()+
@@ -425,14 +430,14 @@ ggsave(plot= comparfish, filename="Aggregation criterion fish.jpeg", path="resul
 
 arbre1<- agnes(rez1$ind$coord, method="ward", par.method=1)
 plot(arbre1, which=2, hang=-1)
-rect.hclust(arbre1, k=4)
 
-group41<- cutree(arbre1,k=4) #4 clusters
+rect.hclust(arbre1, k=4)
+groups<- cutree(arbre1,k=4) #4 clusters
 
 #how clusters are presented in 2D in the MCA subspace
-fviz_mca_ind(rez1,repel=T, habillage=as.factor(group41), addEllipses=F, axes=c(1,2))
+fviz_mca_ind(rez1,repel=T, habillage=as.factor(groups), addEllipses=F, axes=c(1,2))
 
-traitfish<- traitfish %>% mutate(Cluster= group41)
+traitfish<- traitfish %>% mutate(Cluster= groups)
 
 
 {
