@@ -186,8 +186,8 @@ tsais<-full_join(tsais,sdtsais)
 pltts<-ggplot(tsais,aes(x=date,y=value,color=name))+
 	#geom_ribbon(aes(ymin=value-sd,ymax=value+sd),fill="grey78")+
 	geom_line(size=2)+#facet_wrap(~name)
-	scale_color_brewer(palette="Spectral",name="Activité")+
-	#scale_color_distiller(palette="Spectral",name="Densité de\n navires\n(h.km^2)")+
+	scale_color_brewer(palette="Set1",name="Activité")+
+	#scale_color_distiller(palette="Set1",name="Densité de\n navires\n(h.km^2)")+
 	ylab("Densité moyenne mensuelle de navires en heure par km^2")+
 	xlab("Mois")
 
@@ -265,7 +265,7 @@ save(zoneAIS,file="../results/AIS/zoneAIS.rdata")
 mapz<-ggplot()+
 	#geom_sf(st_as_sf(pipo))+
 	geom_raster(data=tmp3,aes(x=x,y=y,fill=as.character(zones)))+
-	scale_fill_brewer(palette="Spectral",name="Zones")+
+	scale_fill_brewer(palette="Set1",name="Zones")+
 	borders("world",fill="grey",colour=NA)+
 	coord_sf(xlim=range(tmp$x),ylim=range(tmp$y))+
 	xlab("Longitude")+ylab("Latitude")+
@@ -276,7 +276,7 @@ tmp4<-tmp3%>%pivot_longer(pêche:plaisance)%>%
 
 bpall<-ggplot()+
 	geom_boxplot(data=tmp4,aes(x=zones,y=value,fill=zones))+
-	scale_fill_brewer(palette="Spectral")+
+	scale_fill_brewer(palette="Set1")+
 	facet_wrap(~name,scale="free_y",ncol=5)+
 	ylab("Densité de navires en heures par km^2")+
 	theme(legend.position="none")
@@ -308,7 +308,7 @@ tmp2<-tmp2%>%mutate(zones=as.factor(zones))
 
 bpall<-ggplot()+
 	geom_boxplot(data=tmp2,aes(x=zones,y=value,fill=zones))+
-	scale_fill_brewer(palette="Spectral")+
+	scale_fill_brewer(palette="Set1")+
 	facet_wrap(~name,scale="free_y",ncol=5)+
 	ylab("Densité de navires en heures par km^2")+
 	theme(legend.position="none")
