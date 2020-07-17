@@ -6,10 +6,10 @@
 "5","Alcyonium digitatum","21-50 years",NA,"2-3 years",NA,NA,NA,"Erect",NA,"Colonial",NA,"Annual episodic",NA
 "6","Psammechinus miliaris","6-10 years",NA,"1 year","0 - 100 m",NA,"Mid Eulittoral (5)","Free living",NA,"Gregarious","External","Annual protracted","Non-migratory / Resident"
 "7","Asterias rubens","6-10 years",NA,"1 year","Intertidal to depths of 650 m.",NA,"Lower Eulittoral (6)","Free living",NA,"Solitary","External","Annual episodic","Non-migratory / Resident"
-"8","Ophiothrix fragilis","6-10 years",NA,"<1 year",NA,NA,"Lower Eulittoral (6)","Free living",NA,"Gregarious",NA,"Annual episodic","Non-migratory / Resident"
-"9","Pomatoschistus minutus","1-2 years",NA,"<1 year","Up to 20 m (sometimes up to 60-70 m)",NA,"Sublittoral Fringe (7)","Free living",NA,"Gregarious",NA,"Annual protracted","See additional information"
+"8","Ophiothrix fragilis","6-10 years",NA,"< 1 year",NA,NA,"Lower Eulittoral (6)","Free living",NA,"Gregarious",NA,"Annual episodic","Non-migratory / Resident"
+"9","Pomatoschistus minutus","1-2 years",NA,"< 1 year","Up to 20 m (sometimes up to 60-70 m)",NA,"Sublittoral Fringe (7)","Free living",NA,"Gregarious",NA,"Annual protracted",NA
 "10","Pisidia longicornis","3-5 years",NA,NA,"0 - 100 m",NA,"Mid Eulittoral (5)","Free living",NA,"Solitary",NA,"Annual episodic","Non-migratory / Resident"
-"11","Urticina felina","21-50 years",NA,"See additional information","Down to at least 100m",NA,"Lower Eulittoral (6)","Attached",NA,"Solitary","External","Annual protracted","Non-migratory / Resident"
+"11","Urticina felina","21-50 years",NA,NA,"Down to at least 100m",NA,"Lower Eulittoral (6)","Attached",NA,"Solitary","External","Annual protracted","Non-migratory / Resident"
 "12","Pecten maximus",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 "13","Echinocardium cordatum","11-20 years",NA,NA,"0 - 230 m",NA,"Lower Eulittoral (6)","Burrow dwelling",NA,"Gregarious","External","Annual episodic","Seasonal (reproduction)"
 "14","Mytilus edulis","21-50 years",NA,"1-2 years",NA,NA,NA,"Attached",NA,"Gregarious",NA,"Annual protracted",NA
@@ -18,8 +18,8 @@
 "17","Flustra foliacea","6-10 years",NA,"< 1 year",NA,NA,"Upper Infralittoral (8)","Attached",NA,"Colonial","Internal","Annual episodic","Non-migratory / Resident"
 "18","Aphrodita aculeata","6-10 years",NA,"1-2 years",NA,NA,"Upper Infralittoral (8)","Free living",NA,"Solitary","External","Annual episodic","Non-migratory / Resident"
 "19","Abra alba","1-2 years",NA,NA,NA,NA,NA,"Burrow dwelling",NA,"Solitary",NA,"Annual protracted",NA
-"20","Hippocampus hippocampus","3-5 years",NA,"<1 year","Sublittoral to 77 m",NA,"Upper Eulittoral (4)","Free living",NA,"Solitary","Internal","Annual episodic","Non-migratory / Resident"
-"21","Crangon crangon","3-5 years",NA,"<1 year",NA,NA,NA,"Free living",NA,"Solitary",NA,"Biannual protracted",NA
+"20","Hippocampus hippocampus","3-5 years",NA,"< 1 year","Sublittoral to 77 m",NA,"Upper Eulittoral (4)","Free living",NA,"Solitary","Internal","Annual episodic","Non-migratory / Resident"
+"21","Crangon crangon","3-5 years",NA,"< 1 year",NA,NA,NA,"Free living",NA,"Solitary",NA,"Biannual protracted",NA
 "22","Alcyonidium diaphanum","6-10 years",NA,"1 year","Extreme low water to 100m","Epifaunal (1)",NA,"Attached",NA,"Colonial",NA,"Annual episodic","Non-migratory / Resident"
 "23","Inachus dorsettensis",NA,NA,NA,"To at least 300 m depth (Ingle, 1997).","Epibenthic (19)",NA,"Free living","Omnivore (8)","Solitary",NA,"Annual episodic",NA
 "24","Macropodia tenuirostris","3-5 years",NA,NA,"Shallow water to 300 m","Epibenthic (19)",NA,"Free living","Omnivore (8)","Solitary",NA,NA,NA
@@ -44,4 +44,4 @@
 "43","Hyas coarctatus",NA,NA,NA,"0 - 500 m",NA,NA,NA,"Predator (22)",NA,NA," ",NA
 "44","Liocarcinus pusillus",NA,NA,NA,"0 - 100 m",NA,NA,NA,NA,NA,NA," ",NA
 "45","Upogebia deltaura",NA,NA,NA,"0 - 40 m",NA,NA,NA,"Passive suspension feeder (3)","Solitary",NA," ",NA
-"46","Inachus phalangium","1-2 years",NA,"<1 year",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"46","Inachus phalangium","1-2 years",NA,"< 1 year",NA,NA,NA,NA,NA,NA,NA,NA,NA

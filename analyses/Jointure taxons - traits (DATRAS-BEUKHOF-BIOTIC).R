@@ -55,8 +55,8 @@ Beukhof<- unique(Beukhof)
 Beukhof<- Beukhof %>% filter(!is.na(ScientificName_accepted))
 
 Beukhofspp<- Beukhof %>% dplyr::select(-c(ScientificName_accepted, Family))
-Beukhofspp<- Beukhofspp %>% filter(!is.na(Genus), !is.na(Species))                                  # Parmi tous les taxons acceptés de Beukhof (361), 303 sont identifiés par un genre ET une espèce
-Beukhofspp<- unique(Beukhofspp)
+Beukhofspp<- Beukhofspp %>% filter(!is.na(Genus), !is.na(Species))                                  
+Beukhofspp<- unique(Beukhofspp)                                                                     # Parmi tous les taxons acceptés de Beukhof (361), 303 sont identifiés par un genre ET une espèce
 
 Beukhofgen<- Beukhof %>% filter(is.na(Species), !is.na(Genus)) %>% 
   dplyr::select(-c(ScientificName_accepted, Family, Species))
@@ -125,11 +125,11 @@ sumrez$remain<- sumrez$nbDatras-sum(sumrez[2:6])
 # FINAL
 traitgen<- gen %>% dplyr::select(-c(Family, Genus, Species, taxon))
 traitfam<- fam %>% dplyr::select(-c(Family, Genus, Species, taxon))
-traitspp<- spp %>% mutate(ScientificName_accepted="")
+traitspp<- spp %>% mutate(ScientificName_accepted = "")
 traitspp$ScientificName_accepted<- paste(traitspp$Genus, traitspp$Species, sep=" ")
 traitspp<- traitspp %>% dplyr::select(-c(Genus, Species, taxon))
 
-traitfish<- rbind(traitspp,traitgen,traitfam)
+traitfish<- rbind(traitspp, traitgen, traitfam)
 traitbenthos<- missingverified %>% dplyr::select(SpeciesName, LifeSpan, Maturity,Habit, Sociability, FertilizationType, ReprodFreq, Migratory)
 traitceph<- Datrasceph
 

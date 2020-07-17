@@ -11,6 +11,7 @@ options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 library(captioner)
 
+set.seed(14)
 
 
 # 1 BENTHOS loading and tab preparation
@@ -141,7 +142,6 @@ ggsave(plot= comparbenthos, filename="Aggregation criterion.jpeg", path="results
 
 tree<- agnes(rez$ind$coord, method="ward", par.method=1)
 plot(tree, which=2, hang=-1, main= "Dendrogramme des taxons benthiques", xlab="")
-
 rect.hclust(tree, k=4) # According to the aggregation criterion, the best number of clusters should be  4
 groups<- cutree(tree, k=4)
 
@@ -428,14 +428,13 @@ ggsave(plot= comparfish, filename="Aggregation criterion fish.jpeg", path="resul
 
 # 4 FISH Classification with Ward criterion
 
-arbre1<- agnes(rez1$ind$coord, method="ward", par.method=1)
-plot(arbre1, which=2, hang=-1)
+tree1<- agnes(rez1$ind$coord, method="ward", par.method=1)
+plot(tree1, which=2, hang=-1)
+rect.hclust(tree1, k=4)
+groups<- cutree(tree1, k=4)
 
-rect.hclust(arbre1, k=4)
-groups<- cutree(arbre1,k=4) #4 clusters
-
-#how clusters are presented in 2D in the MCA subspace
-fviz_mca_ind(rez1,repel=T, habillage=as.factor(groups), addEllipses=F, axes=c(1,2))
+# Representation of clusters in 2D in the MCA subspace
+fviz_mca_ind(rez1, repel=T, habillage=as.factor(groups), addEllipses=F, axes=c(1,2))
 
 traitfish<- traitfish %>% mutate(Cluster= groups)
 
@@ -575,7 +574,7 @@ save(Dens1, file="data/Densfish.Rdata")
 
 # Cephalopodes
 
-load("Traitceph.Rdata")
+load("data/Traitceph.Rdata")
 
   # Densities
 Lili<- J2 %>% left_join(traitceph, by=c("ScientificName_accepted"="Taxons"))

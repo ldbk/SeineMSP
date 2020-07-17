@@ -74,10 +74,8 @@ J2<- J2 %>% dplyr::select(Year, ScientificName_WoRMS, Nombre, Superficie, moyLat
 write.csv(J2, file= "data/J2Datras.csv")
 
 
-# Especes
-J2esp<- J2 %>% dplyr::select(ScientificName_WoRMS)
-J2esp<- unique(J2esp)
-write.csv(J2esp, file="data/DATRAS_taxons_original.csv")
+
+
 
 
 
