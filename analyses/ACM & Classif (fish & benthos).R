@@ -11,7 +11,7 @@ options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 library(captioner)
 
-set.seed(14)
+set.seed(22)
 
 
 # 1 BENTHOS loading and tab preparation
@@ -51,9 +51,9 @@ traitbenthos1<- data.frame(traitbenthos[,-1])
 row.names(traitbenthos1)<- traitbenthos[,1]
 
 rez<- MCA(traitbenthos1, ncp=999, method="Burt", graph=F)
+
 plt1<-plotellipses(rez, axes=c(1,2))
 plt2<-plotellipses(rez, axes=c(1,3))
-
 print(plt1)
 print(plt2)
 
@@ -300,7 +300,7 @@ Dens<- unique(Dens)
   Cluster6<- Dens %>% filter(Cluster==6)
   Cluster7<- Dens %>% filter(Cluster==7)
   Cluster8<- Dens %>% filter(Cluster==8)
-  }
+}
 
 
 save(Dens, file="data/Densbenthos.Rdata")
@@ -343,12 +343,13 @@ traitfish1<- data.frame(traitfish[,-1])
 row.names(traitfish1)<- traitfish[,1]
 
 rez1<- MCA(traitfish1, ncp=999, method="Burt", graph=F)
+
 plt3<-plotellipses(rez1, axes=c(1,2))
 plt4<-plotellipses(rez1, axes=c(1,3))
-
 print(plt3)
 print(plt4)
 
+fviz_mca_ind(rez1, repel=T, addEllipses=F, axes=c(1,2))
 
 
 # 3 FISH classification methods comparison
@@ -429,12 +430,12 @@ ggsave(plot= comparfish, filename="Aggregation criterion fish.jpeg", path="resul
 # 4 FISH Classification with Ward criterion
 
 tree1<- agnes(rez1$ind$coord, method="ward", par.method=1)
-plot(tree1, which=2, hang=-1)
+plot(tree1, which=2, hang=-1, main= "Dendrogramme des taxons démersaux", xlab="")
 rect.hclust(tree1, k=4)
 groups<- cutree(tree1, k=4)
 
 # Representation of clusters in 2D in the MCA subspace
-fviz_mca_ind(rez1, repel=T, habillage=as.factor(groups), addEllipses=F, axes=c(1,2))
+fviz_mca_ind(rez1, repel=T, habillage=as.factor(groups), addEllipses=T, axes=c(1,2))
 
 traitfish<- traitfish %>% mutate(Cluster= groups)
 
@@ -615,8 +616,48 @@ load("results/Communautes bio/Communautés/Cluster5.Rdata")
 load("results/Communautes bio/Communautés/Cluster6.Rdata")
 load("results/Communautes bio/Communautés/Cluster7.Rdata")
 load("results/Communautes bio/Communautés/Cluster8.Rdata")
+load("data/Traitceph.Rdata")
 }
 
+
+
+# Composition des clusters (taxons)
+
+{
+C1<- Cluster1 %>% select(Taxons)
+C2<- Cluster2 %>% select(Taxons)
+C3<- Cluster3 %>% select(Taxons)
+C4<- Cluster4 %>% select(Taxons)
+names(Cluster5)[1]<- "Taxons"
+C5<- Cluster5 %>% select(Taxons)
+names(Cluster6)[1]<- "Taxons"
+C6<- Cluster6 %>% select(Taxons)
+names(Cluster7)[1]<- "Taxons"
+C7<- Cluster7 %>% select(Taxons)
+names(Cluster8)[1]<- "Taxons"
+C8<- Cluster8 %>% select(Taxons)
+C9<- traitceph %>% select(Taxons)
+
+names(C1)[1]<- "Communauté I"
+names(C2)[1]<- "Communauté II"
+names(C3)[1]<- "Communauté III"
+names(C4)[1]<- "Communauté IV"
+names(C5)[1]<- "Communauté V"
+names(C6)[1]<- "Communauté VI"
+names(C7)[1]<- "Communauté VII"
+names(C8)[1]<- "Communauté VIII"
+names(C9)[1]<- "Communauté IX"
+}
+
+write.csv(C1, file="results/Communautes bio/Communautés/Cluster1.csv")
+write.csv(C2, file="results/Communautes bio/Communautés/Cluster2.csv")
+write.csv(C3, file="results/Communautes bio/Communautés/Cluster3.csv")
+write.csv(C4, file="results/Communautes bio/Communautés/Cluster4.csv")
+write.csv(C5, file="results/Communautes bio/Communautés/Cluster5.csv")
+write.csv(C6, file="results/Communautes bio/Communautés/Cluster6.csv")
+write.csv(C7, file="results/Communautes bio/Communautés/Cluster7.csv")
+write.csv(C8, file="results/Communautes bio/Communautés/Cluster8.csv")
+write.csv(C9, file="results/Communautes bio/Communautés/Cluster9.csv")
 
 
 
