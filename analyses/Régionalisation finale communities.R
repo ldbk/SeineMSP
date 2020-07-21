@@ -106,27 +106,21 @@ plt2<- plotellipses(rez, axes=c(1,3))
 
 # Classification
 arbre<- hclust(dist(rez$ind$coord), method="ward.D2")
-#arbre<- agnes(rez$ind$coord, method="ward", par.method=1)
-#save(arbre, file="data/ICES/arbre_régiona_fin_communi_dens.Rdata")
-#load("data/ICES/arbre_régiona_fin_communi_dens.Rdata")
 plot(arbre, which=2, hang=-1)
 #NbClust(rez$ind$coord, min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
-rect.hclust(arbre, k=(5))
-groups<- cutree(arbre, k=5)
+rect.hclust(arbre, k=9)
+groups<- cutree(arbre, k=9)
 
 tata<- cbind(grd2[,c(1,2)], Clust=factor(groups))
-
+save(tata, "results/Communautes bio/Zones_finales_chaque_pixel.Rdata")
 
 Allcom<- ggplot(tata)+
   geom_tile(aes(x=Long, y=Lat, fill=as.numeric(Clust)))+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
-  #ggtitle("Final bioregionalization")+
   scale_fill_gradientn(colours =brewer.pal(n = 5, name = "YlGnBu")) +
   xlab("Longitude")+
   ylab("Latitude")+
-  theme_minimal()
-
-Allcom2<- Allcom +
+  theme_minimal()+
   labs(fill= "Zones")+
   theme(legend.title = element_text(size = 15))+
   theme(legend.text = element_text(size = 15))+
@@ -136,10 +130,10 @@ Allcom2<- Allcom +
   theme(axis.title.y = element_text(size = 15))+
   theme(axis.text.y = element_text(size = 10))
 
-
 ggsave(plot= Allcom2, filename="Biorégionalisation.jpeg", path="results/Zones/Communautes bio", width = 13, height = 8)
 
 
+# Un tab par zone, avec coordonnées des pixels appartenant à chaque zone (tata a nouvelles coords)
 {
 zone1<- tata %>% filter(Clust==1)
 names(zone1)[1]<- "Longitude"
@@ -156,7 +150,21 @@ names(zone4)[2]<- "Latitude"
 zone5<- tata %>% filter(Clust==5)
 names(zone5)[1]<- "Longitude"
 names(zone5)[2]<- "Latitude"
+zone6<- tata %>% filter(Clust==6)
+names(zone6)[1]<- "Longitude"
+names(zone6)[2]<- "Latitude"
+zone7<- tata %>% filter(Clust==7)
+names(zone7)[1]<- "Longitude"
+names(zone7)[2]<- "Latitude"
+zone8<- tata %>% filter(Clust==8)
+names(zone8)[1]<- "Longitude"
+names(zone8)[2]<- "Latitude"
+zone9<- tata %>% filter(Clust==9)
+names(zone9)[1]<- "Longitude"
+names(zone9)[2]<- "Latitude"
 }
+
+# Chaque densité de com, pour chaque pixel, pour chaque zone
 {
 Jzone1<- zone1 %>% left_join(Tabfin1, by=c("Longitude", "Latitude"))
 Jzone1<- Jzone1 %>% left_join(Tabfin2, by=c("Longitude", "Latitude"))
@@ -261,8 +269,78 @@ Jzone5<- zone5 %>% left_join(Tabfin9, by=c("Longitude", "Latitude"))
 Jzone5<- unique(Jzone5)
 #Jzone5<- na.omit(Jzone5)
 }
-
-
+{
+  Jzone6<- zone6 %>% left_join(Tabfin1, by=c("Longitude", "Latitude"))
+  Jzone6<- Jzone6 %>% left_join(Tabfin2, by=c("Longitude", "Latitude"))
+  Jzone6<- Jzone6 %>% left_join(Tabfin3, by=c("Longitude", "Latitude"))
+  Jzone6<- unique(Jzone6)
+  Jzone6<- Jzone6 %>% left_join(Tabfin4, by=c("Longitude", "Latitude"))
+  Jzone6<- unique(Jzone6)
+  Jzone6<- Jzone6 %>% left_join(Tabfin5, by=c("Longitude", "Latitude"))
+  Jzone6<- unique(Jzone6)
+  Jzone6<- Jzone6 %>% left_join(Tabfin6, by=c("Longitude", "Latitude"))
+  Jzone6<- unique(Jzone6)
+  Jzone6<- Jzone6 %>% left_join(Tabfin7, by=c("Longitude", "Latitude"))
+  Jzone6<- unique(Jzone6)
+  Jzone6<- Jzone6 %>% left_join(Tabfin8, by=c("Longitude", "Latitude"))
+  Jzone6<- unique(Jzone6)
+  Jzone6<- Jzone6 %>% left_join(Tabfin9, by=c("Longitude", "Latitude"))
+  Jzone6<- unique(Jzone6)
+}
+{
+  Jzone7<- zone7 %>% left_join(Tabfin1, by=c("Longitude", "Latitude"))
+  Jzone7<- Jzone7 %>% left_join(Tabfin2, by=c("Longitude", "Latitude"))
+  Jzone7<- Jzone7 %>% left_join(Tabfin3, by=c("Longitude", "Latitude"))
+  Jzone7<- unique(Jzone7)
+  Jzone7<- Jzone7 %>% left_join(Tabfin4, by=c("Longitude", "Latitude"))
+  Jzone7<- unique(Jzone7)
+  Jzone7<- Jzone7 %>% left_join(Tabfin5, by=c("Longitude", "Latitude"))
+  Jzone7<- unique(Jzone7)
+  Jzone7<- Jzone7 %>% left_join(Tabfin6, by=c("Longitude", "Latitude"))
+  Jzone7<- unique(Jzone7)
+  Jzone7<- Jzone7 %>% left_join(Tabfin7, by=c("Longitude", "Latitude"))
+  Jzone7<- unique(Jzone7)
+  Jzone7<- Jzone7 %>% left_join(Tabfin8, by=c("Longitude", "Latitude"))
+  Jzone7<- unique(Jzone7)
+  Jzone7<- Jzone7 %>% left_join(Tabfin9, by=c("Longitude", "Latitude"))
+  Jzone7<- unique(Jzone7)
+}
+{
+  Jzone8<- zone8 %>% left_join(Tabfin1, by=c("Longitude", "Latitude"))
+  Jzone8<- Jzone8 %>% left_join(Tabfin2, by=c("Longitude", "Latitude"))
+  Jzone8<- Jzone8 %>% left_join(Tabfin3, by=c("Longitude", "Latitude"))
+  Jzone8<- unique(Jzone8)
+  Jzone8<- Jzone8 %>% left_join(Tabfin4, by=c("Longitude", "Latitude"))
+  Jzone8<- unique(Jzone8)
+  Jzone8<- Jzone8 %>% left_join(Tabfin5, by=c("Longitude", "Latitude"))
+  Jzone8<- unique(Jzone8)
+  Jzone8<- Jzone8 %>% left_join(Tabfin6, by=c("Longitude", "Latitude"))
+  Jzone8<- unique(Jzone8)
+  Jzone8<- Jzone8 %>% left_join(Tabfin7, by=c("Longitude", "Latitude"))
+  Jzone8<- unique(Jzone8)
+  Jzone8<- Jzone8 %>% left_join(Tabfin8, by=c("Longitude", "Latitude"))
+  Jzone8<- unique(Jzone8)
+  Jzone8<- Jzone8 %>% left_join(Tabfin9, by=c("Longitude", "Latitude"))
+  Jzone8<- unique(Jzone8)
+}
+{
+  Jzone9<- zone9 %>% left_join(Tabfin1, by=c("Longitude", "Latitude"))
+  Jzone9<- Jzone9 %>% left_join(Tabfin2, by=c("Longitude", "Latitude"))
+  Jzone9<- Jzone9 %>% left_join(Tabfin3, by=c("Longitude", "Latitude"))
+  Jzone9<- unique(Jzone9)
+  Jzone9<- Jzone9 %>% left_join(Tabfin4, by=c("Longitude", "Latitude"))
+  Jzone9<- unique(Jzone9)
+  Jzone9<- Jzone9 %>% left_join(Tabfin5, by=c("Longitude", "Latitude"))
+  Jzone9<- unique(Jzone9)
+  Jzone9<- Jzone9 %>% left_join(Tabfin6, by=c("Longitude", "Latitude"))
+  Jzone9<- unique(Jzone9)
+  Jzone9<- Jzone9 %>% left_join(Tabfin7, by=c("Longitude", "Latitude"))
+  Jzone9<- unique(Jzone9)
+  Jzone9<- Jzone9 %>% left_join(Tabfin8, by=c("Longitude", "Latitude"))
+  Jzone9<- unique(Jzone9)
+  Jzone9<- Jzone9 %>% left_join(Tabfin9, by=c("Longitude", "Latitude"))
+  Jzone9<- unique(Jzone9)
+}
 
 names(tata)[1]<- "Longitude"
 names(tata)[2]<- "Latitude"
@@ -273,8 +351,12 @@ getmode <- function(v) {
   uniqv[which.max(tabulate(match(v, uniqv)))]
 }
 
-J1<- Tabfin1 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J1<- J1 %>% select(-c(Longitude, Latitude))
+
+
+# Densité moyenne de chaque communauté dans chaque zone
+
+J1<- Tabfin1 %>% inner_join(tata, by=c("Longitude", "Latitude")) # inner prend que les lignes en commun
+J1<- J1 %>% dplyr::select(-c(Longitude, Latitude))
 J1$Pred1<- as.numeric(J1$Pred1)
 J1$Clust<- as.numeric(J1$Clust)
 J1bis<- J1 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred1))
@@ -282,7 +364,7 @@ J1bis$Mode<- as.numeric(J1bis$Mode)
 names(J1bis)[1]<- "zone final"
 
 J2<- Tabfin2 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J2<- J2 %>% select(-c(Longitude, Latitude))
+J2<- J2 %>% dplyr::select(-c(Longitude, Latitude))
 J2$Pred2<- as.numeric(J2$Pred2)
 J2$Clust<- as.numeric(J2$Clust)
 J2bis<- J2 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred2))
@@ -290,7 +372,7 @@ J2bis$Mode<- as.numeric(J2bis$Mode)
 names(J2bis)[1]<- "zone final"
 
 J3<- Tabfin3 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J3<- J3 %>% select(-c(Longitude, Latitude))
+J3<- J3 %>% dplyr::select(-c(Longitude, Latitude))
 J3$Pred3<- as.numeric(J3$Pred3)
 J3$Clust<- as.numeric(J3$Clust)
 J3bis<- J3 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred3))
@@ -298,7 +380,7 @@ J3bis$Mode<- as.numeric(J3bis$Mode)
 names(J3bis)[1]<- "zone final"
 
 J4<- Tabfin4 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J4<- J4 %>% select(-c(Longitude, Latitude))
+J4<- J4 %>% dplyr::select(-c(Longitude, Latitude))
 J4$Pred4<- as.numeric(J4$Pred4)
 J4$Clust<- as.numeric(J4$Clust)
 J4bis<- J4 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred4))
@@ -306,7 +388,7 @@ J4bis$Mode<- as.numeric(J4bis$Mode)
 names(J4bis)[1]<- "zone final"
 
 J5<- Tabfin5 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J5<- J5 %>% select(-c(Longitude, Latitude))
+J5<- J5 %>% dplyr::select(-c(Longitude, Latitude))
 J5$Pred5<- as.numeric(J5$Pred5)
 J5$Clust<- as.numeric(J5$Clust)
 J5bis<- J5 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred5))
@@ -314,7 +396,7 @@ J5bis$Mode<- as.numeric(J5bis$Mode)
 names(J5bis)[1]<- "zone final"
 
 J6<- Tabfin6 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J6<- J6 %>% select(-c(Longitude, Latitude))
+J6<- J6 %>% dplyr::select(-c(Longitude, Latitude))
 J6$Pred6<- as.numeric(J6$Pred6)
 J6$Clust<- as.numeric(J6$Clust)
 J6bis<- J6 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred6))
@@ -322,7 +404,7 @@ J6bis$Mode<- as.numeric(J6bis$Mode)
 names(J6bis)[1]<- "zone final"
 
 J7<- Tabfin7 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J7<- J7 %>% select(-c(Longitude, Latitude))
+J7<- J7 %>% dplyr::select(-c(Longitude, Latitude))
 J7$Pred7<- as.numeric(J7$Pred7)
 J7$Clust<- as.numeric(J7$Clust)
 J7bis<- J7 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred7))
@@ -330,7 +412,7 @@ J7bis$Mode<- as.numeric(J7bis$Mode)
 names(J7bis)[1]<- "zone final"
 
 J8<- Tabfin8 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J8<- J8 %>% select(-c(Longitude, Latitude))
+J8<- J8 %>% dplyr::select(-c(Longitude, Latitude))
 J8$Pred8<- as.numeric(J8$Pred8)
 J8$Clust<- as.numeric(J8$Clust)
 J8bis<- J8 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred8))
@@ -338,7 +420,7 @@ J8bis$Mode<- as.numeric(J8bis$Mode)
 names(J8bis)[1]<- "zone final"
 
 J9<- Tabfin9 %>% inner_join(tata, by=c("Longitude", "Latitude"))
-J9<- J9 %>% select(-c(Longitude, Latitude))
+J9<- J9 %>% dplyr::select(-c(Longitude, Latitude))
 J9$Pred9<- as.numeric(J9$Pred9)
 J9$Clust<- as.numeric(J9$Clust)
 J9bis<- J9 %>% group_by(Clust) %>% summarize(Mode= getmode(Pred9))
@@ -375,39 +457,39 @@ summarycom9$Clust<- as.numeric(summarycom9$Clust)
 
 Mean1<- J1bis %>% full_join(summarycom1, by=c("Mode"="Clust"))
 Mean1<- na.omit(Mean1)
-Mean1<- Mean1 %>% select(-Mode)
+Mean1<- Mean1 %>% dplyr::select(-Mode)
 names(Mean1)[2]<- "Com1"
 Mean2<- J2bis %>% full_join(summarycom2, by=c("Mode"="Clust"))
 Mean2<- na.omit(Mean2)
-Mean2<- Mean2 %>% select(-Mode)
+Mean2<- Mean2 %>% dplyr::select(-Mode)
 names(Mean2)[2]<- "Com2"
 Mean3<- J3bis %>% full_join(summarycom3, by=c("Mode"="Clust"))
 Mean3<- na.omit(Mean3)
-Mean3<- Mean3 %>% select(-Mode)
+Mean3<- Mean3 %>% dplyr::select(-Mode)
 names(Mean3)[2]<- "Com3"
 Mean4<- J4bis %>% full_join(summarycom4, by=c("Mode"="Clust"))
 Mean4<- na.omit(Mean4)
-Mean4<- Mean4 %>% select(-Mode)
+Mean4<- Mean4 %>% dplyr::select(-Mode)
 names(Mean4)[2]<- "Com4"
 Mean5<- J5bis %>% full_join(summarycom5, by=c("Mode"="Clust"))
 Mean5<- na.omit(Mean5)
-Mean5<- Mean5 %>% select(-Mode)
+Mean5<- Mean5 %>% dplyr::select(-Mode)
 names(Mean5)[2]<- "Com5"
 Mean6<- J6bis %>% full_join(summarycom6, by=c("Mode"="Clust"))
 Mean6<- na.omit(Mean6)
-Mean6<- Mean6 %>% select(-Mode)
+Mean6<- Mean6 %>% dplyr::select(-Mode)
 names(Mean6)[2]<- "Com6"
 Mean7<- J7bis %>% full_join(summarycom7, by=c("Mode"="Clust"))
 Mean7<- na.omit(Mean7)
-Mean7<- Mean7 %>% select(-Mode)
+Mean7<- Mean7 %>% dplyr::select(-Mode)
 names(Mean7)[2]<- "Com7"
 Mean8<- J8bis %>% full_join(summarycom8, by=c("Mode"="Clust"))
 Mean8<- na.omit(Mean8)
-Mean8<- Mean8 %>% select(-Mode)
+Mean8<- Mean8 %>% dplyr::select(-Mode)
 names(Mean8)[2]<- "Com8"
 Mean9<- J9bis %>% full_join(summarycom9, by=c("Mode"="Clust"))
 Mean9<- na.omit(Mean9)
-Mean9<- Mean9 %>% select(-Mode)
+Mean9<- Mean9 %>% dplyr::select(-Mode)
 names(Mean9)[2]<- "Com9"
 
 

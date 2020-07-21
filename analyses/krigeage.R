@@ -359,12 +359,12 @@ save(Kriege.logdens, file="data/krigeage log.RData")
 
 
   # Plot du krigeage sur toutes les années pour un cluster
-y <- 2
-gg<- ggplot()+
-  geom_raster(data= Kriege.logdens[Kriege.logdens$Community==y,], aes(x= Longitude, y= Latitude, fill = Prediction)) +
-  scale_fill_gradientn(colours = brewer.pal(n=9, name = "Greys")) + 
+y <- 9
+gg9<- ggplot()+
+  geom_raster(data= Kriege.logdens[Kriege.logdens$Cluster==y,], aes(x= Longitude, y= Latitude, fill = Prediction)) +
+  scale_fill_gradientn(colours = brewer.pal(n=9, name = "Blues")) + 
   facet_wrap(.~ Year) +
-  ggtitle(paste0("Estimation des densités de la communauté III")) + 
+  ggtitle("Estimation des densités de la communauté IX") + 
   theme_minimal() +
   geom_polygon(data= PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
   theme(strip.text.x = element_text(size = 15))+
@@ -375,7 +375,7 @@ gg<- ggplot()+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 15))
 
-ggsave(gg, filename = "Com IX.jpeg", path = "results/Communautes bio/Series tempo cartes", width = 13, height = 8 )
+ggsave(gg9, filename = "Com IX.jpeg", path = "results/Communautes bio/Series tempo cartes", width = 13, height = 8 )
 
 
 
