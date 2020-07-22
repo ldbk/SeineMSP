@@ -6,7 +6,7 @@ library(cowplot)
 library(RColorBrewer)
 
 
-# Cartes zones
+# Cartes 9 zonations (zones)
 {
 load("data/satellite/Particles/part_raster.Rdata")
 load("data/satellite/chl/chl_raster.Rdata")
@@ -35,7 +35,7 @@ par(mfrow = c(1, 1))
 
 
 
-# Cartes zones (means)
+# Cartes 9 zonations (moyennes)
 {
   load("results/satellite/means by zone/chl_raster.Rdata")
   load("results/satellite/means by zone/PP_raster.Rdata")

@@ -78,9 +78,9 @@ ggplot(TabSal2)+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 15))
 
+save(TabSal2, file="data/satellite/Salinity/TabSal2.Rdata")
 
-#ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+
-#  geom_boxplot()
+#ggplot(TabSal2, aes(x= Year, y=moySal, group=Year))+geom_boxplot()
 
 
 # Mean salinity 1998-2018

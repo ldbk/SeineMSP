@@ -77,8 +77,9 @@ ggplot(Tabsst2)+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 20))
 
-#ggplot(Tabsst2, aes(x= Year, y=moySST, group=Year))+
-#  geom_boxplot()
+save(Tabsst2, file="data/satellite/sst/Tabsst2.Rdata")
+
+#ggplot(Tabsst2, aes(x= Year, y=moySST, group=Year))+geom_boxplot()
 
 
 # Mean SST 1981-2018

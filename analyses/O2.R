@@ -83,8 +83,9 @@ ggplot(TabO22)+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 15))
 
-#ggplot(TabO22, aes(x=Year, y=moyO2m, group=Year))+
-#  geom_boxplot()
+save(TabO22, file="data/satellite/O2/TabO22.Rdata")
+
+#ggplot(TabO22, aes(x=Year, y=moyO2m, group=Year))+geom_boxplot()
 
 
 # Mean O2 1998-2018

@@ -75,8 +75,9 @@ ggplot(TabPP2)+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 15))
 
-#ggplot(TabPP2, aes(x= Year, y=moyPP, group=Year))+
-#  geom_boxplot()
+save(TabPP2, file="data/satellite/Primary production/TabPP2.Rdata")
+
+#ggplot(TabPP2, aes(x= Year, y=moyPP, group=Year))+geom_boxplot()
 
 
 # Mean PP 1998-2018

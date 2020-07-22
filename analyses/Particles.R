@@ -70,8 +70,9 @@ ggplot(TabPart2)+
   theme(axis.text.y = element_text(size = 10))+
   theme(legend.title = element_text(size = 15))
 
-#ggplot(TabPart2, aes(x=Year, y=moyPart, group=Year))+
-#  geom_boxplot()
+save(TabPart2, file="data/satellite/Particles/TabPart2.Rdata")
+
+#ggplot(TabPart2, aes(x=Year, y=moyPart, group=Year))+geom_boxplot()
 
 
 # Mean particles 1998-2018
