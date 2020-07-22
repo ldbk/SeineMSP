@@ -1,12 +1,12 @@
 library(dplyr)
 library()
 
-load("data/Kriege.logdens.Rdata")
-load("results/Communautes bio/Zones_finales_chaque_pixel.Rdata")
+load("data/krigeage log.Rdata")
+load("results/Communautes bio/Zones/Tabttpixel.Rdata")
 
 # Conversion tata en SpatialPolygonsDataFrame
 tata1<- tata
-coordinates(tata1)<- ~ Longitude + Latitude
+coordinates(tata1)<- ~ Long + Lat
 gridded(tata1) <- TRUE
 rastertata1<- raster(tata1)
 poltata1<- rasterToPolygons(rastertata1, dissolve=TRUE)
@@ -108,6 +108,7 @@ fin1<- fin1 %>% dplyr::select(-Variance)
 
 # Calculs séries temporelles pour chaque zone
 
+{
 fin1bis<- fin1 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté I" = mean(Prediction))       # Moyenne (pas somme) pour comparer les pixels entre eux et pas les zones qui sont de tailles différentes
 fin2bis<- fin2 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté II" = mean(Prediction))
 fin3bis<- fin3 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté III" = mean(Prediction))
@@ -117,7 +118,8 @@ fin6bis<- fin6 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté VI
 fin7bis<- fin7 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté VII" = mean(Prediction))
 fin8bis<- fin8 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté VIII" = mean(Prediction))
 fin9bis<- fin9 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté IX" = mean(Prediction))
-
+}
+{
 fintot<- fin1bis %>% left_join(fin2bis, by= c("Zones finales", "Year")) # 1 pixel de la Zone 1 a en 1988 une densité de com I égale à 4.08  
 fintot<- fintot %>% left_join(fin3bis, by= c("Zones finales", "Year"))
 fintot<- fintot %>% left_join(fin4bis, by= c("Zones finales", "Year"))
@@ -137,6 +139,7 @@ fintot$`Zones finales`<- sub("6", "Zone 6", fintot$`Zones finales`)
 fintot$`Zones finales`<- sub("7", "Zone 7", fintot$`Zones finales`)
 fintot$`Zones finales`<- sub("8", "Zone 8", fintot$`Zones finales`)
 fintot$`Zones finales`<- sub("9", "Zone 9", fintot$`Zones finales`)
+}
 
 fintot$Communauté<- factor(fintot$Communauté, ordered = TRUE, levels = c("Communauté I", "Communauté II", "Communauté III", "Communauté IV", "Communauté V", "Communauté VI", "Communauté VII", "Communauté VIII", "Communauté IX"))
 names(fintot)[2]<- "Année"

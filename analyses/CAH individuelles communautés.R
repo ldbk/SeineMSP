@@ -268,15 +268,15 @@ Com9<- m
 
 
 {
-  Com1<- raster::plot(Com1, main="Communauté I", xlab="Longitude", ylab="Latitude", col= c("#FFFFCC", "#CC6633"))
-  Com2<- raster::plot(Com2, main="Communauté II", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name = "PuBu"))
-  Com3<- raster::plot(Com3, main="Communauté III", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name = "Greys"))
-  Com4<- raster::plot(Com4, main="Communauté IV", xlab="Longitude", ylab="Latitude", col= c("#CCFFCC", "#99CC99"))
-  Com5<- raster::plot(Com5, main="Communauté V", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=3, name = "PuRd"))
-  Com6<- raster::plot(Com6, main="Communauté VI", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=3, name = "Blues"))
-  Com7<- raster::plot(Com7, main="Communauté VII", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name="Spectral"))
-  Com8<- raster::plot(Com8, main="Communauté VIII", xlab="Longitude", ylab="Latitude", col= brewer.pal(n=4, name="PiYG"))
-  Com9<- raster::plot(Com9, main="Communauté IX", xlab="Longitude", ylab="Latitude", col= c("#FFCCCC", "#FF6666"))
+  Com1<- raster::plot(Com1, main="Communauté I", xlab="Longitude", ylab="Latitude",   col= brewer.pal(n=7, name = "Greys"))
+  Com2<- raster::plot(Com2, main="Communauté II", xlab="Longitude", ylab="Latitude",  col= brewer.pal(n=4, name = "PuBu"))
+  Com3<- raster::plot(Com3, main="Communauté III", xlab="Longitude", ylab="Latitude", col= c("#FFFFCC", "#CC6633"))
+  Com4<- raster::plot(Com4, main="Communauté IV", xlab="Longitude", ylab="Latitude",  col= brewer.pal(n=3, name="Spectral"))
+  Com5<- raster::plot(Com5, main="Communauté V", xlab="Longitude", ylab="Latitude",   col= brewer.pal(n=3, name = "PuRd"))
+  Com6<- raster::plot(Com6, main="Communauté VI", xlab="Longitude", ylab="Latitude",  col= brewer.pal(n=6, name = "Blues"))
+  Com7<- raster::plot(Com7, main="Communauté VII", xlab="Longitude", ylab="Latitude", col= c("#CCFFCC", "#99CC99"))
+  Com8<- raster::plot(Com8, main="Communauté VIII", xlab="Longitude", ylab="Latitude",col= brewer.pal(n=3, name="PiYG"))
+  Com9<- raster::plot(Com9, main="Communauté IX", xlab="Longitude", ylab="Latitude",  col= brewer.pal(n=4, name="Oranges"))
 }
 
 
@@ -286,3 +286,4 @@ par(mfrow = c(1, 1))
 
 
 
+c("#FFCCCC", "#FF6666")
