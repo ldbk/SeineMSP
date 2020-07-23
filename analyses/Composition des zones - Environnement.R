@@ -63,11 +63,31 @@ poltata1<- rasterToPolygons(rastertata1, dissolve=TRUE)
 }
 {
   TabPP2<- TabPP2 %>% ungroup()
+  
+  # create SpatialPointsDataFrame
+  coordinates(TabPP2)<- ~ x + y
+  # coerce to SpatialPixelsDataFrame
+  gridded(TabPP2) <- TRUE
+  # coerce to raster
+  rasterPP<- raster(TabPP2)
+  stackPP<- raster::stack(TabPP2, bands = 32)
+  
+  disPP<- disaggregate(rasterPP, fact=10)
+  
+  TabPP3<- as.data.frame(rasterToPoints(disPP))
+  
+
+  
+  
+  
+  
+  
+  
   TabPP2SP<- SpatialPointsDataFrame(as.matrix(TabPP2[,1:2]), TabPP2)
   pipo1<- sp::over(TabPP2SP, poltata1)
   
   finPP<- cbind(pipo1, TabPP2)
-  names(finPP)[1]<- "Zones finales"
+  names(finPP)[1]<- "Zones_finales"
   names(finPP)[4]<- "Année"
 }
 {
@@ -382,6 +402,17 @@ ggsave(plot= TURB, filename="TURB.jpeg", path="results/satellite/zones/Boxplot",
 
 
 
+
+
+# Essai
+
+
+polfinfort<- fortify(poltata1)
+
+ggplot(na.omit(finchl))+
+  geom_tile(aes(x=x, y=y, fill=moyChl))+
+  geom_polygon(data=polfinfort, aes(x=long, y=lat, group=group) ,fill=NA, col="black")+
+  theme_minimal()
 
 
 

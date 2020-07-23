@@ -1,5 +1,5 @@
 library(dplyr)
-library()
+library(ggplot2)
 
 load("data/krigeage log.Rdata")
 load("results/Communautes bio/Zones/Tabttpixel.Rdata")
@@ -229,7 +229,7 @@ absolu<- ggplot(data=propfin, aes(x=`Zones finales`, y=Proportion, fill=Communau
 
 
 
-# Essai 
+# Proportion des communautés dans chaque zone en relatif 
 
 Effectif<- c(25, 12, 45, 7, 6, 20, 3, 2, 7)
 
@@ -324,12 +324,87 @@ relatif<- ggplot(data=propfinb, aes(x=`Zones finales`, y=Proportion, fill=Commun
 
 
 
+# Caractérisation des zones en termes de densité totale et non plus en termes de communautés
+
+
+{
+  fin1ter<- fin1 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté I" = mean(Prediction))           # Sur l'année 1988, la moyenne d'un pixel de la zone 1 est    
+  fin2ter<- fin2 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté II" = mean(Prediction))
+  fin3ter<- fin3 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté III" = mean(Prediction))
+  fin4ter<- fin4 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté IV" = mean(Prediction))
+  fin5ter<- fin5 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté V" = mean(Prediction))
+  fin6ter<- fin6 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté VI" = mean(Prediction))
+  fin7ter<- fin7 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté VII" = mean(Prediction))
+  fin8ter<- fin8 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté VIII" = mean(Prediction))
+  fin9ter<- fin9 %>% group_by(`Zones finales`, Year) %>% summarise("Communauté IX" = mean(Prediction))
+  }
+{
+  fin1qua<- fin1ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté I`))                   # La moyenne d'un pixel de la zone 1 est
+  fin2qua<- fin2ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté II`))
+  fin3qua<- fin3ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté III`))
+  fin4qua<- fin4ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté IV`))
+  fin5qua<- fin5ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté V`))
+  fin6qua<- fin6ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté VI`))
+  fin7qua<- fin7ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté VII`))
+  fin8qua<- fin8ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté VIII`))
+  fin9qua<- fin9ter %>% group_by(`Zones finales`) %>% summarise("Com" = mean(`Communauté IX`))
+}
+
+fintotqua<- rbind(fin1qua, fin2qua) 
+fintotqua<- rbind(fintotqua, fin3qua)
+fintotqua<- rbind(fintotqua, fin4qua)
+fintotqua<- rbind(fintotqua, fin5qua)
+fintotqua<- rbind(fintotqua, fin6qua)
+fintotqua<- rbind(fintotqua, fin7qua)
+fintotqua<- rbind(fintotqua, fin8qua)
+fintotqua<- rbind(fintotqua, fin9qua)
+
+finfin<- fintotqua %>% group_by(`Zones finales`) %>% summarise(`Densité totale` = sum(Com))
+
+ggplot(data=finfin, aes(x=`Zones finales`, y=`Densité totale`, fill=`Zones finales`)) +
+  geom_bar(stat="identity")
 
 
 
 
 
 
+# Essai
+
+tabchiant<- cbind(fin1, ComII=fin2$Prediction, ComIII=fin3$Prediction, ComIV=fin4$Prediction, 
+                  ComV=fin5$Prediction, ComVI=fin6$Prediction, ComVII=fin7$Prediction, 
+                  ComVIII=fin8$Prediction, ComIX=fin9$Prediction)
+names(tabchiant)[4]<- "ComI"
+tabchiant<- tabchiant %>% select(-`Communauté I`)
+
+
+tabchiant2<- tabchiant %>% group_by(Longitude, Latitude) %>% mutate(Denstot=sum(ComI, ComII, ComIII, ComIV, ComV, ComVI, ComVII, ComVIII, ComIX))
+
+
+
+# Création polygones zones
+
+load("results/Communautes bio/Zones/Tabttpixel.Rdata")
+# create SpatialPointsDataFrame
+tataras<- tata
+coordinates(tataras)<- ~ Long + Lat
+# coerce to SpatialPixelsDataFrame
+gridded(tataras) <- TRUE
+# coerce to raster
+rastertatanew<- raster(tataras)
+rastertatanew
+plot(rastertatanew, col=brewer.pal(n = 9, name = "YlGnBu"), main="", xlab="Longitude", ylab="Latitude")
+
+
+polfin<- rasterToPolygons(rastertatanew, dissolve=TRUE)
+plot(polfin, col=polfin@data$Clust)
+
+polfinfort<- fortify(polfin)
+
+ggplot(tabchiant2)+
+  geom_tile(aes(x=Longitude, y=Latitude, fill=Denstot))+
+  geom_polygon(data=polfinfort, aes(x=long, y=lat, group=group) ,fill=NA, col="black")+
+  theme_minimal()
 
 
 
