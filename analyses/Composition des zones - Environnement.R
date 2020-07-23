@@ -24,96 +24,234 @@ poltata1<- rasterToPolygons(rastertata1, dissolve=TRUE)
 
 
 # Conversion Tab2 en SpatialPointsDataFrame
+fortify.Raster <- function(O2, maxPixel = 1000000) {
+  
+  if (ncell(O2) > maxPixel) {
+    x <- sampleRegular(O2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(O2, seq_len(ncell(O2)))
+  out <- O2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+
 
 {
   Tabchl2<- Tabchl2 %>% ungroup()
-  Tabchl2SP<- SpatialPointsDataFrame(as.matrix(Tabchl2[,1:2]), Tabchl2)
-  pipo1<- sp::over(Tabchl2SP, poltata1)
+  toto <- Tabchl2 %>% pivot_wider(names_from = year, values_from = moyChl)
   
-  finchl<- cbind(pipo1, Tabchl2)
+  l <- list()
+  for (i in unique(Tabchl2$year)){
+    tata <- toto[c(1:2,which(unique(Tabchl2$year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  
+  b <- brick(l)
+  b <- disaggregate(b,10)
+  Chl <- stack(b)  
+  Chl <- fortify.Raster(Chl)
+  names(Chl)[1:(dim(Chl)[2]-2)] <- unique(Tabchl2$year)
+  Chl <- Chl %>% pivot_longer(cols=1:(dim(Chl)[2]-2), names_to="Year",values_to ="Moyenne")  
+  
+  TabChl2SP<- SpatialPointsDataFrame(as.matrix(Chl[,1:2]), Chl)
+  pipo1<- sp::over(TabChl2SP, poltata1)
+  
+  finchl<- cbind(pipo1, Chl)
   names(finchl)[1]<- "Zones finales"
   names(finchl)[4]<- "Année"
 }
 {
   TabDet2<- TabDet2 %>% ungroup()
-  TabDet2SP<- SpatialPointsDataFrame(as.matrix(TabDet2[,1:2]), TabDet2)
+  toto <- TabDet2 %>% pivot_wider(names_from = Year, values_from = moyDet)
+  
+  l <- list()
+  for (i in unique(TabDet2$Year)){
+    tata <- toto[c(1:2,which(unique(TabDet2$Year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  
+  b <- brick(l)
+  b <- disaggregate(b,10)
+  Det <- stack(b)  
+  Det <- fortify.Raster(Det)
+  names(Det)[1:(dim(Det)[2]-2)] <- unique(TabDet2$Year)
+  Det <- Det %>% pivot_longer(cols=1:(dim(Det)[2]-2), names_to="Year",values_to ="Moyenne")  
+  
+  TabDet2SP<- SpatialPointsDataFrame(as.matrix(Det[,1:2]), Det)
   pipo1<- sp::over(TabDet2SP, poltata1)
   
-  finDet<- cbind(pipo1, TabDet2)
+  finDet<- cbind(pipo1, Det)
   names(finDet)[1]<- "Zones finales"
   names(finDet)[4]<- "Année"
 }
 {
   TabO22<- TabO22 %>% ungroup()
-  TabO22SP<- SpatialPointsDataFrame(as.matrix(TabO22[,1:2]), TabO22)
+  toto <- TabO22 %>% pivot_wider(names_from = Year, values_from = moyO2)
+  
+  l <- list()
+  for (i in unique(TabO22$Year)){
+    tata <- toto[c(1:2,which(unique(TabO22$Year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  b <- brick(l)
+  b <- disaggregate(b,10)
+  
+  O2 <- stack(b)  
+  O2 <- fortify.Raster(O2)
+  names(O2)[1:(dim(O2)[2]-2)] <- unique(TabO22$Year)
+  O2 <- O2 %>% pivot_longer(cols=1:(dim(O2)[2]-2), names_to="Year",values_to ="Moyenne")  
+  
+  TabO22SP<- SpatialPointsDataFrame(as.matrix(O2[,1:2]), O2)
   pipo1<- sp::over(TabO22SP, poltata1)
   
-  finO2<- cbind(pipo1, TabO22)
+  finO2<- cbind(pipo1, O2)
   names(finO2)[1]<- "Zones finales"
   names(finO2)[4]<- "Année"
 }
 {
   TabPart2<- TabPart2 %>% ungroup()
-  TabPart2SP<- SpatialPointsDataFrame(as.matrix(TabPart2[,1:2]), TabPart2)
+  toto <- TabPart2 %>% pivot_wider(names_from = Year, values_from = moyPart)
+  
+  l <- list()
+  for (i in unique(TabPart2$Year)){
+    tata <- toto[c(1:2,which(unique(TabPart2$Year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  b <- brick(l)
+  b <- disaggregate(b,10)
+  
+  Part <- stack(b)  
+  Part <- fortify.Raster(Part)
+  names(Part)[1:(dim(Part)[2]-2)] <- unique(TabPart2$Year)
+  Part <- Part %>% pivot_longer(cols=1:(dim(Part)[2]-2), names_to="Year",values_to ="Moyenne")  
+  
+  TabPart2SP<- SpatialPointsDataFrame(as.matrix(Part[,1:2]), Part)
   pipo1<- sp::over(TabPart2SP, poltata1)
   
-  finPart<- cbind(pipo1, TabPart2)
+  finPart<- cbind(pipo1, Part)
   names(finPart)[1]<- "Zones finales"
   names(finPart)[4]<- "Année"
 }
 {
   TabPP2<- TabPP2 %>% ungroup()
+  toto <- TabPP2 %>% pivot_wider(names_from = Year, values_from = moyPP)
   
-  # create SpatialPointsDataFrame
-  coordinates(TabPP2)<- ~ x + y
-  # coerce to SpatialPixelsDataFrame
-  gridded(TabPP2) <- TRUE
-  # coerce to raster
-  rasterPP<- raster(TabPP2)
-  stackPP<- raster::stack(TabPP2, bands = 32)
+  l <- list()
+  for (i in unique(TabPP2$Year)){
+    tata <- toto[c(1:2,which(unique(TabPP2$Year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  b <- brick(l)
+  b <- disaggregate(b,10)
   
-  disPP<- disaggregate(rasterPP, fact=10)
+  PP <- stack(b)  
+  PP <- fortify.Raster(PP)
+  names(PP)[1:(dim(PP)[2]-2)] <- unique(TabPP2$Year)
+  PP <- PP %>% pivot_longer(cols=1:(dim(PP)[2]-2), names_to="Year",values_to ="Moyenne")  
   
-  TabPP3<- as.data.frame(rasterToPoints(disPP))
-  
-
-  
-  
-  
-  
-  
-  
-  TabPP2SP<- SpatialPointsDataFrame(as.matrix(TabPP2[,1:2]), TabPP2)
+  TabPP2SP<- SpatialPointsDataFrame(as.matrix(PP[,1:2]), PP)
   pipo1<- sp::over(TabPP2SP, poltata1)
   
-  finPP<- cbind(pipo1, TabPP2)
+  finPP<- cbind(pipo1, PP)
   names(finPP)[1]<- "Zones_finales"
   names(finPP)[4]<- "Année"
 }
 {
   TabSal2<- TabSal2 %>% ungroup()
-  TabSal2SP<- SpatialPointsDataFrame(as.matrix(TabSal2[,1:2]), TabSal2)
+  toto <- TabSal2 %>% pivot_wider(names_from = Year, values_from = moySal)
+  
+  l <- list()
+  for (i in unique(TabSal2$Year)){
+    tata <- toto[c(1:2,which(unique(TabSal2$Year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  b <- brick(l)
+  b <- disaggregate(b,10)
+  
+  Sal <- stack(b)  
+  Sal <- fortify.Raster(Sal)
+  names(Sal)[1:(dim(Sal)[2]-2)] <- unique(TabSal2$Year)
+  Sal <- Sal %>% pivot_longer(cols=1:(dim(Sal)[2]-2), names_to="Year",values_to ="Moyenne")  
+  
+  TabSal2SP<- SpatialPointsDataFrame(as.matrix(Sal[,1:2]), Sal)
   pipo1<- sp::over(TabSal2SP, poltata1)
   
-  finSal<- cbind(pipo1, TabSal2)
+  finSal<- cbind(pipo1, Sal)
   names(finSal)[1]<- "Zones finales"
   names(finSal)[4]<- "Année"
 }
 {
   Tabsst2<- Tabsst2 %>% ungroup()
-  Tabsst2SP<- SpatialPointsDataFrame(as.matrix(Tabsst2[,1:2]), Tabsst2)
+  toto <- Tabsst2 %>% pivot_wider(names_from = Year, values_from = moySST)
+  
+  l <- list()
+  for (i in unique(Tabsst2$Year)){
+    tata <- toto[c(1:2,which(unique(Tabsst2$Year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  b <- brick(l)
+  b <- disaggregate(b,10)
+  
+  SST <- stack(b)  
+  SST <- fortify.Raster(SST)
+  names(SST)[1:(dim(SST)[2]-2)] <- unique(Tabsst2$Year)
+  SST <- SST %>% pivot_longer(cols=1:(dim(SST)[2]-2), names_to="Year",values_to ="Moyenne")  
+  
+  Tabsst2SP<- SpatialPointsDataFrame(as.matrix(SST[,1:2]), SST)
   pipo1<- sp::over(Tabsst2SP, poltata1)
   
-  finsst<- cbind(pipo1, Tabsst2)
+  finsst<- cbind(pipo1, SST)
   names(finsst)[1]<- "Zones finales"
   names(finsst)[4]<- "Année"
 }
 {
   TabTurb2<- TabTurb2 %>% ungroup()
-  TabTurb2SP<- SpatialPointsDataFrame(as.matrix(TabTurb2[,1:2]), TabTurb2)
+  toto <- TabTurb2 %>% pivot_wider(names_from = Year, values_from = moyTurb)
+  
+  l <- list()
+  for (i in unique(TabTurb2$Year)){
+    tata <- toto[c(1:2,which(unique(TabTurb2$Year)==i)+2)]
+    coordinates(tata) <- ~ x + y
+    gridded(tata) <- TRUE
+    r <- raster(tata)
+    l <- append(l,r)
+  }
+  b <- brick(l)
+  b <- disaggregate(b,10)
+  
+  Turb <- stack(b)  
+  Turb <- fortify.Raster(Turb)
+  names(Turb)[1:(dim(Turb)[2]-2)] <- unique(TabTurb2$Year)
+  Turb <- Turb %>% pivot_longer(cols=1:(dim(Turb)[2]-2), names_to="Year",values_to ="Moyenne")  
+  
+  TabTurb2SP<- SpatialPointsDataFrame(as.matrix(Turb[,1:2]), Turb)
   pipo1<- sp::over(TabTurb2SP, poltata1)
   
-  finTurb<- cbind(pipo1, TabTurb2)
+  finTurb<- cbind(pipo1, Turb)
   names(finTurb)[1]<- "Zones finales"
   names(finTurb)[4]<- "Année"
 }
@@ -408,20 +546,36 @@ ggsave(plot= TURB, filename="TURB.jpeg", path="results/satellite/zones/Boxplot",
 
 
 polfinfort<- fortify(poltata1)
-
 ggplot(na.omit(finchl))+
-  geom_tile(aes(x=x, y=y, fill=moyChl))+
+  geom_tile(aes(x=x, y=y, fill=Moyenne))+
   geom_polygon(data=polfinfort, aes(x=long, y=lat, group=group) ,fill=NA, col="black")+
   theme_minimal()
 
 
+##Boxplot par zone
+
+Chl <- finchl %>% na.omit() %>% mutate(Chl=Moyenne/max(Moyenne)) %>% select(-Moyenne)
+Det <- finDet %>% na.omit() %>% mutate(Det=Moyenne/max(Moyenne)) %>% select(-Moyenne)
+O2  <- finO2 %>% na.omit() %>% mutate(O2=Moyenne/max(Moyenne)) %>% select(-Moyenne)
+Part <- finPart %>% na.omit() %>% mutate(Part=Moyenne/max(Moyenne)) %>% select(-Moyenne)
+PP  <- finPP %>% na.omit() %>% mutate(PP=Moyenne/max(Moyenne)) %>% select(-Moyenne)
+Sal <- finSal %>% na.omit() %>% mutate(Sal=Moyenne/max(Moyenne)) %>% select(-Moyenne)
+SST <- finsst %>% na.omit() %>% mutate(SST=Moyenne/max(Moyenne)) %>% select(-Moyenne)
+Turb  <- finTurb %>% na.omit() %>% mutate(Turb=Moyenne/max(Moyenne)) %>% select(-Moyenne)
 
 
+Env <- data.frame(
+  Parametre=c(rep("Chl",length(Chl$Chl)),rep("Detritus",length(Det$Det)),rep("O2",length(O2$O2)),rep("Particules",length(Part$Part)),rep("Production primaire",length(PP$PP)),rep("Salinité",length(Sal$Sal)),rep("SST",length(SST$SST)),rep("Turbidité",length(Turb$Turb))),
+  Zone=c(Chl$`Zones finales`,Det$`Zones finales`,O2$`Zones finales`,Part$`Zones finales`,PP$Zones_finales,Sal$`Zones finales`,SST$`Zones finales`,Turb$`Zones finales`),
+  Valeur=c(Chl$Chl,Det$Det,O2$O2,Part$Part,PP$PP,Sal$Sal,SST$SST,Turb$Turb)
+)
+Env$Zone <- factor(Env$Zone)
 
-
-
-
-
+ggplot(Env)+
+  geom_boxplot(aes(x=Zone,y=Valeur,fill=Zone))+
+  facet_wrap(.~Parametre)+
+  scale_fill_brewer(palette = "Spectral")+
+  theme_minimal()
 
 
 
