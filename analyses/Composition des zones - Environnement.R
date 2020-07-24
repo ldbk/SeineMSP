@@ -565,19 +565,26 @@ Turb  <- finTurb %>% na.omit() %>% mutate(Turb=Moyenne/max(Moyenne)) %>% select(
 
 
 Env <- data.frame(
-  Parametre=c(rep("Chl",length(Chl$Chl)),rep("Detritus",length(Det$Det)),rep("O2",length(O2$O2)),rep("Particules",length(Part$Part)),rep("Production primaire",length(PP$PP)),rep("Salinité",length(Sal$Sal)),rep("SST",length(SST$SST)),rep("Turbidité",length(Turb$Turb))),
+  Parametre=c(rep("Chlorophylle a",length(Chl$Chl)),rep("Détritus",length(Det$Det)),rep("Oxygène dissous",length(O2$O2)),rep("Particules",length(Part$Part)),rep("Production primaire",length(PP$PP)),rep("Salinité",length(Sal$Sal)),rep("Température de surface",length(SST$SST)),rep("Turbidité",length(Turb$Turb))),
   Zone=c(Chl$`Zones finales`,Det$`Zones finales`,O2$`Zones finales`,Part$`Zones finales`,PP$Zones_finales,Sal$`Zones finales`,SST$`Zones finales`,Turb$`Zones finales`),
   Valeur=c(Chl$Chl,Det$Det,O2$O2,Part$Part,PP$PP,Sal$Sal,SST$SST,Turb$Turb)
 )
 Env$Zone <- factor(Env$Zone)
 
-ggplot(Env)+
+ggenv<- ggplot(Env)+
   geom_boxplot(aes(x=Zone,y=Valeur,fill=Zone))+
   facet_wrap(.~Parametre)+
-  scale_fill_brewer(palette = "Spectral")+
-  theme_minimal()
+  scale_fill_brewer(palette = "YlOrBr")+
+  theme_minimal()+
+  theme(strip.text.x = element_text(size = 15))+
+  theme(axis.title.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.text.y = element_text(size = 10))+
+  theme(legend.title = element_text(size = 20))+
+  theme(legend.text = element_text(size = 15))
 
-
+ggsave(plot= ggenv, filename="Boxplots_tsparam_tszones.jpeg", path="results/satellite/zones/Boxplot", width = 13, height = 8)
 
 
 
