@@ -39,18 +39,26 @@ bathy30 <- cbind(bathy30,ELEV=30)
 bathytot <- rbind(bathy10,bathy20,bathy30)
 bathytot$ELEV <- factor(bathytot$ELEV)
 
+bathytot$ELEV <- sub("10", "-10 m", bathytot$ELEV)
+bathytot$ELEV <- sub("20", "-20 m", bathytot$ELEV)
+bathytot$ELEV <- sub("30", "-30 m", bathytot$ELEV)
 
-ggplot(bathytot)+
+
+ggbathy<- ggplot(bathytot)+
   geom_path(data=bathytot, aes(x=long, y=lat, group=group, lty=ELEV, colour= ELEV), alpha=0.3)+
-  theme_minimal()+
+  theme_classic() +
   xlab("Longitude")+
   ylab("Latitude")+
   theme(axis.title.x= element_text(size = 15))+
   theme(axis.title.y= element_text(size = 15))+
+  theme(legend.title = element_blank())+
+  theme(legend.text = element_text(size = 15))+
+  theme(legend.key.size = unit(35, "line"))+
   geom_sf(data = world, fill = "linen") + 
-  coord_sf(xlim = c(-2, 1.4), ylim = c(49, 50), expand = FALSE)
+  coord_sf(xlim = c(-1.6, 0.7), ylim = c(49.2, 49.8), expand = FALSE)
 
-
+ggsave(plot = ggbathy, filename = "Bathymétrie.jpeg", path = "results/Baie de Seine intro", width = 13, height = 8)
+  
 
 # Fleuves
 #bzh <- readOGR("cours_bzh.gpkg")

@@ -74,16 +74,14 @@ groups<- cutree(arbre, k=6)
 tata<- cbind(grd2[,c(1,2)],Clust=factor(groups))
 save(tata, file="results/satellite/Coordzones.Rdata")
 
-Allparam<- ggplot(tata)+
+ggplot(tata)+
   geom_tile(aes(x=Long,y=Lat,fill= as.numeric(Clust)))+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
   #ggtitle("Final bioregionalization")+
   scale_fill_gradientn(colours =brewer.pal(n = 5, name = "YlOrBr")) +
   xlab("Longitude")+
   ylab("Latitude")+
-  theme_minimal()
-
-Allparam2<- Allparam +
+  theme_minimal()+
   labs(fill= "Zones")+
   theme(legend.title = element_text(size = 15))+
   theme(legend.text = element_text(size = 15))+
@@ -94,9 +92,62 @@ Allparam2<- Allparam +
   theme(axis.text.y = element_text(size = 10))
 
 
-ggsave(plot= Allparam2, filename="All.jpeg", path="results/satellite/zones", width = 13, height = 8)
+
+# Découpage tata en fonction de polycut
+
+load("data/res.Rdata")
+
+  # create SpatialPointsDataFrame
+tataras<- tata
+coordinates(tataras)<- ~ Long + Lat
+  # coerce to SpatialPixelsDataFrame
+gridded(tataras) <- TRUE
+  # coerce to raster
+rastertata<- raster(tataras)
+rastertata
+plot(rastertata, col=brewer.pal(n = 6, name = "YlOrBr"), xlab="Longitude", ylab="Latitude")
+
+rastertata2<- mask(rastertata, res)
+plot(rastertata2, col=brewer.pal(n = 6, name = "YlOrBr"), main="Après mask", xlab="Longitude", ylab="Latitude")
 
 
+
+# Conversion raster - tableau
+fortify.Raster <- function(rastertata2, maxPixel = 1000000) {
+  
+  if (ncell(rastertata2) > maxPixel) {
+    x <- sampleRegular(rastertata2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rastertata2, seq_len(ncell(rastertata2)))
+  out <- rastertata2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+tatatab<- fortify(rastertata2)
+tatatab<- na.omit(tatatab)
+
+allparam<- ggplot(tatatab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  #ggtitle("Final bioregionalization")+
+  scale_fill_manual(values = c("#FFFFD4", "#FEE391", "#FEC44F", "#FE9929", "#D95F0E", "#993404"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 15))+
+  theme(legend.text = element_text(size = 15))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))
+
+
+ggsave(plot= allparam, filename="All.jpeg", path="results/satellite/zones", width = 13, height = 8)
 
 
 

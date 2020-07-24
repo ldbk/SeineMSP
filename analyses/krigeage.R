@@ -32,6 +32,7 @@ coast <- readOGR(dsn="data/Shp_FR/FRA_adm0.shp") #https://www.diva-gis.org/datad
 res <- gDifference(buff, coast)
 PolyCut <- fortify(res)
 
+save(res, file="data/res.Rdata")
 save(PolyCut, file="data/Polycut.Rdata")
 
   # Put polygon in good format for later use
