@@ -55,18 +55,19 @@ TabDet<- pivot_longer(TabDet, cols=1:262, names_to = "Date", values_to = "Detrit
 TabDet2<- TabDet %>% group_by(x,y,Year) %>% summarize(moyDet= mean(Detritus))
 ggplot(TabDet2)+
   geom_tile(aes(x=x, y=y, fill= log(moyDet)))+
-  ggtitle("Detritus moyenne 1997-2019")+
+  ggtitle("Détritus")+
   facet_wrap(. ~Year)+
   xlab("Longitude")+
   ylab("Latitude")+
+  labs(fill="log10 (Détritus)")+
   theme_minimal()+
   scale_fill_gradientn(colours = brewer.pal(n = 9, name = "PuBuGn"))+
   theme(strip.text.x = element_text(size = 15))+
-  theme(axis.text.x = element_text(size = 10 ))+
-  theme(plot.title = element_text(size = 20))+
+  theme(axis.text.x = element_blank())+
+  theme(plot.title = element_text(size = 30, hjust = 0.5))+
   theme(axis.title.x = element_text(size = 15))+
   theme(axis.title.y = element_text(size = 15))+
-  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.y = element_blank())+
   theme(legend.title = element_text(size = 15))
 
 save(TabDet2, file="data/satellite/Detritus/TabDet2.Rdata")

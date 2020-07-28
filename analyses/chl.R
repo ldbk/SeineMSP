@@ -56,19 +56,19 @@ Tabchl<- pivot_longer(Tabchl, cols=1:262, names_to = "Date", values_to = "Chloro
 Tabchl2<- Tabchl %>% group_by(x,y,year) %>% summarize(moyChl= mean(Chloro))
 ggplot(Tabchl2)+
   geom_tile(aes(x=x, y=y, fill=log(moyChl)))+
-  ggtitle("Chlorophylle moyenne 1997-2019")+
+  ggtitle("Chlorophylle a")+
   facet_wrap(. ~ year)+
   xlab("Longitude")+
   ylab("Latitude")+
-  labs(fill="log (Chl)")+
+  labs(fill="log10 (Chlorophylle a)")+
   theme_minimal()+
   scale_fill_gradientn(colours = brewer.pal(n = 9, name = "PuRd"))+
   theme(strip.text.x = element_text(size = 15))+
-  theme(axis.text.x = element_text(size = 10 ))+
-  theme(plot.title = element_text(size = 20))+
+  theme(axis.text.x = element_blank())+
+  theme(plot.title = element_text(size = 30, hjust = 0.5))+
   theme(axis.title.x = element_text(size = 15))+
   theme(axis.title.y = element_text(size = 15))+
-  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.y = element_blank())+
   theme(legend.title = element_text(size = 15))
 
 save(Tabchl2, file="data/satellite/Chl/Tabchl2.Rdata")

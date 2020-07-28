@@ -55,19 +55,19 @@ TabPart<- pivot_longer(TabPart, cols=1:262, names_to = "Date", values_to = "Part
 TabPart2<- TabPart %>% group_by(x,y,Year) %>% summarize(moyPart= mean(Particules))
 ggplot(TabPart2)+
   geom_tile(aes(x=x, y=y, fill= log(moyPart)))+
-  ggtitle("Particules moyenne 1997-2019")+
+  ggtitle("Particules")+
   facet_wrap(. ~ Year)+
   xlab("Longitude")+
   ylab("Latitude")+
-  labs(fill="log(Part)")+
+  labs(fill="log10 (Particules)")+
   theme_minimal()+
   scale_fill_gradientn(colours = brewer.pal(n = 9, name = "YlOrBr"))+
   theme(strip.text.x = element_text(size = 15))+
-  theme(axis.text.x = element_text(size = 10 ))+
-  theme(plot.title = element_text(size = 20))+
+  theme(axis.text.x = element_blank())+
+  theme(plot.title = element_text(size = 30, hjust = 0.5))+
   theme(axis.title.x = element_text(size = 15))+
   theme(axis.title.y = element_text(size = 15))+
-  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.y = element_blank())+
   theme(legend.title = element_text(size = 15))
 
 save(TabPart2, file="data/satellite/Particles/TabPart2.Rdata")

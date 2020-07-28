@@ -60,19 +60,19 @@ TabPP$Day<- as.numeric(substr(as.character(TabPP$Date), 9,10))
 TabPP2<- TabPP %>% group_by(x,y,Year) %>% summarize(moyPP= mean(PP))
 ggplot(TabPP2)+
   geom_tile(aes(x=x, y=y, fill=log(moyPP)))+
-  ggtitle("PP moyenne 1998-2018")+
+  ggtitle("Production primaire")+
   facet_wrap(. ~ Year)+
   xlab("Longitude")+
   ylab("Latitude")+
-  labs(fill="log(PP)")+
+  labs(fill="log10 (Production primaire)")+
   theme_minimal()+
   scale_fill_gradientn(colours = brewer.pal(n = 9, name = "Greens"))+
   theme(strip.text.x = element_text(size = 15))+
-  theme(axis.text.x = element_text(size = 10 ))+
-  theme(plot.title = element_text(size = 20))+
+  theme(axis.text.x = element_blank())+
+  theme(plot.title = element_text(size = 30, hjust = 0.5))+
   theme(axis.title.x = element_text(size = 15))+
   theme(axis.title.y = element_text(size = 15))+
-  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.y = element_blank())+
   theme(legend.title = element_text(size = 15))
 
 save(TabPP2, file="data/satellite/Primary production/TabPP2.Rdata")

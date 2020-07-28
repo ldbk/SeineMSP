@@ -114,6 +114,8 @@ groups<- cutree(arbre, k=9)
 tata<- cbind(grd2[,c(1,2)], Clust=factor(groups))
 save(tata, file="results/Communautes bio/Zones/Tabttpixel.Rdata")
 
+
+# Plot
 Allcom<- ggplot(tata)+
   geom_tile(aes(x=Long, y=Lat, fill=as.numeric(Clust)))+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
@@ -130,7 +132,68 @@ Allcom<- ggplot(tata)+
   theme(axis.title.y = element_text(size = 15))+
   theme(axis.text.y = element_text(size = 10))
 
-ggsave(plot= Allcom2, filename="Biorégionalisation.jpeg", path="results/Zones/Communautes bio", width = 13, height = 8)
+ggsave(plot= Allcom, filename="Biorégionalisation.jpeg", path="results/Zones/Communautes bio", width = 13, height = 8)
+
+
+
+
+# Découpage tata en fonction de polycut
+
+load("data/res.Rdata")
+
+  # create SpatialPointsDataFrame
+tataras<- tata
+coordinates(tataras)<- ~ Long + Lat
+  # coerce to SpatialPixelsDataFrame
+gridded(tataras) <- TRUE
+  # coerce to raster
+rastertata<- raster(tataras)
+rastertata
+plot(rastertata, col=brewer.pal(n = 9, name = "YlGnBu"), xlab="Longitude", ylab="Latitude")
+
+rastertata2<- mask(rastertata, res)
+plot(rastertata2, col=brewer.pal(n = 9, name = "YlGnBu"), main="Après mask", xlab="Longitude", ylab="Latitude")
+
+
+
+  # Conversion raster - tableau
+fortify.Raster <- function(rastertata2, maxPixel = 1000000) {
+  
+  if (ncell(rastertata2) > maxPixel) {
+    x <- sampleRegular(rastertata2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rastertata2, seq_len(ncell(rastertata2)))
+  out <- rastertata2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+tatatab<- fortify(rastertata2)
+tatatab<- na.omit(tatatab)
+
+Allcom<- ggplot(tatatab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  #ggtitle("Final bioregionalization")+
+  scale_fill_manual(values = c("#FFFFD9", "#EDF8B1", "#C7E9B4", "#7FCDBB", "#41B6C4", "#1D91C0", "#225EA8", "#253494", "#081D58"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 15))+
+  theme(legend.text = element_text(size = 15))+
+  theme(plot.title = element_text(size = 20))+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= Allcom, filename="Biorégionalisation.jpeg", path="results/Zones/Communautes bio", width = 13, height = 8)
+
+
+
 
 
 

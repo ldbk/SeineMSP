@@ -74,6 +74,8 @@ groups<- cutree(arbre, k=6)
 tata<- cbind(grd2[,c(1,2)],Clust=factor(groups))
 save(tata, file="results/satellite/Coordzones.Rdata")
 
+
+# Plot
 ggplot(tata)+
   geom_tile(aes(x=Long,y=Lat,fill= as.numeric(Clust)))+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+

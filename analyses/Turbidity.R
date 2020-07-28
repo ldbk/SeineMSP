@@ -55,19 +55,19 @@ TabTurb<- pivot_longer(TabTurb, cols=1:262, names_to = "Date", values_to = "Turb
 TabTurb2<- TabTurb %>% group_by(x,y,Year) %>% summarize(moyTurb= mean(Turbidity))
 ggplot(TabTurb2)+
   geom_tile(aes(x=x, y=y, fill= log(moyTurb)))+
-  ggtitle("Turbidité moyenne 1997-2019")+
+  ggtitle("Turbidité")+
   facet_wrap(. ~Year)+
   xlab("Longitude")+
   ylab("Latitude")+
-  labs(fill="log(Turb)")+
+  labs(fill="log10 (Turbidité)")+
   theme_minimal()+
   scale_fill_gradientn(colours = brewer.pal(n = 9, name = "PuBu"))+
   theme(strip.text.x = element_text(size = 15))+
-  theme(axis.text.x = element_text(size = 10 ))+
-  theme(plot.title = element_text(size = 20))+
+  theme(axis.text.x = element_blank())+
+  theme(plot.title = element_text(size = 30, hjust = 0.5))+
   theme(axis.title.x = element_text(size = 15))+
   theme(axis.title.y = element_text(size = 15))+
-  theme(axis.text.y = element_text(size = 10))+
+  theme(axis.text.y = element_blank())+
   theme(legend.title = element_text(size = 15))
 
 save(TabTurb2, file="data/satellite/Turbidity/TabTurb2.Rdata")

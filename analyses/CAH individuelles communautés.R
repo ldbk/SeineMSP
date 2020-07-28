@@ -286,4 +286,366 @@ par(mfrow = c(1, 1))
 
 
 
-c("#FFCCCC", "#FF6666")
+# Découpage des rasters en fonction de polycut
+
+load("data/res.Rdata")
+load("data/PolyCut.Rdata")
+
+  # Disaggregate
+{
+Com1<- disaggregate(Com1, 10)
+Com2<- disaggregate(Com2, 10)
+Com3<- disaggregate(Com3, 10)
+Com4<- disaggregate(Com4, 10)
+Com5<- disaggregate(Com5, 10)
+Com6<- disaggregate(Com6, 10)
+Com7<- disaggregate(Com7, 10)
+Com8<- disaggregate(Com8, 10)
+Com9<- disaggregate(Com9, 10)
+}
+
+  # Mask
+{
+ComI<- raster::mask(Com1, res)
+ComII<- mask(Com2, res)
+ComIII<- mask(Com3, res)
+ComIV<- mask(Com4, res)
+ComV<- mask(Com5, res)
+ComVI<- mask(Com6, res)
+ComVII<- mask(Com7, res)
+ComVIII<- mask(Com8, res)
+ComIX<- mask(Com9, res)
+}
+
+  # Conversion raster - tableau
+{
+fortify.Raster <- function(ComI, maxPixel = 1000000) {
+  
+  if (ncell(ComI) > maxPixel) {
+    x <- sampleRegular(ComI, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComI, seq_len(ncell(ComI)))
+  out <- ComI %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComII, maxPixel = 1000000) {
+  
+  if (ncell(ComII) > maxPixel) {
+    x <- sampleRegular(ComII, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComII, seq_len(ncell(ComII)))
+  out <- ComII %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComIII, maxPixel = 1000000) {
+  
+  if (ncell(ComIII) > maxPixel) {
+    x <- sampleRegular(ComIII, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComIII, seq_len(ncell(ComIII)))
+  out <- ComIII %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComIV, maxPixel = 1000000) {
+  
+  if (ncell(ComIV) > maxPixel) {
+    x <- sampleRegular(ComIV, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComIV, seq_len(ncell(ComIV)))
+  out <- ComIV %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComV, maxPixel = 1000000) {
+  
+  if (ncell(ComV) > maxPixel) {
+    x <- sampleRegular(ComV, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComV, seq_len(ncell(ComV)))
+  out <- ComV %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComVI, maxPixel = 1000000) {
+  
+  if (ncell(ComVI) > maxPixel) {
+    x <- sampleRegular(ComVI, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComVI, seq_len(ncell(ComVI)))
+  out <- ComVI %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComVII, maxPixel = 1000000) {
+  
+  if (ncell(ComVII) > maxPixel) {
+    x <- sampleRegular(ComVII, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComVII, seq_len(ncell(ComVII)))
+  out <- ComVII %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComVIII, maxPixel = 1000000) {
+  
+  if (ncell(ComVIII) > maxPixel) {
+    x <- sampleRegular(ComVIII, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComVIII, seq_len(ncell(ComVIII)))
+  out <- ComVIII %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(ComIX, maxPixel = 1000000) {
+  
+  if (ncell(ComIX) > maxPixel) {
+    x <- sampleRegular(ComIX, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(ComIX, seq_len(ncell(ComIX)))
+  out <- ComIX %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+}
+
+
+{
+Com1tab<- fortify(ComI)
+Com2tab<- fortify(ComII)
+Com3tab<- fortify(ComIII)
+Com4tab<- fortify(ComIV)
+Com5tab<- fortify(ComV)
+Com6tab<- fortify(ComVI)
+Com7tab<- fortify(ComVII)
+Com8tab<- fortify(ComVIII)
+Com9tab<- fortify(ComIX)
+
+Com1tab<- na.omit(Com1tab)
+Com2tab<- na.omit(Com2tab)
+Com3tab<- na.omit(Com3tab)
+Com4tab<- na.omit(Com4tab)
+Com5tab<- na.omit(Com5tab)
+Com6tab<- na.omit(Com6tab)
+Com7tab<- na.omit(Com7tab)
+Com8tab<- na.omit(Com8tab)
+Com9tab<- na.omit(Com9tab)
+}
+
+
+
+{
+COMI<- ggplot(Com1tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté I")+
+  scale_fill_manual(values = c("#F7F7F7", "#D9D9D9", "#BDBDBD", "#969696", "#737373", "#525252", "#252525"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMI, filename="COMI.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMII<- ggplot(Com2tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté II")+
+  scale_fill_manual(values = c("#F1EEF6", "#BDC9E1", "#74A9CF", "#0570B0"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMII, filename="COMII.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMIII<- ggplot(Com3tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté III")+
+  scale_fill_manual(values = c("#FFFFCC", "#CC6633"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMIII, filename="COMIII.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMIV<- ggplot(Com4tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté IV")+
+  scale_fill_manual(values = c("#FC8D59", "#FFFFBF", "#99D594"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMIV, filename="COMIV.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMV<- ggplot(Com5tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté V")+
+  scale_fill_manual(values = c("#E7E1EF", "#C994C7", "#DD1C77"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMV, filename="COMV.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMVI<- ggplot(Com6tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté VI")+
+  scale_fill_manual(values = c("#EFF3FF", "#C6DBEF", "#9ECAE1", "#6BAED6", "#3182BD", "#08519C"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMVI, filename="COMVI.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMVII<- ggplot(Com7tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté VII")+
+  scale_fill_manual(values = c("#CCFFCC", "#99CC99"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMVII, filename="COMVII.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMVIII<- ggplot(Com8tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté VIII")+
+  scale_fill_manual(values = c("#E9A3C9", "#F7F7F7", "#A1D76A"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMVIII, filename="COMVIII.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+COMIX<- ggplot(Com9tab)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Communauté IX")+
+  scale_fill_manual(values = c("#FEEDDE", "#FDBE85", "#FD8D3C", "#D94701"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= COMIX, filename="COMIX.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
