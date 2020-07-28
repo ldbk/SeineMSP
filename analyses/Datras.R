@@ -45,7 +45,7 @@ J1<- HH %>% left_join(Wing, by= c("StNo"))
 J1$WingSpread.x[is.na(J1$WingSpread.x)]<-	J1$WingSpread.y[is.na(J1$WingSpread.x)]
 J1<- J1[, -11]
 names(J1)[10]<- "WingSpread"
-J1$WingSpread[is.na(J1$WingSpread)]<- 10
+J1$WingSpread[is.na(J1$WingSpread)]<- 10                                            # Largeur par défaut d'un trait de chalut
 
 J2<- HL %>% left_join(J1, by= c("StNo", "HaulNo", "Year"))
 J2<- J2[, -1]
@@ -55,15 +55,14 @@ J2<- J2 %>%
 
 
 # Calcul
-J2$Distance<- J2$Distance/1000 # Converti m en km 
-J2$WingSpread<- J2$WingSpread/1000 # Converti m en km
+J2$Distance<- J2$Distance/1000 # Converti m en km                                   # Distance = Longueur du trait de chalut           
+J2$WingSpread<- J2$WingSpread/1000 # Converti m en km                               # Wingspread = Largeur du trait de chalut
 
 J2<- J2 %>%
-  mutate(Nombre= TotalNo*HaulDur/60) # Converti TotalNo par trait de chalut
-
+  mutate(Nombre= TotalNo*HaulDur/60) # Converti TotalNo par durée réelle du trait de chalut et non plus par heure
 
 J2<- J2 %>%
-  mutate(Superficie= Distance*WingSpread) %>%
+  mutate(Superficie= Distance*WingSpread) %>%                                       # Superficie du trait de chalut
   mutate(moyLat= (ShootLat+HaulLat)/2) %>%
   mutate(moyLong= (ShootLong+HaulLong)/2)
 

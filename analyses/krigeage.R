@@ -8,6 +8,8 @@ library(viridis)
 load("data/Denstot.Rdata")
 
 
+# Etendre le tableau et rajouter lignes de densité = 0
+
 ttsel <- Denstot %>% dplyr::select(Cluster, Year, moyLong, moyLat, DensNb) %>% distinct() 
 codif <- ttsel %>% dplyr::select( Year, moyLong, moyLat) %>% distinct() 
 allstrat <- ttsel %>% tidyr::expand(Cluster,Year) 
