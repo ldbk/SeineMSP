@@ -27,21 +27,31 @@ ggplot()+
   coord_sf(ylim=c(49.2,49.9),xlim=c(-1.5,0.5))+
 	theme_bw()
 
-ggplot()+
-  geom_sf(data=nat2000, aes(fill=sitedesc), alpha=.2)+            
+Usages<- ggplot()+
+  geom_sf(data=nat2000, aes(fill=sitedesc), alpha=.2)+
   geom_sf(data=aggareas %>% mutate(type="Site d'extraction de granulat"), aes(fill=type), alpha=.4)+ 
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
   #geom_sf(data=munpol%>%mutate(type="mun"),aes(fill=type),fill="red")+
   #geom_sf(data=munpt,color="red")+
   #geom_sf(data=windfarms,fill="blue")+
-  geom_sf(data=dredgespoil %>% mutate(type="Site de dépôt"), aes(color=type))+            # Dépôt en mer
+  geom_sf(data=dredgespoil %>% mutate(type="Site de dépôt de granulat"), aes(color=type))+            # Dépôt en mer
   #borders("world", fill="grey") +
   coord_sf(ylim=c(49.2, 49.9),xlim=c(-1.5,0.5))+
-  theme_bw()+
+  theme_minimal()+
   xlab("Longitude")+
   ylab("Latitude")+
-  theme(plot.title = element_text(size = 20))+
-  theme(axis.title.x = element_text(size = 13))+
-  theme(axis.title.y = element_text(size = 13))+
-  theme(legend.text = element_text(size = 15))
+  #theme(legend.position="bottom")+
+  theme(axis.title.x = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 15))+
+  theme(legend.text = element_text(size = 15))+
+  theme(legend.title = element_blank())
+
+save(Usages, file="results/Usages/Usages.Rdata")
+
+ggsave(plot= Usages, filename="Usages.jpeg", path="results/Usages/", width = 13, height = 8)
+
+
+
+
+
 

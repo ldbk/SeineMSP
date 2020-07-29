@@ -148,7 +148,7 @@ allparam<- ggplot(tatatab)+
   theme(axis.title.y = element_text(size = 15))+
   theme(axis.text.y = element_text(size = 10))
 
-
+save(allparam, file="results/satellite/zones/Env.Rdata")
 ggsave(plot= allparam, filename="All.jpeg", path="results/satellite/zones", width = 13, height = 8)
 
 

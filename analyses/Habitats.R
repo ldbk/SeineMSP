@@ -22,6 +22,12 @@ dfHab<- merge(ptHab, ggHab@data, by="id")                     # Associe les donn
 dfHab<- dfHab %>% filter(lat<=49.8)                           # Même latitude max que dans Datras donc dans Krigeage donc dans Com
 names(dfHab)[27]<- "Substrat"
 
+dfHab$Substrat<- sub("Coarse sediment",              "Sédiment grossier",     dfHab$Substrat)
+dfHab$Substrat<- sub("Mixed sediment",               "Sédiment hétérogène",   dfHab$Substrat)
+dfHab$Substrat<- sub("Rock or other hard substrata", "Roche et substrat dur", dfHab$Substrat)
+dfHab$Substrat<- sub("Sandy mud to muddy sand",      "Vase sableuse",         dfHab$Substrat)
+dfHab$Substrat<- sub("Sand",                         "Sable",                 dfHab$Substrat)
+dfHab$Substrat<- sub("Seabed",                       "Fond marin",            dfHab$Substrat)
 
 ggHabitats<- ggplot(dfHab)+
   geom_polygon(aes(x=long, y=lat, group=group, fill= Substrat))+
@@ -33,10 +39,10 @@ ggHabitats<- ggplot(dfHab)+
   theme(axis.title.x = element_text(size = 15))+
   theme(axis.title.y = element_text(size = 15))+
   theme(legend.title = element_text(size = 20))+
-  theme(legend.text = element_text(size = 15))+
-  coord_sf(xlim= range(dfHab$long),ylim= c(49.2, 49.7))
+  theme(legend.text = element_text(size = 15))#+
+  #coord_sf(xlim= range(dfHab$long),ylim= c(49.2, 49.7))
   
-
+save(ggHabitats, file="results/Habitats/Habitats.Rdata")
 ggsave(plot= ggHabitats, filename="ggHabitats.jpeg", path="results/Habitats/", width = 13, height = 8)
 
 
