@@ -137,7 +137,7 @@ distance<- dist(TabSalnew)
 #distance[1:5]
 
 tree<- agnes(distance, method="ward", par.method=1)
-plot(tree, which=2,hang=-1)
+plot(tree, which=2,hang=-1, main="Salinité", cex.main=2)
 
 #NbClust(TabSalnew, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
 # According to the majority rule, the best number of clusters is  3

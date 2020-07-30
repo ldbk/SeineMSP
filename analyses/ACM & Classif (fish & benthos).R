@@ -58,6 +58,8 @@ print(plt1)
 print(plt2)
 
 fviz_mca_ind(rez, repel=T, addEllipses=F, axes=c(1,2))
+fviz_mca_biplot(rez, repel=T, addEllipses=F, axes=c(1,2), col.ind="blue", col.var="red")
+
 
 
 

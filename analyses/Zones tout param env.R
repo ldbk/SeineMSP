@@ -4,6 +4,7 @@ library(raster)
 library(grDevices)
 library(cowplot)
 library(RColorBrewer)
+library(dplyr)
 
 
 # Cartes 9 zonations (zones)
@@ -467,6 +468,333 @@ Turb<- raster::plot(mTurb2, main="Turbidity", xlab="Longitude", ylab="Latitude",
 grid.arrange(ggseriePart, ggseriechl, ggseriePP, ggserieDet, ncol=2, nrow = 2)
 
 grid.arrange(ggserieTurb, ggseriesst, ggserieSal, ggserieO2, ncol=2, nrow = 2)
+
+
+
+
+
+
+
+
+
+# Découpe des rasters avec polycut
+
+load("data/PolyCut.Rdata")
+load("data/res.Rdata")
+
+load("data/satellite/chl/chl_raster.Rdata")
+#col=brewer.pal(n = 3, name = "YlGnBu")
+load("data/satellite/Detritus/Det_raster.Rdata")
+#col=c("#99CCCC", "#336666")
+load("data/satellite/O2/O2_raster.Rdata")
+#col=brewer.pal(n = 3, name = "Purples")
+load("data/satellite/Particles/part_raster.Rdata")
+#col=c("#FFFFCC", "#CC6633")
+load("data/satellite/Primary production/PP_raster.Rdata")
+#col= c("#CCFFCC", "#99CC99")
+load("data/satellite/Salinity/Sal_raster.Rdata")
+#col= brewer.pal(n = 3, name = "Greys")
+load("data/satellite/sst/sst_raster.Rdata")
+#col= c("#FFCCCC", "#FF6666")
+load("data/satellite/Turbidity/Turb_raster.Rdata")
+#col=brewer.pal(n = 3, name = "PuBu")
+
+{
+rasterchl2<- disaggregate(mChl, 10)
+rasterDet2<- disaggregate(mDet, 10)
+rasterO22<- disaggregate(mO2, 10)
+rasterPart2<- disaggregate(mPart, 10)
+rasterPP2<- disaggregate(mPP, 10)
+rasterSal2<- disaggregate(mSal, 10)
+rasterSST2<- disaggregate(mSST, 10)
+rasterTurb2<- disaggregate(mTurb, 10)
+}
+
+{
+rasterchl2<- mask(rasterchl2, res)
+rasterDet2<- mask(rasterDet2, res)
+rasterO22<- mask(rasterO22, res)
+rasterPart2<- mask(rasterPart2, res)
+rasterPP2<- mask(rasterPP2, res)
+rasterSal2<- mask(rasterSal2, res)
+rasterSST2<- mask(rasterSST2, res)
+rasterTurb2<- mask(rasterTurb2, res)
+}
+
+#plot(rasterchl2, col=brewer.pal(n = 3, name = "YlGnBu"), main="Après mask", xlab="Longitude", ylab="Latitude")
+
+fortify.Raster <- function(rasterchl2, maxPixel = 1000000) {
+  
+  if (ncell(rasterchl2) > maxPixel) {
+    x <- sampleRegular(rasterchl2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterchl2, seq_len(ncell(rasterchl2)))
+  out <- rasterchl2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(rasterDet2, maxPixel = 1000000) {
+  
+  if (ncell(rasterDet2) > maxPixel) {
+    x <- sampleRegular(rasterDet2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterDet2, seq_len(ncell(rasterDet2)))
+  out <- rasterDet2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(rasterO22, maxPixel = 1000000) {
+  
+  if (ncell(rasterO22) > maxPixel) {
+    x <- sampleRegular(rasterO22, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterO22, seq_len(ncell(rasterO22)))
+  out <- rasterO22 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(rasterPart2, maxPixel = 1000000) {
+  
+  if (ncell(rasterPart2) > maxPixel) {
+    x <- sampleRegular(rasterPart2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterPart2, seq_len(ncell(rasterPart2)))
+  out <- rasterPart2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(rasterPP2, maxPixel = 1000000) {
+  
+  if (ncell(rasterPP2) > maxPixel) {
+    x <- sampleRegular(rasterPP2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterPP2, seq_len(ncell(rasterPP2)))
+  out <- rasterPP2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(rasterSal2, maxPixel = 1000000) {
+  
+  if (ncell(rasterSal2) > maxPixel) {
+    x <- sampleRegular(rasterSal2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterSal2, seq_len(ncell(rasterSal2)))
+  out <- rasterSal2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(rasterSST2, maxPixel = 1000000) {
+  
+  if (ncell(rasterSST2) > maxPixel) {
+    x <- sampleRegular(rasterSST2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterSST2, seq_len(ncell(rasterSST2)))
+  out <- rasterSST2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+fortify.Raster <- function(rasterTurb2, maxPixel = 1000000) {
+  
+  if (ncell(rasterTurb2) > maxPixel) {
+    x <- sampleRegular(rasterTurb2, maxPixel, asRaster=TRUE)
+  }
+  xy <- xyFromCell(rasterTurb2, seq_len(ncell(rasterTurb2)))
+  out <- rasterTurb2 %>%
+    getValues() %>%
+    data.frame(values = .) %>%
+    cbind(xy)
+  return(out)
+}
+
+{
+Chl<- fortify(rasterchl2)
+Det<- fortify(rasterDet2)
+Part<- fortify(rasterPart2)
+O2<- fortify(rasterO22)
+Sal<- fortify(rasterSal2)
+SST<- fortify(rasterSST2)
+PP<- fortify(rasterPP2)
+Turb<- fortify(rasterTurb2)
+}
+{
+Chl<- na.omit(Chl)
+Det<- na.omit(Det)
+Part<- na.omit(Part)
+O2<- na.omit(O2)
+Sal<- na.omit(Sal)
+SST<- na.omit(SST)
+PP<- na.omit(PP)
+Turb<- na.omit(Turb)
+}
+
+CHL<- ggplot(Chl)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Chlorophylle a")+
+  scale_fill_manual(values = c("#EDF8B1", "#7FCDBB", "#2C7FB8"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= CHL, filename="CHL.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+DET<- ggplot(Det)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Détritus")+
+  scale_fill_manual(values = c("#99CCCC", "#336666"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= DET, filename="DET.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+PART<- ggplot(Part)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Particules")+
+  scale_fill_manual(values = c("#FFFFCC", "#CC6633"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= PART, filename="Part.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+PP<- ggplot(PP)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Production primaire")+
+  scale_fill_manual(values = c("#CCFFCC", "#99CC99"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= PP, filename="PP.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+SAL<- ggplot(Sal)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Salinité")+
+  scale_fill_manual(values = c("#F0F0F0", "#BDBDBD", "#636363"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= SAL, filename="Sal.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+SST<- ggplot(SST)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Température de surface")+
+  scale_fill_manual(values = c("#FFCCCC", "#FF6666"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= SST, filename="SST.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+TURB<- ggplot(Turb)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Turbidité")+
+  scale_fill_manual(values = c("#ECE7F2", "#A6BDDB", "#2B8CBE"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= TURB, filename="Turb.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+O2<- ggplot(O2)+
+  geom_tile(aes(x=x,y=y,fill= as.factor(values)))+
+  geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  ggtitle("Oxygène dissous")+
+  scale_fill_manual(values = c("#EFEDF5", "#BCBDDC", "#756BB1"))+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme_minimal()+
+  labs(fill= "Zones")+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.text.x = element_text(size = 10))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(axis.text.y = element_text(size = 10))
+
+ggsave(plot= O2, filename="O2.jpeg", path="results/satellite/Zones/Decoupe_polycut", width = 13, height = 8)
+
+
+
 
 
 

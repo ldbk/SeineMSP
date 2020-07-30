@@ -79,7 +79,7 @@ EastChan <- ggplot()+
   geom_text(data=bdv,aes(x=long,y=lat,label=legend, fontface=3))+
   
   #geom_text(data=cotentin,aes(x=long,y=lat,label=legend, fontface=3),angle=315)+
-  #geom_path(data=bathytot, aes(x=long, y=lat, group=group, lty=ELEV), alpha=0.3)+
+  geom_path(data=bathytot, aes(x=long, y=lat, group=group, lty=ELEV), alpha=0.3)+
   #geom_path(data=bzh, aes(x=long, y=lat,group=group),col="blue")+
   #geom_path(data=north, aes(x=long, y=lat,group=group),col="blue")+
   
