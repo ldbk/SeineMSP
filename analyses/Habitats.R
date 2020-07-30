@@ -36,10 +36,10 @@ ggHabitats<- ggplot(dfHab)+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
   xlab("Longitude")+
   ylab("Latitude")+
-  theme(axis.title.x = element_text(size = 15))+
-  theme(axis.title.y = element_text(size = 15))+
-  theme(legend.title = element_text(size = 20))+
-  theme(legend.text = element_text(size = 15))#+
+  theme(axis.title.x = element_text(size = 25))+
+  theme(axis.title.y = element_text(size = 25))+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 25))#+
   #coord_sf(xlim= range(dfHab$long),ylim= c(49.2, 49.7))
   
 save(ggHabitats, file="results/Habitats/Habitats.Rdata")

@@ -140,6 +140,7 @@ ggsave(plot= Allcom, filename="Biorégionalisation.jpeg", path="results/Zones/Co
 # Découpage tata en fonction de polycut
 
 load("data/res.Rdata")
+load("results/Communautes bio/Zones/Tabttpixel.Rdata")
 
   # create SpatialPointsDataFrame
 tataras<- tata
@@ -182,12 +183,11 @@ Allcom<- ggplot(tatatab)+
   ylab("Latitude")+
   theme_minimal()+
   labs(fill= "Zones")+
-  theme(legend.title = element_text(size = 15))+
-  theme(legend.text = element_text(size = 15))+
-  theme(plot.title = element_text(size = 20))+
-  theme(axis.title.x = element_text(size = 15))+
+  theme(legend.title = element_text(size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(size = 25))+
   theme(axis.text.x = element_text(size = 10))+
-  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 25))+
   theme(axis.text.y = element_text(size = 10))
 
 save(Allcom, file="results/Communautes bio/Bio.Rdata")
