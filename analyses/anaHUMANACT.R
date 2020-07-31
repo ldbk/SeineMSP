@@ -33,7 +33,7 @@ Usages<- ggplot()+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
   #geom_sf(data=munpol%>%mutate(type="mun"),aes(fill=type),fill="red")+
   #geom_sf(data=munpt,color="red")+
-  #geom_sf(data=windfarms,fill="blue")+
+  #geom_sf(data=windfarms, fill="blue")+
   geom_sf(data=dredgespoil %>% mutate(type="Site de dépôt de granulat"), aes(color=type))+            # Dépôt en mer
   #borders("world", fill="grey") +
   coord_sf(ylim=c(49.2, 49.9),xlim=c(-1.5,0.5))+

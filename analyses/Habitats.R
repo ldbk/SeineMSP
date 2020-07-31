@@ -36,6 +36,7 @@ ggHabitats<- ggplot(dfHab)+
   geom_polygon(data=PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
   xlab("Longitude")+
   ylab("Latitude")+
+  #geom_sf(data=windfarms, fill="blue")+
   theme(axis.title.x = element_text(size = 25))+
   theme(axis.title.y = element_text(size = 25))+
   theme(legend.title = element_text(size = 30))+

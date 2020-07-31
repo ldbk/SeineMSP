@@ -182,6 +182,7 @@ Allcom<- ggplot(tatatab)+
   xlab("Longitude")+
   ylab("Latitude")+
   theme_minimal()+
+  #geom_sf(data=windfarms, fill="blue")+
   labs(fill= "Zones")+
   theme(legend.title = element_text(size = 30))+
   theme(legend.text = element_text(size = 30))+
