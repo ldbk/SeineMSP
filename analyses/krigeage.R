@@ -8,7 +8,7 @@ library(viridis)
 load("data/Denstot.Rdata")
 
 
-# Etendre le tableau et rajouter lignes de densit� = 0
+# Etendre le tableau et rajouter lignes de densit? = 0
 
 ttsel <- Denstot %>% dplyr::select(Cluster, Year, moyLong, moyLat, DensNb) %>% distinct() 
 codif <- ttsel %>% dplyr::select( Year, moyLong, moyLat) %>% distinct() 
@@ -293,6 +293,17 @@ nei1 <- neigh.create(ndim=2,type=0) #unique
 nei2 <- neigh.create(ndim=2,type=2,nmini=2,nmaxi=8,radius=1) # moving
 
 
+#CGFS$Cluster<- sub("1", "I", CGFS$Cluster)
+#CGFS$Cluster<- sub("2", "II", CGFS$Cluster)
+#CGFS$Cluster<- sub("3", "III", CGFS$Cluster)
+#CGFS$Cluster<- sub("4", "IV", CGFS$Cluster)
+#CGFS$Cluster<- sub("5", "V", CGFS$Cluster)
+#CGFS$Cluster<- sub("6", "VI", CGFS$Cluster)
+#CGFS$Cluster<- sub("7", "VII", CGFS$Cluster)
+#CGFS$Cluster<- sub("8", "VIII", CGFS$Cluster)
+#CGFS$Cluster<- sub("9", "IX", CGFS$Cluster)
+
+
 for (j in unique(data.frame(CGFS)[,"Cluster"])){
   
   CGFS$logDens <- log10(CGFS$DensNb+ min(CGFS$DensNb[CGFS$DensNb!=0])) 
@@ -308,7 +319,7 @@ for (j in unique(data.frame(CGFS)[,"Cluster"])){
   vg.data.std <- vario.calc(db.CGFS.std, lag=0.05, nlag=8,opt.code=1,tolcode=0) 
   #plot(vg.data.std,npairdw=T,inches=0.1,las=1,add=T,col=2,lwd=2)
   vario1 <- vg.data.std
-  vg.mod <- model.auto(vario=vario1,struct=c(1:5),npairdw=TRUE,title="",inches=.05)
+  vg.mod <- model.auto(vario=vario1, struct=c(1:5), npairdw=TRUE, title= paste0("Communauté", " ", j), size=45,  col="red", inches=.05)
   
   
   db.CGFS.std <- db.locate(db.CGFS.std,"Year",NA)
@@ -361,22 +372,28 @@ Kriege.logdens<- data.frame(Longitude=Longitude, Latitude=Latitude, Prediction=P
 save(Kriege.logdens, file="data/krigeage log.RData")
 
 
-  # Plot du krigeage sur toutes les années pour un cluster
+
+# Plot du krigeage sur toutes les années pour un cluster
+
 y <- 9
-gg9<- ggplot()+
+
+ggplot()+
   geom_raster(data= Kriege.logdens[Kriege.logdens$Cluster==y,], aes(x= Longitude, y= Latitude, fill = Prediction)) +
-  scale_fill_gradientn(colours = brewer.pal(n=9, name = "Blues")) + 
+  scale_fill_gradientn(colours = brewer.pal(n=4, name="Oranges")) + 
   facet_wrap(.~ Year) +
-  ggtitle("Estimation des densités de la communauté IX") + 
+  ggtitle("Communauté IX") + 
   theme_minimal() +
   geom_polygon(data= PolyCut, aes(x=long, y=lat, group=group), fill=NA, col="black")+
+  labs(fill="Densités interpolées standardisées")+
+  theme(legend.position = "bottom")+
   theme(strip.text.x = element_text(size = 15))+
-  theme(plot.title = element_text(size = 20))+
-  theme(axis.title.x = element_text(size = 15))+
+  theme(plot.title = element_text(size = 35, hjust = 0.5))+
+  theme(axis.title.x = element_text(size = 20))+
   theme(axis.text.x = element_text(size = 10))+
-  theme(axis.title.y = element_text(size = 15))+
+  theme(axis.title.y = element_text(size = 20))+
   theme(axis.text.y = element_text(size = 10))+
-  theme(legend.title = element_text(size = 15))
+  theme(legend.title = element_text(size = 35))+
+  theme(legend.text = element_text(size = 10))
 
 ggsave(gg9, filename = "Com IX.jpeg", path = "results/Communautes bio/Series tempo cartes", width = 13, height = 8 )
 

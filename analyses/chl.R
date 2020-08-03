@@ -136,8 +136,6 @@ metaTabnew<- Tabchlnew %>% dplyr::select(x, y) %>% ungroup()
 Tabchlnew<- Tabchlnew %>% ungroup() %>% dplyr::select(-x, -y)
 
 distance<- dist(Tabchlnew)
-#distance[1:5]
-
 tree<- agnes(distance, method="ward", par.method=1)
 plot(tree, which=2, hang=-1, main= "Chlorophylle a", cex.main=2)
 

@@ -32,7 +32,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   #distance[1:5]
   
   tree<- fastcluster::hclust(distance)
-  plot(tree, hang=-1)
+  plot(tree, hang=-1, main="Communauté II")
   
   #Nb1<- Tab1 %>% group_by(Longitude,Latitude) %>% summarize(moyper= mean(Prediction))
   if(j %in% c(1,2,3,4,9)){
