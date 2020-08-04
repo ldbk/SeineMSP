@@ -1,0 +1,492 @@
+---
+title: "Fish trait analyses"
+author: "Jehaaaaaanne, Thibaaaaaault, Laureeeeeeent"
+date: "`r date()`"
+output: 
+  pdf_document
+
+bibliography: '/home/moi/datahome/work/biblio/enfin/biblioloran.bib'
+---
+
+```{r packageandoptions, include=T,cache=F,echo=F,warning=F,message=F,progress=F,verbose=F,results="hide"}
+#knitr option
+operationnel<-TRUE
+knitr::opts_chunk$set(echo=FALSE, 
+		      warning=!operationnel, 
+		      message=!operationnel,
+		      fig.height=8,
+		      progress=!operationnel,
+		      verbose=!operationnel,
+		      include=TRUE,
+		      dev='png',autodep=FALSE)
+#package
+library(dplyr)
+library(ggplot2)
+library(cluster)
+library(FactoMineR)
+library(factoextra)
+library(fpc)
+library(openxlsx)
+library(googlesheets4)
+library(fpc)
+#stuff for table and fig
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+library(captioner)
+#initialize functions for tables and fig legends
+tabcap <- captioner(prefix = "Table")
+figcap <- captioner(prefix = "Figure")
+#setting the working directory
+#if needed do it here
+#setwd....
+
+```
+
+# Framework
+
+This document presents the analyses done on the fish trait matrix.
+
+# Data
+
+## Abundances
+
+DATRAS CGFS
+
+## Fish "traits"
+
+### Sources
+
+Sources: 
+ - our own work on fishbase and IUCN
+ - Beuhkof et al Pangea database and
+ - benthos : xxx
+
+### Raw data 
+
+```{r datafish0, include=T,cache=T,echo=F}
+#test join with datras data
+#name J2
+#load("../data/J2Datras.RData")
+J2<-read.csv("../data/J2Datras.csv")
+spp0<-J2%>%transmute(spp=ScientificName_WoRMS)%>%distinct()%>%
+	tidyr::separate(spp,sep=" ",into=c("genus","species","species2"),remove=FALSE)%>%
+	arrange(spp)
+#some manual correction
+#if two spp take the last one (2 cases)
+spp0<-spp0%>%mutate(species=ifelse(!is.na(species2),species2,species))
+#if salmo trutta -> Salmo trutta trutta to match Beuhkof name
+spp0<-spp0%>%mutate(species=ifelse(species=="trutta","trutta trutta",species))
+#if Psetta maxima -> Scophthalmus maximus to match Beuhkof name
+spp0<-spp0%>%mutate(genus=ifelse(genus=="Psetta","Scophthalmus",genus))
+spp0<-spp0%>%mutate(species=ifelse(genus=="Psetta","maximus",species))
+
+write.csv(spp0,file="spp0.csv")
+
+#match Beukhof with spp list
+trait<-readxl::read_excel("../data/BEUKHOF_tab_original.xlsx")%>%
+	distinct()
+trait22<-trait%>%filter(LME==22)
+trait22gen<-trait%>%filter(LME==22&is.na(species))
+trait22fam<-trait%>%filter(LME==22&is.na(genus))
+trait24<-trait%>%filter(LME==24)
+trait24gen<-trait%>%filter(LME==24&is.na(species))
+trait24fam<-trait%>%filter(LME==24&is.na(genus))
+#successive join
+#spp ok in LME 22
+spp22<-left_join(spp0,trait22,by=c("genus","species"))%>%filter(is.finite(LME))
+spptmp<-anti_join(spp0,spp22)
+#spp ok in LME 24
+spp24<-left_join(spptmp,trait24,by=c("genus","species"))%>%filter(is.finite(LME))
+spptmp<-anti_join(spptmp,spp24)
+#genus in 22 & 24
+gen22<-left_join(spptmp,trait22gen,by=c("genus"))%>%filter(is.finite(LME))
+spptmp<-anti_join(spptmp,gen22)
+gen24<-left_join(spptmp,trait24gen,by=c("genus"))%>%filter(is.finite(LME))
+spptmp<-anti_join(spptmp,gen22)
+#family in 22 & 24
+fam22<-left_join(spptmp,trait22fam,by=c("genus"="family"))%>%filter(is.finite(LME))
+spptmp<-anti_join(spptmp,fam22)
+fam24<-left_join(spptmp,trait24fam,by=c("genus"="family"))%>%filter(is.finite(LME))
+spptmp<-anti_join(spptmp,fam24)
+#match spptmp with BENTIC: 1 pass
+#some manual correction to match BENTIC available species (because genus
+#matching is not available
+spptmp<-spptmp%>%mutate(species=ifelse(spp=="Maja brachydactyla","squinado",species))
+spptmp<-spptmp%>%mutate(species=ifelse(spp=="Pagurus prideaux","prideauxi",species))
+spptmp<-spptmp%>%mutate(genus=ifelse(spp=="Mimachlamys varia","Chlamys",genus))
+spptmp<-spptmp%>%mutate(species=ifelse(spp=="Macropodia rostrata","spp",species))
+spptmp<-spptmp%>%mutate(species=ifelse(spp=="Galathea","spp",species))
+spptmp<-spptmp%>%mutate(species=ifelse(spp=="Pagurus cuanensis","bernhardus",species))
+spptmp<-spptmp%>%mutate(species=ifelse(spp=="Hippocampus","hippocampus",species))
+spptmp<-spptmp%>%mutate(genus=ifelse(is.na(genus),"",genus))%>%
+	mutate(spp2=paste(genus,species))
+				      
+write.csv(spptmp%>%transmute(spp2,spp),file="spptmp.csv",row.names=F)
+
+benthos1<-read.csv("../data/BIOTIC_tab_benthos.csv",sep=",",header=T)
+spptmp<- anti_join(spptmp,benthos1,by=c("spp2"="SpeciesName"))
+View(spptmp)
+
+#match spptmp genus with BENTIC: 2 pass
+write.csv(spptmp%>%transmute(genus=paste(genus,genus),spp),file="spptmp.csv")
+
+#benthos<- read.csv2("../data/Traits benthos (BIOTIC).csv")
+#sppben<-benthos%>%transmute(spp=SpeciesName)%>%distinct()
+#spp
+
+
+sumrez<-data.frame(nbinit=nrow(spp0),
+		   nbspp22=nrow(spp22),
+		   nbspp24=nrow(spp24),
+		   nbgen22=nrow(gen22),
+		   nbgen24=nrow(gen24),
+		   nbfam22=nrow(fam22),
+		   nbfam24=nrow(fam24),
+		   nbbentho1=nrow(benthos1)
+		   )
+sumrez$remain<-sumrez$nbinit-sum(sumrez[2:length(sumrez)])
+print(sumrez)
+
+```
+
+```{r datafish, include=T,cache=T,echo=F}
+#a conditional test to avoid repetition in data prep and speed up the
+#computation
+if(!file.exists("fishtraitnew.rds")){
+#read the orginal trait data
+fishtraitlocal<-read.csv(file="../data/TabespecesDATRAS.csv", sep=",")
+names(fishtraitlocal)[2]<- "Species"
+#link trait matrix
+#https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0
+fishtraitBeuhkhof<-readxl::read_excel("../data/fishtrait/TraitCollectionFishNAtlanticNEPacificContShelf.xlsx")
+#add IUCN status in Beuhkhof data
+#library(rredlist)
+#token pending...
+
+fishtrait1<-fishtraitBeuhkhof%>%mutate(Species=paste(genus,species))%>%
+		filter(Species%in%fishtraitlocal$Species)%>%
+		filter(LME==22)
+length(unique(fishtrait1$Species))
+	  #11 species missing for LME 22 (North Sea)
+	  #try to get info from other LME : 24 for Celtic seas
+missingtrait1<-fishtraitlocal%>%filter(!Species%in%fishtrait1$Species)
+fishtrait2<-fishtraitBeuhkhof%>%mutate(Species=paste(genus,species))%>%
+		  	filter(Species%in%missingtrait1$Species)%>%
+				filter(LME==24)
+			length(unique(fishtrait2$Species))
+#bind the two files and check missing species
+fishtrait3<-rbind(fishtrait1,fishtrait2)%>%distinct()
+length(unique(fishtrait3$Species))
+#3 species missing
+missingtrait3<-fishtraitlocal%>%filter(!Species%in%fishtrait3$Species)
+missingtrait3%>%pull(Species)
+#ok : let it go and work on 84 species
+#summarise the new trait tables
+fishtraitnew<-fishtrait3%>%select(Species,habitat,feeding.mode,tl,
+#body.shape,offspring.size,
+#spawning.type,
+age.maturity,#fecundity,
+growth.coefficient,length.max,age.max)
+#add IUCN status
+IUCN<- read_sheet("https://docs.google.com/spreadsheets/d/1auNXLqljHhXfPZpL63-og9vwUcvB5mk4QGYJTsPqzxA/edit#gid=0",sheet=1,na="NA")
+names(IUCN)[12]<- "IUCN.status"
+fishtraitnew<-left_join(fishtraitnew,IUCN%>%
+			select(Species,IUCN.status))
+saveRDS(fishtraitnew,file="fishtraitnew.rds")
+}else{
+fishtraitnew<-readRDS(fishtraitnew,file="fishtraitnew.rds")
+}
+```
+
+### Missing values imputation
+
+```{r missingvalfishtrait,cache=TRUE}
+#explo data
+diagmiss<-function(fishtrait){
+		nbid<-fishtrait%>%summarise_all(n_distinct)%>%t()
+	nbNA<-function(a){a[a==""]<-NA;sum(is.na(a))}
+		nbNA<-fishtrait%>%summarise_all(nbNA)%>%t()
+		return(data.frame(nbid=nbid,nbNA=nbNA))
+}
+diagmiss(fishtraitnew)
+#2 missing value in age.maturity 
+#imputation
+fishtraitnew0<-mice::mice(fishtraitnew,m=1)#,defaultMethod=c("pmm","rf","rf","rf"))
+fishtraitnew<-mice::complete(fishtraitnew0)
+diagmiss(fishtraitnew)
+```
+
+### Quantitative to qualitative data
+
+```{r quant2catfishtrait,cache=TRUE}
+#now categorize stuff
+#categorize numerical values 
+catvar<-function(a,value){
+	  	value<-c(0,as.vector(value))
+	print(value)
+		lval<-length(value)
+		interval<-paste0("[",round(value[-lval],3),",",round(value[-1],3),"[")
+			a1<-interval[findInterval(a,value,all.inside=T)]
+				return(a1)
+}
+#a quick check for the function
+##table(fishtraitnew$tl,catvar(fishtraitnew$tl,c(1:5)))
+fishtraitnew$tl<-catvar(fishtraitnew$tl,c(1:5))
+#table(fishtraitnew$offspring.size,catvar(fishtraitnew$offspring.size,c(4,400)))
+#fishtraitnew$offspring.size<-catvar(fishtraitnew$offspring.size,c(4,400))
+##table(fishtraitnew$age.maturity,catvar(fishtraitnew$age.maturity,c(2,3,4,5,14)))
+fishtraitnew$age.maturity<-catvar(fishtraitnew$age.maturity,c(2,3,4,5,14))
+#table(fishtraitnew$fecundity,catvar(fishtraitnew$fecundity,c(1000,10000,100000,1000000)))
+#fishtraitnew$fecundity<-catvar(fishtraitnew$fecundity,c(1000,10000,100000,1000000))
+##table(fishtraitnew$growth.coefficient,catvar(fishtraitnew$growth.coefficient,c(.1,.2,.3,.4,.5,2)))
+fishtraitnew$growth.coefficient<-catvar(fishtraitnew$growth.coefficient,c(.1,.2,.3,.4,.5,2))
+##table(fishtraitnew$length.max,catvar(fishtraitnew$length.max,c(50,100,200)))
+fishtraitnew$length.max<-catvar(fishtraitnew$length.max,c(50,100,200))
+##table(fishtraitnew$age.max,catvar(fishtraitnew$age.max,c(5,10,20,60)))
+fishtraitnew$age.max<-catvar(fishtraitnew$age.max,c(5,10,20,60))
+#to get an idea of categories
+diagmiss(fishtraitnew)
+```
+
+
+### Multiple correspondance analysis
+
+Multiplle correspondance analyses on the trait matrix using Burt tables.
+
+```{r MCAfishtrait,cache=TRUE}
+
+#MCA + classif
+pipo<-data.frame(fishtraitnew[,-1])
+#pipo<-data.frame(fishtraitnew[,c(1,2,3,4,5,7,8)])
+row.names(pipo) <- fishtraitnew$Species
+#correspodance anlysis on Burt table
+rez<-MCA(pipo,ncp=999,method="Burt",graph=F)
+plt1<-plotellipses(rez,axes=c(1,2))
+plt2<-plotellipses(rez,axes=c(1,3))
+```
+```{r MCAfishtrait1,cache=TRUE}
+print(plt1)
+```
+
+```{r MCAfishtrait2,cache=TRUE}
+print(plt2)
+```
+
+With three axes 48.55% of total variance mapped.
+Quick analyses: axe one for big fishes with intermediate growth parameters (size, trophic level, age, age maturity) versus small one with low life expectancy, low trophic level and co. Axe two and three not so clear, but help to distinguish the axe one properties. 
+
+
+### Groups identification in the multiple correspondance analysis spaces
+
+The MCA results are used to identify group of similar traits caracteristics in
+the MCA space. First methods test using Hennig approach and the fpc packages, 
+then group with the best method.
+Methods tested with 2 to 20 groups:
+
+- 4 random classification (cf "stupid" classifiers in Hennig),
+- hierarchical clustering  with ward, single, complete, average, mcquitty criterions,
+- kmeans,
+- clara methods (large dataset computation methods).
+
+
+```{r classiftestmethod,cache=TRUE}
+#then Hennig, C. (2017) Cluster validation by measurement of clustering
+#characteristics relevant to the user. In C. H. Skiadas (ed.) Proceedings of
+#ASMDA 2017, 501-520, https://arxiv.org/abs/1703.09282
+# using clusterbenchmark from fpc
+if(!file.exists("cbs.rds")){
+set.seed(666) #the number of the beaaasttt
+  options(digits=3)
+clustermethod=c("kmeansCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","hclustCBI","claraCBI")
+clustermethodpars <- list()
+clustermethodpars[[2]] <- clustermethodpars[[3]] <- list()
+clustermethodpars[[4]] <-  clustermethodpars[[5]] <-list()
+clustermethodpars[[6]]<-   clustermethodpars[[7]] <-list()
+clustermethodpars[[2]]$method <- "ward.D2"
+clustermethodpars[[3]]$method <- "single"
+clustermethodpars[[4]]$method <- "complete"
+clustermethodpars[[5]]$method <- "average"
+clustermethodpars[[6]]$method <- "mcquitty"
+#clustermethodpars[[7]]$method <- ""
+methodname <- c("kmeans","ward","single","complete","average","mcquitty","clara")
+cbs <-  clusterbenchstats(rez$ind$coord,G=2:20,
+			  clustermethod=clustermethod,scaling=FALSE,
+			  methodname=methodname,
+			  distmethod=rep(FALSE,length(clustermethod)),
+			clustermethodpars=clustermethodpars,nnruns=100,kmruns=100,
+			fnruns=100,avenruns=100,multicore=TRUE,trace=F)
+saveRDS(cbs,file="cbs.rds")
+}else{
+cbs<-readRDS(cbs,file="cbs.rds")
+}
+```
+
+This comes from the quick reading of the Hennig paper found on ArXiv (fpc paper,
+the metric agregation and the cluster strategy and selection to bee data - yes
+bee).
+To select the methods and the number of cluster, differents metrics are plotted and interpreted.
+Two type of metrics: metrics to assess cluster homogeneity and metrics to assess cluster separation. The choice of the metrics has to be in line with the cluster objectives (here to reduce the dimension of the species number in DATRAS, according to some traits similarity).
+Choice of the measures link to the aim of the clustering.
+Some random notes taken during the reading of the Hennig's papers:
+
+
+- cluster homogeneity:
+  - average within-cluster dissimilarities or average distance with cluster (avewithin): individuals within cluster should be functionally more similar than individuals in different cluster (smaller values indicates better clustering quality), 
+  - correlation between distances and a 0-1 vector where 0 means same cluster, 1 means different clusters (pearsongamma): group of species should represent the functional distance in the MCA space (youhouu, headache incoming), it is a representation of dissimilarity structure by clustering (a guess: higher is better?). Measure of the quality of the cluster representatiion "in some way".
+- cluster seperation
+  - separation index, based on the distance for every point to closest point not in the same cluster (sindex): individuals should be functionaly separated from other species (smaller values are better)
+  - widest within-cluster gap (widestgap): assess connectivity (no gap in cluster : smaller value are better)
+
+```{r classiftestmethod2,cache=TRUE}
+#redesign cbs outputs to ease ggplot2 use
+cbslong<-data.frame()
+#stupid classifier
+for(i in 1:4){
+	tmp<-bind_rows(cbs$sim[[i]][cbs$stat$minG:cbs$stat$maxG])
+	tmp$nbclus<-cbs$stat$minG:cbs$stat$maxG
+	tmp$method<-names(cbs$sim)[i]
+	cbslong<-rbind(cbslong,tmp)
+}
+#main methods
+for(i in 1:7){
+	tmp<-bind_rows(cbs$stat[[i]][cbs$stat$minG:cbs$stat$maxG])
+	tmp$nbclus<-cbs$stat$minG:cbs$stat$maxG
+	tmp$method<-cbs$stat$name[i]
+	cbslong<-rbind(cbslong,tmp)
+}
+cbslong<-tidyr::pivot_longer(cbslong,avewithin:pamc)
+#add info
+cbslong<-cbslong%>%mutate(info=ifelse(name%in%c("avewithin","pearsongamma"),"Cluster homogeneity",""),
+			  info=ifelse(name%in%c("sindex","widestgap"),"Cluster separation",info))
+#test ggplot
+stupid<-names(cbs$sim[1:4])
+#all
+ggplot(cbslong%>%filter(!method%in%stupid),aes(x=nbclus,y=value,color=method))+
+	geom_point()+
+	geom_point(data=cbslong%>%filter(method%in%stupid),aes(x=nbclus,y=value),color="grey",alpha=.2)+
+	geom_point()+
+	facet_wrap(~name,scale="free")
+#selected metric
+tmp1<-cbslong%>%filter(!method%in%stupid&info!=""&nbclus<=15)
+tmp2<-cbslong%>%filter(method%in%stupid&info!=""&nbclus<=15)
+ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
+	geom_point()+
+	geom_path()+
+	geom_violin(data=tmp2,aes(x=nbclus,y=value,group=nbclus),color="grey",alpha=.2)+
+	geom_point()+
+	facet_wrap(info~name,scale="free",ncol=2)
+```
+
+
+Results :
+
+- 7 clusters! 4 to 5 should be better
+
+### Final temporary results and Representation for interpretation 
+
+
+```{r clusterrez1,cache=TRUE}
+#the final method tututttuttttttttuuuu
+arbre<-cluster::agnes(rez$ind$coord,method="ward",par.method=1)
+#a plota with 4 clusters
+plot(arbre,which=2,hang=-1)
+rect.hclust(arbre,k=4)
+#another test to check the optimal number of cluster
+#funcluster<-function(a,n){list(cluster=cutree(cluster::agnes(a,method="ward"),k=n))}
+#rezopti<-cluster::clusGap(rez$ind$coord,funcluster,K.max=15,B=1000)
+#plot(rezopti)
+#cluster::maxSE(rezopti$Tab[2:15,3],rezopti$Tab[2:15,4],method="Tibs2001SEmax")
+
+#the cluster 
+group4<-cutree(arbre,k=4) #4 clusters
+group7<-cutree(arbre,k=7) #7 clusters
+
+#how clusters are presented in 2D in the MCA subspace
+fviz_mca_ind(rez,repel=T,habillage=as.factor(group4),addEllipses=F,axes=c(1,2))
+#fviz_mca_ind(rez,repel=T,habillage=as.factor(group7),addEllipses=F,axes=c(1,2))
+#fviz_mca_ind(rez,repel=T,habillage=as.factor(group4),addEllipses=F,axes=c(1,3))
+#fviz_mca_ind(rez,repel=T,habillage=as.factor(group4),addEllipses=F,axes=c(2,3))
+```
+
+
+\newpage
+
+
+```{r clusterrez1fig1,cache=TRUE}
+fviz_mca_ind(rez,repel=T,habillage=as.factor(group4),addEllipses=F,axes=c(1,2))
+```
+
+\newpage
+
+# Heatmap
+
+Nice plot but impossible to include in the markdown for now...
+
+```{r clusterrez2,cache=TRUE,results="as.is"}
+#a plot tree with dataaaa
+#burtmatrix
+#aa<-GDAtools::burt(pipo)
+aa<-t(GDAtools::dichotom(pipo))
+colnames(aa)<-rownames(pipo)
+library(ComplexHeatmap)
+Heatmap(aa,cluster_columns=as.dendrogram(arbre),cluster_rows=TRUE,column_order=arbre$order,
+	      column_split=7,column_title="TO BE CHECKED")
+#draw(hmap)
+
+
+```
+
+# Rasteriiiiiiize
+
+
+```{r rasterize,cache=TRUE}
+#read the data DATRAS
+load("../data/J2Datras.RData")
+#left_join with group7
+group7nom<-data.frame(cluster=group7,spp=row.names(pipo))
+J3<-left_join(J2,group7nom,by=c("ScientificName_WoRMS"="spp"))%>%filter(is.finite(cluster))
+#rasterize
+library(raster)
+r0<- raster(nrow=5, ncol=7, xmn=-1.500034, xmx=0.7083337, ymn=49.16667, ymx=49.70833)
+projection(r0)<- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+#mhh mean of density in Nb for group 2
+rall<-stack()
+funmean<-function(a,na.rm=T){mean(a,na.rm=T)}
+for(i in unique(J3$Year)){
+	tmp<-J3%>%filter(Year==i&cluster==2)
+	if(nrow(tmp)>0){
+	r1<- rasterize(tmp[,c("moyLong","moyLat")], r0, fields=DensityWgt, fun=funmean)
+	}else{
+	r1<-r0
+	}
+	names(r1)<-i
+	rall<-addLayer(rall,r1)
+}
+library(rasterVis)
+levelplot(rall)
+
+#a test for one year
+plot(rall[[15]])
+tmp<-J3%>%filter(Year==2002&cluster==2)
+points(tmp[,c("moyLong","moyLat")])
+#test interpolation ?
+xy<-data.frame(xyFromCell(rall[[15]],1:ncell(rall[[15]])))
+v<-getValues(rall[[15]])
+#thin plate spline model
+library(fields)
+tps<-Tps(xy,v)
+k1<-Krig(xy,v)
+p<-interpolate(rall[[15]],tps)
+p1<-interpolate(rall[[15]],k1)
+plot(p)
+p<-mask(p,rall[[15]])
+
+
+
+
+
+
+```
+
+
+

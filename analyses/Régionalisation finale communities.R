@@ -132,7 +132,7 @@ Allcom<- ggplot(tata)+
   theme(axis.title.y = element_text(size = 15))+
   theme(axis.text.y = element_text(size = 10))
 
-ggsave(plot= Allcom, filename="Biorégionalisation.jpeg", path="results/Zones/Communautes bio", width = 13, height = 8)
+ggsave(plot= Allcom, filename="Biorégionalisation.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
 
 
 
@@ -192,7 +192,7 @@ Allcom<- ggplot(tatatab)+
   theme(axis.text.y = element_text(size = 10))
 
 save(Allcom, file="results/Communautes bio/Bio.Rdata")
-ggsave(plot= Allcom, filename="Biorégionalisation.jpeg", path="results/Zones/Communautes bio", width = 13, height = 8)
+ggsave(plot= Allcom, filename="Biorégionalisation.jpeg", path="results/Communautes bio/Zones", width = 13, height = 8)
 
 
 

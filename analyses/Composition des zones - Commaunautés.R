@@ -144,12 +144,13 @@ fintot$`Zones finales`<- sub("9", "Zone 9", fintot$`Zones finales`)
 fintot$Communauté<- factor(fintot$Communauté, ordered = TRUE, levels = c("Communauté I", "Communauté II", "Communauté III", "Communauté IV", "Communauté V", "Communauté VI", "Communauté VII", "Communauté VIII", "Communauté IX"))
 names(fintot)[2]<- "Année"
 
-ggplot(fintot)+
+seriescom<- ggplot(fintot)+
   geom_line(aes(x=Année, y=Moyenne))+
   facet_grid(`Zones finales` ~ Communauté)+
   guides(x = guide_axis(angle = 90))+
   theme_bw()
   
+ggsave(plot= seriescom, filename="Série_tempo-ttes com_ttes zones.jpeg", path="results/Communautes bio/Zones/Séries tempo", width = 13, height = 8)
 
 
 
