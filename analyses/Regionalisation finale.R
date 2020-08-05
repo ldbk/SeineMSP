@@ -6,6 +6,9 @@ library(cluster)  # pour agnes
 library(RColorBrewer)
 library(NbClust)
 library(fastcluster) # pour hclust
+library(factoextra) # pour fviz_mca_ind
+library(sp)
+library(ggdendro)
 
 {
 load(file="data/satellite/Detritus/TabDetfin.Rdata")
@@ -64,12 +67,26 @@ plt2<- plotellipses(rez, axes=c(1,3))
 
 
 # Classification
-arbre<- hclust(dist(rez$ind$coord), method="ward.D2")
-plot(arbre, which=2,hang=-1)
+distance<- dist(rez$ind$coord)
+tree<- hclust(distance, method="ward.D2")
+plot(tree, hang= -1, main ="", ylab ="Distance", xlab= "", labels = F)
 #NbClust(rez$ind$coord, min.nc = 2, max.nc = 10, index="all", method = "ward.D2")
 # According to the majority rule, the best number of clusters is  10 (5 indicateurs, puis 4 indicateurs pour 6, 3 ou 2 clusters)
-rect.hclust(arbre, k=6)
-groups<- cutree(arbre, k=6)
+rect.hclust(tree, k=6)
+groups<- cutree(tree, k=6)
+
+fviz_mca_ind(rez, repel=T, addEllipses=F, axes=c(1,2), geom="point",
+             col.ind = factor(groups),
+             #palette = brewer.pal(n = 6, name = "YlOrBr"),
+             pointsize = 4,
+             labelsize = 1,
+             title = "")+
+  scale_color_manual(name = "Zones", values= c("#FFFFD4", "#FEE391", "#FEC44F", "#FE9929", "#D95F0E", "#993404"))+
+  theme(legend.title = element_text(size= 25))+
+  theme(legend.text = element_text(size= 25))+
+  theme(axis.title.x = element_text(size= 20))+
+  theme(axis.title.y = element_text(size= 20))
+
 
 tata<- cbind(grd2[,c(1,2)],Clust=factor(groups))
 save(tata, file="results/satellite/Coordzones.Rdata")

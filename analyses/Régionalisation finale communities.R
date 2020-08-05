@@ -103,13 +103,26 @@ plt1<- plotellipses(rez, axes=c(1,2))
 plt2<- plotellipses(rez, axes=c(1,3))
 
 
-
 # Classification
-arbre<- hclust(dist(rez$ind$coord), method="ward.D2")
-plot(arbre, which=2, hang=-1)
+distance<- dist(rez$ind$coord)
+tree<- hclust(distance, method="ward.D2")
+plot(tree, hang= -1, main ="", ylab ="Distance", xlab= "", labels = F)
 #NbClust(rez$ind$coord, min.nc = 2, max.nc = 10, index="alllong", method = "ward.D2")
-rect.hclust(arbre, k=9)
-groups<- cutree(arbre, k=9)
+rect.hclust(tree, k=9)
+groups<- cutree(tree, k=9)
+
+fviz_mca_ind(rez, repel=T, addEllipses=F, axes=c(1,2), geom="point",
+             col.ind = factor(groups),
+             #palette = brewer.pal(n = 6, name = "YlOrBr"),
+             pointsize = 4,
+             labelsize = 1,
+             title = "")+
+  scale_color_manual(name = "Zones", values= c("#FFFFD9", "#EDF8B1", "#C7E9B4", "#7FCDBB", "#41B6C4", "#1D91C0", "#225EA8", "#253494", "#081D58"))+
+  theme(legend.title = element_text(size= 25))+
+  theme(legend.text = element_text(size= 25))+
+  theme(axis.title.x = element_text(size= 20))+
+  theme(axis.title.y = element_text(size= 20))
+
 
 tata<- cbind(grd2[,c(1,2)], Clust=factor(groups))
 save(tata, file="results/Communautes bio/Zones/Tabttpixel.Rdata")
