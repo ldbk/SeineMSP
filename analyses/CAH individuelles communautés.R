@@ -184,6 +184,9 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
 #  print(i)
 #}
 
+  
+  # Dendrogrammes 
+  
   #treecut<- dendro_data_k(tree, 4)
   
   #firstplot<- plot_ggdendro(treecut,
@@ -231,6 +234,25 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   
   print(ggtata)
   
+  tete<- tata
+  names(tete)[2]<- "Zones"
+  
+  ggplot(tete)+
+    geom_point(aes(x=Year, y=Prediction, col=Zones))+
+    geom_line(aes(x=Year, y=Prediction, col=Zones, group=Zones))+
+    theme_minimal()+
+    ylab("Densités")+
+    xlab("Années (1988-2019)")+
+    ggtitle("Communauté IX")+
+    theme(axis.text.x = element_text(angle = 90))+
+    theme(plot.title = element_text(size = 40, hjust = 0.5))+
+    theme(axis.title.x = element_text(size = 30)) +
+    theme(axis.title.y = element_text(size = 30)) +
+    theme(axis.text.x = element_blank())+
+    theme(legend.title = element_text("Zones", size= 30))+
+    theme(legend.text = element_text(size = 30))+
+    scale_colour_manual(values = brewer.pal(n=4, name="Oranges"))
+    #theme(axis.text.x = element_blank())
   
   tete<- tata %>% ungroup() %>% group_by(Clust) %>% summarise(Prediction= mean(Prediction))
   save(tete, file=paste0("data/ICES/mean_prediction_byzone_", j, ".Rdata"))
