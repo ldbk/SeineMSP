@@ -284,7 +284,7 @@ treecut <- dendro_data_k(tree, 3)
 firstplot<- plot_ggdendro(treecut,
                           direction   = "tb",
                           expand.y    = 0.2,
-                          scale.color = c("black","#EFEDF5", "#BCBDDC", "#756BB1"))
+                          scale.color = c("black","#CC99FF", "#9966CC", "#330066"))
 
 O2gg<- firstplot +
   ggtitle("Oxygène dissous")+

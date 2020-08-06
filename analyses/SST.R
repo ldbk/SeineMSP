@@ -273,7 +273,7 @@ treecut <- dendro_data_k(tree, 2)
 firstplot<- plot_ggdendro(treecut,
                           direction   = "tb",
                           expand.y    = 0.2,
-                          scale.color = c("#FFCCCC", "#FF6666"))
+                          scale.color = c("#FF9999", "#990000"))
 
 SSTgg<- firstplot +
   ggtitle("Température de surface")+

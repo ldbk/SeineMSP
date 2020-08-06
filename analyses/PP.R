@@ -279,7 +279,7 @@ treecut <- dendro_data_k(tree, 2)
 firstplot<- plot_ggdendro(treecut,
                           direction   = "tb",
                           expand.y    = 0.2,
-                          scale.color = c("#CCFFCC", "#99CC99"))
+                          scale.color = c("#66CC66", "#336633"))
 
 PPgg<- firstplot +
   ggtitle("Production primaire")+

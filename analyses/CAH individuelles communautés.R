@@ -187,23 +187,23 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
   
   # Dendrogrammes 
   
-  #treecut<- dendro_data_k(tree, 4)
+  treecut<- dendro_data_k(tree, 2)
   
-  #firstplot<- plot_ggdendro(treecut,
-   #                         direction   = "tb",
-    #                        expand.y    = 0.2,
-     #                       scale.color = c("black", "#FEEDDE", "#FDBE85", "#FD8D3C", "#D94701"))
+  firstplot<- plot_ggdendro(treecut,
+                            direction   = "tb",
+                            expand.y    = 0.2,
+                            scale.color = c("black","#CC99FF", "#C994C7", "#DD1C77"))
   
-  #ComIX<- firstplot +
-   # ggtitle("Communauté IX")+
-    #ylab("Distance")+
-    #theme_classic()+
-    #theme(plot.title = element_text(size = 40, hjust = 0.5))+
-    #theme(axis.title.x = element_blank()) +
-    #theme(axis.title.y = element_text(size = 35)) +
-    #theme(axis.text.x = element_blank())
+  ComVII<- firstplot +
+    ggtitle("Communauté VII")+
+    ylab("Distance")+
+    theme_classic()+
+    theme(plot.title = element_text(size = 40, hjust = 0.5))+
+    theme(axis.title.x = element_blank()) +
+    theme(axis.title.y = element_text(size = 35)) +
+    theme(axis.text.x = element_blank())
   
-  #ggsave(plot= ComIX, filename="ComIX.jpeg", path="results/Communautes bio/Zones/Dendrogrammes", width = 13, height = 8)
+  ggsave(plot= ComV, filename="ComV.jpeg", path="results/Communautes bio/Zones/Dendrogrammes", width = 13, height = 8)
   
   
   rect.hclust(tree, max(PLOM$Best.partition))
@@ -243,7 +243,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
     theme_minimal()+
     ylab("Densités")+
     xlab("Années (1988-2019)")+
-    ggtitle("Communauté IX")+
+    ggtitle("Communauté IV")+
     theme(axis.text.x = element_text(angle = 90))+
     theme(plot.title = element_text(size = 40, hjust = 0.5))+
     theme(axis.title.x = element_text(size = 30)) +
@@ -251,7 +251,7 @@ for (j in unique(data.frame(Kriege.logdens)[,"Community"])){
     theme(axis.text.x = element_blank())+
     theme(legend.title = element_text("Zones", size= 30))+
     theme(legend.text = element_text(size = 30))+
-    scale_colour_manual(values = brewer.pal(n=4, name="Oranges"))
+    scale_colour_manual(values = c("#FC8D59", "#FFCC33", "#99D594"))
     #theme(axis.text.x = element_blank())
   
   tete<- tata %>% ungroup() %>% group_by(Clust) %>% summarise(Prediction= mean(Prediction))

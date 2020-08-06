@@ -266,7 +266,7 @@ treecut <- dendro_data_k(tree, 3)
 firstplot<- plot_ggdendro(treecut,
                           direction   = "tb",
                           expand.y    = 0.2,
-                          scale.color = c("black", "#ECE7F2", "#A6BDDB", "#2B8CBE"))
+                          scale.color = c("black", "#CCCCFF", "#A6BDDB", "#2B8CBE"))
 
 Turbgg<- firstplot +
   ggtitle("Turbidité")+

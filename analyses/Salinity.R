@@ -273,7 +273,7 @@ treecut <- dendro_data_k(tree, 3)
 firstplot<- plot_ggdendro(treecut,
                           direction   = "tb",
                           expand.y    = 0.2,
-                          scale.color = c("black", "#F0F0F0", "#BDBDBD", "#636363"))
+                          scale.color = c("black", "#CCCCCC", "#999999", "#666666"))
 
 Salgg<- firstplot +
   ggtitle("Salinité")+

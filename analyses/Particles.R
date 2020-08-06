@@ -265,7 +265,7 @@ treecut <- dendro_data_k(tree, 2)
 firstplot<- plot_ggdendro(treecut,
                           direction   = "tb",
                           expand.y    = 0.2,
-                          scale.color = c("#FFFFCC", "#CC6633"))
+                          scale.color = c("#FFCC33", "#CC6633"))
 
 Partgg<- firstplot +
   ggtitle("Particules")+
