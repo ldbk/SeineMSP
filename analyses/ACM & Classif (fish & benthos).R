@@ -129,13 +129,30 @@ ggplot(cbslong%>%filter(!method%in%stupid),aes(x=nbclus,y=value,color=method))+
 # selected metrics
 tmp1<- cbslong%>%filter(!method%in%stupid&info!=""&nbclus<=15)
 tmp2<- cbslong%>%filter(method%in%stupid&info!=""&nbclus<=15)
-comparbenthos<- ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
+
+tmp3<- tmp1
+names(tmp3)[2]<- "Méthode"
+names(tmp3)[4]<- "Valeur"
+tmp3$info<- sub("Cluster homogeneity", "Homogénéité des clusters", tmp3$info)
+tmp3$info<- sub("Cluster separation", "Séparation entre les clusters", tmp3$info)
+
+tmp4<- tmp2
+names(tmp4)[4]<- "Valeur"
+tmp4$info<- sub("Cluster homogeneity", "Homogénéité des clusters", tmp4$info)
+tmp4$info<- sub("Cluster separation", "Séparation entre les clusters", tmp4$info)
+
+comparbenthos<- ggplot(tmp3,aes(x=nbclus,y=Valeur,color=Méthode),alpha=..5)+
   geom_point()+
   geom_path()+
-  geom_violin(data=tmp2,aes(x=nbclus,y=value,group=nbclus),color="grey",alpha=.2)+
+  geom_violin(data=tmp4,aes(x=nbclus,y=Valeur,group=nbclus),color="grey",alpha=.2)+
   geom_point()+
   facet_wrap(info~name,scale="free",ncol=2)+
-  theme_minimal()
+  theme_minimal()+
+  theme(legend.title = element_text(size= 20))+
+  theme(legend.text = element_text(size= 20))+
+  theme(legend.position="bottom")+
+  theme(strip.text.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size= 15))
 ggsave(plot= comparbenthos, filename="Aggregation criterion.jpeg", path="results/Communautes bio", width = 13, height = 8)
 
 
@@ -560,16 +577,35 @@ ggplot(cbslong%>%filter(!method%in%stupid),aes(x=nbclus,y=value,color=method))+
   geom_point(data=cbslong%>%filter(method%in%stupid),aes(x=nbclus,y=value),color="grey",alpha=.2)+
   geom_point()+
   facet_wrap(~name,scale="free")
-#selected metric
+
+# selected metric
 tmp1<-cbslong%>%filter(!method%in%stupid&info!=""&nbclus<=15)
 tmp2<-cbslong%>%filter(method%in%stupid&info!=""&nbclus<=15)
-comparfish<- ggplot(tmp1,aes(x=nbclus,y=value,color=method),alpha=..5)+
+
+tmp3<- tmp1
+names(tmp3)[2]<- "Méthode"
+names(tmp3)[4]<- "Valeur"
+tmp3$info<- sub("Cluster homogeneity", "Homogénéité des clusters", tmp3$info)
+tmp3$info<- sub("Cluster separation", "Séparation entre les clusters", tmp3$info)
+
+tmp4<- tmp2
+names(tmp4)[4]<- "Valeur"
+tmp4$info<- sub("Cluster homogeneity", "Homogénéité des clusters", tmp4$info)
+tmp4$info<- sub("Cluster separation", "Séparation entre les clusters", tmp4$info)
+
+comparfish<- ggplot(tmp3,aes(x=nbclus,y=Valeur,color=Méthode),alpha=..5)+
   geom_point()+
   geom_path()+
-  geom_violin(data=tmp2,aes(x=nbclus,y=value,group=nbclus),color="grey",alpha=.2)+
+  geom_violin(data=tmp4,aes(x=nbclus,y=Valeur,group=nbclus),color="grey",alpha=.2)+
   geom_point()+
   facet_wrap(info~name,scale="free",ncol=2)+
-  theme_minimal()
+  theme_minimal()+
+  theme(legend.title = element_text(size= 20))+
+  theme(legend.text = element_text(size= 20))+
+  theme(legend.position="bottom")+
+  theme(strip.text.x = element_text(size = 20))+
+  theme(axis.title.y = element_text(size= 15))
+
 ggsave(plot= comparfish, filename="Aggregation criterion fish.jpeg", path="results/Communautes bio", width = 13, height = 8)
 
 
