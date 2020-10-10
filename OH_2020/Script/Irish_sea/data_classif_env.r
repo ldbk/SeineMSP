@@ -38,6 +38,10 @@ library("zoo")
 library(fastcluster)
 library(FactoMineR)
 
+#Libraries for mask
+library(rworldmap)
+library(rworldxtra)
+
 # Script for Wekeo environment
 sr=SpatialPolygons(list(Polygons(list(Polygon(cbind(c(xmin, xmin, xmax, xmax),c(ymax, ymin, ymin, ymax)))),"1")))
 mpa=SpatialPolygonsDataFrame(sr, data.frame(cbind(1:1), row.names=c("1")))
@@ -652,9 +656,7 @@ mpa_adg<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gmis_w
 #####
 
 # CLASSIF#####
-
-
-coast <- readOGR("OH_2020/Data/EEA_Coastline_WGS84.gpkg")
+coast <- rworldmap::getMap(resolution = "high")
 coast <- raster::crop(coast, raster::extent(xmin-0.1,xmax+0.1,ymin-0.1,ymax+0.1))
 
 
