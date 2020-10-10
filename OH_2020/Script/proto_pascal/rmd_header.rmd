@@ -1,0 +1,30 @@
+---
+title: "Dataset: MSP Analysis"
+author: Document produced by http://www.marine-analyst.eu
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    number_section: yes
+    theme: default
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+```{r setup, include=FALSE}
+library(knitr)
+library(kableExtra)
+knitr::opts_chunk$set(
+  eval = TRUE,
+	echo = TRUE,
+	fig.align = "center",
+	message = FALSE,
+	warning = FALSE,
+	fig.width=5.5,
+	out.width = "100%"
+)
+# clean environment
+rm(list=ls())
+gc()
+```
