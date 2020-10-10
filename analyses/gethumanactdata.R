@@ -53,6 +53,25 @@ gethumact<-function(nom="emodnet:aggregateareas",request="GetFeature"){
 	return(uu)
 }
 
+gethumact<-function(nom="emodnet:aggregateareas",request="GetFeature"){
+	url<-parse_url("https://ows.emodnet-humanactivities.eu/wfs")
+  url<-parse_url("https://ows.emodnet-seabedhabitats.eu/emodnet_view/wfs")
+	#nom="emodnet:aggregateareas"
+	url$query <- list(service = "WFS",
+			  version = "1.1.0",
+			  request = "", 
+			  typename="",
+			  bbox= "49.2,-1.5,49.8,0", 
+			  outputFormat = "application/json")
+	url$query$typename<-nom
+	url$query$request<-request
+	#url$query<-list(typename =nom)
+	request <- build_url(url)
+	uu<-read_sf(request)
+	return(uu)
+}
+
+
 #get the dataaaaa
 #nat2000
 nat2000<-gethumact("natura2000areas")
