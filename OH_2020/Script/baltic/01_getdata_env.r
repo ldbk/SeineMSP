@@ -1,6 +1,6 @@
 # Test script localy
 
-    
+
 wdpaid <- '10_53.3_22_57.5'
 #wdpaid <- 'minlon_minlat_maxlon_maxlat'
 
@@ -552,7 +552,7 @@ read_gmis_wcst_data<-function (resolution = resolution, gmis_wcst_url = gmis_wcs
 #================================================================
 name <- "GMIS_T_SST"
 resolution <- "4km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- "oC"
@@ -564,7 +564,7 @@ mpa_sst<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gmis_w
 #================================================================
 name <- "GMIS_A_PPR"
 resolution <- "4km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- "mg m-2 day-1"
@@ -576,7 +576,7 @@ mpa_ppr<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gmis_w
 #================================================================
 name <- "GMIS_C_SALI"
 resolution <- "28km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- ".0001"
@@ -588,7 +588,7 @@ mpa_salinity<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = g
 #================================================================
 name <- "GMIS_A_CHLA"
 resolution <- "4km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- "mg.m-3"
@@ -600,7 +600,7 @@ mpa_chla<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gmis_
 #================================================================
 name <- "GMIS_A_K490"
 resolution <- "4km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- "m^-1"
@@ -613,7 +613,7 @@ mpa_kd443<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gmis
 #================================================================
 name <- "GMIS_O_OXYG"
 resolution <- "28km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- "mmol m-3"
@@ -626,7 +626,7 @@ mpa_oxygene<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gm
 #================================================================
 name <- "GMIS_A_BBP"
 resolution <- "4km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- "m^-1"
@@ -638,10 +638,15 @@ mpa_bbp<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gmis_w
 #================================================================
 name <- "GMIS_A_ADG"
 resolution <- "4km"
-startdate <- "2000-01"
+startdate <- "2010-01"
 enddate <- "2018-12"
 gmis_wcst_url <- "http://mapserver.marine-analyst.eu/webservices/4km/wcs-t"
 unite <- "m^-1"
 logscale <- FALSE
 
 mpa_adg<-mpaextract(name = name, resolution = resolution, gmis_wcst_url = gmis_wcst_url, startdate = startdate, enddate =enddate, xmin = extent(mpa)@xmin-1, xmax = extent(mpa)@xmax+1, ymin = extent(mpa)@ymin-1, ymax = extent(mpa)@ymax+1)
+
+#truc ajouté
+nomfich<-ls(patt="mpa_")
+save(list=nomfich,file="env.rdata")
+
