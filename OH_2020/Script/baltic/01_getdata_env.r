@@ -1,7 +1,7 @@
 # Test script localy
 
 
-wdpaid <- '10_53.3_22_57.5'
+wdpaid <- '18_54_22_56'
 #wdpaid <- 'minlon_minlat_maxlon_maxlat'
 
 wdpaidsplit <- unlist(strsplit(wdpaid, "[_]"))
