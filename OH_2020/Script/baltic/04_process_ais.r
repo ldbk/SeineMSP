@@ -7,6 +7,9 @@ library(NbClust)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(fastcluster)
+library(FactoMineR)
+library(sf)
 #land data to mask data
 landmask <- rworldmap::getMap(resolution = "high")
 
@@ -29,6 +32,11 @@ allmpa<-list(mpa_fishing,mpa_dredging,mpa_sailing,mpa_pleasure,mpa_speedcraft,mp
 allmpa<-lapply(allmpa,aggregate,fact=aggfac)
 #mask
 allmpa<-lapply(allmpa,mask,mask=landmask,inverse=T)
+#yearly
+fsapply<-function(a){return(stackApply(a,indices=substr(names(a),2,5),fun=mean,na.rm=T))}
+fsapply(mpa_fishing)
+allmpa<-lapply(allmpa,fsapply)
+
 #individual group or sum
 #fishing
 fishAIS<-r2df(allmpa[[1]])
@@ -56,6 +64,7 @@ tmp<-full_join(full_join(tmp1,tmp2),tmp3)
 tmp$sum<-apply(tmp[,4:6],1,sum,na.rm=T)
 servAIS<-tmp%>%transmute(x,y,name,value=sum)
 #eliminate pt at land
+landmask2<-st_as_sf(landmask)
 pt2<-st_as_sf(fishAIS,coords=c("x","y"),crs=crs(landmask2))
 landmask2<-st_crop(st_as_sf(landmask),extent(pt2))
 #pt at sea 
@@ -63,171 +72,63 @@ ptin<-!apply(st_intersects(pt2,landmask2,sparse=F),1,any)
 #plot(alldf[[1]][ptin,1:2])
 #list of all stuff
 alldf<-list(fishAIS[ptin,],dredAIS[ptin,],sailAIS[ptin,],tranAIS[ptin,],servAIS[ptin,])
-
-#
-classif(alldf[[1]])
-ggplot(alldf[[1]],aes(x=x,y=y,fill=value))+geom_raster()+
+#fct to add a name
+fname<-function(a,nom){a$type<-nom;return(a)}
+ggplot(do.call("rbind",Map(fname,alldf,c("fish","dred","sail","tran","serv"))),
+       aes(x=x,y=y,fill=value))+geom_raster()+
 	scale_fill_distiller(palette="Spectral",name="Zone",trans="log10")+
-	#de\n navires\n(h.km^2)",trans="log10")+
-	facet_wrap(~name)
-
-
-##############################################
-#filter quatile 99%
-f99<-function(df){
-		df<-df%>%group_by(name)%>%
-		mutate(qxx=quantile(value,.95,na.rm=T),
-		       mxx=mean(value,na.rm=T),
-		       medxx=median(value,na.rm=T))%>%
-		ungroup()%>%
-		mutate(value=ifelse(value>=qxx,
-				    mxx,value))%>%
-		mutate(value2=ifelse(is.finite(value),value,medxx))%>%
-		dplyr::select(-qxx,-mxx,-medxx)%>%
-		data.frame()
-	return(df)
-}
-
-
+	borders("world",fill="grey",colour=NA)+
+	geom_sf()+
+	facet_grid(type~name)
+#
 #classif 
 classif<-function(tmp){
-	tmp<-alldf[[1]]
-	tmp$value[is.nan(tmp$value)]<-NA
+	#tmp<-alldf[[4]]%>%group_by(name)%>%
+	tmp<-tmp%>%group_by(name)%>%
+		mutate(m=min(value,na.rm=T),
+		       q=quantile(value,.95,na.rm=T))%>%
+		ungroup()%>%
+		mutate(value=ifelse(is.na(value),0,value))%>%
+		dplyr::select(-m,-q)
+	#tmp<-alldf[[1]]
+	#tmp$value<-log10(tmp$value+1)
 	tmp$value<-log10(tmp$value+1)
-	mat0<-tmp%>%tidyr::pivot_wider(values_from=value,names_from=name)
+	mat0<-tmp%>%tidyr::pivot_wider(values_from=value,names_from=name,values_fill=0)
 	idptNA<-is.finite(apply(mat0[,-c(1:2)],1,sum))
-	d<-dist(mat0[,-c(1:2)])
+	#str(mat0[,-c(1:2)])
+	d<-stats::dist((mat0[,-c(1:2)]))
 	clust <-fastcluster::hclust(d, method = "ward.D2")
-	pipo<-data.frame(x=mat0$x[idptNA],y=mat0$y[idptNA],zone=cutree(clust,6))
+	pipo<-data.frame(x=mat0$x,y=mat0$y,zone=cutree(clust,6))
 	return(pipo)
 }
-pipo<-classif(alldf[[1]])
+allzone<-lapply(alldf,classif)
+ggplot(do.call("rbind",Map(fname,allzone,c("fish","dred","sail","tran","serv"))),
+       aes(x=x,y=y,fill=zone))+geom_raster()+
+	scale_fill_distiller(palette="Spectral",name="Zone",trans="log10")+
+	#de\n navires\n(h.km^2)",trans="log10")+
+	facet_wrap(~type,ncol=2)
 
-ggplot(pipo,aes(x=x,y=y,fill=zone))+geom_raster()+#facet_wrap(~name)+
-		scale_fill_distiller(palette="Spectral",name="Zone")#de\n navires\n(h.km^2)",trans="log10")+
+#MCA
+uu<-do.call("rbind",Map(fname,allzone,c("fish","dred","sail","tran","serv")))%>%
+	mutate(zonetype=paste0(type,"-",zone))%>%
+	dplyr::select(-zone)%>%
+	pivot_wider(values_from=zonetype,names_from=type)
+mca <- MCA(uu[,-c(1,2)], ncp=999, method="Burt", graph=F)
+#
+#plotellipses(mca, axes = c(1,2))
+#plotellipses(mca, axes = c(1,3))
 
-	#identify point with no data
-	idptNA<-which(apply(mat0[,-c(1:2)],1,sum,na.rm=T)>0)
-	#take the mat with median value
-	mat1<-tmp%>%dplyr::select(-value)%>%tidyr::pivot_wider(values_from=value2,names_from=name)
-	#take only valid point
-	mat<-mat1[idptNA,-c(1:2)]
-	d<-dist(mat0)
-	clust <-fastcluster::hclust(d, method = "ward.D2")
-	pipo<-data.frame(x=mat0$x[idptNA],y=mat0$y[idptNA],zone=cutree(clust,6))
-	return(pipo)
-}
+#final classif
+d <- dist(mca$ind$coord)
+clust <- fastcluster::hclust(d, method="ward.D2")
+groups <- cutree(clust,6)
 
+finalzone <- data.frame(uu[,c(1,2)],Cluster=factor(groups))
 
-
-alldat<-list(fishingAIS,dredgingAIS,transportAIS,serviceAIS,sailingAIS)
-alldat1<-lapply(alldat,r2df)
-alldat2<-lapply(alldat1,f99)
-alldat3<-lapply(alldat2,classif)
-f1<-function(a,nom){a$name<-nom;return(a)}
-#f1(alldat3[[1]],"pipo")
-alldat4<-Map(f1,alldat3,c("Fishing","Dredging","Transport","Service","Sailing"))
-rez<-do.call("rbind",alldat4)
-ggplot(rez,aes(x=x,y=y,fill=zone))+geom_raster()+facet_wrap(~name)+
-		scale_fill_distiller(palette="Spectral",name="Zone")#de\n navires\n(h.km^2)",trans="log10")+
-
-rasterVis::levelplot(stack((lapply(alldat,mean,na.rm=T))),zscaleLog=10)
-lapply(alldat2,function(a){summary(a$value2)}
-
-
-stop("ici")
-#stop
-
-
-
-
-#tmp 2 raster
-mat0<-tmp%>%dplyr::select(-value2)%>%tidyr::pivot_wider(values_from=value,names_from=name)
-#identify point with no data
-idptNA<-which(apply(mat[,-c(1:2)],1,sumna.rm=T)>0)
-#take the mat with median value
-mat1<-tmp%>%dplyr::select(-value)%>%tidyr::pivot_wider(values_from=value2,names_from=name)
-#take only valid point
-mat<-mat1[idptNA,-c(1:2)]
-d<-dist(mat)
-clust <-fastcluster::hclust(d, method = "ward.D2")
-
-pipo<-data.frame(x=mat0$x[idptNA],y=mat0$y[idptNA],zone=cutree(clust,6))
-
-ggplot(pipo,aes(x=x,y=y,fill=zone))+geom_raster()
-
-
-
-#fct to trans raster in long truc and filter by high quantile
-
-plt1<-ggplot()+
-		geom_raster(data=tmp,aes(x=x,y=y,fill=value+1))+
-		facet_wrap(~name,ncol=12)+
-		scale_fill_distiller(palette="Spectral",name="Densité de\n navires\n(h.km^2)",trans="log10")+
-		#scale_fill_gradient(trans = 'log10')+ 
-		#scale_fill_viridis_c(trans="log")+#palette="viridis",name="Zones")+
-		#scale_fill_viridis_c(palette="rainbow")+#palette="viridis",name="Zones")+
-		borders("world",fill="grey",colour=NA)+
-		coord_sf(xlim=range(tmp$x),ylim=range(tmp$y))+
-		xlab("Longitude")+ylab("Latitude")#+
-
-
-
-#test
-raster<-fishingAIS
-plot(log10(mean(raster,na.rm=T)))
-method.dist="euclidean"
-method.classif="ward.D2"
-
-classif <- function(df, method.dist="euclidean", method.classif="ward.D2", nb.clust){
-	uu<-raster::as.data.frame(stack(mpa_fishing))
-	idptNA<-which(apply(uu,1,sum,na.rm=T)>0)
-	uu<-uu[idptNA,]
-	aa<-dist(uu)
-	clust <-fastcluster::hclust(aa, method = method.classif)
-
-	if(F){
-		df<-tmp
-	}
-	#convert df to long table
-	mat<-df%>%tidyr::pivot_wider(values_from=value,names_from=name)
-	#identify point with no data
-	idptNA<-which(apply(mat[,-c(1:2)],1,sum,na.rm=T)>0)
-	mat<-mat[idptNA,-c(1:2)]
-	plot(raster((as.matrix(d))))
-	
-
-	uu<-raster::as.data.frame(fishingAIS,xy=T)
-	d<-dist(uu[,-c(1:2)])
-
-	mat<-as.data.frame(mat)
-	#remove xy where no data
-	d <- stats::dist(mat,method=method.dist)
-	d[!is.finite(d)]<-NaN
-	clust <-fastcluster::hclust(d, method = method.classif)
-
-	f1<-function(df,k,mdist=method.dist,mclassif=method.classifp){
-		d <- dist(df,method="euclidean")
-		clust <-fastcluster::hclust(d, method = "ward.D2")
-		zones <- cutree(clust,k)
-		return(zones)
-	}
-	#optimal nbclust 
-	rez<-NbClust::NbClust(df, diss=NULL,distance="euclidean",min.nc = 2, max.nc = 5, index=c("dunn"), method = "ward.D2")
-
-	rez<-FastNbClust(NULL, diss=d,distance=NULL,min.nc = 2, max.nc = 5, index=c("frey","mcclain","cindex","silhouette","dunn"), method = "ward.D2")
-	rez<-FastNbClust(df, diss=NULL,distance="euclidean",min.nc = 2, max.nc = 5, index=c("gap"), method = "ward.D2")
-
-	zones <- cutree(clust,6)
-
-    return(clust)
-}
-pixelok <- which(!is.na(apply(raster::as.data.frame(mpa_sst),1,mean)))
-zone <- raster[[1]]
-values(zone) <- NA
-zone <- zones
-
-
-
+ggplot(finalzone,
+       aes(x=x,y=y,fill=Cluster))+geom_raster()+
+	scale_fill_brewer(palette="Set3",name="Cluster")#+#,trans="log10")+
+	#de\n navires\n(h.km^2)",trans="log10")+
+	#facet_wrap(~type,ncol=2)
 
 
