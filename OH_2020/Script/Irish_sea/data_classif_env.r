@@ -662,8 +662,19 @@ coast <- raster::crop(coast, raster::extent(xmin-0.1,xmax+0.1,ymin-0.1,ymax+0.1)
 
 classif <- function(raster, method.dist="euclidean", method.classif="ward.D2", nb.clust){
   df <- raster::as.data.frame(raster, xy=T)
+  df <- tidyr::pivot_longer(data=df, cols=3:dim(df)[2],names_to="Date", values_to="Values")
+  df <- dplyr::mutate(df, Month=substr(Date,7,8),Year=substr(Date,2,5)) 
+  df <- dplyr::group_by(df,Year,x,y) %>% dplyr::mutate(Values=mean(Values,na.rm=T))
+  df <-  df %>% dplyr::select(-Date,-Month) %>% ungroup() %>% distinct() %>% tidyr::pivot_wider(names_from=Year, values_from=Values)
   x <- is.na(maps::map.where(coast, df$x, df$y))
   df <- df[which(x),-c(1,2)]
+  
+  for(i in 1:dim(df)[2]){
+    year <- df[,i]
+    year[which(is.na(year)),] <- mean(pull(year),na.rm=T)
+    df[,i] <- year
+  }
+  
   d <- dist(df,method=method.dist)
   clust <-fastcluster::hclust(d, method = method.classif)
   
@@ -712,14 +723,14 @@ grid <- expand.grid(Long=seq(from=-8.1,to=-2.5,by=round(res(mpa_adg)[1],4)),Lat=
 
 
 env.zones <- data.frame(grid,
-                        SST=extract(sst.classif,grid),
-                        PPR=extract(ppr.classif,grid),
-                        SAL=extract(salinity.classif,grid),
-                        CHL=extract(chla.classif,grid),
-                        KD=extract(kd443.classif,grid),
-                        OXY=extract(oxygene.classif,grid),
-                        BBP=extract(bbp.classif,grid),
-                        ADG=extract(adg.classif,grid))
+                        SST=raster::extract(sst.classif,grid),
+                        PPR=raster::extract(ppr.classif,grid),
+                        SAL=raster::extract(salinity.classif,grid),
+                        CHL=raster::extract(chla.classif,grid),
+                        KD=raster::extract(kd443.classif,grid),
+                        OXY=raster::extract(oxygene.classif,grid),
+                        BBP=raster::extract(bbp.classif,grid),
+                        ADG=raster::extract(adg.classif,grid))
 env.zones <- na.omit(env.zones)
 
 for(i in 3:10){
