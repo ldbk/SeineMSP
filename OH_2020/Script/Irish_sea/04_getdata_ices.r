@@ -24,7 +24,21 @@ HH <- dplyr::mutate(HH, Long=((ShootLong+HaulLong)/2), Lat=((ShootLat+HaulLat)/2
 coast <- rworldmap::getMap(resolution = "high")
 coast <- raster::crop(coast, raster::extent(xmin-0.1,xmax+0.1,ymin-0.1,ymax+0.1))
 
-x <- is.na(maps::map.where(coast, HH$Long, HH$Lat))
-HH.in <- HH[which(x),]
+#Subset hauls in our area
+HH.in <- HH[HH$Long<xmax & HH$Long>xmin & HH$Lat<ymax & HH$Lat>ymin,]
+coast2<-st_as_sf(coast)
+sp<-st_as_sf(HH.in,coords=c("Long","Lat"),crs=crs(coast2))
 
-ggplot(HH.in)+geom_point(aes(x=Long,y=Lat))
+#Points index to keep 
+SeaPt<-!apply(st_intersects(sp,coast2,sparse=F),1,any)
+HH.in <- HH.in[SeaPt,]
+
+#ggplot(HH.in)+geom_point(aes(x=Long,y=Lat,col=Survey))
+
+#Which campaign do we keep
+campaign <- names(table(HH.in$Survey)[which(table(HH.in$Survey)==max(table(HH.in$Survey)))])
+quarter <- as.integer(names(table(HH.in$Quarter[HH.in$Survey==campaign])[which(table(HH.in$Quarter[HH.in$Survey==campaign])==max(table(HH.in$Quarter[HH.in$Survey==campaign])))]))
+
+#Load campaign for last 10 years
+HH <- getDATRAS(record = "HH", campaign, years=2008:2018,quarter)
+HL <- getDATRAS(record = "HL", campaign, years=2008:2018,quarter)

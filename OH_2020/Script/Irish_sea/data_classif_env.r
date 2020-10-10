@@ -33,6 +33,7 @@ library("wq")
 library("zoo")
 #library("jsonlite")
 #require(xtable)
+library(dplyr)
 
 #Libraries for environmental analysis
 library(fastcluster)
@@ -719,7 +720,7 @@ bbp.classif <- classif(mpa_bbp,nb.clust = 5)
 adg.classif <- classif(mpa_adg,nb.clust = 5)
 
 #FINAL CLASSIFICATION#####
-grid <- expand.grid(Long=seq(from=-8.1,to=-2.5,by=round(res(mpa_adg)[1],4)),Lat=seq(from=51.5,to=55.9,by=round(res(mpa_adg)[1],4)))
+grid <- expand.grid(Long=seq(from=xmin,to=xmax,by=round(res(mpa_adg)[1],4)),Lat=seq(from=ymin,to=ymax,by=round(res(mpa_adg)[1],4)))
 
 
 env.zones <- data.frame(grid,
@@ -733,7 +734,7 @@ env.zones <- data.frame(grid,
                         ADG=raster::extract(adg.classif,grid))
 env.zones <- na.omit(env.zones)
 
-for(i in 3:10){
+for(i in 3:dim(env.zones)[2]){
   env.zones[,i] <- paste(env.zones[,i],names(env.zones)[i],sep="_")
 }
 
