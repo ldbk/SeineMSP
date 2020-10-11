@@ -7,16 +7,45 @@ ymin <- as.numeric(wdpaidsplit[2])
 xmax <- as.numeric(wdpaidsplit[3])
 ymax <- as.numeric(wdpaidsplit[4])
 
-#Library
-library(tidyr)
-library(dplyr)
+
+library(rgdal)
+library(downloader)
 library(ggplot2)
+library(mapdata)
+library(geojsonio)
+library(ggmap)
+library(ggrepel)
+
+# EMIS-R Libraries
+
+library("rasterVis")
+library("XML")
+library("RCurl")
+library("bitops")
+library("lattice")
+library("latticeExtra")
+#library("RColorBrewer")
+library("maps")
+library("maptools")
+library("wq")
+#library("xtable")
+library("zoo")
+#library("jsonlite")
+#require(xtable)
+library(dplyr)
+
 #Libraries for mask
 library(rworldmap)
 library(rworldxtra)
 
-#
 library(worms)
+
+# Script for Wekeo environment
+sr=SpatialPolygons(list(Polygons(list(Polygon(cbind(c(xmin, xmin, xmax, xmax),c(ymax, ymin, ymin, ymax)))),"1")))
+mpa=SpatialPolygonsDataFrame(sr, data.frame(cbind(1:1), row.names=c("1")))
+proj4string(mpa)<-CRS("+proj=longlat +datum=WGS84")
+
+bbox<-paste(xmin,ymin,xmax,ymax,sep=",")
 
 #Write NA
 {

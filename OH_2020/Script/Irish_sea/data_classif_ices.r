@@ -1,5 +1,6 @@
 #Area of interest 
 wdpaid <- '-8.02_51.76_-2.63_55.79'
+wdpaid <- '-2.8_44.3_-0.2_46.6'
 #wdpaid <- 'minlon_minlat_maxlon_maxlat'
 wdpaidsplit <- unlist(strsplit(wdpaid, "[_]"))
 xmin <- as.numeric(wdpaidsplit[1])
@@ -17,9 +18,17 @@ library(ggplot2)
 library(worms)
 library(rgdal)
 library(rgeos)
-library(RGeostats)
+#library(RGeostats)
 library(viridis)
 
+
+library(ggplot2)
+#Libraries for mask
+library(rworldmap)
+library(rworldxtra)
+
+#
+library(worms)
 
 HH <- data.frame()
 for (i in getSurveyList()){
@@ -95,11 +104,11 @@ Bio.sp <- Bio.sp %>% dplyr::left_join(sp[,c(1,3,13,14,15,16,17,18)],by=("SpecCod
 
 if(dim(Benthos <- Bio.sp[Bio.sp$phylum!="Chordata",])[1]>500){
   Benthos <- Bio.sp[Bio.sp$phylum!="Chordata",]
-}else{Bentho <- data.frame(StNo=numeric(),HaulNo=numeric(),Year=numeric(),meanLon=numeric(),meanLat=numeric(),Abun=numeric(),group=numeric())}
+}else{Benthos <- data.frame(StNo=numeric(),HaulNo=numeric(),Year=numeric(),meanLon=numeric(),meanLat=numeric(),Abun=numeric(),group=numeric(), TotalNo <- numeric())}
 
 if(dim(Bio.sp[Bio.sp$class=="Elasmobranchii",])[1]>500){
   Elasmo <- Bio.sp[Bio.sp$class=="Elasmobranchii",]
-}else{Bentho <- data.frame(StNo=numeric(),HaulNo=numeric(),Year=numeric(),meanLon=numeric(),meanLat=numeric(),Abun=numeric(),group=numeric(),class=character())}
+}else{Elasmo <- data.frame(StNo=numeric(),HaulNo=numeric(),Year=numeric(),meanLon=numeric(),meanLat=numeric(),Abun=numeric(),group=numeric(),class=character(), TotalNo <- numeric())}
 
 
 tmp <- Bio.sp[Bio.sp$phylum=="Chordata" &Bio.sp$class!="Elasmobranchii",]
@@ -125,7 +134,7 @@ Sp <- rbind(Bio.order,Elasmo,Benthos)
 keep <- c(keep,"Elasmonbranchii","Benthic fauna")
 
 
-# Etendre le tableau et rajouter lignes de densit? = 0
+# Etendre le tableau et rajouter lignes de densite
 ttsel <- Sp %>% ungroup() %>% dplyr::select(group, Year, meanLon, meanLat, Abun) %>% distinct() 
 codif <- ttsel %>% dplyr::select( Year, meanLon, meanLat) %>% distinct() 
 allstrat <- ttsel %>% tidyr::expand(group,Year) 
@@ -141,7 +150,7 @@ Poly <- Polygon(hull)
 
 # Create SpatialPolygons objects
 SpPoly<- SpatialPolygons(list(Polygons(list(Poly), "SpPoly")))
-buff <- raster::buffer(SpPoly, 0.1)
+buff <- raster::buffer(SpPoly, 0.2)
 
 # Cut object along coast
 coast <- rworldmap::getMap(resolution = "high")
@@ -153,13 +162,13 @@ PolyCut <- fortify(res)
 
 # Put polygon in good format for later use
 toto <- PolyCut[PolyCut$piece==1,]
-db.poly <- polygon.create(toto[,c(1,2)])
+db.poly <- RGeostats::polygon.create(toto[,c(1,2)])
 
-data.db <- db.create(Sp0)
-data.db <- db.locate(data.db, c("meanLon","meanLat"),"x")
-data.db <- db.locate(data.db, "Abun","z")
+data.db <- RGeostats::db.create(Sp0)
+data.db <- RGeostats::db.locate(data.db, c("meanLon","meanLat"),"x")
+data.db <- RGeostats::db.locate(data.db, "Abun","z")
 
-# Boucle vario/krigeage sur tout les clusters (avec logarithme)
+# Boucle vario krigeage sur tout les clusters 
 
 Longitude <- numeric()
 Latitude <- numeric()
@@ -172,34 +181,34 @@ Variance <- numeric()
 
 
 # Grille de krigeage
-grid.db <- db.grid.init(data.db,nodes=c(100,100))
-poly <- polygon.create(x=PolyCut[PolyCut$group=="1.1",1],y=PolyCut[PolyCut$group=="1.1",2]) #RGeostats polygon
-grid.db <- db.polygon(grid.db, poly)
+grid.db <- RGeostats::db.grid.init(data.db,nodes=c(100,100))
+poly <- RGeostats::polygon.create(x=PolyCut[PolyCut$group=="1.1",1],y=PolyCut[PolyCut$group=="1.1",2]) #RGeostats polygon
+grid.db <- RGeostats::db.polygon(grid.db, poly)
 
 
-# Moving or unique neighbouhood?
-nei1 <- neigh.create(ndim=2,type=0) #unique
-nei2 <- neigh.create(ndim=2,type=2,nmini=2,nmaxi=8,radius=1) # moving
+# Moving or unique neighbouhood
+nei1 <- RGeostats::neigh.create(ndim=2,type=0) #unique
+nei2 <- RGeostats::neigh.create(ndim=2,type=2,nmini=2,nmaxi=8,radius=1) # moving
 
 
 for (j in unique(pull(Sp0[,"group"]))){
   
-  data.db <- db.create(Sp0[Sp0$group==j,]) #Choix du cluster
-  data.db <- db.locate(data.db,names=c("meanLon","meanLat"),"x")
-  data.db <- db.locate(data.db,names=c("Abun"),"z")
+  data.db <- RGeostats::db.create(Sp0[Sp0$group==j,]) #Choix du cluster
+  data.db <- RGeostats::db.locate(data.db,names=c("meanLon","meanLat"),"x")
+  data.db <- RGeostats::db.locate(data.db,names=c("Abun"),"z")
   
   # Standartisation par an
   data.db.std <- data.db
-  data.db.std <- db.locate(data.db.std,"Year","code")
+  data.db.std <- RGeostats::db.locate(data.db.std,"Year","code")
   
   # Vario moyen
-  vg.data.std <- vario.calc(data.db.std, lag=0.05, nlag=floor(max(dist(data.db@items[,c(3,4)]))/2)/0.05,opt.code=1,tolcode=0) 
+  vg.data.std <- RGeostats::vario.calc(data.db.std, lag=0.05, nlag=floor(max(dist(data.db@items[,c(3,4)]))/2)/0.05,opt.code=1,tolcode=0) 
   #plot(vg.data.std,npairdw=T,inches=0.1,las=1,add=T,col=2,lwd=2)
   vario1 <- vg.data.std
-  vg.mod <- model.auto(vario=vario1, struct=c(1:5), npairdw=TRUE, title= paste0("Communauté", " ", j), size=45,  col="red", inches=.05, draw=F)
+  vg.mod <- RGeostats::model.auto(vario=vario1, struct=c(1:5), npairdw=TRUE, title= paste0("Communaute", " ", j), size=45,  col="red", inches=.05, draw=F)
   
   
-  data.db.std <- db.locate(data.db.std,"Year",NA)
+  data.db.std <- RGeostats::db.locate(data.db.std,"Year",NA)
   
   for (i in sort(unique(data.db[,"Year"]))){
     
@@ -215,10 +224,10 @@ for (j in unique(pull(Sp0[,"group"]))){
       
       # Ordinary kriging, unique neighbourhood
       sel <- data.db.std[,"Year"]== i
-      db.kriege <- db.create(data.db.std[sel])
-      db.kriege <- db.locate(db.kriege,names=c("meanLon","meanLat"),"x")
-      db.kriege <- db.locate(db.kriege,names=c("Abun"),"z")
-      kres <- kriging(db.kriege, grid.db, model = vg.mod, neigh = nei1, uc=c("1"), mean=NA)
+      db.kriege <- RGeostats::db.create(data.db.std[sel])
+      db.kriege <- RGeostats::db.locate(db.kriege,names=c("meanLon","meanLat"),"x")
+      db.kriege <- RGeostats::db.locate(db.kriege,names=c("Abun"),"z")
+      kres <- RGeostats::kriging(db.kriege, grid.db, model = vg.mod, neigh = nei1, uc=c("1"), mean=NA)
       
       Longitude <- c(Longitude, kres@items$x1[kres@items$Polygon==TRUE])
       Latitude <- c(Latitude, kres@items$x2[kres@items$Polygon==TRUE])
