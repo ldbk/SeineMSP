@@ -74,13 +74,16 @@ ptin<-!apply(st_intersects(pt2,landmask2,sparse=F),1,any)
 alldf<-list(fishAIS[ptin,],dredAIS[ptin,],sailAIS[ptin,],tranAIS[ptin,],servAIS[ptin,])
 #fct to add a name
 fname<-function(a,nom){a$type<-nom;return(a)}
-ggplot(do.call("rbind",Map(fname,alldf,c("fish","dred","sail","tran","serv"))),
-       aes(x=x,y=y,fill=value))+geom_raster()+
+maptmp<-do.call("rbind",Map(fname,alldf,c("fish","dred","sail","tran","serv")))
+ggplot(maptmp,aes(x=x,y=y,fill=value))+geom_raster()+
 	scale_fill_distiller(palette="Spectral",name="Zone",trans="log10")+
+	facet_grid(type~name)+
 	borders("world",fill="grey",colour=NA)+
-	geom_sf()+
-	facet_grid(type~name)
-#
+	coord_sf(xlim=range(maptmp$x),ylim=range(maptmp$y))+
+	xlab("Longitude")+ylab("Latitude")+
+	theme_bw()#+
+	#theme(legend.position="bottom")
+
 #classif 
 classif<-function(tmp){
 	#tmp<-alldf[[4]]%>%group_by(name)%>%
@@ -93,7 +96,7 @@ classif<-function(tmp){
 	#tmp<-alldf[[1]]
 	#tmp$value<-log10(tmp$value+1)
 	tmp$value<-log10(tmp$value+1)
-	mat0<-tmp%>%tidyr::pivot_wider(values_from=value,names_from=name,values_fill=0)
+	mat0<-tmp%>%tidyr::pivot_wider(values_from=value,names_from=name)#,values_fill=0)
 	idptNA<-is.finite(apply(mat0[,-c(1:2)],1,sum))
 	#str(mat0[,-c(1:2)])
 	d<-stats::dist((mat0[,-c(1:2)]))
@@ -102,11 +105,16 @@ classif<-function(tmp){
 	return(pipo)
 }
 allzone<-lapply(alldf,classif)
-ggplot(do.call("rbind",Map(fname,allzone,c("fish","dred","sail","tran","serv"))),
-       aes(x=x,y=y,fill=zone))+geom_raster()+
-	scale_fill_distiller(palette="Spectral",name="Zone",trans="log10")+
+maptmp<-do.call("rbind",Map(fname,allzone,c("fish","dred","sail","tran","serv")))
+ggplot(maptmp,
+       aes(x=x,y=y,fill=as.factor(zone)))+geom_raster()+
+	scale_fill_brewer(palette="Set3",name="Cluster")+#,trans="log10")+
 	#de\n navires\n(h.km^2)",trans="log10")+
-	facet_wrap(~type,ncol=2)
+	facet_wrap(~type,ncol=2)+
+	borders("world",fill="grey",colour=NA)+
+	coord_sf(xlim=range(maptmp$x),ylim=range(maptmp$y))+
+	xlab("Longitude")+ylab("Latitude")+
+	theme_bw()#+
 
 #MCA
 uu<-do.call("rbind",Map(fname,allzone,c("fish","dred","sail","tran","serv")))%>%
@@ -127,8 +135,23 @@ finalzone <- data.frame(uu[,c(1,2)],Cluster=factor(groups))
 
 ggplot(finalzone,
        aes(x=x,y=y,fill=Cluster))+geom_raster()+
-	scale_fill_brewer(palette="Set3",name="Cluster")#+#,trans="log10")+
-	#de\n navires\n(h.km^2)",trans="log10")+
-	#facet_wrap(~type,ncol=2)
+	scale_fill_brewer(palette="Set3",name="Cluster")+
+	borders("world",fill="grey",colour=NA)+
+	coord_sf(xlim=range(finalzone$x),ylim=range(finalzone$y))+
+	xlab("Longitude")+ylab("Latitude")+
+	theme_bw()#+
+
+#add stuff
+allrez<-do.call("rbind",Map(fname,alldf,c("fish","dred","sail","tran","serv")))%>%
+	left_join(finalzone)
+
+ggplot()+
+	  geom_boxplot(data=allrez,aes(x=type,y=value,fill=type))+
+	    facet_wrap(~Cluster,nrow=2)+xlab("type")+ylab("Parameters")+
+	    scale_y_log10()+
+	      scale_fill_brewer(palette="Set3")
+	
+
+
 
 
